@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - misc</title><link href="/" rel="alternate"></link><link href="/feeds/misc.atom.xml" rel="self"></link><id>/</id><updated>2020-01-28T00:00:00+08:00</updated><entry><title>Designs That Don't Suck</title><link href="/designs-that-dont-suck.html" rel="alternate"></link><published>2020-01-28T00:00:00+08:00</published><updated>2020-01-28T00:00:00+08:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-28:/designs-that-dont-suck.html</id><summary type="html">&lt;h2&gt;Ample leading&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - misc</title><link href="/" rel="alternate"></link><link href="/feeds/misc.atom.xml" rel="self"></link><id>/</id><updated>2020-01-29T19:12:01+08:00</updated><entry><title>grok</title><link href="/grok.html" rel="alternate"></link><published>2020-01-29T19:12:01+08:00</published><updated>2020-01-29T19:12:01+08:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-29:/grok.html</id><summary type="html"></summary><content type="html"></content></entry><entry><title>grok the term</title><link href="/grok-the-term.html" rel="alternate"></link><published>2020-01-29T19:10:03+08:00</published><updated>2020-01-29T19:10:03+08:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-29:/grok-the-term.html</id><summary type="html"></summary><content type="html"></content></entry><entry><title>The Year of Creating</title><link href="/the-year-of-creating.html" rel="alternate"></link><published>2020-01-29T00:00:00+08:00</published><updated>2020-01-29T00:00:00+08:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-29:/the-year-of-creating.html</id><summary type="html">&lt;h3&gt;It's not too late for new years resolutions!&lt;/h3&gt;
+&lt;p&gt;The New Year(s) have arrived and i&lt;/p&gt;
+&lt;p&gt;Taken from the &lt;a href="https://en.wikipedia.org/wiki/Lunar_calendar"&gt;CGP Grey video&lt;/a&gt; I have decided to make it the year of creating.&lt;/p&gt;
+&lt;p&gt;The premise of the video is that resolutions are hard rules to follow. 
+Humans aren't too good at …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;It's not too late for new years resolutions!&lt;/h3&gt;
+&lt;p&gt;The New Year(s) have arrived and i&lt;/p&gt;
+&lt;p&gt;Taken from the &lt;a href="https://en.wikipedia.org/wiki/Lunar_calendar"&gt;CGP Grey video&lt;/a&gt; I have decided to make it the year of creating.&lt;/p&gt;
+&lt;p&gt;The premise of the video is that resolutions are hard rules to follow. 
+Humans aren't too good at sticking to hard rules. 
+Instead, yearly themes are substituted as a way of deifining our yearly goals.&lt;/p&gt;
+&lt;p&gt;The beauty of themes is that they aren't strictly defined. This plays well with ever changing goals and circumstances.&lt;/p&gt;
+&lt;p&gt;So why creating?&lt;/p&gt;
+&lt;p&gt;For months, I have been meaning to improve my ability to communicate well through writing. So far, not much has been produced in terms of publishable content. I hope to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Increase the amount of written files I produce.&lt;/em&gt; Whether that is on daily entries on how I feel, technical topics accessible to anyone literate or an interesting insight that I would like to review and document in my own words&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Refine and edit&lt;/em&gt; new and existing pieces. Removing unecessary words. Not being afraid of reading material from my past self.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It will be an interesting to see where the year of creativity will take me. What goals will I have achieved and how will I define creating in 12 months.&lt;/p&gt;
+&lt;p&gt;To a year of creating!&lt;/p&gt;</content></entry><entry><title>Designs That Don't Suck</title><link href="/designs-that-dont-suck.html" rel="alternate"></link><published>2020-01-28T00:00:00+08:00</published><updated>2020-01-28T00:00:00+08:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-28:/designs-that-dont-suck.html</id><summary type="html">&lt;h2&gt;Ample leading&lt;/h2&gt;
 &lt;p&gt;Set our leading (line-height) to 120-145% of your base font size. Give your words room to breathe.&lt;/p&gt;
 &lt;h2&gt;Alignment&lt;/h2&gt;
 &lt;p&gt;Everything should look in place. Ideally, use a grid and typographic scale. Align body text left.&lt;/p&gt;
