@@ -1,0 +1,126 @@
+/* 
+/* Font definitions {{{ */
+@font-face {
+/* Monospace stack */
+font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+
+ } 
+
+/* }}} */
+
+/* Main blocks style {{{ */
+body {
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+    font-size: 100%;
+
+}
+
+#wrapper {
+    width:90%;
+    max-width:800px;
+    margin:auto;
+    font-size: 16px;
+    line-height: 120%;
+
+}
+.topnav.wrapper {
+    text-align:left;
+}
+footer {
+    text-align: center;
+    margin: auto;
+    width: 90%;
+    max-width: 800px;
+    border-top:1px solid #aaa;
+    padding: 10px;
+}
+
+#blank {
+    height: 100%;
+    padding:10px;
+}
+
+
+/* }}} */
+
+/* Titles and headers {{{ */
+h1, h3 {
+    line-height:1.2;
+}
+
+h1, p {
+    display: inline-block;
+}
+
+h2 {
+    font-weight: normal;
+    color: #555;
+}
+/* }}} */
+
+/* Pretty links {{{ */
+a {
+    color: #333;
+    text-decoration: none;
+    font-style: italic;
+    border-bottom: 1px dotted grey;
+}
+
+a:hover {
+    color: #f94;
+}
+
+h1 a, h2 a, h3 a {
+    font-style: normal;
+}
+
+header {
+    text-align: center;
+
+}
+
+.date {}
+
+.tag {}
+
+header h1 a {
+    color: #1e1e1e;
+    border: none;
+}
+
+hr {
+        border: 0;
+        height: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+footer {
+	position:relative;
+	bottom:0;
+	height:4em;
+	font-size:16px;
+	padding-top:1em;
+	border-top:1px solid #999;	
+}
+
+/*
+header h1 a:hover {
+    color: #fff;
+}
+*/
+/* }}} */
+
+/* Monospace stack */
+/*
+font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+*/
+
+/* Helvetica/Arial-based sans serif stack */
+/*
+ font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+*/
+
+
