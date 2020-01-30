@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Pelican Blog - test</title><link href="/" rel="alternate"></link><link href="/feeds/test.atom.xml" rel="self"></link><id>/</id><updated>2020-01-26T10:20:00+00:00</updated><entry><title>Testing the Waters</title><link href="/testing-the-waters.html" rel="alternate"></link><published>2020-01-26T10:20:00+00:00</published><updated>2020-01-26T10:20:00+00:00</updated><author><name></name></author><id>tag:None,2020-01-26:/testing-the-waters.html</id><summary type="html">&lt;h2&gt;Exploration in markdown&lt;/h2&gt;
+&lt;p&gt;This article is a test post.
+I'm currently trying to configure writing blog posts in markdown to be rendered to html. &lt;/p&gt;
+&lt;p&gt;The blog will be an &lt;strong&gt;exploration&lt;/strong&gt; of the many novel or re-occurring thoughts I have.&lt;/p&gt;
+&lt;p&gt;At first, many of the posts will be reflection on interesting …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Exploration in markdown&lt;/h2&gt;
+&lt;p&gt;This article is a test post.
+I'm currently trying to configure writing blog posts in markdown to be rendered to html. &lt;/p&gt;
+&lt;p&gt;The blog will be an &lt;strong&gt;exploration&lt;/strong&gt; of the many novel or re-occurring thoughts I have.&lt;/p&gt;
+&lt;p&gt;At first, many of the posts will be reflection on interesting insights from other blogs or books.&lt;br&gt;
+There will be heavy influences from the various blogs I frequently browse. Some notable mentions:    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://sivers.org/" title="Derek Sivers"&gt;Derek Sivers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.z3bra.org/"&gt;z3bra.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://paulgraham.com/" title="Paul Graham"&gt;paulgraham&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://meltingasphalt.com/" title="Kevin Simler"&gt;melting Asphalt&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I plan on creating a section on book notes (one step at a time!).&lt;/p&gt;
+&lt;p&gt;To wrap up, a few more &lt;strong&gt;tests&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;fib :: Int -&amp;gt; Int&lt;/span&gt;
+&lt;span class="err"&gt;fib 0 = 0&lt;/span&gt;
+&lt;span class="err"&gt;fib 1 = 1&lt;/span&gt;
+&lt;span class="err"&gt;fib n = fib (n-1) + fib (n-2)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Finally a quote about ends:   &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When you reach the end of your rope, tie a knot in it and hang on. 
+-- Franklin D. Roosevelt&lt;/p&gt;
+&lt;/blockquote&gt;</content><category term="blog"></category><category term="test"></category><category term="markdown"></category></entry></feed>
