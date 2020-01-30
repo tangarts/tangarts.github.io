@@ -1,7 +1,0 @@
-output/
-*.py[cod]
-publishconf.py
-pelicanconf.py
-tasks.py
-Makefile
-.gitignore

@@ -1,5 +1,0 @@
----
-title: contact
-slug: contact
-
----
