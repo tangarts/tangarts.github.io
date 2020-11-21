@@ -1,46 +1,75 @@
 
 <html>
-    <head>
+    <head> 
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel= "stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/ico"/>
     <title> grok the term </title>
     </head>
     
     <body>
+
 	    <header><h1> <a href='/'> tangarts </a> </h1></header>  
                 <div class="topnav" id="wrapper" style="text-align:right">
-                <a href="/about">About</a> &centerdot;
-                <a href="/archives.html">Archive</a> &centerdot;
-                <a href="mailto:nehemiahcampbell@hotmail.co.uk">Contact</a>
+                <a href="/about">about</a> &centerdot;
+                <a href="/archives.html">archive</a> &centerdot;
+                <a href="/now">now</a> &centerdot;
+                <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
                 </div> 
         <div id='wrapper'>
 
+        <hr>
 
 
-<h1>grok the term</h1>
-<div class=date>2020-01-29 
+
+<h1> grok the term </h1>
+<div class=date>
+        2020-01-29
+        | Modified: 2020-08-24
+
 </div>
 
-<hr>
+<div><p>A few minutes into a conversation about <a href="">why I use Linux</a>, I am hit with the question. <em>So what is</em> a terminal?</p>
+<p>I open up <em>htop</em> and show</p>
+<div class="highlight"><pre><span></span><code><span class="err">        ├─sh───urxvt─┬─bash───htop</span>
+<span class="err">        │            └─urxvt</span>
+</code></pre></div>
 
-<div></div>
+<p>You can see htop running on this terminal.</p>
+<p>Now if we look at the process tree below&hellip;</p>
+<div class="highlight"><pre><span></span><code><span class="err">        ├─sh───firefox─┬─RDD Process───3*[{RDD Process}]</span>
+<span class="err">        │              ├─2*[Web Content───26*[{Web Content}]]</span>
+<span class="err">        │              ├─Web Content───17*[{Web Content}]</span>
+<span class="err">        │              ├─Web Content───23*[{Web Content}]</span>
+<span class="err">        │              ├─3*[Web Content───24*[{Web Content}]]</span>
+<span class="err">        │              ├─WebExtensions───23*[{WebExtensions}]</span>
+<span class="err">        │              └─60*[{firefox}]</span>
+</code></pre></div>
+
+<p><em>Woah</em>, a lot more processes.</p>
+<p>Firefox uses a <em>graphical user interface (GUI)</em> which runs more programs for user accessibility. </p>
+<p>By interacting with a terminal, I reduce the need to expend resources at the expense of learning a new skill.</p>
+<p>Consider another example. Using Notepad++ and Vim. Or Vim and gVim (vim running with a GUI).
+Scaling up, we get to a desktop with its clickable menus and convenient taskbar. </p>
+<p>For a laptop that is 10 years old, extra processes takes it's toll.<br>
+I also only use a handful of applications: text-editor, file manager, music player, pdf viewer. Everything else is online. </p>
+<p>No desktop, minimal GUI, only the applications I need.</p>
+<p>I think Bruce Lee sums it up well:</p>
+<blockquote>
+<p>Absorb what is useful, discard what is useless and add what is specifically your own.</p>
+</blockquote></div>
 
 
         </div> 
+
         <footer>
-		&sim;
-                <a href='/about'>about</a> &bullet;
-                <a href='#'>book</a> &odot;
+                <p>&mdash; &centerdot; &centerdot; &centerdot;</p> 
+                <!---
+                <a href='/about'>about</a> &compfn;
+                <a href='#'>book</a> &compfn;
                 <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
-		&bsim;
+                -->
         </footer>
     </body>
 </html>
-
-
-<!-- 
-        <p>&mdash; Insert something inspiring.</p>
-
-
--> 

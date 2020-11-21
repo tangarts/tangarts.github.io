@@ -1,0 +1,68 @@
+
+<html>
+    <head> 
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/ico"/>
+    <title> nets </title>
+    </head>
+    
+    <body>
+
+	    <header><h1> <a href='/'> tangarts </a> </h1></header>  
+                <div class="topnav" id="wrapper" style="text-align:right">
+                <a href="/about">about</a> &centerdot;
+                <a href="/archives.html">archive</a> &centerdot;
+                <a href="/now">now</a> &centerdot;
+                <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
+                </div> 
+        <div id='wrapper'>
+
+        <hr>
+
+
+
+<h1> nets </h1>
+<div class=date>
+        2020-06-02
+        | Modified: 2020-08-24
+
+</div>
+
+<div><blockquote>
+<p><strong>NN overparameterization:</strong> We can train large deep slow neural networks to
+human-level performance on many tasks, and we can then train small shallow
+fast versions of those NNs to save energy/enable mobile deployment, so why
+can’t we train small shallow fast NNs in the first place? And what would
+happen if we did figure it out?</p>
+</blockquote>
+<h3>Architecture:</h3>
+<p>Neural networks are essentially layers of linear transformations with
+non-linear activation funcitons between the layers. The ith hidden layer
+expressed as:</p>
+<p>$$h_i = f(\sum_i^n W_jh_{i-1})$$</p>
+<p>If we specified our activation function to be a sigmoid transformation
+$\sigma(\bf{z})_i = \frac{exp{z_i}}{\sum_j=1^K exp{z_j}}$ then we obtain a
+multinomi al logistic regression classifier</p>
+<p>The benefit of adding layers to our neural network has to do with learning
+complexity. </p>
+<h3>MNSIT Digits</h3>
+<p>With images we see that the first few layers learn high level features such as the edges of the digit. As we increase layer depth, more abstract feautres such as the number of curves a digit has.</p>
+<p>Current architecture design</p>
+<p>Convolutional Layers: </p>
+<p>Recurrent layers:</p></div>
+
+
+        </div> 
+
+        <footer>
+                <p>&mdash; &centerdot; &centerdot; &centerdot;</p> 
+                <!---
+                <a href='/about'>about</a> &compfn;
+                <a href='#'>book</a> &compfn;
+                <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
+                -->
+        </footer>
+    </body>
+</html>
