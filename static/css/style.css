@@ -7,8 +7,28 @@ body {
         font-size: 100%;
 
 }
+#header_wrap {
+    width: 100%;
+    padding: 0;
+}
+#navbar {
+        text-align: right;
+        max-width: 640px;
+    margin: 10px;
 
-#wrapper {
+}
+
+#navbar li {
+        display: inline-block;
+}
+
+
+list-none ol {
+    list-style-type: none !important;
+    margin-left: 0 !important;
+
+}
+.wrapper {
         width: 36em;
         max-width:640px;
         margin: 0 auto;
@@ -16,15 +36,11 @@ body {
         line-height: 1.2; 
 }
 
-@media only screen and (max-width: 320px) {
-        #wrapper {
-                font-size: 16px;
-        }
-}
 
-
-.topnav.wrapper {
-        text-align:left;
+.wrapper.topnav {
+        text-align:right;
+        font-size: 18px;
+        display: inline-block;
 }
 
 footer {
@@ -94,7 +110,7 @@ h1 a, h2 a, h3 a {
         font-style: normal;
 }
 
-header {
+header  {
         text-align: center;
 }
 
