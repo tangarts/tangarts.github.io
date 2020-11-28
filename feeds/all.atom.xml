@@ -13,7 +13,7 @@ create a remote and hidden repository on github. &lt;/p&gt;
 &lt;p&gt;Generate a new ssh key pair for cloning into the remote repository:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;puttygen -t rsa -b 2048 -O private-openssh -o pass_for_ios.key&lt;/code&gt; and &lt;code&gt;puttygen
 pass_for_ios.key -C "Pass for iOS" -O public-openssh -o pass_for_ios.pub&lt;/code&gt;&lt;/p&gt;
-&lt;h4&gt;Importing ASCII-armored keys&lt;/h4&gt;
+&lt;h2&gt;Importing ASCII-armored keys&lt;/h2&gt;
 &lt;p&gt;Clone into this repo to use the asc2qr.sh script
 &lt;code&gt;https://github.com/4bitfocus/asc-key-to-qr-code&lt;/code&gt; &lt;/p&gt;
 &lt;p&gt;(I tried using &lt;code&gt;https://github.com/yishilin14/asc-key-to-qr-code-gif&lt;/code&gt;
@@ -118,7 +118,7 @@ vivere&lt;/em&gt; (know how to live) in all circumstances.&lt;/p&gt;
 &lt;p&gt;Dress at your best on your execution day. The dignified attitude will make both
 defeat and victory feel equally heroic. Try not to blame others of your fate,
 even if they deserve blame. Never exhibit any self-pity. Do not complain. The
-only article Lady Fortuna has no control over is your behaviour. Good Luck&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>links</title><link href="/links.html" rel="alternate"></link><published>2020-06-26T00:00:00+01:00</published><updated>2020-08-19T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-26:/links.html</id><content type="html">&lt;h4&gt;A bunch of links&lt;/h4&gt;
+only article Lady Fortuna has no control over is your behaviour. Good Luck&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>links</title><link href="/links.html" rel="alternate"></link><published>2020-06-26T00:00:00+01:00</published><updated>2020-08-19T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-26:/links.html</id><content type="html">&lt;h2&gt;A bunch of links&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=nJPERZDfyWc"&gt;Everything is a remix&lt;/a&gt;  &lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.wired.com/story/six-weeks-100s-miles-hours-glorious-boredom-japan/"&gt;Walking&lt;/a&gt;  &lt;/li&gt;
@@ -230,7 +230,7 @@ conversation starter. &lt;/p&gt;
 &lt;li&gt;Foucault's Pendulum, Eco &lt;/li&gt;
 &lt;li&gt;Pale Fire, Nabokov&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4&gt;To Read:&lt;/h4&gt;
+&lt;h3&gt;To Read:&lt;/h3&gt;
 &lt;p&gt;The Odyssey, Homer&lt;br&gt;
 Faust, Goethe
 The War Of Art, Pressfield
@@ -250,7 +250,7 @@ A Brief History of Time, Hawking  &lt;/p&gt;</content><category term="misc"></ca
 &lt;h3&gt;Clouds &amp;amp; Particles&lt;/h3&gt;
 &lt;p&gt;Particles larger than oxygen and nitrogen molecules cause a reduction in saturation hence rural sunsets appear more vibrant.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;This was an excuse to post my sunset pics.  &lt;em&gt;Enjoy &lt;strong&gt;:)&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This was an excuse to post my sunset pics.  &lt;em&gt;Enjoy&lt;/em&gt; &lt;strong&gt;:)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="New College 19th Floor view" src="/images/19th.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="motorbiking" src="/images/moto.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Langkawi" src="/images/langkawi.jpg"&gt;&lt;/p&gt;
@@ -716,12 +716,12 @@ I also only use a handful of applications: text-editor, file manager, music play
 &lt;blockquote&gt;
 &lt;p&gt;Absorb what is useful, discard what is useless and add what is specifically your own.&lt;/p&gt;
 &lt;/blockquote&gt;</content><category term="misc"></category></entry><entry><title>The Year of Creating</title><link href="/the-year-of-creating.html" rel="alternate"></link><published>2020-01-29T00:00:00+00:00</published><updated>2020-01-29T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-29:/the-year-of-creating.html</id><summary type="html">&lt;h3&gt;It's not too late for new years resolutions!&lt;/h3&gt;
-&lt;p&gt;The &lt;a href="https://en.wikipedia.org/wiki/Lunar_calendar"&gt;New Year(s)&lt;/a&gt; have arrived
+&lt;p&gt;The &lt;a href="https://en.wikipedia.org/wiki/Lunar_calendar"&gt;New Years&lt;/a&gt; have arrived
 and I'm still without a goal to chase. An accomplishment to achieve by the end
 of the year.&lt;/p&gt;
 &lt;p&gt;From the CGP Grey video I have decided to make it the year of creating.&lt;/p&gt;
-&lt;p&gt;Resolutions are hard …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;It's not too late for new years resolutions!&lt;/h3&gt;
-&lt;p&gt;The &lt;a href="https://en.wikipedia.org/wiki/Lunar_calendar"&gt;New Year(s)&lt;/a&gt; have arrived
+&lt;p&gt;Resolutions are hard rules …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;It's not too late for new years resolutions!&lt;/h3&gt;
+&lt;p&gt;The &lt;a href="https://en.wikipedia.org/wiki/Lunar_calendar"&gt;New Years&lt;/a&gt; have arrived
 and I'm still without a goal to chase. An accomplishment to achieve by the end
 of the year.&lt;/p&gt;
 &lt;p&gt;From the CGP Grey video I have decided to make it the year of creating.&lt;/p&gt;
@@ -734,35 +734,42 @@ ever changing goals and circumstances.&lt;/p&gt;
 &lt;p&gt;For months, I have been meaning to improve my ability to communicate well
 through writing. So far, not much has been produced in terms of publishable
 content. I hope to:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Increase the amount of written files I produce.&lt;/strong&gt; Whether that is on daily
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Increase the amount of written files I produce.&lt;/strong&gt; Whether that is on daily
   entries on how I feel, technical topics accessible to anyone literate or an
-  interesting insight that I would like to review and document in my own words.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Refine and edit new and existing pieces.&lt;/strong&gt; Removing unnecessary words. Not
-  being afraid of reading material from my past self.&lt;/li&gt;
-&lt;/ul&gt;
+  interesting insight that I would like to review and document in my own words.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Refine and edit new and existing pieces.&lt;/strong&gt; Removing unnecessary words. Not
+  being afraid of reading material from my past self.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;It will be an interesting to see where the year of creativity will take me. &lt;/p&gt;
 &lt;p&gt;What goals will I have achieved and how will I define creating in 12 months.  &lt;/p&gt;
 &lt;p&gt;To a year of creating!&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Designs That Don't Suck</title><link href="/designs-that-dont-suck.html" rel="alternate"></link><published>2020-01-28T00:00:00+00:00</published><updated>2020-01-28T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-28:/designs-that-dont-suck.html</id><summary type="html">&lt;p&gt;&lt;a href="https://www.curiositry.com/designs-that-don-t-suck/"&gt;some useful advice&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;Ample leading&lt;/h3&gt;
+&lt;h2&gt;Ample leading&lt;/h2&gt;
 &lt;p&gt;Set our leading (line-height) to 120-145% of your base font size. Give your words room to breathe.&lt;/p&gt;
-&lt;h3&gt;Alignment&lt;/h3&gt;
+&lt;h2&gt;Alignment&lt;/h2&gt;
 &lt;p&gt;Everything should look in place. Ideally, use a grid and typographic scale. Align body text left.&lt;/p&gt;
-&lt;h3&gt;Line-length&lt;/h3&gt;
+&lt;h2&gt;Line-length&lt;/h2&gt;
 &lt;p&gt;Aim for 40-90 characters per line  &lt;/p&gt;
-&lt;h3&gt;Readable text size&lt;/h3&gt;
+&lt;h2&gt;Readable text size&lt;/h2&gt;
 &lt;p&gt;For …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://www.curiositry.com/designs-that-don-t-suck/"&gt;some useful advice&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;Ample leading&lt;/h3&gt;
+&lt;h2&gt;Ample leading&lt;/h2&gt;
 &lt;p&gt;Set our leading (line-height) to 120-145% of your base font size. Give your words room to breathe.&lt;/p&gt;
-&lt;h3&gt;Alignment&lt;/h3&gt;
+&lt;h2&gt;Alignment&lt;/h2&gt;
 &lt;p&gt;Everything should look in place. Ideally, use a grid and typographic scale. Align body text left.&lt;/p&gt;
-&lt;h3&gt;Line-length&lt;/h3&gt;
+&lt;h2&gt;Line-length&lt;/h2&gt;
 &lt;p&gt;Aim for 40-90 characters per line  &lt;/p&gt;
-&lt;h3&gt;Readable text size&lt;/h3&gt;
+&lt;h2&gt;Readable text size&lt;/h2&gt;
 &lt;p&gt;For print, 10-14 pt. On screen, 16-24 pt for body text.&lt;/p&gt;
-&lt;h3&gt;Quality Typefaces&lt;/h3&gt;
+&lt;h2&gt;Quality Typefaces&lt;/h2&gt;
 &lt;p&gt;Regular, bold and italic variants are essential.&lt;/p&gt;
-&lt;h3&gt;White Space&lt;/h3&gt;</content><category term="misc"></category></entry><entry><title>An English Wood</title><link href="/an-english-wood.html" rel="alternate"></link><published>2020-01-27T10:25:00+00:00</published><updated>2020-01-27T10:25:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-27:/an-english-wood.html</id><summary type="html">&lt;h5&gt;by Robert Greaves&lt;/h5&gt;
+&lt;h2&gt;White Space&lt;/h2&gt;
+&lt;p&gt;&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>An English Wood</title><link href="/an-english-wood.html" rel="alternate"></link><published>2020-01-27T10:25:00+00:00</published><updated>2020-01-27T10:25:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-27:/an-english-wood.html</id><summary type="html">&lt;h5&gt;by Robert Greaves&lt;/h5&gt;
 &lt;p&gt;This valley wood is pledged&lt;br&gt;
 To the set shape of things,&lt;br&gt;
 And reasonably hedged:&lt;br&gt;
@@ -824,12 +831,12 @@ want to cut out, paragraphs that will need to be edited but that comes after
 with pruning your tree. &lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img alt="tree, poem" src="images/grow-the-tree.png"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Testing the Waters</title><link href="/testing-the-waters.html" rel="alternate"></link><published>2019-06-19T00:00:00+01:00</published><updated>2020-08-26T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2019-06-19:/testing-the-waters.html</id><summary type="html">&lt;h2&gt;Exploration in markdown&lt;/h2&gt;
-&lt;p&gt;This article is a test post.  I'm currently trying to configure writing blog
+&lt;p&gt;This article is a test post. I'm currently trying to configure writing blog
 posts in markdown to be rendered to html. &lt;/p&gt;
 &lt;p&gt;The blog will be an &lt;strong&gt;exploration&lt;/strong&gt; of the many novel or re-occurring thoughts
 I have.&lt;/p&gt;
 &lt;p&gt;At first, many of the posts will be reflection on interesting …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Exploration in markdown&lt;/h2&gt;
-&lt;p&gt;This article is a test post.  I'm currently trying to configure writing blog
+&lt;p&gt;This article is a test post. I'm currently trying to configure writing blog
 posts in markdown to be rendered to html. &lt;/p&gt;
 &lt;p&gt;The blog will be an &lt;strong&gt;exploration&lt;/strong&gt; of the many novel or re-occurring thoughts
 I have.&lt;/p&gt;
@@ -843,15 +850,157 @@ frequently browse. Some notable mentions:    &lt;/p&gt;
 &lt;li&gt;&lt;a href="https://meltingasphalt.com/" title="Kevin Simler"&gt;Melting Asphalt&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I plan on creating a section on book notes (one step at a time!).&lt;/p&gt;
-&lt;p&gt;To wrap up, a few more &lt;strong&gt;tests&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="ow"&gt;::&lt;/span&gt; &lt;span class="kt"&gt;Int&lt;/span&gt; &lt;span class="ow"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="kt"&gt;Int&lt;/span&gt;
-&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="ow"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;p&gt;To wrap up, a few more tests&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;fib :: Int -&amp;gt; Int&lt;/span&gt;
+&lt;span class="err"&gt;fib 0 = 0&lt;/span&gt;
+&lt;span class="err"&gt;fib 1 = 1&lt;/span&gt;
+&lt;span class="err"&gt;fib n = fib (n-1) + fib (n-2)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;hr&gt;
+&lt;h2&gt;Text Elements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;a href="#"&gt;a element&lt;/a&gt; and &lt;a href="http://example.com"&gt;external a element&lt;/a&gt; examples&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;abbr&gt;abbr element&lt;/abbr&gt; and an &lt;abbr title="Abbreviation"&gt;abbr&lt;/abbr&gt; element with title examples&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;acronym title="A Cowboy Ran One New York Marathon"&gt;ACRONYM&lt;/acronym&gt; element example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;strong&gt;b element&lt;/strong&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;cite&gt;cite element&lt;/cite&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;code element&lt;/code&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;data value="3967381398"&gt;data element&lt;/data&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;del&gt;del element&lt;/del&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;dfn&gt;dfn element&lt;/dfn&gt; and &lt;dfn title="Title text"&gt;dfn element with title&lt;/dfn&gt; examples&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;em&gt;em element&lt;/em&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;em&gt;i element&lt;/em&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;ins&gt;ins element&lt;/ins&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;kbd&gt;kbd element&lt;/kbd&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;mark&gt;mark element&lt;/mark&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;q&gt;q element&lt;/q&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;q&gt;q element &lt;q&gt;inside&lt;/q&gt; a q element&lt;/q&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;s&gt;s element&lt;/s&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;samp&gt;samp element&lt;/samp&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;small&gt;small element&lt;/small&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;span&gt;span element&lt;/span&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;strong&gt;strong element&lt;/strong&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;sub&gt;sub element&lt;/sub&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;sup&gt;sup element&lt;/sup&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;time datetime="2005-05-15 19:00"&gt;time element&lt;/time&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;u&gt;u element&lt;/u&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;var&gt;var element&lt;/var&gt; example&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;List Types&lt;/h2&gt;
+&lt;h3&gt;Ordered List&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;List Item 1&lt;/li&gt;
+&lt;li&gt;List Item 2&lt;ol&gt;
+&lt;li&gt;List Item 2.1&lt;/li&gt;
+&lt;li&gt;List Item 2.2&lt;ol&gt;
+&lt;li&gt;List Item 2.2.1&lt;/li&gt;
+&lt;li&gt;List Item 2.2 2&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;List Item 2.3&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;List Item 3&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Unordered List&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;List Item 1&lt;/li&gt;
+&lt;li&gt;List Item 2&lt;ul&gt;
+&lt;li&gt;List Item 2.1&lt;/li&gt;
+&lt;li&gt;List Item 2.2&lt;ul&gt;
+&lt;li&gt;List Item 2.2.1&lt;/li&gt;
+&lt;li&gt;List Item 2.2 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;List Item 2.3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;List Item 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Tables&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Table Header 1&lt;/th&gt;
+&lt;th&gt;Table Header 2&lt;/th&gt;
+&lt;th&gt;Table Header 3&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Division 1&lt;/td&gt;
+&lt;td&gt;Division 2&lt;/td&gt;
+&lt;td&gt;Division 3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Division 1&lt;/td&gt;
+&lt;td&gt;Division 2&lt;/td&gt;
+&lt;td&gt;Division 3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Division 1&lt;/td&gt;
+&lt;td&gt;Division 2&lt;/td&gt;
+&lt;td&gt;Division 3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;Finally a quote about ends:   &lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;When you reach the end of your rope, tie a knot in it and hang on.  --
-Franklin D. Roosevelt&lt;/p&gt;
+&lt;p&gt;When you reach the end of your rope, tie a knot in it and hang on. 
+&amp;mdash; Franklin D. Roosevelt&lt;/p&gt;
 &lt;/blockquote&gt;</content><category term="test"></category></entry></feed>

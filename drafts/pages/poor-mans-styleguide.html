@@ -1,0 +1,206 @@
+
+<html>
+    <head> 
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/ico"/>
+    <title> Poor Man's Styleguide </title>
+    </head>
+    
+    <body>
+            <div class="container">
+	    <header>
+                    <h1> <a href='/'> tangarts </a> </h1>
+                    <div id="header_wrap" class="wrapper">
+                    <nav id="navbar" >
+                <ul class="list-none" >
+                        <li><a href="/about">about</a> &centerdot;</li>
+                <li><a href="/archives.html">archive</a> &centerdot;</li>
+                <li><a href="/now">now</a> &centerdot;</li>
+                <li><a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a></li>
+                </ul> 
+
+                    </nav>
+                    </div>
+
+            </header>  
+        <main class="wrapper">
+
+                       <hr> 
+
+
+<h1> Poor Man's Styleguide </h1>
+
+<div class=date> 
+        Last updated: 2020-11-28
+</div>
+<div><p><strong><a href="https://www.poormansstyleguide.com">See the full demo at www.poormansstyleguide.com</a></strong></p>
+<hr>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+<hr>
+<h1>Block Elements</h1>
+<h2>Paragraphs and Images</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl.
+Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu
+volutpat enim diam eget metus. Maecenas ornare tortor.</p>
+<p><img alt="Placeholder Image and Some Alt Text" src="https://placehold.it/350x150" title="A title element for this placeholder image."></p>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam dignissim
+convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam
+sit amet sem.</p>
+<h2>Blockquote</h2>
+<p>This is a standard paragraph. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+<blockquote>
+<p>"This is a blockquote. Lorem ipsum dolor sit amet, consectetuer adipiscing
+elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc
+iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at,
+tincidunt nec, gravida vehicula, nisl."</p>
+</blockquote>
+<p>This is a standard paragraph. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+<p><em>Note: the
+<a href="http://html5doctor.com/the-figure-figcaption-elements/">Figure-Figcaption</a> and
+<a href="http://html5doctor.com/the-details-and-summary-elements/">Details-Summary</a>
+elements are not currently supported in markdown.</em></p>
+<hr>
+<h1>Text Elements</h1>
+<p>The <a href="#">a element</a> and <a href="http://example.com">external a element</a> examples</p>
+<p>The <abbr>abbr element</abbr> and an <abbr title="Abbreviation">abbr</abbr> element with title examples</p>
+<p>The <acronym title="A Cowboy Ran One New York Marathon">ACRONYM</acronym> element example</p>
+<p>The <strong>b element</strong> example</p>
+<p>The <cite>cite element</cite> example</p>
+<p>The <code>code element</code> example</p>
+<p>The <data value="3967381398">data element</data> example</p>
+<p>The ~~del element~~ example</p>
+<p>The <dfn>dfn element</dfn> and <dfn title="Title text">dfn element with title</dfn> examples</p>
+<p>The <em>em element</em> example</p>
+<p>The <em>i element</em> example</p>
+<p>The <ins>ins element</ins> example</p>
+<p>The <kbd>kbd element</kbd> example</p>
+<p>The <mark>mark element</mark> example</p>
+<p>The <q>q element</q> example</p>
+<p>The <q>q element <q>inside</q> a q element</q> example</p>
+<p>The <s>s element</s> example</p>
+<p>The <samp>samp element</samp> example</p>
+<p>The <small>small element</small> example</p>
+<p>The <span>span element</span> example</p>
+<p>The <strong>strong element</strong> example</p>
+<p>The <sub>sub element</sub> example</p>
+<p>The <sup>sup element</sup> example</p>
+<p>The <time datetime="2005-05-15 19:00">time element</time> example</p>
+<p>The <u>u element</u> example</p>
+<p>The <var>var element</var> example</p>
+<hr>
+<h1>Monospace / Preformatted</h1>
+<p>Code block wrapped in "pre" and "code" tags:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Loop through Divs using Javascript.</span>
+<span class="kd">var</span> <span class="nx">divs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">),</span> <span class="nx">i</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">divs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">divs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Monospace Text wrapped in "pre" tags:</p>
+<pre>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam dignissim
+convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam
+sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida
+vehicula, nisl.</pre>
+
+<hr>
+<h1>List Types</h1>
+<h2>Ordered List</h2>
+<ol>
+<li>List Item 1</li>
+<li>List Item 2<ol>
+<li>List Item 2.1</li>
+<li>List Item 2.2<ol>
+<li>List Item 2.2.1</li>
+<li>List Item 2.2 2</li>
+</ol>
+</li>
+<li>List Item 2.3</li>
+</ol>
+</li>
+<li>List Item 3</li>
+</ol>
+<h2>Unordered List</h2>
+<ul>
+<li>List Item 1</li>
+<li>List Item 2<ul>
+<li>List Item 2.1</li>
+<li>List Item 2.2<ul>
+<li>List Item 2.2.1</li>
+<li>List Item 2.2 2</li>
+</ul>
+</li>
+<li>List Item 2.3</li>
+</ul>
+</li>
+<li>List Item 3</li>
+</ul>
+<h2>Definition List</h2>
+<dl>
+  <dt>Definition Term 1</dt>
+  <dd>Definition Description 1</dd>
+  <dt>Definition Term 2</dt>
+  <dd>Definition Description 2</dd>
+</dl>
+
+<hr>
+<h1>Tables</h1>
+<table>
+<thead>
+<tr>
+<th>Table Header 1</th>
+<th>Table Header 2</th>
+<th>Table Header 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Division 1</td>
+<td>Division 2</td>
+<td>Division 3</td>
+</tr>
+<tr>
+<td>Division 1</td>
+<td>Division 2</td>
+<td>Division 3</td>
+</tr>
+<tr>
+<td>Division 1</td>
+<td>Division 2</td>
+<td>Division 3</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Media and Form Elements</h1>
+<p>The remaining sections contain elements that cannot be represented in markdown. Please consult <a href="https://github.com/bryanbraun/poor-mans-styleguide/blob/gh-pages/index.html">the HTML version</a>, to see these elements.</p></div>
+
+
+        </main> 
+
+        <footer>
+                <p>&mdash; &centerdot; &centerdot; &centerdot;</p> 
+                <!---
+                <a href='/about'>about</a> &compfn;
+                <a href='#'>book</a> &compfn;
+                <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
+                -->
+        </footer>
+
+            </div>
+    </body>
+</html>

@@ -38,7 +38,7 @@
 </div>
 
 <article><h2>Exploration in markdown</h2>
-<p>This article is a test post.  I'm currently trying to configure writing blog
+<p>This article is a test post. I'm currently trying to configure writing blog
 posts in markdown to be rendered to html. </p>
 <p>The blog will be an <strong>exploration</strong> of the many novel or re-occurring thoughts
 I have.</p>
@@ -52,17 +52,159 @@ frequently browse. Some notable mentions:    </p>
 <li><a href="https://meltingasphalt.com/" title="Kevin Simler">Melting Asphalt</a></li>
 </ul>
 <p>I plan on creating a section on book notes (one step at a time!).</p>
-<p>To wrap up, a few more <strong>tests</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nf">fib</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
-<span class="nf">fib</span> <span class="mi">0</span> <span class="ow">=</span> <span class="mi">0</span>
-<span class="nf">fib</span> <span class="mi">1</span> <span class="ow">=</span> <span class="mi">1</span>
-<span class="nf">fib</span> <span class="n">n</span> <span class="ow">=</span> <span class="n">fib</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<p>To wrap up, a few more tests</p>
+<div class="highlight"><pre><span></span><code><span class="err">fib :: Int -&gt; Int</span>
+<span class="err">fib 0 = 0</span>
+<span class="err">fib 1 = 1</span>
+<span class="err">fib n = fib (n-1) + fib (n-2)</span>
 </code></pre></div>
 
+<hr>
+<h2>Text Elements</h2>
+<ul>
+<li>
+<p>The <a href="#">a element</a> and <a href="http://example.com">external a element</a> examples</p>
+</li>
+<li>
+<p>The <abbr>abbr element</abbr> and an <abbr title="Abbreviation">abbr</abbr> element with title examples</p>
+</li>
+<li>
+<p>The <acronym title="A Cowboy Ran One New York Marathon">ACRONYM</acronym> element example</p>
+</li>
+<li>
+<p>The <strong>b element</strong> example</p>
+</li>
+<li>
+<p>The <cite>cite element</cite> example</p>
+</li>
+<li>
+<p>The <code>code element</code> example</p>
+</li>
+<li>
+<p>The <data value="3967381398">data element</data> example</p>
+</li>
+<li>
+<p>The <del>del element</del> example</p>
+</li>
+<li>
+<p>The <dfn>dfn element</dfn> and <dfn title="Title text">dfn element with title</dfn> examples</p>
+</li>
+<li>
+<p>The <em>em element</em> example</p>
+</li>
+<li>
+<p>The <em>i element</em> example</p>
+</li>
+<li>
+<p>The <ins>ins element</ins> example</p>
+</li>
+<li>
+<p>The <kbd>kbd element</kbd> example</p>
+</li>
+<li>
+<p>The <mark>mark element</mark> example</p>
+</li>
+<li>
+<p>The <q>q element</q> example</p>
+</li>
+<li>
+<p>The <q>q element <q>inside</q> a q element</q> example</p>
+</li>
+<li>
+<p>The <s>s element</s> example</p>
+</li>
+<li>
+<p>The <samp>samp element</samp> example</p>
+</li>
+<li>
+<p>The <small>small element</small> example</p>
+</li>
+<li>
+<p>The <span>span element</span> example</p>
+</li>
+<li>
+<p>The <strong>strong element</strong> example</p>
+</li>
+<li>
+<p>The <sub>sub element</sub> example</p>
+</li>
+<li>
+<p>The <sup>sup element</sup> example</p>
+</li>
+<li>
+<p>The <time datetime="2005-05-15 19:00">time element</time> example</p>
+</li>
+<li>
+<p>The <u>u element</u> example</p>
+</li>
+<li>
+<p>The <var>var element</var> example</p>
+</li>
+</ul>
+<hr>
+<h2>List Types</h2>
+<h3>Ordered List</h3>
+<ol>
+<li>List Item 1</li>
+<li>List Item 2<ol>
+<li>List Item 2.1</li>
+<li>List Item 2.2<ol>
+<li>List Item 2.2.1</li>
+<li>List Item 2.2 2</li>
+</ol>
+</li>
+<li>List Item 2.3</li>
+</ol>
+</li>
+<li>List Item 3</li>
+</ol>
+<h3>Unordered List</h3>
+<ul>
+<li>List Item 1</li>
+<li>List Item 2<ul>
+<li>List Item 2.1</li>
+<li>List Item 2.2<ul>
+<li>List Item 2.2.1</li>
+<li>List Item 2.2 2</li>
+</ul>
+</li>
+<li>List Item 2.3</li>
+</ul>
+</li>
+<li>List Item 3</li>
+</ul>
+<hr>
+<h2>Tables</h2>
+<table>
+<thead>
+<tr>
+<th>Table Header 1</th>
+<th>Table Header 2</th>
+<th>Table Header 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Division 1</td>
+<td>Division 2</td>
+<td>Division 3</td>
+</tr>
+<tr>
+<td>Division 1</td>
+<td>Division 2</td>
+<td>Division 3</td>
+</tr>
+<tr>
+<td>Division 1</td>
+<td>Division 2</td>
+<td>Division 3</td>
+</tr>
+</tbody>
+</table>
 <p>Finally a quote about ends:   </p>
 <blockquote>
-<p>When you reach the end of your rope, tie a knot in it and hang on.  --
-Franklin D. Roosevelt</p>
+<p>When you reach the end of your rope, tie a knot in it and hang on. 
+&mdash; Franklin D. Roosevelt</p>
 </blockquote></article>
 
 
