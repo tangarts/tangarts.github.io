@@ -682,7 +682,185 @@ attributes.&lt;/p&gt;
 opinion, for our horizontal friend and advisor, only he who has courage is free
 with his opinion. &lt;/p&gt;
 &lt;p&gt;The best way of checking if you are alive is by checking if you live
-variations. Remember that food would not have a taste if it weren't for hunger.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>grok the term</title><link href="/grok-the-term.html" rel="alternate"></link><published>2020-01-29T00:00:00+00:00</published><updated>2020-08-24T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-29:/grok-the-term.html</id><summary type="html">&lt;p&gt;A few minutes into a conversation about &lt;a href=""&gt;why I use Linux&lt;/a&gt;, I am hit with the question. &lt;em&gt;So what is&lt;/em&gt; a terminal?&lt;/p&gt;
+variations. Remember that food would not have a taste if it weren't for hunger.&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>python-idioms</title><link href="/python-idioms.html" rel="alternate"></link><published>2020-03-22T00:00:00+00:00</published><updated>2020-03-22T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-03-22:/python-idioms.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;A collection of python idioms and design patterns&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;What idioms should I use to make my code easier to read?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Build strings as a list and use &lt;code&gt;''.join&lt;/code&gt; at the end.p&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;Join is a string method called on the separator, not the list. Calling it from
+the empty string …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;A collection of python idioms and design patterns&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;What idioms should I use to make my code easier to read?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Build strings as a list and use &lt;code&gt;''.join&lt;/code&gt; at the end.p&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;Join is a string method called on the separator, not the list. Calling it from
+the empty string concatenates the pieces with no separator, which is a Python
+quirk and rather surprising at first. This is important: &lt;strong&gt;string building with
++ is quadratic time instead of linear!&lt;/strong&gt; If you learn one idiom, learn this
+  one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Wrong:&lt;/strong&gt; &lt;code&gt;for s in strings: result += s&lt;/code&gt;&lt;br&gt;
+&lt;strong&gt;Right:&lt;/strong&gt; &lt;code&gt;result = ''.join(strings)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Use &lt;code&gt;in&lt;/code&gt; wherever possible.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Use &lt;code&gt;if not x&lt;/code&gt; instead of &lt;code&gt;if x == 0&lt;/code&gt;.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;To reverse-sort a list, use: &lt;code&gt;list.sort()&lt;/code&gt; or &lt;code&gt;list.reverse()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Catch errors rather than avoiding them to avoid cluttering your code with
+special cases.  This idiom is called EAFP ('easier to ask forgiveness than
+permission'), as opposed to LBYL ('look before you leap').
+This often makes the code more readable. For example:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Worse:&lt;/strong&gt;&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;#check whether int conversion will raise an error&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isdigit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;    &lt;span class="c1"&gt;#too many digits for int conversion&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Better:&lt;/strong&gt;&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ne"&gt;OverflowError&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;#int conversion failed&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;h3&gt;What techniques should I use to make my code run faster?&lt;/h3&gt;
+&lt;p&gt;Profile before optimizing for speed: optimize for readability first&lt;/p&gt;
+&lt;p&gt;Build strings as a list and use &lt;code&gt;''.join()&lt;/code&gt; at the end. &lt;strong&gt;(Super important)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Use &lt;code&gt;map&lt;/code&gt; and/or &lt;code&gt;filter&lt;/code&gt; to apply functions to lists.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;map&lt;/code&gt; applies a function to each item in a list (technically, sequence) and
+returns a list of the results.&lt;br&gt;
+&lt;code&gt;filter&lt;/code&gt; applies a function to each item in a sequence, and returns a list
+containing only those items for which the function evaluated True (using the
+&lt;strong&gt;nonzero&lt;/strong&gt; built-in method).&lt;br&gt;
+These functions can make code much shorter. 
+They also make it much faster, since the loop takes place entirely in the C API
+and never has to bind loop variables to Python objects.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Worse:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;strings = []&lt;/span&gt;
+&lt;span class="err"&gt;for d in data:&lt;/span&gt;
+&lt;span class="err"&gt;    strings.append(str(d))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Better:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;strings = map(str, data)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;&lt;strong&gt;Use function factories to create utility functions.&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;multiply_by_field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fieldname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;multiplier&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="ss"&gt;&amp;quot;&amp;quot;&amp;quot;Returns function that multiplies field &amp;quot;&lt;/span&gt;&lt;span class="n"&gt;fieldname&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot; by multiplier.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;multiplier&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;getattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fieldname&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;multiplier&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;multiplier&lt;/span&gt;
+
+&lt;span class="n"&gt;triple&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;multiply_by_field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Count&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;quadruple&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;multiply_by_field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Count&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;halve_sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;multiply_by_field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Sum&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;python file names &lt;code&gt;calc_squares.py&lt;/code&gt; over &lt;code&gt;calc-squares.py&lt;/code&gt; as second cannot be
+imported though single name module names are best.&lt;/p&gt;
+&lt;h3&gt;packagin packages&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;package/&lt;/span&gt;
+&lt;span class="err"&gt;  __init__.py        -- contains functions a(), b()&lt;/span&gt;
+&lt;span class="err"&gt;  other.py           -- contains function c()&lt;/span&gt;
+&lt;span class="err"&gt;  subdir/&lt;/span&gt;
+&lt;span class="err"&gt;     __init__.py     -- contains function d()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;package&lt;/span&gt;
+&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;package.other&lt;/span&gt;
+&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;package.subdir&lt;/span&gt;
+&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subdir&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;note:&lt;/em&gt; hierarchies of packages more than two deep are annoying to develop on&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
+&lt;span class="err"&gt;docstrings :&lt;/span&gt;
+&lt;span class="err"&gt;&amp;quot;Good&amp;quot; docstring coding is used to provide additional information about functionality &lt;/span&gt;
+&lt;span class="err"&gt;beyond what can be discovered automatically by introspection&lt;/span&gt;
+&lt;span class="err"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;testing, testing, testing...&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;An Introduction to Testing Concepts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Unit tests are tests for fairly small and specific units of functionality.
+Functional tests test entire functional paths through your code. 
+Regression tests make sure that (within the resolution of your records) your program's output has not changed.&lt;/p&gt;
+&lt;p&gt;All three types of tests are necessary in different ways.&lt;/p&gt;
+&lt;p&gt;Regression tests tell you when unexpected changes in behavior occur, and can
+reassure you that your basic data processing is still working.  For scientists,
+this is particularly important if you are trying to link past research results
+to new research results: if you can no longer replicate your original results
+with your updated code, then you must regard your code with suspicion, unless
+the changes are intentional.&lt;/p&gt;
+&lt;p&gt;Both unit and functional tests tend to be expectation based.  you use the tests
+to lay out what behavior you expect from your code, and write your tests so
+that they assert that those expectations are met.&lt;/p&gt;
+&lt;p&gt;Unit tests tend to be much shorter and require less setup and teardown, while
+functional tests can be quite long.  functional tests tell you when your code
+is broken, while unit tests tell you where your code is broken.  because of the
+finer granularity of unit tests, a broken unit test can identify a particular
+piece of code as the source of an error, while functional tests merely tell you
+that a feature is broken.&lt;/p&gt;
+&lt;h3&gt;Adding tests to existing project&lt;/h3&gt;
+&lt;p&gt;First, start by writing a test for each bug as they are discovered.
+isolate the cause of the bug; write a test that demonstrates the bug; fix the
+bug; verify that the test passes.&lt;/p&gt;
+&lt;p&gt;Next, take out some time -- half a day or so -- and write fixtures and
+functional tests for some small chunk of code; if you can, pick a piece of code
+that you're planning to clean up or extend. Don't worry about being exhaustive,
+just write tests that target the main point of the code that you're working on.&lt;/p&gt;
+&lt;p&gt;Repeat this a few times. &lt;/p&gt;
+&lt;p&gt;Use code coverage analysis to analyze what code your tests cover, and what code
+isn't covered.  At this point you can take a targetted approach and spend some
+time writing tests aimed directly at uncovered areas of code.  There should now
+be tests that cover 30-50% of your code, at least (it's very easy to attain
+this level of code coverage!).&lt;/p&gt;
+&lt;p&gt;Once you've reached this point, you can either decide to focus on increasing
+your code coverage, or you can simply continue incrementally constraining your
+code by writing tests for bugs and new features.  Assuming you have a fairly
+normal code churn, you should get to the point of 70-80% coverage within a few
+months to a few years (depending on the size of the project!)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Cache decorator&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;simple_cache&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fn&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;{}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;new_fn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;FOUND IN CACHE; RETURNING&amp;#39;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;otherwise&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;call&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;value&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;fn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;new_fn&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nv"&gt;@simplecache&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This approach is effective because at each stage you get immediate feedback
+from your efforts, and it's easier to justify to managers than a whole-team
+effort to add testing. Plus, if you're unfamiliar with testing or with parts of
+the code base, it gives you time to adjust and adapt your approach to the needs
+of the particular project.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;see also: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=_O23jIXsshs"&gt;10 tips for pythonic code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/mikeckennedy/ten-tips-for-pythonic-code-jetbrains-webcast/blob/master/"&gt;ten-tips-for-pythonic-coten-tips-for-pythonic-code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="misc"></category></entry><entry><title>grok the term</title><link href="/grok-the-term.html" rel="alternate"></link><published>2020-01-29T00:00:00+00:00</published><updated>2020-08-24T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-29:/grok-the-term.html</id><summary type="html">&lt;p&gt;A few minutes into a conversation about &lt;a href=""&gt;why I use Linux&lt;/a&gt;, I am hit with the question. &lt;em&gt;So what is&lt;/em&gt; a terminal?&lt;/p&gt;
 &lt;p&gt;I open up &lt;em&gt;htop&lt;/em&gt; and show&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;        ├─sh───urxvt─┬─bash───htop&lt;/span&gt;
 &lt;span class="err"&gt;        │            └─urxvt&lt;/span&gt;
