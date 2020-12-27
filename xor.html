@@ -1,0 +1,347 @@
+
+<html>
+    <head> 
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/ico"/>
+    <title> XOR </title>
+    </head>
+    
+    <body>
+            <div class="container">
+	    <header>
+                    <h1> <a href='/'> tangarts </a> </h1>
+                    <div id="header_wrap" class="wrapper">
+                    <nav id="navbar" >
+                <ul class="list-none" >
+                        <li><a href="/about">about</a> &centerdot;</li>
+                <li><a href="/archives.html">archive</a> &centerdot;</li>
+                <li><a href="/now">now</a> &centerdot;</li>
+                <li><a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a></li>
+                </ul> 
+
+                    </nav>
+                    </div>
+
+            </header>  
+        <main class="wrapper">
+
+                       <hr> 
+
+
+<h1> XOR </h1>
+<div class=date>
+        2020-08-08
+        | Modified: 2020-12-26
+
+</div>
+
+<article><h1>XOR problem</h1>
+<p>In learning a new field I don't think an introduction using the most basic
+example doesn't help. Using the XOR problem to understand deep learning often
+obscures the grander picture. That being said, I'm not sure who this
+explanation is for. At the moment, myself. Why? To see how well I can explain
+the fundamental concepts of deep learning using a toy example. </p>
+<p>A quick history lesson. </p>
+<p>Perceptrons are functions that perform a linear operation followed by a non
+linear function mapping. In general, taking inputs <span class="math">\(x_1, x_2, ..., x_n\)</span> to an
+output <span class="math">\(f(\sum_i^n {w_i x_i})\)</span>. Letting <span class="math">\(f(z)\)</span> be a step function with value <code>1
+if z &gt; 0 else 0</code>.</p>
+<p>The problem here is that we are only able to find functions that are linearly
+separable.</p>
+<p><strong>Multilayer and differentiable activation functions</strong></p>
+<p>What we want to do is add non linearity to our input. By doing so we can
+transform our feature space for a linear model to learn.</p>
+<h3>The architecture</h3>
+<p>The network consists of two inputs <span class="math">\(x_1\)</span> and <span class="math">\(x_2\)</span>, a hidden layer <span class="math">\(\textbf{h}=
+[h_1, h_2]\)</span> and output <span class="math">\(y\)</span> </p>
+<h3>Task</h3>
+<p>Find the parameters/weights <span class="math">\(\theta\)</span> that minimize the error/loss between estimated function <span class="math">\(f\)</span> and our estimate <span class="math">\(f^*\)</span>. We want our <span class="math">\(\theta\)</span> values to produce an estimate as close to <span class="math">\(f^*\)</span> as possible, or for the loss function L to be as close to zero.</p>
+<p>The mean squared error </p>
+<div class="math">$$ L(\theta) = \frac{1}{2} \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta))^2$$</div>
+<p> has a nice derivative, </p>
+<div class="math">$$\nabla{L_{\theta}} = \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta)) \nabla f( \textbf{x} ; \theta)$$</div>
+<p>i.e. the product of the summed difference and the change in our estimated function <span class="math">\(f(\textbf{x}; \theta)\)</span> with respect to a change in <span class="math">\(\theta\)</span></p>
+<h3>Optimization, Gradient Descent</h3>
+<p>In thinking of our Loss function as a terrain, we want the coordinates that reaches the lowest valley.</p>
+<p>We start at coordinates <span class="math">\(\theta_0\)</span>. How do we find the deepest valley? Intuitively, a natural step would to go in the direction with the steepest incline by a small <span class="math">\(\alpha\)</span> sized step , <span class="math">\(-\alpha \nabla_{\theta}{L}\)</span>. </p>
+<p>Taking the step, we arrive at a new coordinate <span class="math">\(\theta_1\)</span>. Repeating this process choose the direction with the steepest decline until we reach our destination.</p>
+<p><span class="math">\(\theta_{n+1} = \theta_{n} - \alpha \nabla_{\theta}{L}\)</span></p>
+<h3>Backpropagation</h3>
+<p>Going back to the XOR problem
+we have</p>
+<div class="math">$$\textbf{x} \rightarrow f(\textbf{W}^T\textbf{x}) = \textbf{h}$$</div>
+<div class="math">$$\textbf{h} \rightarrow g(\textbf{w}^T \textbf{h}) \rightarrow \textbf{w}^T f(\textbf{W}^T\textbf{x} ) = y$$</div>
+<p>The parameter <span class="math">\(\theta\)</span> is made up of different weights <span class="math">\(\textbf W\)</span> and <span class="math">\(\textbf w\)</span> that the network will need to learn.</p>
+<p>Thus 
+</p>
+<div class="math">$$
+\begin{aligned}
+\nabla_{x} L &amp;= \frac{\partial L}{\partial y} \
+&amp;= \frac{\partial y}{\partial (\textbf w^T \textbf h)} \
+&amp;= \frac{\partial (\textbf w^T \textbf h)}{\partial h} \
+&amp;= \frac{\partial h}{\partial (\textbf W ^T \textbf x)} \
+&amp;= \frac{\partial (\textbf W^T \textbf x)}{\partial x}
+\end{aligned}
+$$</div>
+<div class="math">$$(y - y^*) \textbf w  f'(.) \textbf W$$</div>
+<p>where y is our predicted value, <span class="math">\(y^*\)</span> is the true value.</p>
+<p>So </p>
+<div class="math">$$\nabla_{w} L = \frac{\partial L}{\partial y}
+\frac{\partial y}{\partial (\textbf w^T \textbf h)}
+\frac{\partial (\textbf w^T \textbf h)}{\partial \textbf w} = (y - y^*)  \textbf h $$</div>
+<p>and </p>
+<div class="math">$$\nabla_{W} L = \frac{\partial L}{\partial y} \frac{\partial y}{\partial (\textbf w^T \textbf h)}
+\frac{\partial (\textbf w^T \textbf h)}{\partial h}
+\frac{\partial h}{\partial (\textbf W ^T \textbf x)}
+\frac{\partial (\textbf W^T \textbf x)}{\partial W} = (y - y^*) \textbf w f'(\textbf W ^T \textbf x)\textbf x $$</div>
+<div class="math">$$\frac{\partial L}{\partial y} = (y - y^*)$$</div>
+<div class="math">$$\frac{\partial (\textbf w^T \textbf h)}{\partial h} = \textbf w$$</div>
+<div class="math">$$\frac{\partial h}{\partial (\textbf W ^T \textbf x)} = f'(\textbf W ^T \textbf x)$$</div>
+<div class="math">$$\frac{\partial (\textbf W^T \textbf x)}{\partial x}= \textbf W$$</div>
+<h3>Activation Function</h3>
+<p>The most common non-linear function used in modern neural networks is the ReLU </p>
+<div class="math">$$f(z) = \max(0, z)$$</div>
+<p>or variations of it. </p>
+<p>Its derivative </p>
+<div class="math">$$f'(z) = \max(0, 1)$$</div>
+<p>is easy to compute even though it is non differentiable at 0.</p>
+<p>The sigmoid function </p>
+<div class="math">$$g(z) = \frac{1}{1 + \exp(-z)}$$</div>
+<p> is used in binary classification problems with derivative </p>
+<div class="math">$$g'(z) = g(z)(1 - g(z))$$</div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; A  B | XOR(A,B)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bits</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">bits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">bits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> |     </span><span class="si">{</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span>     <span class="n">A</span>  <span class="n">B</span> <span class="o">|</span> <span class="n">XOR</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span>    <span class="o">-----------------</span>
+<span class="o">&gt;&gt;</span>     <span class="mi">0</span>  <span class="mi">0</span> <span class="o">|</span>     <span class="mi">0</span>
+<span class="o">&gt;&gt;</span>     <span class="mi">0</span>  <span class="mi">1</span> <span class="o">|</span>     <span class="mi">1</span>
+<span class="o">&gt;&gt;</span>     <span class="mi">1</span>  <span class="mi">0</span> <span class="o">|</span>     <span class="mi">1</span>
+<span class="o">&gt;&gt;</span>     <span class="mi">1</span>  <span class="mi">1</span> <span class="o">|</span>     <span class="mi">0</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; non-linear function &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">dx_sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">relu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dx_relu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">loss_fn</span><span class="p">(</span><span class="n">predicted</span><span class="p">,</span> <span class="n">true</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">predicted</span> <span class="o">-</span> <span class="n">true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># 100 iterations </span>
+<span class="n">iterations</span> <span class="o">=</span> <span class="mi">10000</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">input_dim</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">output_dim</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># learning rate</span>
+
+<span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">))</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">))</span>
+
+<span class="n">activation_fn</span> <span class="o">=</span> <span class="n">relu</span>
+<span class="n">dx_activation_fn</span> <span class="o">=</span> <span class="n">dx_relu</span>
+
+
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># forward pass</span>
+
+    <span class="c1"># (4, 2) x (2, 2) -&gt; (4, 2)</span>
+    <span class="n">fc1</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="c1"># (4, 2)</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="n">activation_fn</span><span class="p">(</span><span class="n">fc1</span><span class="p">)</span>
+    <span class="c1"># (4, 2) x (2, 1) ==&gt; (4, 1)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">hidden</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">output</span><span class="p">,</span>  <span class="n">Y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loss: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  Step: </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">iterations</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1">## backward pass </span>
+    <span class="c1">#(4x1)</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">output</span> <span class="o">-</span> <span class="n">Y</span>
+
+    <span class="n">delta_hidden</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx_activation_fn</span><span class="p">(</span><span class="n">fc1</span><span class="p">)</span> 
+
+    <span class="c1">## gradient descent</span>
+
+    <span class="n">grad_w</span> <span class="o">=</span> <span class="n">hidden</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">grad_w</span>
+
+    <span class="n">grad_W</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">delta_hidden</span><span class="p">)</span>
+    <span class="n">W</span> <span class="o">-=</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">grad_W</span>
+
+
+
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000012</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">1000</span><span class="o">/</span><span class="mi">10000</span>
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000003</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">2000</span><span class="o">/</span><span class="mi">10000</span>
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000001</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">3000</span><span class="o">/</span><span class="mi">10000</span>
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000001</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">4000</span><span class="o">/</span><span class="mi">10000</span>
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000000</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">5000</span><span class="o">/</span><span class="mi">10000</span>
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000000</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">6000</span><span class="o">/</span><span class="mi">10000</span>
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000000</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">7000</span><span class="o">/</span><span class="mi">10000</span>
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000000</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">8000</span><span class="o">/</span><span class="mi">10000</span>
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000000</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">9000</span><span class="o">/</span><span class="mi">10000</span>
+<span class="o">&gt;&gt;</span>    <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.000000</span>  <span class="n">Step</span><span class="p">:</span> <span class="mi">10000</span><span class="o">/</span><span class="mi">10000</span>
+</code></pre></div>
+
+<hr>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;predicted </span><span class="si">{</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1"> =&gt; true </span><span class="si">{</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span>    <span class="n">predicted</span> <span class="mf">0.00000</span> <span class="o">=&gt;</span> <span class="n">true</span> <span class="mi">0</span>
+<span class="o">&gt;&gt;</span>    <span class="n">predicted</span> <span class="mf">1.00000</span> <span class="o">=&gt;</span> <span class="n">true</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;</span>    <span class="n">predicted</span> <span class="mf">1.00000</span> <span class="o">=&gt;</span> <span class="n">true</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;</span>    <span class="n">predicted</span> <span class="mf">0.00084</span> <span class="o">=&gt;</span> <span class="n">true</span> <span class="mi">0</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span>    <span class="p">(</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.85018314</span><span class="p">,</span>  <span class="mf">0.80808135</span><span class="p">],</span>
+<span class="o">&gt;&gt;</span>            <span class="p">[</span> <span class="mf">0.85056309</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.80776054</span><span class="p">]]),</span>
+<span class="o">&gt;&gt;</span>
+<span class="o">&gt;&gt;</span>     <span class="n">array</span><span class="p">([[</span><span class="mf">1.1756913</span> <span class="p">],</span>
+<span class="o">&gt;&gt;</span>            <span class="p">[</span><span class="mf">1.23749876</span><span class="p">]]))</span>
+</code></pre></div>
+
+<h2>plot</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+
+<span class="k">def</span> <span class="nf">xorNet</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">fc1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">fc1</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">hidden</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">splot</span><span class="p">(</span><span class="n">ax3d</span><span class="p">,</span> <span class="n">nticks</span><span class="o">=</span><span class="mi">101</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;surface plot of the xor outputs of</span>
+<span class="sd">    the self.net for a mesh grid inputs of a and b:&quot;&quot;&quot;</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="n">nticks</span><span class="p">)</span>
+    <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">],</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">xor</span> <span class="o">=</span> <span class="n">xorNet</span><span class="p">(</span><span class="n">ab</span><span class="p">)</span>
+    <span class="n">xor</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">nticks</span><span class="p">,</span><span class="n">nticks</span><span class="p">)</span>
+    <span class="n">ax3d</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">ax3d</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">xor</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno&#39;</span><span class="p">,)</span><span class="c1">#edgecolor=&#39;none&#39;)</span>
+    <span class="n">ax3d</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">azim</span><span class="o">=-</span><span class="mi">60</span><span class="p">)</span>
+    <span class="n">ax3d</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="n">ax3d</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+    <span class="n">ax3d</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="n">ax3d</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+    <span class="n">ax3d</span><span class="o">.</span><span class="n">set_zticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="n">ax3d</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;XOR&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax3d</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">splot</span><span class="p">(</span><span class="n">ax3d</span><span class="p">)</span>
+<span class="n">ax3d</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="xor-relu-soln" src="images/xor-relu-soln.png"></p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></article>
+
+
+
+        </main> 
+
+        <footer>
+                <p>&mdash; &centerdot; &centerdot; &centerdot;</p> 
+                <!---
+                <a href='/about'>about</a> &compfn;
+                <a href='#'>book</a> &compfn;
+                <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
+                -->
+        </footer>
+
+            </div>
+    </body>
+</html>

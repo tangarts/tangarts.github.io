@@ -33,25 +33,25 @@
 <h1> grok the term </h1>
 <div class=date>
         2020-01-29
-        | Modified: 2020-08-24
+        | Modified: 2020-12-26
 
 </div>
 
 <article><p>A few minutes into a conversation about <a href="">why I use Linux</a>, I am hit with the question. <em>So what is</em> a terminal?</p>
-<p>I open up <em>htop</em> and show</p>
-<div class="highlight"><pre><span></span><code><span class="err">        ├─sh───urxvt─┬─bash───htop</span>
-<span class="err">        │            └─urxvt</span>
+<p>looking at a segment of <code>pstree</code></p>
+<div class="highlight"><pre><span></span><code> ├─st───zsh───tmux: client
+ └─st───zsh───pstree
 </code></pre></div>
 
 <p>You can see htop running on this terminal.</p>
 <p>Now if we look at the process tree below&hellip;</p>
-<div class="highlight"><pre><span></span><code><span class="err">        ├─sh───firefox─┬─RDD Process───3*[{RDD Process}]</span>
-<span class="err">        │              ├─2*[Web Content───26*[{Web Content}]]</span>
-<span class="err">        │              ├─Web Content───17*[{Web Content}]</span>
-<span class="err">        │              ├─Web Content───23*[{Web Content}]</span>
-<span class="err">        │              ├─3*[Web Content───24*[{Web Content}]]</span>
-<span class="err">        │              ├─WebExtensions───23*[{WebExtensions}]</span>
-<span class="err">        │              └─60*[{firefox}]</span>
+<div class="highlight"><pre><span></span><code> ─firefox─┬─Privileged Cont───20*<span class="o">[{</span>Privileged Cont<span class="o">}]</span>
+          ├─Web Content───26*<span class="o">[{</span>Web Content<span class="o">}]</span>
+          ├─2*<span class="o">[</span>Web Content───23*<span class="o">[{</span>Web Content<span class="o">}]]</span>
+          ├─2*<span class="o">[</span>Web Content───24*<span class="o">[{</span>Web Content<span class="o">}]]</span>
+          ├─Web Content───15*<span class="o">[{</span>Web Content<span class="o">}]</span>
+          ├─WebExtensions───22*<span class="o">[{</span>WebExtensions<span class="o">}]</span>
+          └─79*<span class="o">[{</span>firefox<span class="o">}]</span>
 </code></pre></div>
 
 <p><em>Woah</em>, a lot more processes.</p>

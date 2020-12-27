@@ -54,13 +54,7 @@ special cases.  This idiom is called EAFP ('easier to ask forgiveness than
 permission'), as opposed to LBYL ('look before you leap').
 This often makes the code more readable. For example:</p>
 <p><strong>Worse:</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">#check whether int conversion will raise an error</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#check whether int conversion will raise an error</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">isdigit</span><span class="p">:</span>
     <span class="k">return</span> <span class="kc">None</span>
 <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>    <span class="c1">#too many digits for int conversion</span>
@@ -68,17 +62,14 @@ This often makes the code more readable. For example:</p>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 </code></pre></div>
-</td></tr></table>
+
 <p><strong>Better:</strong></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">OverflowError</span><span class="p">):</span> <span class="c1">#int conversion failed</span>
     <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div>
-</td></tr></table>
+
 <h3>What techniques should I use to make my code run faster?</h3>
 <p>Profile before optimizing for speed: optimize for readability first</p>
 <p>Build strings as a list and use <code>''.join()</code> at the end. <strong>(Super important)</strong></p>
@@ -92,13 +83,13 @@ These functions can make code much shorter.
 They also make it much faster, since the loop takes place entirely in the C API
 and never has to bind loop variables to Python objects.</p>
 <p><strong>Worse:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="err">strings = []</span>
-<span class="err">for d in data:</span>
-<span class="err">    strings.append(str(d))</span>
+<div class="highlight"><pre><span></span><code><span class="n">strings</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">strings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
 </code></pre></div>
 
 <p><strong>Better:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="err">strings = map(str, data)</span>
+<div class="highlight"><pre><span></span><code><span class="n">strings</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre></div>
 
 <h3><strong>Use function factories to create utility functions.</strong></h3>
@@ -116,11 +107,11 @@ and never has to bind loop variables to Python objects.</p>
 <p>python file names <code>calc_squares.py</code> over <code>calc-squares.py</code> as second cannot be
 imported though single name module names are best.</p>
 <h3>packagin packages</h3>
-<div class="highlight"><pre><span></span><code><span class="err">package/</span>
-<span class="err">  __init__.py        -- contains functions a(), b()</span>
-<span class="err">  other.py           -- contains function c()</span>
-<span class="err">  subdir/</span>
-<span class="err">     __init__.py     -- contains function d()</span>
+<div class="highlight"><pre><span></span><code><span class="n">package</span><span class="o">/</span>
+  <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>        <span class="o">--</span> <span class="n">contains</span> <span class="n">functions</span> <span class="n">a</span><span class="p">(),</span> <span class="n">b</span><span class="p">()</span>
+  <span class="n">other</span><span class="o">.</span><span class="n">py</span>           <span class="o">--</span> <span class="n">contains</span> <span class="n">function</span> <span class="n">c</span><span class="p">()</span>
+  <span class="n">subdir</span><span class="o">/</span>
+     <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>     <span class="o">--</span> <span class="n">contains</span> <span class="n">function</span> <span class="n">d</span><span class="p">()</span>
 </code></pre></div>
 
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">package</span>
@@ -135,11 +126,13 @@ imported though single name module names are best.</p>
 </code></pre></div>
 
 <p><em>note:</em> hierarchies of packages more than two deep are annoying to develop on</p>
-<div class="highlight"><pre><span></span><code><span class="err">&quot;&quot;&quot; </span>
-<span class="err">docstrings :</span>
-<span class="err">&quot;Good&quot; docstring coding is used to provide additional information about functionality </span>
-<span class="err">beyond what can be discovered automatically by introspection</span>
-<span class="err">&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">Docstrings</span>
+<span class="sd">---------</span>
+
+<span class="sd">&quot;Good&quot; docstring coding is used to provide additional information about functionality </span>
+<span class="sd">beyond what can be discovered automatically by introspection</span>
+<span class="sd">&quot;&quot;&quot;</span>
 </code></pre></div>
 
 <h3>testing, testing, testing...</h3>
@@ -183,21 +176,21 @@ code by writing tests for bugs and new features.  Assuming you have a fairly
 normal code churn, you should get to the point of 70-80% coverage within a few
 months to a few years (depending on the size of the project!)</p>
 <p><strong>Cache decorator</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">simple_cache</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">simple_cache</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">new_fn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">cache</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="k">print</span><span class="w"> </span><span class="s1">&#39;FOUND IN CACHE; RETURNING&#39;</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">cache</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="w"></span>
+    <span class="k">def</span> <span class="nf">new_fn</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+            <span class="nb">print</span> <span class="s1">&#39;FOUND IN CACHE; RETURNING&#39;</span>
+            <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
 
-<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">otherwise</span><span class="p">,</span><span class="w"> </span><span class="k">call</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="k">value</span><span class="w"></span>
-<span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="n">cache</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">val</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">new_fn</span><span class="w"></span>
-<span class="nv">@simplecache</span><span class="w"></span>
-<span class="n">f</span><span class="p">()</span><span class="w"></span>
+        <span class="c1"># otherwise, call function &amp; record value</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">cache</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">return</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">new_fn</span>
+<span class="nd">@simplecache</span>
+<span class="n">f</span><span class="p">()</span>
 </code></pre></div>
 
 <p>This approach is effective because at each stage you get immediate feedback
