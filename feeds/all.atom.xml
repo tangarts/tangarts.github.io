@@ -231,7 +231,7 @@ $$&lt;/div&gt;
 &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img alt="xor-relu-soln" src="images/xor-relu-soln.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="xor-relu-soln" src="images/xor-relu-soln.jpg"&gt;&lt;/p&gt;
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
@@ -651,13 +651,13 @@ last bit of our sequence being 1 and the previously returned XOR result, 0. &lt;
 &lt;p&gt;In viewing neural network architectures as function composition we see
 recurrent neural networks can be viewed as a reduce operation on an input
 sequence.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="rnn" src="images/RNN-encoding.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="rnn" src="images/RNN-encoding.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Considering one bit at a time and remembering the previous partial result in
 a recurrent or multi-step architecture reduces the problem of learning k-bit
 parity to the simple one of learning just 2-bit parity.&lt;/p&gt;
 &lt;h3&gt;The Architecture&lt;/h3&gt;
 &lt;p&gt;Below is a diagram showing the architecture of the LSTM.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="xor lstm" src="images/xor_lstm_.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="xor lstm" src="images/xor_lstm_.jpg"&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;model&lt;/span&gt;
 
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;    &lt;span class="n"&gt;XORLSTM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
@@ -1714,7 +1714,7 @@ consciousness, apply pen to paper, fingertips to the keyboard. &lt;/p&gt;
 want to cut out, paragraphs that will need to be edited but that comes after
 with pruning your tree. &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;img alt="tree, poem" src="images/grow-the-tree.png"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Testing the Waters</title><link href="/testing-the-waters.html" rel="alternate"></link><published>2019-06-19T00:00:00+01:00</published><updated>2020-08-26T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2019-06-19:/testing-the-waters.html</id><summary type="html">&lt;h2&gt;Exploration in markdown&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="tree, poem" src="images/grow-the-tree.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Testing the Waters</title><link href="/testing-the-waters.html" rel="alternate"></link><published>2019-06-19T00:00:00+01:00</published><updated>2020-08-26T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2019-06-19:/testing-the-waters.html</id><summary type="html">&lt;h2&gt;Exploration in markdown&lt;/h2&gt;
 &lt;p&gt;This article is a test post. I'm currently trying to configure writing blog
 posts in markdown to be rendered to html. &lt;/p&gt;
 &lt;p&gt;The blog will be an &lt;strong&gt;exploration&lt;/strong&gt; of the many novel or re-occurring thoughts

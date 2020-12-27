@@ -344,13 +344,13 @@ last bit of our sequence being 1 and the previously returned XOR result, 0. </p>
 <p>In viewing neural network architectures as function composition we see
 recurrent neural networks can be viewed as a reduce operation on an input
 sequence.</p>
-<p><img alt="rnn" src="images/RNN-encoding.png"></p>
+<p><img alt="rnn" src="images/RNN-encoding.jpg"></p>
 <p>Considering one bit at a time and remembering the previous partial result in
 a recurrent or multi-step architecture reduces the problem of learning k-bit
 parity to the simple one of learning just 2-bit parity.</p>
 <h3>The Architecture</h3>
 <p>Below is a diagram showing the architecture of the LSTM.</p>
-<p><img alt="xor lstm" src="images/xor_lstm_.png"></p>
+<p><img alt="xor lstm" src="images/xor_lstm_.jpg"></p>
 <div class="highlight"><pre><span></span><code><span class="n">model</span>
 
 <span class="o">&gt;&gt;</span>    <span class="n">XORLSTM</span><span class="p">(</span>
