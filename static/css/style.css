@@ -1,40 +1,164 @@
-/* 
-/* Font definitions {{{ */
-@font-face {
-/* Monospace stack */
-font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+@import url("default.css");
 
- } 
+* {
+    box-sizing: border-box;
+}
 
-/* }}} */
-
-/* Main blocks style {{{ */
 body {
+    font:18px/1.3 "Bitstream Charter", "Century SchoolBook", serif;
     padding: 0;
     margin: 0;
-    font-family: monospace;
     font-size: 100%;
 
 }
 
-#wrapper {
-    width:90%;
-    max-width:800px;
-    margin:auto;
-    font-size: 16px;
-    line-height: 120%;
+h1,h2,h3,h4,h5,h6 {
+    font-family:"Bitstream Charter","Century SchoolBook", serif;
+    margin:2.5rem 0 1rem;
 
 }
-.topnav.wrapper {
-    text-align:left;
+
+ul li {
+    margin-left: 0.5rem;
 }
+
+header {
+    text-align: center;
+}
+
+a, a:visited {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+  height:auto;
+  max-width:100%;
+
+}
+
+pre {
+  border: 1px solid lightgrey;
+  overflow:auto;
+}
+
+code {
+    font-family: "Fira Mono";
+    font-style: normal; font-weight: normal; font-size: 0.85rem;
+    font-size: 95%;
+    hyphens: none;
+    padding: 0 0.2em;
+}
+
+table {
+  border-collapse:collapse;
+  margin:2rem 0;
+  text-align:left;
+  width:100%;
+}
+
+tr {
+  border-bottom:1px solid lightgrey;
+}
+
+th,td {
+  padding:1rem;
+}
+
+
 footer {
     text-align: center;
     margin: auto;
     width: 90%;
-    max-width: 800px;
+    max-width: 640px;
     border-top:1px solid #aaa;
     padding: 10px;
+}
+
+blockquote {
+    font-style: italic;
+    background: #f9f9f9;
+    border-left: 6px solid #ccc;
+    padding: 0.5em 8px;
+}
+
+blockquote p {
+    display: inline;
+}
+
+pre {
+    margin: 1em 0;
+    overflow: auto;
+    overflow-y: hidden;
+    padding: 8px;
+    color: #333;
+}
+
+
+/* Titles and headers {{{ */
+h1, h3 {
+    line-height:1.2;
+}
+
+/* links */
+h1 a:hover {
+    color: #f94;
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 4px;
+}
+
+footer {
+    position:relative;
+    bottom:0;
+    height:4em;
+    font-size:16px;
+    padding-top:1em;
+    border-top:1px solid #999;	
+}
+
+.container {
+    width: 90%;
+    max-width: 640px;
+    margin: auto;
+
+}
+
+.wrapper {
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.3; 
+}
+
+#header_wrap {
+    width: 100%;
+    padding: 0;
+}
+
+#navbar {
+    text-align: right;
+    max-width: 640px;
+    margin: 10px;
+}
+
+#navbar li {
+    display: inline-block;
+    margin: 0;
+}
+
+.wrapper.topnav {
+    text-align:right;
+    display: inline-block;
 }
 
 #blank {
@@ -42,85 +166,8 @@ footer {
     padding:10px;
 }
 
-
-/* }}} */
-
-/* Titles and headers {{{ */
-h1, h3 {
-    line-height:1.2;
+.date {
+    font-size:14px;
+    color: #777;
 }
-
-h1, p {
-    display: inline-block;
-}
-
-h2 {
-    font-weight: normal;
-    color: #555;
-}
-/* }}} */
-
-/* Pretty links {{{ */
-a {
-    color: #333;
-    text-decoration: none;
-    font-style: italic;
-    border-bottom: 1px dotted grey;
-}
-
-a:hover {
-    color: #f94;
-}
-
-h1 a, h2 a, h3 a {
-    font-style: normal;
-}
-
-header {
-    text-align: center;
-
-}
-
-.date {}
-
-.tag {}
-
-header h1 a {
-    color: #1e1e1e;
-    border: none;
-}
-
-hr {
-        border: 0;
-        height: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-footer {
-	position:relative;
-	bottom:0;
-	height:4em;
-	font-size:16px;
-	padding-top:1em;
-	border-top:1px solid #999;	
-}
-
-/*
-header h1 a:hover {
-    color: #fff;
-}
-*/
-/* }}} */
-
-/* Monospace stack */
-/*
-font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
-*/
-
-/* Helvetica/Arial-based sans serif stack */
-/*
- font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
-*/
-
 

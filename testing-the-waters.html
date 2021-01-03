@@ -1,76 +1,292 @@
 
 <html>
-    <head>
+    <head> 
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel= "stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/ico"/>
     <title> Testing the Waters </title>
     </head>
     
     <body>
-	    <header><h1> <a href='/'> tangarts </a> </h1></header>  
-                <div class="topnav" id="wrapper" style="text-align:right">
-                <a href="/about">About</a> &centerdot;
-                <a href="/archives.html">Archive</a> &centerdot;
-                <a href="mailto:nehemiahcampbell@hotmail.co.uk">Contact</a>
-                </div> 
-        <div id='wrapper'>
+            <div class="container">
+	    <header>
+                    <h1> <a href='/'> tangarts </a> </h1>
+                    <div id="header_wrap" class="wrapper">
+                    <nav id="navbar" >
+                <ul class="list-none" >
+                        <li><a href="/about">about</a> &centerdot;</li>
+                <li><a href="/archives.html">archive</a> &centerdot;</li>
+                <li><a href="/now">now</a> &centerdot;</li>
+                <li><a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a></li>
+                </ul> 
+
+                    </nav>
+                    </div>
+
+            </header>  
+        <main class="wrapper">
+
+                       <hr> 
 
 
+<h1> Testing the Waters </h1>
+<div class=date>
+        2019-06-19
+        | Modified: 2020-08-26
 
-<h1>Testing the Waters</h1>
-<div class=date>2020-01-26 
- / <span class="tags">
-  <a class="tag" href="/tag/blog.html">blog</a>
-  <a class="tag" href="/tag/test.html">test</a>
-  <a class="tag" href="/tag/markdown.html">markdown</a>
-</span>
 </div>
 
-<hr>
-
-<div><h2>Exploration in markdown</h2>
-<p>This article is a test post.
-I'm currently trying to configure writing blog posts in markdown to be rendered to html. </p>
-<p>The blog will be an <strong>exploration</strong> of the many novel or re-occurring thoughts I have.</p>
-<p>At first, many of the posts will be reflection on interesting insights from other blogs or books.<br>
-There will be heavy influences from the various blogs I frequently browse. Some notable mentions:    </p>
+<article><h2>Exploration in markdown</h2>
+<p>This article is a test post. I'm currently trying to configure writing blog
+posts in markdown to be rendered to html. </p>
+<p>The blog will be an <strong>exploration</strong> of the many novel or re-occurring thoughts
+I have.</p>
+<p>At first, many of the posts will be reflection on interesting insights from
+other blogs or books.  There will be heavy influences from the various blogs I
+frequently browse. Some notable mentions:    </p>
 <ul>
 <li><a href="https://sivers.org/" title="Derek Sivers">Derek Sivers</a></li>
 <li><a href="http://blog.z3bra.org/">z3bra.org</a></li>
-<li><a href="http://paulgraham.com/" title="Paul Graham">paulgraham</a></li>
-<li><a href="https://meltingasphalt.com/" title="Kevin Simler">melting Asphalt</a></li>
+<li><a href="http://paulgraham.com/" title="Paul Graham">Paul Graham</a></li>
+<li><a href="https://meltingasphalt.com/" title="Kevin Simler">Melting Asphalt</a></li>
 </ul>
 <p>I plan on creating a section on book notes (one step at a time!).</p>
-<p>To wrap up, a few more <strong>tests</strong></p>
-<div class="highlight"><pre><span></span><span class="err">fib :: Int -&gt; Int</span>
-<span class="err">fib 0 = 0</span>
-<span class="err">fib 1 = 1</span>
-<span class="err">fib n = fib (n-1) + fib (n-2)</span>
-</pre></div>
+<p>The Fibonacci sequence is defined
+</p>
+<div class="math">$$F_0 = 1, F_1 = 1$$</div>
+<p>and</p>
+<div class="math">$$F_n = F_{n-1} + F_{n-1}$$</div>
+<p>for <span class="math">\(n &gt; 1\)</span>.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">fib</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
+<span class="nf">fib</span> <span class="mi">0</span> <span class="ow">=</span> <span class="mi">0</span>
+<span class="nf">fib</span> <span class="mi">1</span> <span class="ow">=</span> <span class="mi">1</span>
+<span class="nf">fib</span> <span class="n">n</span> <span class="ow">=</span> <span class="n">fib</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
 
-
+<hr>
+<h2>Text Elements</h2>
+<ul>
+<li>
+<p>The <a href="#">a element</a> and <a href="http://example.com">external a element</a> examples</p>
+</li>
+<li>
+<p>The <abbr>abbr element</abbr> and an <abbr title="Abbreviation">abbr</abbr> element with title examples</p>
+</li>
+<li>
+<p>The <acronym title="A Cowboy Ran One New York Marathon">ACRONYM</acronym> element example</p>
+</li>
+<li>
+<p>The <strong>b element</strong> example</p>
+</li>
+<li>
+<p>The <cite>cite element</cite> example</p>
+</li>
+<li>
+<p>The <code>code element</code> example</p>
+</li>
+<li>
+<p>The <data value="3967381398">data element</data> example</p>
+</li>
+<li>
+<p>The <del>del element</del> example</p>
+</li>
+<li>
+<p>The <dfn>dfn element</dfn> and <dfn title="Title text">dfn element with title</dfn> examples</p>
+</li>
+<li>
+<p>The <em>em element</em> example</p>
+</li>
+<li>
+<p>The <em>i element</em> example</p>
+</li>
+<li>
+<p>The <ins>ins element</ins> example</p>
+</li>
+<li>
+<p>The <kbd>kbd element</kbd> example</p>
+</li>
+<li>
+<p>The <mark>mark element</mark> example</p>
+</li>
+<li>
+<p>The <q>q element</q> example</p>
+</li>
+<li>
+<p>The <q>q element <q>inside</q> a q element</q> example</p>
+</li>
+<li>
+<p>The <s>s element</s> example</p>
+</li>
+<li>
+<p>The <samp>samp element</samp> example</p>
+</li>
+<li>
+<p>The <small>small element</small> example</p>
+</li>
+<li>
+<p>The <span>span element</span> example</p>
+</li>
+<li>
+<p>The <strong>strong element</strong> example</p>
+</li>
+<li>
+<p>The <sub>sub element</sub> example</p>
+</li>
+<li>
+<p>The <sup>sup element</sup> example</p>
+</li>
+<li>
+<p>The <time datetime="2005-05-15 19:00">time element</time> example</p>
+</li>
+<li>
+<p>The <u>u element</u> example</p>
+</li>
+<li>
+<p>The <var>var element</var> example</p>
+</li>
+</ul>
+<hr>
+<h2>List Types</h2>
+<h3>Ordered List</h3>
+<ol>
+<li>List Item 1</li>
+<li>List Item 2<ol>
+<li>List Item 2.1</li>
+<li>List Item 2.2<ol>
+<li>List Item 2.2.1</li>
+<li>List Item 2.2 2</li>
+</ol>
+</li>
+<li>List Item 2.3</li>
+</ol>
+</li>
+<li>List Item 3</li>
+</ol>
+<h3>Unordered List</h3>
+<ul>
+<li>List Item 1</li>
+<li>List Item 2<ul>
+<li>List Item 2.1</li>
+<li>List Item 2.2<ul>
+<li>List Item 2.2.1</li>
+<li>List Item 2.2 2</li>
+</ul>
+</li>
+<li>List Item 2.3</li>
+</ul>
+</li>
+<li>List Item 3</li>
+</ul>
+<hr>
+<h2>Tables</h2>
+<table>
+<thead>
+<tr>
+<th>Table Header 1</th>
+<th>Table Header 2</th>
+<th>Table Header 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Division 1</td>
+<td>Division 2</td>
+<td>Division 3</td>
+</tr>
+<tr>
+<td>Division 1</td>
+<td>Division 2</td>
+<td>Division 3</td>
+</tr>
+<tr>
+<td>Division 1</td>
+<td>Division 2</td>
+<td>Division 3</td>
+</tr>
+</tbody>
+</table>
 <p>Finally a quote about ends:   </p>
 <blockquote>
 <p>When you reach the end of your rope, tie a knot in it and hang on. 
--- Franklin D. Roosevelt</p>
-</blockquote></div>
+&mdash; Franklin D. Roosevelt</p>
+</blockquote>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></article>
 
 
-        </div> 
+
+        </main> 
+
         <footer>
-		&sim;
-                <a href='/about'>about</a> &bullet;
-                <a href='#'>book</a> &odot;
+                <p>&mdash; &centerdot; &centerdot; &centerdot;</p> 
+                <!---
+                <a href='/about'>about</a> &compfn;
+                <a href='#'>book</a> &compfn;
                 <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
-		&bsim;
+                -->
         </footer>
+
+            </div>
     </body>
 </html>
-
-
-<!-- 
-        <p>&mdash; Insert something inspiring.</p>
-
-
--> 
