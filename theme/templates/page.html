@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+
+<h1> {{ page.title }} </h1>
+
+<div class=date> 
+        {% if page.modified %}
+        Last updated: {{ page.modified | strftime("%Y-%m-%d") }}
+        {% endif %}
+</div>
+<div>{{ page.content }}</div>
+
+{% endblock %}

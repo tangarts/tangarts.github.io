@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content_title %}{% endblock %}
+
+{% block content %}        
+
+<ul>
+        {% if articles %}
+                {% for article in articles %}
+
+		<li> <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a> </li> 
+		</br> 
+                {% endfor %}
+
+        {% else %}
+                No posts found.
+        {% endif %}
+</ul>
+
+{% endblock %}

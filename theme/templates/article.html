@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title|striptags }}{% endblock %}
+{% block content %}
+
+<h1> {{ article.title }} </h1>
+<div class=date>
+        {{ article.locale_date }}
+        {% if article.modified %}
+        | Modified: {{ article.modified | strftime("%Y-%m-%d") }}
+        {% endif %}
+
+{% if article.tags %} | <span class="tags">
+  {% for tag in article.tags %}
+  <a class="tag" href="{{ SITEURL }}/{{ tag.url }}">{{ tag|e }}</a>
+  {% endfor %}
+</span>
+{% endif %}
+</div>
+
+<article>{{ article.content }}</article>
+
+
+{% endblock %}
