@@ -118,19 +118,19 @@ The sigmoid function $$g(z) = \frac{1}{1 + \exp(-z)}$$ is used in binary classif
 ```python
 import numpy as np
 
-X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-Y = np.array([[0], [1], [1], [0]])
-print(" A  B | XOR(A,B)")
-print("-----------------")
-for i, bits in enumerate(X):
-    print(f" {bits[0]}  {bits[1]} |     {Y[i][0]}")
+>>> X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+>>> Y = np.array([[0], [1], [1], [0]])
+>>> print(" A  B | XOR(A,B)")
+>>> print("-----------------")
+>>> for i, bits in enumerate(X):
+...     print(f" {bits[0]}  {bits[1]} |     {Y[i][0]}")
 
->>>     A  B | XOR(A,B)
->>>    -----------------
->>>     0  0 |     0
->>>     0  1 |     1
->>>     1  0 |     1
->>>     1  1 |     0
+ A  B | XOR(A,B)
+-----------------
+ 0  0 |     0
+ 0  1 |     1
+ 1  0 |     1
+ 1  1 |     0
 
 
 ```
@@ -163,10 +163,7 @@ def loss_fn(predicted, true):
 ```python
 # 100 iterations 
 iterations = 10000
-```
 
-
-```python
 input_dim = X.shape[-1]
 output_dim = Y.shape[-1]
 lr = 0.1 # learning rate
@@ -179,46 +176,46 @@ activation_fn = relu
 dx_activation_fn = dx_relu
 
 
-for step in range(1, iterations+1):
-    # forward pass
+>>> for step in range(1, iterations+1):
+...    # forward pass
+...
+...    # (4, 2) x (2, 2) -> (4, 2)
+...    fc1 = X.dot(W)
+...    # (4, 2)
+...    hidden = activation_fn(fc1)
+...    # (4, 2) x (2, 1) ==> (4, 1)
+...    output = hidden.dot(w)
+...
+...    loss = loss_fn(output,  Y)
+...    if step % 1000 == 0:
+...        print(f"Loss: {np.mean(loss):.6f}  Step: {step}/{iterations}")
+...
+...    ## backward pass 
+...    #(4x1)
+...    error = output - Y
+...
+...    delta_hidden = error.dot(w.T) * dx_activation_fn(fc1) 
+...
+...    ## gradient descent
+...
+...    grad_w = hidden.T.dot(error)
+...    w -= lr * grad_w
+...
+...    grad_W = X.T.dot(delta_hidden)
+...    W -= lr * grad_W
 
-    # (4, 2) x (2, 2) -> (4, 2)
-    fc1 = X.dot(W)
-    # (4, 2)
-    hidden = activation_fn(fc1)
-    # (4, 2) x (2, 1) ==> (4, 1)
-    output = hidden.dot(w)
-
-    loss = loss_fn(output,  Y)
-    if step % 1000 == 0:
-        print(f"Loss: {np.mean(loss):.6f}  Step: {step}/{iterations}")
-
-    ## backward pass 
-    #(4x1)
-    error = output - Y
-
-    delta_hidden = error.dot(w.T) * dx_activation_fn(fc1) 
-
-    ## gradient descent
-
-    grad_w = hidden.T.dot(error)
-    w -= lr * grad_w
-
-    grad_W = X.T.dot(delta_hidden)
-    W -= lr * grad_W
 
 
-
->>>    Loss: 0.000012  Step: 1000/10000
->>>    Loss: 0.000003  Step: 2000/10000
->>>    Loss: 0.000001  Step: 3000/10000
->>>    Loss: 0.000001  Step: 4000/10000
->>>    Loss: 0.000000  Step: 5000/10000
->>>    Loss: 0.000000  Step: 6000/10000
->>>    Loss: 0.000000  Step: 7000/10000
->>>    Loss: 0.000000  Step: 8000/10000
->>>    Loss: 0.000000  Step: 9000/10000
->>>    Loss: 0.000000  Step: 10000/10000
+Loss: 0.000012  Step: 1000/10000
+Loss: 0.000003  Step: 2000/10000
+Loss: 0.000001  Step: 3000/10000
+Loss: 0.000001  Step: 4000/10000
+Loss: 0.000000  Step: 5000/10000
+Loss: 0.000000  Step: 6000/10000
+Loss: 0.000000  Step: 7000/10000
+Loss: 0.000000  Step: 8000/10000
+Loss: 0.000000  Step: 9000/10000
+Loss: 0.000000  Step: 10000/10000
 
 
 ```
@@ -227,24 +224,25 @@ for step in range(1, iterations+1):
 
 
 ```python
-for i, prediction in enumerate(output):
-    print(f'predicted {prediction[0]:.5f} => true {Y[i][0]}')
+>>> for i, prediction in enumerate(output):
+...    print(f'predicted {prediction[0]:.5f} => true {Y[i][0]}')
 
->>>    predicted 0.00000 => true 0
->>>    predicted 1.00000 => true 1
->>>    predicted 1.00000 => true 1
->>>    predicted 0.00084 => true 0
+predicted 0.00000 => true 0
+predicted 1.00000 => true 1
+predicted 1.00000 => true 1
+predicted 0.00084 => true 0
 ```
 
 ```python
-print(W)
-print(w)
+>>> print(W)
 
->>>    (array([[-0.85018314,  0.80808135],
->>>            [ 0.85056309, -0.80776054]]),
->>>
->>>     array([[1.1756913 ],
->>>            [1.23749876]]))
+array([[-0.85018314,  0.80808135],
+       [ 0.85056309, -0.80776054]])
+
+>>> print(w)
+
+array([[1.1756913 ],
+        [1.23749876]])
 ```
 
 
