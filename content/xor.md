@@ -33,47 +33,45 @@ transform our feature space for a linear model to learn.
 ### The architecture
 
 The network consists of two inputs $x_1$ and $x_2$, a hidden layer $\textbf{h}=
-[h_1, h_2]$ and output $y$ 
+[h_1, h_2]$ and output $y$.
 
 
 ### Task 
 
-Find the parameters/weights $\theta$ that minimize the error/loss between estimated function $f$ and our estimate $f^*$. We want our $\theta$ values to produce an estimate as close to $f^*$ as possible, or for the loss function L to be as close to zero.
+Find the parameters (weights) $\theta$ that minimize the error (loss) between estimated function $f$ and our estimate $f^*$. We want our $\theta$ values to produce an estimate as close to $f^*$ as possible, or for the loss function L to be as close to zero.
 
-The mean squared error $$ L(\theta) = \frac{1}{2} \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta))^2$$ has a nice derivative, $$\nabla{L_{\theta}} = \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta)) \nabla f( \textbf{x} ; \theta)$$
+The mean squared error $$ L(\theta) = \frac{1}{2} \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta))^2$$ has a nice derivative $$\nabla{L_{\theta}} = \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta)) \nabla f( \textbf{x} ; \theta)$$.
 
-i.e. the product of the summed difference and the change in our estimated function $f(\textbf{x}; \theta)$ with respect to a change in $\theta$
+(i.e. the product of the summed difference and the change in our estimated function $f(\textbf{x}; \theta)$ with respect to a change in $\theta$)
 
 ### Optimization, Gradient Descent
 
-In thinking of our Loss function as a terrain, we want the coordinates that reaches the lowest valley.
+In thinking of our loss function as a terrain, we want the coordinates that reaches the lowest valley.
 
-We start at coordinates $\theta_0$. How do we find the deepest valley? Intuitively, a natural step would to go in the direction with the steepest incline by a small $\alpha$ sized step , $-\alpha \nabla_{\theta}{L}$. 
+We start at coordinates $\theta_0$ and ask, how do we find the deepest valley? Intuitively, a natural step would to go in the direction with the steepest incline by a small $\alpha$ sized step, $-\alpha \nabla_{\theta}{L}$. 
 
-Taking the step, we arrive at a new coordinate $\theta_1$. Repeating this process choose the direction with the steepest decline until we reach our destination.
+Taking the step, we arrive at a new coordinate $\theta_1$. Repeating this process choose the direction with the steepest decline until we reach our destination
 
-$\theta_{n+1} = \theta_{n} - \alpha \nabla_{\theta}{L}$
+$\theta_{n+1} = \theta_{n} - \alpha \nabla_{\theta}{L}$.
 
 ### Backpropagation
 
-Going back to the XOR problem
-we have
+Going back to the XOR problem we have
 
 $$\textbf{x} \rightarrow f(\textbf{W}^T\textbf{x}) = \textbf{h}$$
-$$\textbf{h} \rightarrow g(\textbf{w}^T \textbf{h}) \rightarrow \textbf{w}^T f(\textbf{W}^T\textbf{x} ) = y$$
+$$\textbf{h} \rightarrow g(\textbf{w}^T \textbf{h}) \rightarrow \textbf{w}^T f(\textbf{W}^T\textbf{x} ) = y .$$
 
 The parameter $\theta$ is made up of different weights $\textbf W$ and $\textbf w$ that the network will need to learn.
 
 Thus 
-$$
-\begin{aligned}
-\nabla_{x} L &= \frac{\partial L}{\partial y} \
-&= \frac{\partial y}{\partial (\textbf w^T \textbf h)} \
-&= \frac{\partial (\textbf w^T \textbf h)}{\partial h} \
-&= \frac{\partial h}{\partial (\textbf W ^T \textbf x)} \
+
+\begin{align}
+\nabla_{x} L &= \frac{\partial L}{\partial y} \\
+&= \frac{\partial y}{\partial (\textbf w^T \textbf h)} \\
+&= \frac{\partial (\textbf w^T \textbf h)}{\partial h} \\
+&= \frac{\partial h}{\partial (\textbf W ^T \textbf x)} \\
 &= \frac{\partial (\textbf W^T \textbf x)}{\partial x}
-\end{aligned}
-$$
+\end{align}
  
 $$(y - y^*) \textbf w  f'(.) \textbf W$$
 
@@ -114,6 +112,8 @@ is easy to compute even though it is non differentiable at 0.
 
 The sigmoid function $$g(z) = \frac{1}{1 + \exp(-z)}$$ is used in binary classification problems with derivative $$g'(z) = g(z)(1 - g(z))$$
 
+## Numpy Implementation
+
 
 ```python
 import numpy as np
@@ -125,12 +125,12 @@ print("-----------------")
 for i, bits in enumerate(X):
     print(f" {bits[0]}  {bits[1]} |     {Y[i][0]}")
 
->>     A  B | XOR(A,B)
->>    -----------------
->>     0  0 |     0
->>     0  1 |     1
->>     1  0 |     1
->>     1  1 |     0
+>>>     A  B | XOR(A,B)
+>>>    -----------------
+>>>     0  0 |     0
+>>>     0  1 |     1
+>>>     1  0 |     1
+>>>     1  1 |     0
 
 
 ```
@@ -209,16 +209,16 @@ for step in range(1, iterations+1):
 
 
 
->>    Loss: 0.000012  Step: 1000/10000
->>    Loss: 0.000003  Step: 2000/10000
->>    Loss: 0.000001  Step: 3000/10000
->>    Loss: 0.000001  Step: 4000/10000
->>    Loss: 0.000000  Step: 5000/10000
->>    Loss: 0.000000  Step: 6000/10000
->>    Loss: 0.000000  Step: 7000/10000
->>    Loss: 0.000000  Step: 8000/10000
->>    Loss: 0.000000  Step: 9000/10000
->>    Loss: 0.000000  Step: 10000/10000
+>>>    Loss: 0.000012  Step: 1000/10000
+>>>    Loss: 0.000003  Step: 2000/10000
+>>>    Loss: 0.000001  Step: 3000/10000
+>>>    Loss: 0.000001  Step: 4000/10000
+>>>    Loss: 0.000000  Step: 5000/10000
+>>>    Loss: 0.000000  Step: 6000/10000
+>>>    Loss: 0.000000  Step: 7000/10000
+>>>    Loss: 0.000000  Step: 8000/10000
+>>>    Loss: 0.000000  Step: 9000/10000
+>>>    Loss: 0.000000  Step: 10000/10000
 
 
 ```
@@ -230,21 +230,21 @@ for step in range(1, iterations+1):
 for i, prediction in enumerate(output):
     print(f'predicted {prediction[0]:.5f} => true {Y[i][0]}')
 
->>    predicted 0.00000 => true 0
->>    predicted 1.00000 => true 1
->>    predicted 1.00000 => true 1
->>    predicted 0.00084 => true 0
+>>>    predicted 0.00000 => true 0
+>>>    predicted 1.00000 => true 1
+>>>    predicted 1.00000 => true 1
+>>>    predicted 0.00084 => true 0
 ```
 
 ```python
 print(W)
 print(w)
 
->>    (array([[-0.85018314,  0.80808135],
->>            [ 0.85056309, -0.80776054]]),
->>
->>     array([[1.1756913 ],
->>            [1.23749876]]))
+>>>    (array([[-0.85018314,  0.80808135],
+>>>            [ 0.85056309, -0.80776054]]),
+>>>
+>>>     array([[1.1756913 ],
+>>>            [1.23749876]]))
 ```
 
 
@@ -252,6 +252,7 @@ print(w)
 
 
 ```python
+
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm

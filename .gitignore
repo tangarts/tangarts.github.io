@@ -5,3 +5,4 @@ pelicanconf.py
 tasks.py
 Makefile
 .gitignore
+*.xml

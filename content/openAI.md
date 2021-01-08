@@ -34,17 +34,17 @@ As we are considering sequential data it seems that an LSTM would be a good
 architectural choice in training a neural network to learn the parity of
 a sequence of bits. 
 
-**parity.**
+**Parity.**
 
 : The parity of a sequence checks the number of 1-bits. In our case we will
 consider odd-parity, the function returning 1 if the number of bits in
 a sequence is odd, 0 if even.
 
-**parity function.**
+**Parity function.**
 
 : The function takes in a sequence of bits and returns the parity bit of the
-: sequence. Returning 1 if the sequence contains an odd amount of 1-bits,
-: 0 otherwise.
+sequence. Returning 1 if the sequence contains an odd amount of 1-bits,
+0 otherwise.
 
 The parity function can be written as $$f(\textbf{x}) = x_1 \oplus x_2 \oplus \ldots \oplus x_n$$
 
@@ -67,29 +67,28 @@ import operator
 import functools
 import random
 
-def foldl(func, acc, xs):
-    return functools.reduce(func, xs, acc)  
+>>> def foldl(func, acc, xs):
+...    return functools.reduce(func, xs, acc)  
 
-foldl(operator.add, 0, [1,2,3,4,5,6,7,8,9,10])
+>>> foldl(operator.add, 0, [1,2,3,4,5,6,7,8,9,10])
 
->> 55
+55
 ```
 
 ```python
-#!python
 
 # parity check, function = xor, acc = 0 sequece, 0s and 1s
-random.seed(1)
+>>> random.seed(1)
 
-print("bitstring     |  parity ")
-print("-"*25)
-for _ in range(1):
-    seq = [random.randint(0,1) for _ in range(12)]
-    print(f"{''.join(str(b) for b in seq)}  |    {foldl(operator.xor, 0, seq)}")
+>>> print("bitstring     |  parity ")
+... print("-"*25)
+... for _ in range(1):
+...     seq = [random.randint(0,1) for _ in range(12)]
+...     print(f"{''.join(str(b) for b in seq)}  |    {foldl(operator.xor, 0, seq)}")
 
->>    bitstring     |  parity 
->>    -------------------------
->>    001011110010  |    0
+bitstring     |  parity 
+-------------------------
+001011110010  |    0
 
 ```
 
@@ -107,19 +106,20 @@ def trace_xor(a, b):
     print(f"{a} XOR {b} = {result}")
     return result
 
+
 print(foldl(trace_xor, 0, [1,0,0,1,1]))
 
->>    0 XOR 1 = 1
->>    1 XOR 0 = 1
->>    1 XOR 0 = 1
->>    1 XOR 1 = 0
->>    0 XOR 1 = 1
->>    1
+0 XOR 1 = 1
+1 XOR 0 = 1
+1 XOR 0 = 1
+1 XOR 1 = 0
+0 XOR 1 = 1
+1
 ```
 
 The middle column corresponds to our bit string we want to check. Notice the
 left column is the previous result from XOR(a, b). As a consequence, the final
-result only depends on xor of the previously returned result. In our example the
+result only depends on XOR of the previously returned result. In our example the
 last bit of our sequence being 1 and the previously returned XOR result, 0. 
 
 ## Experiment
@@ -290,30 +290,28 @@ def validate(model):
             total += labels.size(0)*labels.size(1)
             correct += ((outputs > 0.5) == (labels > 0.5)).sum().item()
     return correct / total
-        
 ```
 
 
 ```python
-train()
+>>> train()
 
->>    Training...
->>    
->>    ------------------------------------------------------------
->>    Epoch [1/8], Step [250/12500], Loss: 0.7235, Accuracy: 0.375
->>    ------------------------------------------------------------
->>    Epoch [1/8], Step [500/12500], Loss: 0.6935, Accuracy: 0.460
->>    ------------------------------------------------------------
->>    Epoch [1/8], Step [750/12500], Loss: 0.6767, Accuracy: 0.618
->>    ------------------------------------------------------------
->>    Epoch [1/8], Step [1000/12500], Loss: 0.7001, Accuracy: 0.368
->>    ------------------------------------------------------------
->>    Epoch [1/8], Step [1250/12500], Loss: 0.4462, Accuracy: 0.873
->>    ------------------------------------------------------------
->>    Epoch [1/8], Step [1500/12500], Loss: 0.0427, Accuracy: 1.000
->>    ------------------------------------------------------------
->>    EARLY STOPPING
+Training...
 
+------------------------------------------------------------
+Epoch [1/8], Step [250/12500], Loss: 0.7235, Accuracy: 0.375
+------------------------------------------------------------
+Epoch [1/8], Step [500/12500], Loss: 0.6935, Accuracy: 0.460
+------------------------------------------------------------
+Epoch [1/8], Step [750/12500], Loss: 0.6767, Accuracy: 0.618
+------------------------------------------------------------
+Epoch [1/8], Step [1000/12500], Loss: 0.7001, Accuracy: 0.368
+------------------------------------------------------------
+Epoch [1/8], Step [1250/12500], Loss: 0.4462, Accuracy: 0.873
+------------------------------------------------------------
+Epoch [1/8], Step [1500/12500], Loss: 0.0427, Accuracy: 1.000
+------------------------------------------------------------
+EARLY STOPPING
 ```
 
 ### Model Summary
@@ -335,48 +333,55 @@ parity to the simple one of learning just 2-bit parity.
 
 Below is a diagram showing the architecture of the LSTM.
 
-![xor lstm](images/xor_lstm_.jpg)
+![xor lstm](images/xor_lstm.jpg)
 
 
 ```python
-model
+>>> model
 
->>    XORLSTM(
->>      (lstm): LSTM(1, 2, batch_first=True)
->>      (fc): Linear(in_features=2, out_features=1, bias=True)
->>      (activation): Sigmoid()
->>    )
+XORLSTM(
+  (lstm): LSTM(1, 2, batch_first=True)
+  (fc): Linear(in_features=2, out_features=1, bias=True)
+  (activation): Sigmoid()
+)
 
 ```
 
 
 ```python
-model(XOR(1, 2).generate_data(1)[0]).size()
+>>> model(XOR(1, 2).generate_data(1)[0]).size()
 
->>    torch.Size([1, 50, 1])
+torch.Size([1, 50, 1])
 ```
 
 
 ```python
 sampleX.reshape(-1)
 
->>    tensor([1., 0., 0., 1., 0., 1., 0., 0., 0., 1., 1., 1., 0., 0., 1., 0., 0., 0.,
->>            0., 1., 0., 0., 1., 0., 0., 0., 1., 0., 1., 0., 0., 1., 0., 0., 1., 0.,
->>            0., 1., 0., 1., 1., 0., 1., 0., 1., 1., 1., 0., 0., 1.])
+tensor([1., 0., 0., 1., 0., 1., 0., 0., 0., 1.,
+        1., 1., 0., 0., 1., 0., 0., 0., 0., 1.,
+        0., 0., 1., 0., 0., 0., 1., 0., 1., 0.,
+        0., 1., 0., 0., 1., 0., 0., 1., 0., 1.,
+        1., 0., 1., 0., 1., 1., 1., 0., 0., 1.])
 ```
+
+**Cumulative parity of sample bit** 
 
 ```python
-(model(sampleX) > 0.5).float().reshape(-1) # cumulative parity of sample bit
+>>> (model(sampleX) > 0.5).float().reshape(-1) 
 
->>    tensor([1., 1., 1., 0., 0., 1., 1., 1., 1., 0., 1., 0., 0., 0., 1., 1., 1., 1.,
->>            1., 0., 0., 0., 1., 1., 1., 1., 0., 0., 1., 1., 1., 0., 0., 0., 1., 1.,
->>            1., 0., 0., 1., 0., 0., 1., 1., 0., 1., 0., 0., 0., 1.])
+tensor([1., 1., 1., 0., 0., 1., 1., 1., 1., 0.,
+        1., 0., 0., 0., 1., 1., 1., 1., 1., 0.,
+        0., 0., 1., 1., 1., 1., 0., 0., 1., 1.,
+        1., 0., 0., 0., 1., 1., 1., 0., 0., 1.,
+        0., 0., 1., 1., 0., 1., 0., 0., 0., 1.])
+
+>>> sampleY.reshape(-1)
+
+tensor([1., 1., 1., 0., 0., 1., 1., 1., 1., 0.,
+        1., 0., 0., 0., 1., 1., 1., 1., 1., 0.,
+        0., 0., 1., 1., 1., 1., 0., 0., 1., 1.,
+        1., 0., 0., 0., 1., 1., 1., 0., 0., 1.,
+        0., 0., 1., 1., 0., 1., 0., 0., 0., 1.])
 ```
 
-```python
-sampleY.reshape(-1)
-
->>    tensor([1., 1., 1., 0., 0., 1., 1., 1., 1., 0., 1., 0., 0., 0., 1., 1., 1., 1.,
->>            1., 0., 0., 0., 1., 1., 1., 1., 0., 0., 1., 1., 1., 0., 0., 0., 1., 1.,
->>            1., 0., 0., 1., 0., 0., 1., 1., 0., 1., 0., 0., 0., 1.])
-```
