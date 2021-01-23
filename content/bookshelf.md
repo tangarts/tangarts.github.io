@@ -1,7 +1,7 @@
 ---
 title: bookshelf
 date: 2020-06-19  
-modified: 2020-08-24
+modified: 2021-01-23
 status: published
  
 An ongoing list of books I have read: in bold are the notable mentions.  
@@ -99,12 +99,21 @@ In chronological order?
 * Zorba the Greek, Kanzantzakis  
 * How Will You Measure Your Life, Christensen   
 * The Graveyard Book, Gaiman  
+* The Paris Review Interviews vol. 3
 * Essays and Aphorisms, Schopenhauer  
 * Foucault's Pendulum, Eco 
 * Pale Fire, Nabokov
+* How to Win Friends, Carnegie 
+* Keep the Aspidistra Flying, Orwell
+* The Paris Review Interviews vol. 2
+
+### Queued
  
-### To Read:  
- 
+Narcissus and Goldmund, Hesse
+Ficciones, Borges
+
+### One day...
+
 The Odyssey, Homer  
 Faust, Goethe
 The War Of Art, Pressfield
