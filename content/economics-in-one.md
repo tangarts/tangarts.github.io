@@ -221,7 +221,6 @@ In order that new industries may grow fast enough it is necessary for some old
 to be allowed to shrink or die for the sake of releasing capital and labour for
 new industries (Horse and buggy trade)
 
-### How the Price System Works
 
 ### "Stabilizing" Commodities
 
@@ -258,7 +257,6 @@ The best way to raise wages is to raise labour productivity.
 The more he produces the more he increases community wealth, the more his
 services are worth to consumers and employers hence the more he'll get paid.
 
-### DO Unions Really Raise Wages?
 
 ### Lessons Restated
 
