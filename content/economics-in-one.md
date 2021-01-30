@@ -16,9 +16,9 @@ the immediate effects of a given policy (overlooking secondary consequences).
 The whole of economics can be reduced to a single lesson, and that lesson can
 be reduced to a single sentence. 
 
-> _The art of economics consists in looking not merely at the immediate hut at
+> _The art of economics consists in looking not merely at the immediate but at
 > the longer effects of any act or policy; it consists in tracing the
-> consequences of that policy not merely for one group hut for all groups._
+> consequences of that policy not merely for one group but for all groups._
 
 Of course, the opposite error is possible. We ought to not concentrate _only_
 on the long-run results.
