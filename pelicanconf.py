@@ -14,10 +14,18 @@ STATIC_PATHS = [
     'images',
     'pdfs',
     'extra/favicon.ico.gz',
+    'extra/apple-touch-icon.png',
+    'extra/favicon-32x32.png',
+    'extra/favicon-16x16.png',
+    'extra/site.webmanifest',
 ]
 
 EXTRA_PATH_METADATA = {
-    'extra/favicon.ico.gz': {'path': 'favicon.ico.gz'},
+    'extra/favicon.ico.gz'      : {'path': 'favicon.ico.gz'},
+    'extra/apple-touch-icon.png': {'path': 'apple-touch-icon.png'},
+    'extra/favicon-32x32.png'   : {'path': 'favicon-16x16.png'},
+    'extra/favicon-16x16.png'   : {'path': 'favicon-16x16.png'},
+    'extra/site.webmanifest'    : {'path': 'site.webmanifest'},
 }
 
 STATIC_URL = '{path}'
