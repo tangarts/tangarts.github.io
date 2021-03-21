@@ -99,15 +99,15 @@ and never has to bind loop variables to Python objects.</p>
 </code></pre></div>
 
 <h3><strong>Use function factories to create utility functions.</strong></h3>
-<div class="highlight"><pre><span></span><code><span class="n">def</span> <span class="n">multiply_by_field</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">):</span>
-    <span class="ss">&quot;&quot;&quot;Returns function that multiplies field &quot;</span><span class="n">fieldname</span><span class="ss">&quot; by multiplier.&quot;&quot;&quot;</span>
-    <span class="n">def</span> <span class="n">multiplier</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">)</span> <span class="o">*</span> <span class="n">multiplier</span>
-    <span class="k">return</span> <span class="n">multiplier</span>
+<div class="highlight"><pre><span></span><code><span class="nv">def</span> <span class="nv">multiply_by_field</span><span class="ss">(</span><span class="nv">fieldname</span>, <span class="nv">multiplier</span><span class="ss">)</span>:
+    <span class="s2">&quot;&quot;&quot;</span><span class="s">Returns function that multiplies field </span><span class="s2">&quot;</span><span class="nv">fieldname</span><span class="s2">&quot;</span><span class="s"> by multiplier.</span><span class="s2">&quot;&quot;&quot;</span>
+    <span class="nv">def</span> <span class="nv">multiplier</span><span class="ss">(</span><span class="nv">x</span><span class="ss">)</span>:
+        <span class="k">return</span> <span class="nv">getattr</span><span class="ss">(</span><span class="nv">x</span>, <span class="nv">fieldname</span><span class="ss">)</span> <span class="o">*</span> <span class="nv">multiplier</span>
+    <span class="k">return</span> <span class="nv">multiplier</span>
 
-<span class="n">triple</span> <span class="o">=</span> <span class="n">multiply_by_field</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">quadruple</span> <span class="o">=</span> <span class="n">multiply_by_field</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">halve_sum</span> <span class="o">=</span> <span class="n">multiply_by_field</span><span class="p">(</span><span class="s1">&#39;Sum&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span>
+<span class="nv">triple</span> <span class="o">=</span> <span class="nv">multiply_by_field</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Count</span><span class="s1">&#39;</span>, <span class="mi">3</span><span class="ss">)</span>
+<span class="nv">quadruple</span> <span class="o">=</span> <span class="nv">multiply_by_field</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Count</span><span class="s1">&#39;</span>, <span class="mi">4</span><span class="ss">)</span>
+<span class="nv">halve_sum</span> <span class="o">=</span> <span class="nv">multiply_by_field</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Sum</span><span class="s1">&#39;</span>, <span class="mi">0</span>.<span class="mi">5</span><span class="ss">)</span>
 </code></pre></div>
 
 <p>python file names <code>calc_squares.py</code> over <code>calc-squares.py</code> as second cannot be
