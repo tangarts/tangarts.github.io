@@ -6,3 +6,5 @@ tasks.py
 Makefile
 .gitignore
 *.xml
+todo.md
+content/draft/
