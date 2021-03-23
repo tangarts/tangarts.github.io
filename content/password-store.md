@@ -6,8 +6,8 @@ modified: 2020-09-02
 status: published
 ---
 
-After taking more than a few hours to _reset_ my Pass for iOS repository on my
-phone, I thought it would be good to write a short guide of setting one up.
+After taking more than a few hours to reset my Pass for iOS repository on my
+phone, I thought it would be good to write a short guide to setting one up.
 
 Check the [official Pass for iOS
 Wiki](https://github.com/yishilin14/asc-key-to-qr-code-gif) to see alternative

@@ -1,7 +1,9 @@
+---
 title: What I'm doing now
 slug: now
 status: published
-modified: 2021-01-29
+modified: 2021-03-21
+---
 
 #### Final Year
 
@@ -10,15 +12,16 @@ Making slow progress with my final year thesis, Meta learning with
 
 #### Clojure
 
-Exploring Clojure and ClojureScript.
+Exploring Clojure and ClojureScript. Making small apps and solving [programming problems](https://programmingpraxis.com/)
 
 #### Reading 
 
-[Narcissus and Goldmund](https://en.wikipedia.org/wiki/Narcissus_and_Goldmund)
+[Collected Fictions - Jorge Luis Borges](https://www.goodreads.com/book/show/17961.Collected_Fictions)
 
 #### Other 
 
 - Continuing to write daily.
+- Learning the Bass guitar.
 
 ---
 

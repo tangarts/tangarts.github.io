@@ -8,7 +8,7 @@ status: published
 
 The year of connection, I've decided on the theme for next year.
 
-[Connection](connection).
+**Connection**
 
 First off, how did the year of creating go?
 
