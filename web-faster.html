@@ -1,0 +1,104 @@
+
+<html>
+    <head> 
+        <meta charset='utf-8' />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel= "stylesheet" href="/static/css/style.css" type="text/css">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <!--    <link rel="shortcut icon" href="/favicon.ico.gz" type="image/ico"/> -->
+
+        <title> Web, faster </title>
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <h1> <a href='/'> tangarts </a> </h1>
+                <div id="header_wrap" class="wrapper">
+                    <nav id="navbar" >
+                        <ul class="list-none" >
+                            <li><a href="/about">about</a> &centerdot;</li>
+                            <li><a href="/archives.html">archive</a> &centerdot;</li>
+                            <li><a href="/now">now</a> &centerdot;</li>
+                            <li><a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a></li>
+                        </ul> 
+
+                    </nav>
+                </div>
+
+            </header>  
+            <main class="wrapper">
+
+                <hr> 
+
+
+<h1> Web, faster </h1>
+<div class=date>
+        2021-03-23
+        | Modified: 2021-03-28
+
+</div>
+
+<article><p>On inspecting <a href="sunset">sunset</a> I noticed I had to wait as each image loaded, top to bottom.
+There must be something I can do about it.</p>
+<h2>The Test</h2>
+<p>All tests conducted used <a href="https://www.webpagetest.org/">WebPageTest</a> with the default settings.</p>
+<p>For the <a href="sunset">page</a>, the bottlenecks were the multiple uncompressed, uncached images. </p>
+<p><img alt="before score" src="images/before-summary.jpg">
+<img alt="before optimized" src="images/before-optimized.jpg"></p>
+<h2>Image Compression</h2>
+<p>The first <code>0/100</code> score was the lack of image compression. </p>
+<p>Following Googles guideline to <a href="https://developers.google.com/speed/docs/insights/OptimizeImages">optimizing images</a>:</p>
+<ul>
+<li>Reduce quality to 85 if it was higher. With quality larger than 85, the image
+  becomes larger quickly, while the visual improvement is little.</li>
+<li>Reduce Chroma sampling to 4:2:0, because human visual system is less
+  sensitive to colors as compared to luminance.</li>
+<li>Use progressive format for images over 10k bytes. Progressive JPEG usually
+  has higher compression ratio than baseline JPEG for large image, and has the
+  benefits of progressively rendering.</li>
+<li>Use grayscale color space if the image is black and white.</li>
+</ul>
+<p>can be represented using <code>convert</code> from <a href="https://imagemagick.org/index.php">ImageMagick</a>,
+first to change png to ipeg then apply progressive compression.</p>
+<ul>
+<li><code>for image in *.png ;  do convert "$image" "${image%.*}.jpg" ; done</code></li>
+<li><code>for image in *.jpg; do convert "$image"  -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB "$image"; done</code></li>
+</ul>
+<p>As well as JPEG being a preferred format for photographs they are able to be
+compressed such that the full image is instantly loaded.</p>
+<h2>Progressive JPEGs</h2>
+<p>The second <code>0/100</code> score was the lack of progressive JPEG usage. Standard JPEGs
+load from <em>top to bottom</em>, the image loads line by line. Progressive
+JPEGs on the other hand loads the entire image and renders pixel by pixel.
+Contrasting with regular JPEGs we can say progressive JPEGs load from back to front.</p>
+<h2>After</h2>
+<p><img alt="after score" src="images/after-summary.jpg">
+<img alt="after optimized" src="images/after-optimized.jpg"></p>
+<p>Success! A 2x speed up in loading time, from 32 to 16 seconds and a 2x reduction in page size.</p>
+<h2>Caching?</h2>
+<p>The remaining poor rating, caching, is managed on the server side. Github pages stores cached
+content for only 10 minutes. Ideally for static content such as CSS, JS and images month long
+caching is recommended. </p>
+<h3>Further</h3>
+<p>This post was inspired by Dan Luu's <a href="https://danluu.com/octopress-speedup/">50x speed up</a></p></article>
+
+
+
+            </main> 
+
+            <footer>
+                <p>&mdash; &centerdot; &centerdot; &centerdot;</p> 
+                <!---
+                    <a href='/about'>about</a> &compfn;
+                    <a href='#'>book</a> &compfn;
+                    <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
+                -->
+            </footer>
+
+        </div>
+    </body>
+</html>

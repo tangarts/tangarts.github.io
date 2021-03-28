@@ -63,11 +63,17 @@ transform our feature space for a linear model to learn.</p>
 [h_1, h_2]\)</span> and output <span class="math">\(y\)</span>.</p>
 <h3>Task</h3>
 <p>Find the parameters (weights) <span class="math">\(\theta\)</span> that minimize the error (loss) between estimated function <span class="math">\(f\)</span> and our estimate <span class="math">\(f^*\)</span>. We want our <span class="math">\(\theta\)</span> values to produce an estimate as close to <span class="math">\(f^*\)</span> as possible, or for the loss function L to be as close to zero.</p>
-<p>The mean squared error </p>
-<div class="math">$$ L(\theta) = \frac{1}{2} \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta))^2$$</div>
-<p> has a nice derivative </p>
-<div class="math">$$\nabla{L_{\theta}} = \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta)) \nabla f( \textbf{x} ; \theta)$$</div>
-<p>.</p>
+<p>The mean squared error 
+</p>
+<div class="math">\begin{equation}
+    L(\theta) = \frac{1}{2} \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta))^2
+\end{equation}</div>
+<p>
+has a nice derivative 
+</p>
+<div class="math">\begin{equation}
+    \nabla{L_{\theta}} = \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta)) \nabla f( \textbf{x} ; \theta).
+\end{equation}</div>
 <p>(i.e. the product of the summed difference and the change in our estimated function <span class="math">\(f(\textbf{x}; \theta)\)</span> with respect to a change in <span class="math">\(\theta\)</span>)</p>
 <h3>Optimization, Gradient Descent</h3>
 <p>In thinking of our loss function as a terrain, we want the coordinates that reaches the lowest valley.</p>

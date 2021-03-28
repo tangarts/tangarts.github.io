@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - misc</title><link href="/" rel="alternate"></link><link href="/feeds/misc.atom.xml" rel="self"></link><id>/</id><updated>2021-01-23T00:00:00+00:00</updated><entry><title>2020: A Year in Review</title><link href="/2020.html" rel="alternate"></link><published>2020-11-29T00:00:00+00:00</published><updated>2020-12-26T11:09:52+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-11-29:/2020.html</id><summary type="html">&lt;p&gt;The year of connection, I've decided on the theme for next year.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - misc</title><link href="/" rel="alternate"></link><link href="/feeds/misc.atom.xml" rel="self"></link><id>/</id><updated>2021-03-28T00:00:00+00:00</updated><entry><title>Web, faster</title><link href="/web-faster.html" rel="alternate"></link><published>2021-03-23T00:00:00+00:00</published><updated>2021-03-28T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-03-23:/web-faster.html</id><summary type="html">&lt;p&gt;On inspecting &lt;a href="sunset"&gt;sunset&lt;/a&gt; I noticed I had to wait as each image loaded, top to bottom.
+There must be something I can do about it.&lt;/p&gt;
+&lt;h2&gt;The Test&lt;/h2&gt;
+&lt;p&gt;All tests conducted used &lt;a href="https://www.webpagetest.org/"&gt;WebPageTest&lt;/a&gt; with the default settings.&lt;/p&gt;
+&lt;p&gt;For the &lt;a href="sunset"&gt;page&lt;/a&gt;, the bottlenecks were the multiple uncompressed, uncached images. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="before score" src="images/before-summary.jpg"&gt;
+&lt;img alt="before optimized" src="images/before-optimized.jpg"&gt;&lt;/p&gt;
+&lt;h2&gt;Image Compression&lt;/h2&gt;
+&lt;p&gt;The …&lt;/p&gt;</summary><content type="html">&lt;p&gt;On inspecting &lt;a href="sunset"&gt;sunset&lt;/a&gt; I noticed I had to wait as each image loaded, top to bottom.
+There must be something I can do about it.&lt;/p&gt;
+&lt;h2&gt;The Test&lt;/h2&gt;
+&lt;p&gt;All tests conducted used &lt;a href="https://www.webpagetest.org/"&gt;WebPageTest&lt;/a&gt; with the default settings.&lt;/p&gt;
+&lt;p&gt;For the &lt;a href="sunset"&gt;page&lt;/a&gt;, the bottlenecks were the multiple uncompressed, uncached images. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="before score" src="images/before-summary.jpg"&gt;
+&lt;img alt="before optimized" src="images/before-optimized.jpg"&gt;&lt;/p&gt;
+&lt;h2&gt;Image Compression&lt;/h2&gt;
+&lt;p&gt;The first &lt;code&gt;0/100&lt;/code&gt; score was the lack of image compression. &lt;/p&gt;
+&lt;p&gt;Following Googles guideline to &lt;a href="https://developers.google.com/speed/docs/insights/OptimizeImages"&gt;optimizing images&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reduce quality to 85 if it was higher. With quality larger than 85, the image
+  becomes larger quickly, while the visual improvement is little.&lt;/li&gt;
+&lt;li&gt;Reduce Chroma sampling to 4:2:0, because human visual system is less
+  sensitive to colors as compared to luminance.&lt;/li&gt;
+&lt;li&gt;Use progressive format for images over 10k bytes. Progressive JPEG usually
+  has higher compression ratio than baseline JPEG for large image, and has the
+  benefits of progressively rendering.&lt;/li&gt;
+&lt;li&gt;Use grayscale color space if the image is black and white.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;can be represented using &lt;code&gt;convert&lt;/code&gt; from &lt;a href="https://imagemagick.org/index.php"&gt;ImageMagick&lt;/a&gt;,
+first to change png to ipeg then apply progressive compression.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;for image in *.png ;  do convert "$image" "${image%.*}.jpg" ; done&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;for image in *.jpg; do convert "$image"  -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB "$image"; done&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As well as JPEG being a preferred format for photographs they are able to be
+compressed such that the full image is instantly loaded.&lt;/p&gt;
+&lt;h2&gt;Progressive JPEGs&lt;/h2&gt;
+&lt;p&gt;The second &lt;code&gt;0/100&lt;/code&gt; score was the lack of progressive JPEG usage. Standard JPEGs
+load from &lt;em&gt;top to bottom&lt;/em&gt;, the image loads line by line. Progressive
+JPEGs on the other hand loads the entire image and renders pixel by pixel.
+Contrasting with regular JPEGs we can say progressive JPEGs load from back to front.&lt;/p&gt;
+&lt;h2&gt;After&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="after score" src="images/after-summary.jpg"&gt;
+&lt;img alt="after optimized" src="images/after-optimized.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Success! A 2x speed up in loading time, from 32 to 16 seconds and a 2x reduction in page size.&lt;/p&gt;
+&lt;h2&gt;Caching?&lt;/h2&gt;
+&lt;p&gt;The remaining poor rating, caching, is managed on the server side. Github pages stores cached
+content for only 10 minutes. Ideally for static content such as CSS, JS and images month long
+caching is recommended. &lt;/p&gt;
+&lt;h3&gt;Further&lt;/h3&gt;
+&lt;p&gt;This post was inspired by Dan Luu's &lt;a href="https://danluu.com/octopress-speedup/"&gt;50x speed up&lt;/a&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>2020: A Year in Review</title><link href="/2020.html" rel="alternate"></link><published>2020-11-29T00:00:00+00:00</published><updated>2020-12-26T11:09:52+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-11-29:/2020.html</id><summary type="html">&lt;p&gt;The year of connection, I've decided on the theme for next year.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Connection&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;First off, how did the year of creating go?&lt;/p&gt;
 &lt;p&gt;In exploring this years theme I managed to create a personal CRM, starting with
@@ -80,11 +130,17 @@ transform our feature space for a linear model to learn.&lt;/p&gt;
 [h_1, h_2]\)&lt;/span&gt; and output &lt;span class="math"&gt;\(y\)&lt;/span&gt;.&lt;/p&gt;
 &lt;h3&gt;Task&lt;/h3&gt;
 &lt;p&gt;Find the parameters (weights) &lt;span class="math"&gt;\(\theta\)&lt;/span&gt; that minimize the error (loss) between estimated function &lt;span class="math"&gt;\(f\)&lt;/span&gt; and our estimate &lt;span class="math"&gt;\(f^*\)&lt;/span&gt;. We want our &lt;span class="math"&gt;\(\theta\)&lt;/span&gt; values to produce an estimate as close to &lt;span class="math"&gt;\(f^*\)&lt;/span&gt; as possible, or for the loss function L to be as close to zero.&lt;/p&gt;
-&lt;p&gt;The mean squared error &lt;/p&gt;
-&lt;div class="math"&gt;$$ L(\theta) = \frac{1}{2} \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta))^2$$&lt;/div&gt;
-&lt;p&gt; has a nice derivative &lt;/p&gt;
-&lt;div class="math"&gt;$$\nabla{L_{\theta}} = \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta)) \nabla f( \textbf{x} ; \theta)$$&lt;/div&gt;
-&lt;p&gt;.&lt;/p&gt;
+&lt;p&gt;The mean squared error 
+&lt;/p&gt;
+&lt;div class="math"&gt;\begin{equation}
+    L(\theta) = \frac{1}{2} \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta))^2
+\end{equation}&lt;/div&gt;
+&lt;p&gt;
+has a nice derivative 
+&lt;/p&gt;
+&lt;div class="math"&gt;\begin{equation}
+    \nabla{L_{\theta}} = \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta)) \nabla f( \textbf{x} ; \theta).
+\end{equation}&lt;/div&gt;
 &lt;p&gt;(i.e. the product of the summed difference and the change in our estimated function &lt;span class="math"&gt;\(f(\textbf{x}; \theta)\)&lt;/span&gt; with respect to a change in &lt;span class="math"&gt;\(\theta\)&lt;/span&gt;)&lt;/p&gt;
 &lt;h3&gt;Optimization, Gradient Descent&lt;/h3&gt;
 &lt;p&gt;In thinking of our loss function as a terrain, we want the coordinates that reaches the lowest valley.&lt;/p&gt;
