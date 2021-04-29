@@ -1,0 +1,246 @@
+
+<html>
+    <head> 
+        <meta charset='utf-8' />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel= "stylesheet" href="/static/css/style.css" type="text/css">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <!-- KaTex -->
+        <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+      crossorigin="anonymous">
+
+        <title> A Quantum Computing primer </title>
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <h1> <a href='/'> tangarts </a> </h1>
+                <div id="header_wrap" class="wrapper">
+                    <nav id="navbar" >
+                        <ul class="list-none" >
+                            <li><a href="/about">about</a> &centerdot;</li>
+                            <li><a href="/archives.html">archive</a> &centerdot;</li>
+                            <li><a href="/now">now</a> &centerdot;</li>
+                            <li><a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a></li>
+                        </ul> 
+
+                    </nav>
+                </div>
+
+            </header>  
+            <main class="wrapper">
+
+                <hr> 
+
+
+<h1> A Quantum Computing primer </h1>
+<div class=date>
+        2016-06-06
+        | Modified: 2020-04-28
+
+</div>
+
+<article><h2>Abstract</h2>
+<p>In this paper, an overview of quantum computers will be addressed;
+fundamental quantum mechanical properties, recent advancements and
+potential uses for the upcoming technology. I have focused on one recent
+development of the qubit from a team of researchers at the University of
+New South Wales (UNSW) who are using a phosphorus atom imbedded in a
+chip of silicon-28 as the qubit. (Borghino, 2015)</p>
+<h2>Introduction</h2>
+<p>The digital age of computing has started to diverge. Traditional
+computers are becoming much smaller; scientists are developing molecular
+computers which are only 100s of nanometres wide. In addition to the
+shrinking of technology, scientists are looking towards quantum
+mechanics and its strange properties to create a new way of processing
+information.</p>
+<p>Traditionally classical computers store information in two states, 0 or
+1. However, quantum computers store information as 0, 1 or as a state of
+both 0 and 1. (Altepeter, 2010) This allows the potential for more
+powerful computers with same amount of 'classical bits'.</p>
+<h2>Recent advances in creating a qubit</h2>
+<p>Qubits can be a multitude of things from the polarization of a photon,
+the energy levels of an ion or the nuclear spin of an atom. (unknown,
+n.d.) The most promising candidate has been utilised by a team of
+researchers at the University of New South Wales (UNSW). They are
+harnessing the spin of an electron in a phosphorus atom. (Borghino,
+2015)</p>
+<h3>Electron spin</h3>
+<p>The direction of an electrons spin state is caused by the interaction of
+the electrons magnetic field and the external magnetic field applied to
+it. When the electrons magnetic field aligns with the external magnetic
+field the lowest energy state is achieved (spin down). To get it into
+spin up, a pulse of microwaves are fired at the electron at a specific
+frequency. In addition, if you stop the pulse at a specific time, the
+electron will be in a superposed state of both up and down.</p>
+<p>However, the property of the electron spin means that only discrete
+values of an electron spin exists- namely spin up and spin down. This
+means when the direction is measured, it will be in a classical state of
+up or down. The choice using electron spin over other means is
+highlighted below by the researchers at the UNSW.</p>
+<p>"Silicon electron 'spins' also have very long 'coherence times': this
+means data encoded on the spin can remain there for longer periods than
+it would in most materials, before it is scrambled and lost. This is
+important for performing successful calculations." (University of New
+South Wales, 2015)</p>
+<h3>Superposition</h3>
+<p>The state of both 0 and 1 is a consequence of superposition. Sub-atomic
+particles such as electrons and protons can exist in a superposition of
+these two states (or wave of probability). (Mastin, 2009) It is helpful
+to use mathematical notation shown to describe the phenomenon.</p>
+<div class="math">$$\left. \ \mathbf{|\psi} \right\rangle\mathbf{= a}\left. \ \mathbf{|0} \right\rangle\mathbf{+}\left. \ \mathbf{b|1} \right\rangle$$</div>
+<p>Where <strong><em>a</em></strong> and <strong><em>b</em></strong> are coefficients of finding the electron in
+either <span class="math">\(\left. \ \mathbf{|0} \right\rangle\)</span> or
+<span class="math">\(\left. \ \mathbf{|1} \right\rangle\)</span> and
+<span class="math">\(\mathbf{\ }\left. \ \mathbf{|\psi} \right\rangle\)</span> is the qubit (wave
+function).</p>
+<p>As previously mentioned, the wave function exists as the sum of possible
+probabilities before being measured. As soon as the qubit is measured
+the wave function collapses to one of the two states. (unknown, n.d.)</p>
+<h3>Entanglement</h3>
+<p>Two qubits have 4 quantum states, <span class="math">\(\mathbf{|0\rangle|0\rangle}\)</span><strong>,</strong>
+<span class="math">\(\left| \mathbf{0} \right\rangle\left| \mathbf{1} \right\rangle\mathbf{+ \ |1\rangle|0\rangle}\)</span><strong>,</strong>
+<span class="math">\(\left| \mathbf{0} \right\rangle\left| \mathbf{1} \right\rangle\mathbf{- |1\rangle|0\rangle}\)</span>
+and <span class="math">\(\mathbf{|1\rangle|1\rangle}\)</span><strong>.</strong> The second state listed known as
+the singlet state has very peculiar properties; any measurement of one
+half of the singlet state will give a completely random result. On the
+other hand, when both qubits are measured, they result in opposite spin
+direction- it seems as if the electrons seem to know about the others
+state. (Mastin, 2009) They become entangled and described as one system
+rather than two separate bodies.</p>
+<p>This important property of the quantum world is known as entanglement. 2
+entangled qubits provide 4 pieces of information- the probability of
+finding the qubit in each of the 4 states. In comparison 2 classical
+bits gives us 2 pieces of information- the state of each bit.
+Consequently, the amount of information provided through qubits is
+<span class="math">\(\mathbf{2}^{n}\)</span> classical bits. With only 300 qubits, all in an
+entangled state of superposition, the number of 'classical' information
+exceeds the amount of particles in the universe.</p>
+<h2>Applications</h2>
+<p>Since quantum computers exploit the parallelisms of quantum phenomena,
+one major use of the technology would be to crack the RSA encryption.
+Factorising large numbers that would take classical computers billions
+of years could potentially be done in a few minutes. Furthermore, our
+understanding of diseases would rapidly increase due to quantum
+computers. (Freiberger, 2015)</p>
+<h2>Overcoming problems</h2>
+<p>Unfortunately, getting a fully functioning quantum computer has many
+problems. A large amount of them stem from the qubit. The qubit needs to
+be in an environment free of external factors which will cause
+decoherence. Quantum computers are cooled to just above 0°K as thermal
+energy at room temperature renders measuring electron spin completely.
+Decoherence also occurs if the material surrounding the qubit has a
+magnetic nucleus (Tyryshkin, 2011). Fortunately, the team at the
+university of new south wales are using silicon-28 as it doesn't cause
+decoherence. (Avaliani, 2002)</p>
+<h2>Conclusion</h2>
+<p>Scientists hope to improve qubit coherence time and create stronger
+interactions with its environment. In 10 years' time, the team at UNSW
+hope to create a quantum computer with 10+ qubits which is stable enough
+to work at room temperature. However, we are still at the beginning of a
+new approach to computing and data management. The future of quantum
+computing is still in its infancy; the potential to harness quantum
+phenomenon has yet to be fully understood.</p>
+<h2>Bibliography</h2>
+<p>Altepeter, J. B., 2010. <em>A tale of two qubits: how quantum computers
+work.</em> [Online]\
+Available at:
+[http://arstechnica.com/science/2010/01/a-tale-of-two-qubits-how-quantum-computers-work/]{.ul}Avaliani,
+A., 2002. <em>arxiv.org.</em> [Online]\
+Available at:
+[https://arxiv.org/ftp/cs/papers/0405/0405004.pdf]{.ul}Borghino, D.,
+2015. <em>Quantum computers inch closer to reality thanks to entangled
+qubits in silicon.</em> [Online]\
+Available at:
+[http://www.gizmag.com/advance-programmable-silicon-quantum-computers/40420/]{.ul}Borghino,
+D., 2015. <em>Qubits made from standard silicon transistors.</em> [Online]\
+Available at:
+[http://www.gizmag.com/silicon-quantum-computer/39711/]{.ul}Mastin, L.,
+2009. <em>NONLOCALITY AND ENTANGLEMENT.</em> [Online]\
+Available at:
+[http://www.physicsoftheuniverse.com/topics_quantum_nonlocality.html]{.ul}Mastin,
+L., 2009. <em>SUPERPOSITION, INTERFERENCE AND DECOHERENCE.</em> [Online]\
+Available at:
+[http://www.physicsoftheuniverse.com/topics_quantum_superposition.html]{.ul}N/A,
+n.d. <em>Qubit and Entanglement.</em> [Online]\
+Available at:
+[https://universe-review.ca/R13-11-QuantumComputing.ht]{.ul}</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></article>
+
+
+
+            </main> 
+
+            <footer>
+                <p>&centerdot; &centerdot; &centerdot;</p> 
+            </footer>
+
+        </div>
+    </body>
+</html>

@@ -8,7 +8,10 @@
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <!--    <link rel="shortcut icon" href="/favicon.ico.gz" type="image/ico"/> -->
+        <!-- KaTex -->
+        <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+      crossorigin="anonymous">
 
         <title> XOR </title>
     </head>
@@ -62,49 +65,47 @@ transform our feature space for a linear model to learn.</p>
 <p>The network consists of two inputs <span class="math">\(x_1\)</span> and <span class="math">\(x_2\)</span>, a hidden layer <span class="math">\(\textbf{h}=
 [h_1, h_2]\)</span> and output <span class="math">\(y\)</span>.</p>
 <h3>Task</h3>
-<p>Find the parameters (weights) <span class="math">\(\theta\)</span> that minimize the error (loss) between estimated function <span class="math">\(f\)</span> and our estimate <span class="math">\(f^*\)</span>. We want our <span class="math">\(\theta\)</span> values to produce an estimate as close to <span class="math">\(f^*\)</span> as possible, or for the loss function L to be as close to zero.</p>
+<p>Find the parameters (weights) <span class="math">\(\theta\)</span> that minimize the error (loss) between estimated function <span class="math">\(f\)</span> and our estimate <span class="math">\(f^*\)</span>. We want our <span class="math">\(\theta\)</span> values to produce an estimate as close to <span class="math">\(f^*\)</span> as possible, or for the loss function <span class="math">\(\mathcal L\)</span> to be as close to zero.</p>
 <p>The mean squared error 
 </p>
-<div class="math">\begin{equation}
-    L(\theta) = \frac{1}{2} \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta))^2
-\end{equation}</div>
-<p>
-has a nice derivative 
+<div class="math">$$\mathcal L(\theta) = \frac{1}{2} \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta))^2$$</div>
+<p>has a nice derivative 
 </p>
-<div class="math">\begin{equation}
-    \nabla{L_{\theta}} = \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta)) \nabla f( \textbf{x} ; \theta).
-\end{equation}</div>
+<div class="math">$$\nabla{\mathcal L_{\theta}} = \sum_{x} (f^*(\textbf{x}) - f( \textbf{x} ; \theta)) \nabla f( \textbf{x} ; \theta).$$</div>
 <p>(i.e. the product of the summed difference and the change in our estimated function <span class="math">\(f(\textbf{x}; \theta)\)</span> with respect to a change in <span class="math">\(\theta\)</span>)</p>
 <h3>Optimization, Gradient Descent</h3>
 <p>In thinking of our loss function as a terrain, we want the coordinates that reaches the lowest valley.</p>
-<p>We start at coordinates <span class="math">\(\theta_0\)</span> and ask, how do we find the deepest valley? Intuitively, a natural step would to go in the direction with the steepest incline by a small <span class="math">\(\alpha\)</span> sized step, <span class="math">\(-\alpha \nabla_{\theta}{L}\)</span>. </p>
+<p>We start at coordinates <span class="math">\(\theta_0\)</span> and ask, how do we find the deepest valley? Intuitively, a natural step would to go in the direction with the steepest incline by a small <span class="math">\(\alpha\)</span> sized step, <span class="math">\(-\alpha \nabla_{\theta}{\mathcal L}\)</span>. </p>
 <p>Taking the step, we arrive at a new coordinate <span class="math">\(\theta_1\)</span>. Repeating this process choose the direction with the steepest decline until we reach our destination</p>
-<p><span class="math">\(\theta_{n+1} = \theta_{n} - \alpha \nabla_{\theta}{L}\)</span>.</p>
+<p><span class="math">\(\theta_{n+1} = \theta_{n} - \alpha \nabla_{\theta}{\mathcal L}\)</span>.</p>
 <h3>Backpropagation</h3>
 <p>Going back to the XOR problem we have</p>
 <div class="math">$$\textbf{x} \rightarrow f(\textbf{W}^T\textbf{x}) = \textbf{h}$$</div>
-<div class="math">$$\textbf{h} \rightarrow g(\textbf{w}^T \textbf{h}) \rightarrow \textbf{w}^T f(\textbf{W}^T\textbf{x} ) = y .$$</div>
+<div class="math">$$\textbf{h} \rightarrow g(\textbf{w}^T \textbf{h}) \rightarrow \textbf{w}^T f(\textbf{W}^T\textbf{x} ) = y.$$</div>
 <p>The parameter <span class="math">\(\theta\)</span> is made up of different weights <span class="math">\(\textbf W\)</span> and <span class="math">\(\textbf w\)</span> that the network will need to learn.</p>
 <p>Thus </p>
-<div class="math">\begin{align}
-\nabla_{x} L &amp;= \frac{\partial L}{\partial y} \\
+<div class="math">$$\begin{aligned}
+\nabla_{x} \mathcal L &amp;= \frac{\partial \mathcal L}{\partial y} \\
 &amp;= \frac{\partial y}{\partial (\textbf w^T \textbf h)} \\
 &amp;= \frac{\partial (\textbf w^T \textbf h)}{\partial h} \\
 &amp;= \frac{\partial h}{\partial (\textbf W ^T \textbf x)} \\
 &amp;= \frac{\partial (\textbf W^T \textbf x)}{\partial x}
-\end{align}</div>
+\end{aligned}$$</div>
 <div class="math">$$(y - y^*) \textbf w  f'(.) \textbf W$$</div>
 <p>where y is our predicted value, <span class="math">\(y^*\)</span> is the true value.</p>
 <p>So </p>
-<div class="math">$$\nabla_{w} L = \frac{\partial L}{\partial y}
+<div class="math">$$\nabla_{w} \mathcal L = \frac{\partial \mathcal L}{\partial y}
 \frac{\partial y}{\partial (\textbf w^T \textbf h)}
 \frac{\partial (\textbf w^T \textbf h)}{\partial \textbf w} = (y - y^*)  \textbf h $$</div>
 <p>and </p>
-<div class="math">$$\nabla_{W} L = \frac{\partial L}{\partial y} \frac{\partial y}{\partial (\textbf w^T \textbf h)}
+<div class="math">$$\begin{aligned}
+\nabla_{W} \mathcal L &amp;= \frac{\partial \mathcal L}{\partial y} \frac{\partial y}{\partial (\textbf w^T \textbf h)}
 \frac{\partial (\textbf w^T \textbf h)}{\partial h}
 \frac{\partial h}{\partial (\textbf W ^T \textbf x)}
-\frac{\partial (\textbf W^T \textbf x)}{\partial W} = (y - y^*) \textbf w f'(\textbf W ^T \textbf x)\textbf x $$</div>
-<div class="math">$$\frac{\partial L}{\partial y} = (y - y^*)$$</div>
+\frac{\partial (\textbf W^T \textbf x)}{\partial W} \\
+&amp;= (y - y^*) \textbf w f'(\textbf W ^T \textbf x)\textbf x
+\end{aligned}$$</div>
+<div class="math">$$\frac{\partial \mathcal L}{\partial y} = (y - y^*)$$</div>
 <div class="math">$$\frac{\partial (\textbf w^T \textbf h)}{\partial h} = \textbf w$$</div>
 <div class="math">$$\frac{\partial h}{\partial (\textbf W ^T \textbf x)} = f'(\textbf W ^T \textbf x)$$</div>
 <div class="math">$$\frac{\partial (\textbf W^T \textbf x)}{\partial x}= \textbf W$$</div>
@@ -343,12 +344,7 @@ has a nice derivative
             </main> 
 
             <footer>
-                <p>&mdash; &centerdot; &centerdot; &centerdot;</p> 
-                <!---
-                    <a href='/about'>about</a> &compfn;
-                    <a href='#'>book</a> &compfn;
-                    <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
-                -->
+                <p>&centerdot; &centerdot; &centerdot;</p> 
             </footer>
 
         </div>

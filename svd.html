@@ -13,7 +13,7 @@
       href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
       crossorigin="anonymous">
 
-        <title> Testing the Waters </title>
+        <title> SVD </title>
     </head>
 
     <body>
@@ -38,187 +38,44 @@
                 <hr> 
 
 
-<h1> Testing the Waters </h1>
+<h1> SVD </h1>
 <div class=date>
-        2019-06-19
-        | Modified: 2020-08-26
+        2020-07-25
+        | Modified: 2021-04-24
 
 </div>
 
-<article><h2>Exploration in markdown</h2>
-<p>This article is a test post. I'm currently trying to configure writing blog
-posts in markdown to be rendered to html. </p>
-<p>The blog will be an <strong>exploration</strong> of the many novel or re-occurring thoughts
-I have.</p>
-<p>At first, many of the posts will be reflection on interesting insights from
-other blogs or books.  There will be heavy influences from the various blogs I
-frequently browse. Some notable mentions:    </p>
-<ul>
-<li><a href="https://sivers.org/" title="Derek Sivers">Derek Sivers</a></li>
-<li><a href="http://blog.z3bra.org/">z3bra.org</a></li>
-<li><a href="http://paulgraham.com/" title="Paul Graham">Paul Graham</a></li>
-<li><a href="https://meltingasphalt.com/" title="Kevin Simler">Melting Asphalt</a></li>
-</ul>
-<p>I plan on creating a section on book notes (one step at a time!).</p>
-<p>The Fibonacci sequence is defined
-</p>
-<div class="math">$$F_0 = 1, F_1 = 1$$</div>
-<p>and</p>
-<div class="math">$$F_n = F_{n-1} + F_{n-1}$$</div>
-<p>for <span class="math">\(n &gt; 1\)</span>.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">fib</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
-<span class="nf">fib</span> <span class="mi">0</span> <span class="ow">=</span> <span class="mi">0</span>
-<span class="nf">fib</span> <span class="mi">1</span> <span class="ow">=</span> <span class="mi">1</span>
-<span class="nf">fib</span> <span class="n">n</span> <span class="ow">=</span> <span class="n">fib</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<article><p>Take an <span class="math">\(n \times m\)</span>  matrix <span class="math">\(X\)</span>. The factorized form using singular value
+decomposition is <span class="math">\(U\Sigma V^T\)</span> where <span class="math">\(U\)</span> is a <span class="math">\(n \times m\)</span> matrix, <span class="math">\(\Sigma\)</span> and
+<span class="math">\(V^T\)</span> are <span class="math">\(m \times m\)</span> matrices.</p>
+<h4>Properties of the matrices, <span class="math">\(U\)</span>, <span class="math">\(V\)</span> and <span class="math">\(\Sigma\)</span></h4>
+<p>Both <span class="math">\(U\)</span> and <span class="math">\(V\)</span> are orthogonal matrices, <span class="math">\(U^T U = I\)</span>,  <span class="math">\(V^T V = V V^T = I\)</span>.</p>
+<h4>Singular values:</h4>
+<p>The diagonal matrix <span class="math">\(\Sigma\)</span> has all entries off the main diagonal as zero. 
+<span class="math">\(\sigma_{11} \geq \sigma_{22} \geq \ldots \geq \sigma_{nn} \geq 0\)</span></p>
+<h4>low rank approximation:</h4>
+<p>The best approximation for <span class="math">\(X \in p\)</span> dimensions, <span class="math">\(p &lt; n\)</span> is <span class="math">\(U_p\Sigma_p V_p^T\)</span>, the first <span class="math">\(p\)</span> columns of <span class="math">\(\Sigma\)</span></p>
+<h4>Principal Component Analysis</h4>
+<p><span class="math">\(X = U\Sigma V^T\)</span> </p>
+<p><span class="math">\(U\Sigma = XV\)</span></p>
+<h4>Other forms:</h4>
+<p><span class="math">\(X^T X = (U\Sigma V^T)^T U\Sigma V^T = V\Sigma U^TU\Sigma V^T = V\Sigma^2 V^T\)</span></p>
+<p><span class="math">\((X^T X)^{-1} = V\Sigma^{-2} V^T\)</span></p>
+<p><span class="math">\(X(X^T X)^{-1}X^T = U\Sigma V^T V\Sigma^{-2}V^T V\Sigma U^T = UU^T\)</span></p>
+<h3>Eigendecomposition</h3>
+<p>For symmetric <span class="math">\(A = X^T\)</span>, <span class="math">\(X = V\Sigma^2 V^T\)</span>, and
+<span class="math">\(B = XX^T = U\Sigma V^T(V\Sigma U^T) = U\Sigma^2U^T\)</span></p>
+<p>The eigenvalues of <span class="math">\(A\)</span> and <span class="math">\(B\)</span> are <span class="math">\(\Sigma\Sigma^T\)</span> and <span class="math">\(\Sigma^T\Sigma\)</span> respectively with eigenvectors <span class="math">\(U\)</span> and <span class="math">\(V^T\)</span>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">x</span><span class="nd">@v</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="nd">@u</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </code></pre></div>
 
-<hr>
-<h2>Text Elements</h2>
-<ul>
-<li>
-<p>The <a href="#">a element</a> and <a href="http://example.com">external a element</a> examples</p>
-</li>
-<li>
-<p>The <abbr>abbr element</abbr> and an <abbr title="Abbreviation">abbr</abbr> element with title examples</p>
-</li>
-<li>
-<p>The <acronym title="A Cowboy Ran One New York Marathon">ACRONYM</acronym> element example</p>
-</li>
-<li>
-<p>The <strong>b element</strong> example</p>
-</li>
-<li>
-<p>The <cite>cite element</cite> example</p>
-</li>
-<li>
-<p>The <code>code element</code> example</p>
-</li>
-<li>
-<p>The <data value="3967381398">data element</data> example</p>
-</li>
-<li>
-<p>The <del>del element</del> example</p>
-</li>
-<li>
-<p>The <dfn>dfn element</dfn> and <dfn title="Title text">dfn element with title</dfn> examples</p>
-</li>
-<li>
-<p>The <em>em element</em> example</p>
-</li>
-<li>
-<p>The <em>i element</em> example</p>
-</li>
-<li>
-<p>The <ins>ins element</ins> example</p>
-</li>
-<li>
-<p>The <kbd>kbd element</kbd> example</p>
-</li>
-<li>
-<p>The <mark>mark element</mark> example</p>
-</li>
-<li>
-<p>The <q>q element</q> example</p>
-</li>
-<li>
-<p>The <q>q element <q>inside</q> a q element</q> example</p>
-</li>
-<li>
-<p>The <s>s element</s> example</p>
-</li>
-<li>
-<p>The <samp>samp element</samp> example</p>
-</li>
-<li>
-<p>The <small>small element</small> example</p>
-</li>
-<li>
-<p>The <span>span element</span> example</p>
-</li>
-<li>
-<p>The <strong>strong element</strong> example</p>
-</li>
-<li>
-<p>The <sub>sub element</sub> example</p>
-</li>
-<li>
-<p>The <sup>sup element</sup> example</p>
-</li>
-<li>
-<p>The <time datetime="2005-05-15 19:00">time element</time> example</p>
-</li>
-<li>
-<p>The <u>u element</u> example</p>
-</li>
-<li>
-<p>The <var>var element</var> example</p>
-</li>
-</ul>
-<hr>
-<h2>List Types</h2>
-<h3>Ordered List</h3>
-<ol>
-<li>List Item 1</li>
-<li>List Item 2<ol>
-<li>List Item 2.1</li>
-<li>List Item 2.2<ol>
-<li>List Item 2.2.1</li>
-<li>List Item 2.2 2</li>
-</ol>
-</li>
-<li>List Item 2.3</li>
-</ol>
-</li>
-<li>List Item 3</li>
-</ol>
-<h3>Unordered List</h3>
-<ul>
-<li>List Item 1</li>
-<li>List Item 2<ul>
-<li>List Item 2.1</li>
-<li>List Item 2.2<ul>
-<li>List Item 2.2.1</li>
-<li>List Item 2.2 2</li>
-</ul>
-</li>
-<li>List Item 2.3</li>
-</ul>
-</li>
-<li>List Item 3</li>
-</ul>
-<hr>
-<h2>Tables</h2>
-<table>
-<thead>
-<tr>
-<th>Table Header 1</th>
-<th>Table Header 2</th>
-<th>Table Header 3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Division 1</td>
-<td>Division 2</td>
-<td>Division 3</td>
-</tr>
-<tr>
-<td>Division 1</td>
-<td>Division 2</td>
-<td>Division 3</td>
-</tr>
-<tr>
-<td>Division 1</td>
-<td>Division 2</td>
-<td>Division 3</td>
-</tr>
-</tbody>
-</table>
-<p>Finally a quote about ends:   </p>
-<blockquote>
-<p>When you reach the end of your rope, tie a knot in it and hang on. 
-&mdash; Franklin D. Roosevelt</p>
-</blockquote>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",

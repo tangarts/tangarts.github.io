@@ -13,7 +13,7 @@
       href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
       crossorigin="anonymous">
 
-        <title> Testing the Waters </title>
+        <title> Sampling: Rejection and Importance </title>
     </head>
 
     <body>
@@ -38,187 +38,91 @@
                 <hr> 
 
 
-<h1> Testing the Waters </h1>
+<h1> Sampling: Rejection and Importance </h1>
 <div class=date>
-        2019-06-19
-        | Modified: 2020-08-26
+        2021-04-25
+        | Modified: 2021-04-26
 
 </div>
 
-<article><h2>Exploration in markdown</h2>
-<p>This article is a test post. I'm currently trying to configure writing blog
-posts in markdown to be rendered to html. </p>
-<p>The blog will be an <strong>exploration</strong> of the many novel or re-occurring thoughts
-I have.</p>
-<p>At first, many of the posts will be reflection on interesting insights from
-other blogs or books.  There will be heavy influences from the various blogs I
-frequently browse. Some notable mentions:    </p>
-<ul>
-<li><a href="https://sivers.org/" title="Derek Sivers">Derek Sivers</a></li>
-<li><a href="http://blog.z3bra.org/">z3bra.org</a></li>
-<li><a href="http://paulgraham.com/" title="Paul Graham">Paul Graham</a></li>
-<li><a href="https://meltingasphalt.com/" title="Kevin Simler">Melting Asphalt</a></li>
-</ul>
-<p>I plan on creating a section on book notes (one step at a time!).</p>
-<p>The Fibonacci sequence is defined
-</p>
-<div class="math">$$F_0 = 1, F_1 = 1$$</div>
-<p>and</p>
-<div class="math">$$F_n = F_{n-1} + F_{n-1}$$</div>
-<p>for <span class="math">\(n &gt; 1\)</span>.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">fib</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
-<span class="nf">fib</span> <span class="mi">0</span> <span class="ow">=</span> <span class="mi">0</span>
-<span class="nf">fib</span> <span class="mi">1</span> <span class="ow">=</span> <span class="mi">1</span>
-<span class="nf">fib</span> <span class="n">n</span> <span class="ow">=</span> <span class="n">fib</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div>
-
+<article><p>We left the introduction to monte carlo simulations with its limitation of slow convergence.</p>
+<p>In this post we will cover Rejection and Importance sampling.</p>
+<p>For a density function <span class="math">\(\pi(x)\)</span>, how can we sample from it?</p>
+<h2>Rejection Sampling</h2>
+<p>The idea is to sample from a distribution <span class="math">\(q\)</span> that contains <span class="math">\(\pi\)</span> for all <span class="math">\(x\)</span>, that is 
+<span class="math">\(\pi \leq M \cdot q\)</span> for all <span class="math">\(x\)</span> and a constant <span class="math">\(M\)</span>.
+The algorithm is a two step process:</p>
+<p><strong>Rejection Sampling</strong></p>
 <hr>
-<h2>Text Elements</h2>
-<ul>
-<li>
-<p>The <a href="#">a element</a> and <a href="http://example.com">external a element</a> examples</p>
-</li>
-<li>
-<p>The <abbr>abbr element</abbr> and an <abbr title="Abbreviation">abbr</abbr> element with title examples</p>
-</li>
-<li>
-<p>The <acronym title="A Cowboy Ran One New York Marathon">ACRONYM</acronym> element example</p>
-</li>
-<li>
-<p>The <strong>b element</strong> example</p>
-</li>
-<li>
-<p>The <cite>cite element</cite> example</p>
-</li>
-<li>
-<p>The <code>code element</code> example</p>
-</li>
-<li>
-<p>The <data value="3967381398">data element</data> example</p>
-</li>
-<li>
-<p>The <del>del element</del> example</p>
-</li>
-<li>
-<p>The <dfn>dfn element</dfn> and <dfn title="Title text">dfn element with title</dfn> examples</p>
-</li>
-<li>
-<p>The <em>em element</em> example</p>
-</li>
-<li>
-<p>The <em>i element</em> example</p>
-</li>
-<li>
-<p>The <ins>ins element</ins> example</p>
-</li>
-<li>
-<p>The <kbd>kbd element</kbd> example</p>
-</li>
-<li>
-<p>The <mark>mark element</mark> example</p>
-</li>
-<li>
-<p>The <q>q element</q> example</p>
-</li>
-<li>
-<p>The <q>q element <q>inside</q> a q element</q> example</p>
-</li>
-<li>
-<p>The <s>s element</s> example</p>
-</li>
-<li>
-<p>The <samp>samp element</samp> example</p>
-</li>
-<li>
-<p>The <small>small element</small> example</p>
-</li>
-<li>
-<p>The <span>span element</span> example</p>
-</li>
-<li>
-<p>The <strong>strong element</strong> example</p>
-</li>
-<li>
-<p>The <sub>sub element</sub> example</p>
-</li>
-<li>
-<p>The <sup>sup element</sup> example</p>
-</li>
-<li>
-<p>The <time datetime="2005-05-15 19:00">time element</time> example</p>
-</li>
-<li>
-<p>The <u>u element</u> example</p>
-</li>
-<li>
-<p>The <var>var element</var> example</p>
-</li>
-</ul>
-<hr>
-<h2>List Types</h2>
-<h3>Ordered List</h3>
 <ol>
-<li>List Item 1</li>
-<li>List Item 2<ol>
-<li>List Item 2.1</li>
-<li>List Item 2.2<ol>
-<li>List Item 2.2.1</li>
-<li>List Item 2.2 2</li>
-</ol>
-</li>
-<li>List Item 2.3</li>
-</ol>
-</li>
-<li>List Item 3</li>
-</ol>
-<h3>Unordered List</h3>
-<ul>
-<li>List Item 1</li>
-<li>List Item 2<ul>
-<li>List Item 2.1</li>
-<li>List Item 2.2<ul>
-<li>List Item 2.2.1</li>
-<li>List Item 2.2 2</li>
+<li>Sample <span class="math">\(X \sim q\)</span> and sample <span class="math">\(U \sim U[0, 1]\)</span>.</li>
+<li>If <span class="math">\(\mathbb P(U &lt; \frac{\pi(X)}{Mq(X)})\)</span><ul>
+<li>accept <span class="math">\(X\)</span> as a sample from <span class="math">\(\pi\)</span></li>
+<li>otherwise reject <span class="math">\(X\)</span> and repeat the sampling step.</li>
 </ul>
 </li>
-<li>List Item 2.3</li>
-</ul>
-</li>
-<li>List Item 3</li>
-</ul>
+</ol>
 <hr>
-<h2>Tables</h2>
-<table>
-<thead>
-<tr>
-<th>Table Header 1</th>
-<th>Table Header 2</th>
-<th>Table Header 3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Division 1</td>
-<td>Division 2</td>
-<td>Division 3</td>
-</tr>
-<tr>
-<td>Division 1</td>
-<td>Division 2</td>
-<td>Division 3</td>
-</tr>
-<tr>
-<td>Division 1</td>
-<td>Division 2</td>
-<td>Division 3</td>
-</tr>
-</tbody>
-</table>
-<p>Finally a quote about ends:   </p>
-<blockquote>
-<p>When you reach the end of your rope, tie a knot in it and hang on. 
-&mdash; Franklin D. Roosevelt</p>
-</blockquote>
+<p>To show this works we prove:
+For any <span class="math">\(a, b \in \mathbb R\)</span>, <span class="math">\(a \leq b\)</span>.
+</p>
+<div class="math">$$
+    \mathbb P(X \in [a, b] \mid X \text{ accepted}) = \int_a^b \pi(x) dx
+$$</div>
+<p><em>Proof</em>:
+</p>
+<div class="math">$$
+\begin{aligned}
+\mathbb P(X \in [a, b] \cap \text{ accepted}) &amp;= \int_a^b \mathbb P(X \text{ accepted} \mid X = x)q(x) dx \\
+&amp;= \int_a^b \frac{\pi(X)}{Mq(X)}q(x) dx \\
+&amp;= \frac{1}{M} \int_a^b \pi(x) dx  \\
+&amp;= \frac{1}{M} 
+\end{aligned}
+$$</div>
+<p>
+Using Bayes' theorem
+</p>
+<div class="math">$$
+\begin{aligned}
+    \mathbb P(X \in [a, b] \mid X \text{ accepted}) &amp;= \frac{\mathbb P(X \in [a, b] \cap \text{ accepted})}{\mathbb P(X \text{ accepted})} \\
+    &amp;= \frac{\frac{1}{M} \int_a^b \pi(x) dx}{\frac{1}{M}} \\
+    &amp;= \int_a^b \pi(x) dx  
+\end{aligned}
+$$</div>
+<p>An important consequence of this is the probability until an acceptance <span class="math">\(\mathbb P(X \text{ accepted}) = \frac{1}{M}\)</span> is distributed
+geometrically <span class="math">\(Y \sim \text{Geometric}(\frac{1}{M})\)</span>. The mean time until an acceptance is then <span class="math">\(\mathbb E[Y] = M\)</span>.</p>
+<h2>Importance sampling</h2>
+<p>We want to evaluate integrals in the form: <span class="math">\(\int \varphi(x)\pi(x) dx\)</span> where
+<span class="math">\(\pi\)</span> is a probability distribution and <span class="math">\(\varphi(x)\)</span> is a function. Sometimes
+<span class="math">\(\pi\)</span> is tricky to evaluate, maybe the integral is intractable. Importance
+sampling introduces a proposal distribution <span class="math">\(q\)</span> such that</p>
+<div class="math">$$ \{x : \pi(x) &gt; 0\} \subseteq \{x : q(x) &gt; 0\} $$</div>
+<p>or alternatively, there exists a constant <span class="math">\(M\)</span> such that <span class="math">\(\pi(x) \leq M \cdot
+q(x)\)</span> for all <span class="math">\(x\)</span> which allows us to express our integral as:</p>
+<div class="math">$$\begin{aligned}
+\mathbb E_{\pi}[\varphi(X)] &amp;= \int \varphi(x)\pi(x) dx \\
+&amp;= \int \varphi(x)\frac{\pi(x)}{q(x)}q(x) dx \\
+&amp;= \int \varphi(x)w(x)q(x) dx \\
+&amp;= \mathbb E_{q}[\varphi(X)w(X)]. \end{aligned}$$</div>
+<p>Using the equivalence above, letting <span class="math">\(X_i \overset{i.i.d}\sim q\)</span> and appealing
+to the weak law of large numbers we see </p>
+<div class="math">$$
+    \frac{1}{n} \sum_{i=1}^n \varphi(X_i)w(X_i) \overset{\text{p}}\rightarrow \mathbb E_{\pi}[\varphi(X)]
+$$</div>
+<p>The algorithm is as follows:</p>
+<p><strong>Importance Sampling</strong></p>
+<hr>
+<p>Choose <span class="math">\(q\)</span> such that <span class="math">\(\{x : \pi(x) &gt; 0\} \subseteq \{x : q(x) &gt; 0\}\)</span>.</p>
+<ol>
+<li>For <span class="math">\(i = 1, 2, \cdots, n\)</span>:<ul>
+<li>Draw <span class="math">\(X_i \sim q\)</span> </li>
+<li>Calculate importance weights <span class="math">\(w(X_i) = \frac{\pi(X_i)}{q(X_i)}\)</span></li>
+</ul>
+</li>
+<li>Calculate <span class="math">\(\bar{\varphi}_n = \frac{1}{n}\sum_{i=1}^n \varphi(X_i)w(X_i)\)</span>, 
+the unbiased estimator of <span class="math">\(\mathbb E_\pi[\varphi(X)]\)</span>.</li>
+</ol>
+<hr>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",

@@ -8,9 +8,12 @@
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <!--    <link rel="shortcut icon" href="/favicon.ico.gz" type="image/ico"/> -->
+        <!-- KaTex -->
+        <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+      crossorigin="anonymous">
 
-        <title> bayesian </title>
+        <title> Monte Carlo </title>
     </head>
 
     <body>
@@ -35,19 +38,70 @@
                 <hr> 
 
 
-<h1> bayesian </h1>
+<h1> Monte Carlo </h1>
 <div class=date>
-        2020-06-28
+        2021-04-24
+        | Modified: 2021-04-24
 
 </div>
 
-<article><p>How tall is my friend?</p>
-<p>With this information you might ask for their name, ethnicity. The only prior information would be the distribution of humans, It is very unlikely that my friend is shorter than 3 ft or taller than 8 ft though not impossible.
-A reasonable guess would be 5 ft 6 in. This is an approximate average height for both male and female.</p>
-<p>Mathematically, we can express the height of my friend as <span class="math">\(\theta\)</span>, and our estimate as a range of likely heights, bell-shaped and peaking around 5 ft 6 in. </p>
-<p>A little later I mention his name, <a href="https://www.behindthename.com/name/oscar">Oscar</a> <a href="https://surnames.behindthename.com/name/van00hautum">Van Hautum</a></p>
-<p>With 3 new pieces of information, you think he's taller than before, a Dutch male, you infer from the name, you have more confidence in thinking he is closer to 6 ft.</p>
-<p>That's all well and reasonable but he's actually a cat.</p>
+<article><p>Monte Carlo methods are a class of sampling algorithms to obtain numerical approximations.
+To do this we rely on the weak law of large numbers:</p>
+<dl>
+<dt><strong>The weak law of large numbers</strong></dt>
+<dd>
+<p>A sequence of random variables <span class="math">\(X_1, X_2, \cdots, X_n\)</span> <em>converges in probability</em> to a random
+variable <span class="math">\(X\)</span> if for all <span class="math">\(\delta &gt; 0\)</span>
+<div class="math">$$
+    \lim_{n\rightarrow \infty} \mathbb P(|X_n - X | \geq \delta) = 0.
+$$</div>
+</p>
+</dd>
+</dl>
+<p>This is also written as <span class="math">\(X_n \overset{\text{p}}\rightarrow X\)</span></p>
+<dl>
+<dt>A consequence of this taking using the empirical mean <span class="math">\(\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i\)</span></dt>
+<dd>
+<p>If the sequence <span class="math">\(X_1, X_2, \cdots\)</span> are independent and identically distributed (i.i.d) with <span class="math">\(\mathbb E(X_1) = \mu\)</span> and
+finite variance <span class="math">\(\sigma^2 &lt; \infty\)</span>,  we have <span class="math">\(\overline{X}_n \overset{\text{p}}\rightarrow \mu\)</span></p>
+</dd>
+</dl>
+<p>For an illustrated example we'll use an abstract example of estimating the probability that <span class="math">\(X \in A\)</span> for a set <span class="math">\(A \subset \mathbb R\)</span>. We also assume <span class="math">\(X\)</span> has probability density function <span class="math">\(\pi\)</span>.</p>
+<p>Defining the estimator of a sample landing in <span class="math">\(A\)</span> as <span class="math">\(\hat{p} := \boldsymbol{1}_{X_n \in A}\)</span> we notice that <span class="math">\(\mathbb P(X \in A) = \mathbb E[\boldsymbol{1}_{X_n \in A}]\)</span> thus we approximate <span class="math">\(\mathbb P(X \in A)\)</span> with the empirical mean <span class="math">\(\frac{1}{n} \sum_{i=1}^n \boldsymbol{1}_{X_i \in A}\)</span></p>
+<p>where
+</p>
+<div class="math">$$\boldsymbol{1}_{X_i \in A} = \left\{
+\begin{array}{ll}
+1 &amp;  X_i \in A \\
+0 &amp; \text{otherwise}
+\end{array} 
+\right.$$</div>
+<p>The estimator <span class="math">\(\hat{p}\)</span> describes the proportion of samples landing in <span class="math">\(A\)</span>. If we define <span class="math">\(Z_n\)</span> as the <em>number</em> of samples landing in <span class="math">\(A\)</span> the we have the relationship <span class="math">\(\hat{p} = \dfrac{Z_n}{n}\)</span>.</p>
+<p>It follows that the number of samples that land in <span class="math">\(A\)</span> follows a Binomial distribution <span class="math">\(Z_n \sim \text{Bin}(n, p)\)</span>. This arises from considering the sum of <span class="math">\(n\)</span> independent Bernoulli trials.</p>
+<!--
+#### The limitations of Monte Carlo simulations
+
+As we know the distribution of $\hat{p}$ we can calculate the variance of the estimator:
+$$
+    \text{Var}(\hat{p}) = \frac{1}{n^2}\text{Var}(Z_n) = \frac{np(1 - p)}{n^2} = \frac{p(1 - p)}{n}.
+$$
+The empirical mean $\mathbb E[\hat{p}] = \frac{1}{n}\mathbb E[Z_n] = p$ thus using the weak law of large numbers, $\hat{p} \overset{\text{p}}\rightarrow p$.
+
+How do we quantify how close $\hat{p}$ is to $p$? First we introduce the Central Limit theorem:
+
+: For $X_1, X_2, \cdots, X_n$, $n$ i.i.d samples with mean $\mu$ and finite variance $\sigma^2$ with $\overline{X}_n$ defining the empirical mean,
+$$Z = lim_{n \rightarrow \infty} \sqrt{n}\left( \frac{\overline{X}_n - \mu}{\sigma}\right) \sim \mathcal N(0, 1)$$
+
+The consequence of the theorem tells us 
+for large $n$ $\overline{Z}_n \sim \mu + \frac{\sigma}{\sqrt{n}}Z$
+Which for our parameters of interest:
+$$p + \frac{\sqrt{p(1-p)}}{\sqrt{n}}Z$$
+
+$p$ the quantity of interest and $\frac{\sqrt{p(1-p)}}{\sqrt{n}}Z$ the error term. As $Z \in (0, 1)$ we take the error term to be $\frac{\sqrt{p(1-p)}}{\sqrt{n}}$
+
+Finally, we see the error term shrinks by a factor of $\sqrt{n}$. 
+-->
+
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
@@ -116,12 +170,7 @@ A reasonable guess would be 5 ft 6 in. This is an approximate average height for
             </main> 
 
             <footer>
-                <p>&mdash; &centerdot; &centerdot; &centerdot;</p> 
-                <!---
-                    <a href='/about'>about</a> &compfn;
-                    <a href='#'>book</a> &compfn;
-                    <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
-                -->
+                <p>&centerdot; &centerdot; &centerdot;</p> 
             </footer>
 
         </div>

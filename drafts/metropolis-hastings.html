@@ -8,9 +8,12 @@
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <!--    <link rel="shortcut icon" href="/favicon.ico.gz" type="image/ico"/> -->
+        <!-- KaTex -->
+        <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+      crossorigin="anonymous">
 
-        <title> nets </title>
+        <title> Metropolis Hastings </title>
     </head>
 
     <body>
@@ -35,35 +38,54 @@
                 <hr> 
 
 
-<h1> nets </h1>
+<h1> Metropolis Hastings </h1>
 <div class=date>
-        2020-06-02
-        | Modified: 2020-08-24
+        2021-04-27
+        | Modified: 2021-04-27
 
 </div>
 
-<article><blockquote>
-<p><strong>NN overparameterization:</strong> We can train large deep slow neural networks to
-human-level performance on many tasks, and we can then train small shallow
-fast versions of those NNs to save energy/enable mobile deployment, so why
-can’t we train small shallow fast NNs in the first place? And what would
-happen if we did figure it out?</p>
-</blockquote>
-<h3>Architecture:</h3>
-<p>Neural networks are essentially layers of linear transformations with
-non-linear activation funcitons between the layers. The ith hidden layer
-expressed as:</p>
-<div class="math">$$h_i = f(\sum_i^n W_jh_{i-1})$$</div>
-<p>If we specified our activation function to be a sigmoid transformation
-<span class="math">\(\sigma(\bf{z})_i = \frac{exp{z_i}}{\sum_j=1^K exp{z_j}}\)</span> then we obtain a
-multinomi al logistic regression classifier</p>
-<p>The benefit of adding layers to our neural network has to do with learning
-complexity. </p>
-<h3>MNSIT Digits</h3>
-<p>With images we see that the first few layers learn high level features such as the edges of the digit. As we increase layer depth, more abstract feautres such as the number of curves a digit has.</p>
-<p>Current architecture design</p>
-<p>Convolutional Layers: </p>
-<p>Recurrent layers:</p>
+<article><p>We continue the series of Monte Carlo methods by covering Markov chain based sampling algorithms.</p>
+<p>Metropolis Hastings is a sampling algorithm that relies on the guarantees from invariant distributions.</p>
+<p><strong>Metropolis Hastings</strong></p>
+<hr>
+<p>Initialise <span class="math">\(X^{(0)}\)</span> and for <span class="math">\(t \geq 1\)</span></p>
+<ol>
+<li>Draw <span class="math">\(X \sim Q(\cdot \mid X^{(t-1)})\)</span></li>
+<li>Compute <div class="math">$$\alpha(X \mid X^{(t-1)}) = \min \left(1, \frac{\pi(X)Q(X^{(t-1)} \mid X)}{\pi(X^{(t-1)})Q(X \mid X^{(t-1)})} \right)$$</div>
+</li>
+</ol>
+<p>Set <span class="math">\(X^{(t)} = X\)</span> with probability <span class="math">\(\alpha(X \mid X^{(t-1)})\)</span> else <span class="math">\(X^{(t)} = X^{(t-1)}\)</span>.</p>
+<hr>
+<p>The conditional probability of accepting any proposed state given the chain is in <span class="math">\(i\)</span> is
+</p>
+<div class="math">$$ a(i) = \sum_{j \in \mathbb S} \alpha(j \mid i)Q_{i, j} $$</div>
+<p>From the algorithm we see the transition kernel <span class="math">\(K_{i,j} = \alpha(j\mid i)Q_{i,i} + (1 - a(i))\delta_{ij}\)</span> generates a 
+Markov chain for the sequence <span class="math">\((X^{(t)})_{t \geq 0}\)</span> using the distribution <span class="math">\(\pi\)</span>.</p>
+<p>An advantage of using MH algorithm is we only need to know a distribution that is proportional to <span class="math">\(\pi\)</span>.</p>
+<p>There are two popular Metropolis-Hastings variations, the Metropolis algorithm
+that uses a symmetric proposal distribution <span class="math">\(Q(X^{(t)} \mid X^{(t-1)}) = Q(X^{(t-1)} \mid X^{(t)})\)</span>. Common 
+distributions used are normal, <span class="math">\(\mathcal N(\mu, \sigma^2)\)</span> and uniform, <span class="math">\(U[a, b]\)</span>.
+The resulting acceptance ratio is simplfied to</p>
+<div class="math">$$\alpha(X \mid X^{(t-1)}) = \min \left(1, \frac{\pi(X)}{\pi(X^{(t-1)})} \right)$$</div>
+<p><strong>Gibbs Sampling</strong></p>
+<p>Gibbs sampling uses full conditional distributions as the proposal distribution. For <span class="math">\(j = 1,2, \ldots, n\)</span> 
+the proposal </p>
+<div class="math">$$Q(X \mid X^{(t-1)}) = \pi(X_j \mid X_1^{(t-1)}, \ldots, X_1^{(t-1)}, X_1^{(t+1)}, \ldots, X_1^{(n)})$$</div>
+<p>
+The acceptance probability <span class="math">\(\alpha(X \mid X^{(t-1)})\)</span> can be shown to be equal to 1.</p>
+<hr>
+<p>Initialise <span class="math">\(X^{(0)} = (X_1^{(0)}, X_2^{(0)})\)</span> and for <span class="math">\(t \geq 1\)</span></p>
+<ol>
+<li>Draw <span class="math">\(X_1^{(t)} \sim \pi_{1|2}(\cdot \mid X_2^{(t-1)})\)</span></li>
+<li>Draw <span class="math">\(X_2^{(t)} \sim \pi_{2|1}(\cdot \mid X_1^{(t)})\)</span></li>
+</ol>
+<hr>
+<p>The transition kernel that guarantees an invariant distribution is</p>
+<div class="math">$$K(\mathbf x, \mathbf y) = \pi_{1|2}(y_1 \mid x_2)\pi_{2|1}(y_2 \mid y_1)$$</div>
+<p>
+with <span class="math">\(\mathbf x = (x_1, x_2) = (X_1^{(t-1)}, X_2^{(t-1)})\)</span>
+and <span class="math">\(\mathbf y = (y_1, y_2) = (X_1^{(t)}, X_2^{(t)})\)</span></p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
@@ -132,12 +154,7 @@ complexity. </p>
             </main> 
 
             <footer>
-                <p>&mdash; &centerdot; &centerdot; &centerdot;</p> 
-                <!---
-                    <a href='/about'>about</a> &compfn;
-                    <a href='#'>book</a> &compfn;
-                    <a href="mailto:nehemiahcampbell@hotmail.co.uk">contact</a>
-                -->
+                <p>&centerdot; &centerdot; &centerdot;</p> 
             </footer>
 
         </div>

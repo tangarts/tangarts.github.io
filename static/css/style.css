@@ -1,4 +1,4 @@
-@import url("default.css");
+@import url("styles.css");
 
 * {
     box-sizing: border-box;
@@ -50,9 +50,8 @@ pre {
 code {
     font-family: "Fira Mono";
     font-style: normal; font-weight: normal; font-size: 0.85rem;
-    font-size: 95%;
+    font-size: 85%;
     hyphens: none;
-    padding: 0 0.2em;
 }
 
 table {
