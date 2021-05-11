@@ -78,10 +78,7 @@ to class 1?&lt;/p&gt;
 &lt;p&gt;thus Bayes rule classifies &lt;span class="math"&gt;\(\mathbf x\)&lt;/span&gt; to the class with the highest probability:&lt;/p&gt;
 &lt;div class="math"&gt;$$\varphi(\mathbf x) = \arg \underset{j\in\{1, 2\}}\max \mathbb P(Y = j \mid X = \mathbf x).$$&lt;/div&gt;
 &lt;p&gt;In other words, we assign &lt;span class="math"&gt;\(\mathbf x\)&lt;/span&gt; to class 1 if &lt;span class="math"&gt;\(\mathbb P(Y = 1 \mid
-X = \mathbf x) &amp;gt; \mathbb P(Y = 2 \mid X = \mathbf x)\)&lt;/span&gt; or $f_1(\mathbf x)\pi_1&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;f_2(\mathbf x)\pi_2$.&lt;/p&gt;
-&lt;/blockquote&gt;
+X = \mathbf x) &amp;gt; \mathbb P(Y = 2 \mid X = \mathbf x)\)&lt;/span&gt; or &lt;span class="math"&gt;\(f_1(\mathbf x)\pi_1 &amp;gt;  f_2(\mathbf x)\pi_2\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;Assuming the populations follow a normal distribution with different means but
 equal covariance, &lt;span class="math"&gt;\(X \mid Y = j \sim \mathcal N(\mu_, \Sigma)\)&lt;/span&gt; We then assign
 &lt;span class="math"&gt;\(\mathbf x\)&lt;/span&gt; to class 1 if&lt;/p&gt;
@@ -480,7 +477,7 @@ $$&lt;/div&gt;
 \mathbb P(X \in [a, b] \cap \text{ accepted}) &amp;amp;= \int_a^b \mathbb P(X \text{ accepted} \mid X = x)q(x) dx \\
 &amp;amp;= \int_a^b \frac{\pi(X)}{Mq(X)}q(x) dx \\
 &amp;amp;= \frac{1}{M} \int_a^b \pi(x) dx  \\
-&amp;amp;\Rightarrow \mathbb P( X \text{ accepted}) = \frac{1}{M} 
+\Rightarrow \mathbb P( X \text{ accepted}) &amp;amp;= \frac{1}{M} 
 \end{aligned}
 $$&lt;/div&gt;
 &lt;p&gt;
