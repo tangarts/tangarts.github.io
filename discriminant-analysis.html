@@ -13,7 +13,7 @@
       href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
       crossorigin="anonymous">
 
-        <title> Sampling: Rejection and Importance </title>
+        <title> Discriminant Analysis </title>
     </head>
 
     <body>
@@ -38,91 +38,59 @@
                 <hr> 
 
 
-<h1> Sampling: Rejection and Importance </h1>
+<h1> Discriminant Analysis </h1>
 <div class=date>
-        2021-04-25
-        | Modified: 2021-04-26
+        2021-05-02
+        | Modified: 2021-05-02
 
 </div>
 
-<article><p>We left the introduction to monte carlo simulations with its limitation of slow convergence.</p>
-<p>In this post we will cover Rejection and Importance sampling.</p>
-<p>For a density function <span class="math">\(\pi(x)\)</span>, how can we sample from it?</p>
-<h2>Rejection Sampling</h2>
-<p>The idea is to sample from a distribution <span class="math">\(q\)</span> that contains <span class="math">\(\pi\)</span> for all <span class="math">\(x\)</span>, that is 
-<span class="math">\(\pi \leq M \cdot q\)</span> for all <span class="math">\(x\)</span> and a constant <span class="math">\(M\)</span>.
-The algorithm is a two step process:</p>
-<p><strong>Rejection Sampling</strong></p>
-<hr>
-<ol>
-<li>Sample <span class="math">\(X \sim q\)</span> and sample <span class="math">\(U \sim U[0, 1]\)</span>.</li>
-<li>If <span class="math">\(\mathbb P(U &lt; \frac{\pi(X)}{Mq(X)})\)</span><ul>
-<li>accept <span class="math">\(X\)</span> as a sample from <span class="math">\(\pi\)</span></li>
-<li>otherwise reject <span class="math">\(X\)</span> and repeat the sampling step.</li>
-</ul>
-</li>
-</ol>
-<hr>
-<p>To show this works we prove:
-For any <span class="math">\(a, b \in \mathbb R\)</span>, <span class="math">\(a \leq b\)</span>.
-</p>
-<div class="math">$$
-    \mathbb P(X \in [a, b] \mid X \text{ accepted}) = \int_a^b \pi(x) dx
-$$</div>
-<p><em>Proof</em>:
-</p>
-<div class="math">$$
-\begin{aligned}
-\mathbb P(X \in [a, b] \cap \text{ accepted}) &amp;= \int_a^b \mathbb P(X \text{ accepted} \mid X = x)q(x) dx \\
-&amp;= \int_a^b \frac{\pi(X)}{Mq(X)}q(x) dx \\
-&amp;= \frac{1}{M} \int_a^b \pi(x) dx  \\
-&amp;\Rightarrow \mathbb P( X \text{ accepted}) = \frac{1}{M} 
-\end{aligned}
-$$</div>
-<p>
-Using Bayes' theorem
-</p>
-<div class="math">$$
-\begin{aligned}
-    \mathbb P(X \in [a, b] \mid X \text{ accepted}) &amp;= \frac{\mathbb P(X \in [a, b] \cap \text{ accepted})}{\mathbb P(X \text{ accepted})} \\
-    &amp;= \frac{\frac{1}{M} \int_a^b \pi(x) dx}{\frac{1}{M}} \\
-    &amp;= \int_a^b \pi(x) dx  
-\end{aligned}
-$$</div>
-<p>An important consequence of this is the probability until an acceptance <span class="math">\(\mathbb P(X \text{ accepted}) = \frac{1}{M}\)</span> is distributed
-geometrically <span class="math">\(Y \sim \text{Geometric}(\frac{1}{M})\)</span>. The mean time until an acceptance is then <span class="math">\(\mathbb E[Y] = M\)</span>.</p>
-<h2>Importance sampling</h2>
-<p>We want to evaluate integrals in the form: <span class="math">\(\int \varphi(x)\pi(x) dx\)</span> where
-<span class="math">\(\pi\)</span> is a probability distribution and <span class="math">\(\varphi(x)\)</span> is a function. Sometimes
-<span class="math">\(\pi\)</span> is tricky to evaluate, maybe the integral is intractable. Importance
-sampling introduces a proposal distribution <span class="math">\(q\)</span> such that</p>
-<div class="math">$$ \{x : \pi(x) &gt; 0\} \subseteq \{x : q(x) &gt; 0\} $$</div>
-<p>or alternatively, there exists a constant <span class="math">\(M\)</span> such that <span class="math">\(\pi(x) \leq M \cdot
-q(x)\)</span> for all <span class="math">\(x\)</span> which allows us to express our integral as:</p>
+<article><h2>Linear Discriminant Classifier</h2>
+<p>Suppose we have two classes of data <span class="math">\(P_1\)</span> and <span class="math">\(P_2\)</span> corresponding to genuine
+and counterfeit currency distributed <span class="math">\(f_j(\mathbf x)\)</span>, <span class="math">\(j = \{1, 2\}\)</span>. Letting
+<span class="math">\(Y\)</span> denote classes <span class="math">\(Y = 1\)</span> or <span class="math">\(Y = 2\)</span>. We also assume the prior probabilities
+of class assignment as <span class="math">\(\mathbb P(Y = 1) = \pi_1\)</span>, <span class="math">\(\mathbb P(Y = 2) = \pi_2\)</span>
+and <span class="math">\(\pi_1 + \pi_2 = 1\)</span>.</p>
+<p>Given we have observed <span class="math">\(\mathbf x\)</span> what is the probability of it belonging
+to class 1?</p>
+<div class="math">$$\mathbb P(Y = 1 \mid X = \mathbf x)
+= \frac{\mathbb P(Y = 1 \cap X = \mathbf x)}{\mathbb P(X = \mathbf x)}
+= \frac{f_1(\mathbf x)\pi_1}{f_1(\mathbf x)\pi_1 + f_2(\mathbf x)\pi_2}$$</div>
+<p>thus Bayes rule classifies <span class="math">\(\mathbf x\)</span> to the class with the highest probability:</p>
+<div class="math">$$\varphi(\mathbf x) = \arg \underset{j\in\{1, 2\}}\max \mathbb P(Y = j \mid X = \mathbf x).$$</div>
+<p>In other words, we assign <span class="math">\(\mathbf x\)</span> to class 1 if <span class="math">\(\mathbb P(Y = 1 \mid
+X = \mathbf x) &gt; \mathbb P(Y = 2 \mid X = \mathbf x)\)</span> or $f_1(\mathbf x)\pi_1</p>
+<blockquote>
+<p>f_2(\mathbf x)\pi_2$.</p>
+</blockquote>
+<p>Assuming the populations follow a normal distribution with different means but
+equal covariance, <span class="math">\(X \mid Y = j \sim \mathcal N(\mu_, \Sigma)\)</span> We then assign
+<span class="math">\(\mathbf x\)</span> to class 1 if</p>
 <div class="math">$$\begin{aligned}
-\mathbb E_{\pi}[\varphi(X)] &amp;= \int \varphi(x)\pi(x) dx \\
-&amp;= \int \varphi(x)\frac{\pi(x)}{q(x)}q(x) dx \\
-&amp;= \int \varphi(x)w(x)q(x) dx \\
-&amp;= \mathbb E_{q}[\varphi(X)w(X)]. \end{aligned}$$</div>
-<p>Using the equivalence above, letting <span class="math">\(X_i \overset{i.i.d}\sim q\)</span> and appealing
-to the weak law of large numbers we see </p>
-<div class="math">$$
-    \frac{1}{n} \sum_{i=1}^n \varphi(X_i)w(X_i) \overset{\text{p}}\rightarrow \mathbb E_{\pi}[\varphi(X)]
-$$</div>
-<p>The algorithm is as follows:</p>
-<p><strong>Importance Sampling</strong></p>
-<hr>
-<p>Choose <span class="math">\(q\)</span> such that <span class="math">\(\{x : \pi(x) &gt; 0\} \subseteq \{x : q(x) &gt; 0\}\)</span>.</p>
-<ol>
-<li>For <span class="math">\(i = 1, 2, \cdots, n\)</span>:<ul>
-<li>Draw <span class="math">\(X_i \sim q\)</span> </li>
-<li>Calculate importance weights <span class="math">\(w(X_i) = \frac{\pi(X_i)}{q(X_i)}\)</span></li>
-</ul>
-</li>
-<li>Calculate <span class="math">\(\bar{\varphi}_n = \frac{1}{n}\sum_{i=1}^n \varphi(X_i)w(X_i)\)</span>, 
-the unbiased estimator of <span class="math">\(\mathbb E_\pi[\varphi(X)]\)</span>.</li>
-</ol>
-<hr>
+&amp;\frac{f_1(\mathbf x)}{f_2(\mathbf x)} &gt; \frac{\pi_2}{\pi_1} \\
+&amp;\Rightarrow \log \frac{f_1(\mathbf x)}{f_2(\mathbf x)} + \log \frac{\pi_1}{\pi_2} &gt; 0 \\
+&amp;= \log \frac{\pi_1}{\pi_2}  + (\mu_1 - \mu_2)^T\Sigma^{-1}\mathbf x - \frac{1}{2} (\mu_1 - \mu_2)^T\Sigma^{-1}(\mu_1 + \mu_2) &gt; 0.
+\end{aligned}$$</div>
+<!--
+From the last line we recover the discriminant function
+$\delta_j(x) = \log\pi_j + \mu_j^T\Sigma^{-1}\mathbf x - \frac{1}{2}\mu_j^T\Sigma^{-1}\mu_j$
+-->
+
+<p>In practice the true mean and covariance is not known for population
+distributions. Instead we use the sample statistic,
+<span class="math">\(\hat \mu_j = \bar{\mathbf x_j}\)</span> for the mean and
+<span class="math">\(\hat \Sigma_j = \sum_i (x_i - \bar{\mathbf x_j})^T(x_i - \bar{\mathbf x_j}) \,/\, (n_j - 1)\)</span>
+for the covariance. It is also common to specify the prior probabilites as
+<span class="math">\(\hat \pi_j  = n_j \,/\, N\)</span>, where <span class="math">\(n_j\)</span> is the number of observations in class
+<span class="math">\(j\)</span>.</p>
+<h3>Relaxing Constraints and Generalizing</h3>
+<p>So far we have looked at the <span class="math">\(K =2\)</span> classes case. For <span class="math">\(K &gt; 2\)</span> the probability
+of observation <span class="math">\(\mathbf x\)</span> being distributed under class <span class="math">\(j\)</span> is </p>
+<div class="math">$$\mathbb P(Y = j \mid \mathbf x) = \frac{f_j(x)\pi_j(x)}{\sum_{k=1}^K f_k(\mathbf x)\pi_k(\mathbf x)}$$</div>
+<p>If we assume the populations do not have the same covariance <span class="math">\(\Sigma_j \neq
+\Sigma_k\)</span> we get Quadratic Discriminant Analysis. Gaussian assumption can be
+replaced for non-linear decision boundary and the non-parametric version,
+<em>Naive Bayes</em> also considers <em>independent conditional probabilities</em>.</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",

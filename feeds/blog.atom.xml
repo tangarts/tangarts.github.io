@@ -1,5 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - blog</title><link href="/" rel="alternate"></link><link href="/feeds/blog.atom.xml" rel="self"></link><id>/</id><updated>2021-04-29T00:00:00+01:00</updated><entry><title>Modelling TFL journeys</title><link href="/modelling-tfl-journeys.html" rel="alternate"></link><published>2021-04-26T00:00:00+01:00</published><updated>2021-04-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-26:/modelling-tfl-journeys.html</id><summary type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - blog</title><link href="/" rel="alternate"></link><link href="/feeds/blog.atom.xml" rel="self"></link><id>/</id><updated>2021-05-02T00:00:00+01:00</updated><entry><title>Discriminant Analysis</title><link href="/discriminant-analysis.html" rel="alternate"></link><published>2021-05-02T00:00:00+01:00</published><updated>2021-05-02T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-05-02:/discriminant-analysis.html</id><summary type="html">&lt;h2&gt;Linear Discriminant Classifier&lt;/h2&gt;
+&lt;p&gt;Suppose we have two classes of data &lt;span class="math"&gt;\(P_1\)&lt;/span&gt; and &lt;span class="math"&gt;\(P_2\)&lt;/span&gt; corresponding to genuine
+and counterfeit currency distributed &lt;span class="math"&gt;\(f_j(\mathbf x)\)&lt;/span&gt;, &lt;span class="math"&gt;\(j = \{1, 2\}\)&lt;/span&gt;. Letting
+&lt;span class="math"&gt;\(Y\)&lt;/span&gt; denote classes &lt;span class="math"&gt;\(Y = 1\)&lt;/span&gt; or &lt;span class="math"&gt;\(Y = 2\)&lt;/span&gt;. We also assume the prior probabilities
+of class assignment as &lt;span class="math"&gt;\(\mathbb P(Y = 1) = \pi_1 …&lt;/span&gt;&lt;/p&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</summary><content type="html">&lt;h2&gt;Linear Discriminant Classifier&lt;/h2&gt;
+&lt;p&gt;Suppose we have two classes of data &lt;span class="math"&gt;\(P_1\)&lt;/span&gt; and &lt;span class="math"&gt;\(P_2\)&lt;/span&gt; corresponding to genuine
+and counterfeit currency distributed &lt;span class="math"&gt;\(f_j(\mathbf x)\)&lt;/span&gt;, &lt;span class="math"&gt;\(j = \{1, 2\}\)&lt;/span&gt;. Letting
+&lt;span class="math"&gt;\(Y\)&lt;/span&gt; denote classes &lt;span class="math"&gt;\(Y = 1\)&lt;/span&gt; or &lt;span class="math"&gt;\(Y = 2\)&lt;/span&gt;. We also assume the prior probabilities
+of class assignment as &lt;span class="math"&gt;\(\mathbb P(Y = 1) = \pi_1\)&lt;/span&gt;, &lt;span class="math"&gt;\(\mathbb P(Y = 2) = \pi_2\)&lt;/span&gt;
+and &lt;span class="math"&gt;\(\pi_1 + \pi_2 = 1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Given we have observed &lt;span class="math"&gt;\(\mathbf x\)&lt;/span&gt; what is the probability of it belonging
+to class 1?&lt;/p&gt;
+&lt;div class="math"&gt;$$\mathbb P(Y = 1 \mid X = \mathbf x)
+= \frac{\mathbb P(Y = 1 \cap X = \mathbf x)}{\mathbb P(X = \mathbf x)}
+= \frac{f_1(\mathbf x)\pi_1}{f_1(\mathbf x)\pi_1 + f_2(\mathbf x)\pi_2}$$&lt;/div&gt;
+&lt;p&gt;thus Bayes rule classifies &lt;span class="math"&gt;\(\mathbf x\)&lt;/span&gt; to the class with the highest probability:&lt;/p&gt;
+&lt;div class="math"&gt;$$\varphi(\mathbf x) = \arg \underset{j\in\{1, 2\}}\max \mathbb P(Y = j \mid X = \mathbf x).$$&lt;/div&gt;
+&lt;p&gt;In other words, we assign &lt;span class="math"&gt;\(\mathbf x\)&lt;/span&gt; to class 1 if &lt;span class="math"&gt;\(\mathbb P(Y = 1 \mid
+X = \mathbf x) &amp;gt; \mathbb P(Y = 2 \mid X = \mathbf x)\)&lt;/span&gt; or $f_1(\mathbf x)\pi_1&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;f_2(\mathbf x)\pi_2$.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Assuming the populations follow a normal distribution with different means but
+equal covariance, &lt;span class="math"&gt;\(X \mid Y = j \sim \mathcal N(\mu_, \Sigma)\)&lt;/span&gt; We then assign
+&lt;span class="math"&gt;\(\mathbf x\)&lt;/span&gt; to class 1 if&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{aligned}
+&amp;amp;\frac{f_1(\mathbf x)}{f_2(\mathbf x)} &amp;gt; \frac{\pi_2}{\pi_1} \\
+&amp;amp;\Rightarrow \log \frac{f_1(\mathbf x)}{f_2(\mathbf x)} + \log \frac{\pi_1}{\pi_2} &amp;gt; 0 \\
+&amp;amp;= \log \frac{\pi_1}{\pi_2}  + (\mu_1 - \mu_2)^T\Sigma^{-1}\mathbf x - \frac{1}{2} (\mu_1 - \mu_2)^T\Sigma^{-1}(\mu_1 + \mu_2) &amp;gt; 0.
+\end{aligned}$$&lt;/div&gt;
+&lt;!--
+From the last line we recover the discriminant function
+$\delta_j(x) = \log\pi_j + \mu_j^T\Sigma^{-1}\mathbf x - \frac{1}{2}\mu_j^T\Sigma^{-1}\mu_j$
+--&gt;
+
+&lt;p&gt;In practice the true mean and covariance is not known for population
+distributions. Instead we use the sample statistic,
+&lt;span class="math"&gt;\(\hat \mu_j = \bar{\mathbf x_j}\)&lt;/span&gt; for the mean and
+&lt;span class="math"&gt;\(\hat \Sigma_j = \sum_i (x_i - \bar{\mathbf x_j})^T(x_i - \bar{\mathbf x_j}) \,/\, (n_j - 1)\)&lt;/span&gt;
+for the covariance. It is also common to specify the prior probabilites as
+&lt;span class="math"&gt;\(\hat \pi_j  = n_j \,/\, N\)&lt;/span&gt;, where &lt;span class="math"&gt;\(n_j\)&lt;/span&gt; is the number of observations in class
+&lt;span class="math"&gt;\(j\)&lt;/span&gt;.&lt;/p&gt;
+&lt;h3&gt;Relaxing Constraints and Generalizing&lt;/h3&gt;
+&lt;p&gt;So far we have looked at the &lt;span class="math"&gt;\(K =2\)&lt;/span&gt; classes case. For &lt;span class="math"&gt;\(K &amp;gt; 2\)&lt;/span&gt; the probability
+of observation &lt;span class="math"&gt;\(\mathbf x\)&lt;/span&gt; being distributed under class &lt;span class="math"&gt;\(j\)&lt;/span&gt; is &lt;/p&gt;
+&lt;div class="math"&gt;$$\mathbb P(Y = j \mid \mathbf x) = \frac{f_j(x)\pi_j(x)}{\sum_{k=1}^K f_k(\mathbf x)\pi_k(\mathbf x)}$$&lt;/div&gt;
+&lt;p&gt;If we assume the populations do not have the same covariance &lt;span class="math"&gt;\(\Sigma_j \neq
+\Sigma_k\)&lt;/span&gt; we get Quadratic Discriminant Analysis. Gaussian assumption can be
+replaced for non-linear decision boundary and the non-parametric version,
+&lt;em&gt;Naive Bayes&lt;/em&gt; also considers &lt;em&gt;independent conditional probabilities&lt;/em&gt;.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Modelling TFL journeys</title><link href="/modelling-tfl-journeys.html" rel="alternate"></link><published>2021-04-26T00:00:00+01:00</published><updated>2021-04-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-26:/modelling-tfl-journeys.html</id><summary type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
 &lt;h3&gt;&lt;a href="https://data.london.gov.uk/dataset/public-transport-journeys-type-transport"&gt;Public Transport Journeys by Type of Transport&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The data set comes from the Transport for London website. It describes the number of journeys on the public transport network by TFL reporting period, by type of transport. Data is broken down by bus, underground, DLR, tram, Overground …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
 &lt;h3&gt;&lt;a href="https://data.london.gov.uk/dataset/public-transport-journeys-type-transport"&gt;Public Transport Journeys by Type of Transport&lt;/a&gt;&lt;/h3&gt;
@@ -308,7 +480,7 @@ $$&lt;/div&gt;
 \mathbb P(X \in [a, b] \cap \text{ accepted}) &amp;amp;= \int_a^b \mathbb P(X \text{ accepted} \mid X = x)q(x) dx \\
 &amp;amp;= \int_a^b \frac{\pi(X)}{Mq(X)}q(x) dx \\
 &amp;amp;= \frac{1}{M} \int_a^b \pi(x) dx  \\
-&amp;amp;= \frac{1}{M} 
+&amp;amp;\Rightarrow \mathbb P( X \text{ accepted}) = \frac{1}{M} 
 \end{aligned}
 $$&lt;/div&gt;
 &lt;p&gt;
