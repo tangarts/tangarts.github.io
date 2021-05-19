@@ -59,13 +59,13 @@
 <p>We first create a test set the last 5 journey counts on the London Underground network to compare 
 with our final forecasts.</p>
 <h2>Visualise the time series plot</h2>
-<div class="highlight"><pre><span></span><code><span class="err">## `geom_smooth()` using formula &#39;y ~ x&#39;</span>
+<div class="highlight"><pre><span></span><code>## `geom_smooth()` using formula &#39;y ~ x&#39;
 </code></pre></div>
 
 <p><img alt="center" src="/figures/tfl/unnamed-chunk-3-1.png"></p>
-<div class="highlight"><pre><span></span><code><span class="err">##                  Estimate   Std. Error  t value     Pr(&gt;|t|)</span>
-<span class="err">## (Intercept)  4.983828e+03 4.579668e+02 10.88251 1.315793e-19</span>
-<span class="err">## period.start 6.840706e-03 6.413333e-04 10.66638 4.340164e-19</span>
+<div class="highlight"><pre><span></span><code>##                  Estimate   Std. Error  t value     Pr(&gt;|t|)
+## (Intercept)  4.983828e+03 4.579668e+02 10.88251 1.315793e-19
+## period.start 6.840706e-03 6.413333e-04 10.66638 4.340164e-19
 </code></pre></div>
 
 <p>From the initial plot, we can see the time series is non-stationary. We also confirm this from
@@ -83,100 +83,100 @@ the non-zero linear model regression coefficient.</p>
 <p><img alt="center" src="/figures/tfl/unnamed-chunk-6-1.png"></p>
 <p>After applying differencing every 13 lags we see a clearer representation of the ACF and
 PACF plots. We initially consider <strong>ARIMA(0,1,1)(0,1,1)[13]</strong>.</p>
-<div class="highlight"><pre><span></span><code><span class="err">## </span>
-<span class="err">##  Ljung-Box test</span>
-<span class="err">## </span>
-<span class="err">## data:  Residuals from ARIMA(0,1,1)(0,1,1)[13]</span>
-<span class="err">## Q* = 5.4208, df = 8, p-value = 0.7118</span>
-<span class="err">## </span>
-<span class="err">## Model df: 2.   Total lags used: 10</span>
+<div class="highlight"><pre><span></span><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(0,1,1)(0,1,1)[13]
+## Q* = 5.4208, df = 8, p-value = 0.7118
+## 
+## Model df: 2.   Total lags used: 10
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code><span class="err">## </span>
-<span class="err">## Call:</span>
-<span class="err">## arima(x = lu, order = c(0, 1, 1), seasonal = list(order = c(0, 1, 1), period = 13), </span>
-<span class="err">##     method = (&quot;ML&quot;))</span>
-<span class="err">## </span>
-<span class="err">## Coefficients:</span>
-<span class="err">##           ma1     sma1</span>
-<span class="err">##       -0.8258  -0.9033</span>
-<span class="err">## s.e.   0.0575   0.2643</span>
-<span class="err">## </span>
-<span class="err">## sigma^2 estimated as 16.43:  log likelihood = -314.98,  aic = 635.95</span>
+<div class="highlight"><pre><span></span><code>## 
+## Call:
+## arima(x = lu, order = c(0, 1, 1), seasonal = list(order = c(0, 1, 1), period = 13), 
+##     method = (&quot;ML&quot;))
+## 
+## Coefficients:
+##           ma1     sma1
+##       -0.8258  -0.9033
+## s.e.   0.0575   0.2643
+## 
+## sigma^2 estimated as 16.43:  log likelihood = -314.98,  aic = 635.95
 </code></pre></div>
 
 <p>The model summary seems promising, we now check if the model is adequate using Ljung-Box tests for 
 <span class="math">\(K = 6\)</span>, 12 and 24</p>
-<div class="highlight"><pre><span></span><code><span class="err">## </span>
-<span class="err">##  Box-Ljung test</span>
-<span class="err">## </span>
-<span class="err">## data:  model1$residuals</span>
-<span class="err">## X-squared = 1.9491, df = 6, p-value = 0.9243</span>
+<div class="highlight"><pre><span></span><code>## 
+##  Box-Ljung test
+## 
+## data:  model1$residuals
+## X-squared = 1.9491, df = 6, p-value = 0.9243
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code><span class="err">## </span>
-<span class="err">##  Box-Ljung test</span>
-<span class="err">## </span>
-<span class="err">## data:  model1$residuals</span>
-<span class="err">## X-squared = 14.991, df = 12, p-value = 0.242</span>
+<div class="highlight"><pre><span></span><code>## 
+##  Box-Ljung test
+## 
+## data:  model1$residuals
+## X-squared = 14.991, df = 12, p-value = 0.242
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code><span class="err">## </span>
-<span class="err">##  Box-Ljung test</span>
-<span class="err">## </span>
-<span class="err">## data:  model1$residuals</span>
-<span class="err">## X-squared = 28.14, df = 24, p-value = 0.2542</span>
+<div class="highlight"><pre><span></span><code>## 
+##  Box-Ljung test
+## 
+## data:  model1$residuals
+## X-squared = 28.14, df = 24, p-value = 0.2542
 </code></pre></div>
 
 <p>From the Ljung-Box tests, we can conclude the model is adequate up to lag 24.</p>
 <h2>Overdifferencing</h2>
 <p>We now try to overfit the model. We start by increasing the degree of the seasonal moving average part to 4. 
 Assuming quarterly seasonal variation.</p>
-<div class="highlight"><pre><span></span><code><span class="err">## </span>
-<span class="err">##  Ljung-Box test</span>
-<span class="err">## </span>
-<span class="err">## data:  Residuals from ARIMA(0,1,1)(0,1,4)[13]</span>
-<span class="err">## Q* = 5.4319, df = 5, p-value = 0.3655</span>
-<span class="err">## </span>
-<span class="err">## Model df: 5.   Total lags used: 10</span>
+<div class="highlight"><pre><span></span><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(0,1,1)(0,1,4)[13]
+## Q* = 5.4319, df = 5, p-value = 0.3655
+## 
+## Model df: 5.   Total lags used: 10
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code><span class="err">## </span>
-<span class="err">## Call:</span>
-<span class="err">## arima(x = ts(lu), order = c(0, 1, 1), seasonal = list(order = c(0, 1, 4), period = 13), </span>
-<span class="err">##     method = (&quot;ML&quot;))</span>
-<span class="err">## </span>
-<span class="err">## Coefficients:</span>
-<span class="err">##           ma1     sma1     sma2     sma3    sma4</span>
-<span class="err">##       -0.8087  -0.8449  -0.0553  -0.2369  0.2667</span>
-<span class="err">## s.e.   0.0634   0.3447   0.1598   0.1669  0.1404</span>
-<span class="err">## </span>
-<span class="err">## sigma^2 estimated as 14.78:  log likelihood = -311.11,  aic = 634.21</span>
+<div class="highlight"><pre><span></span><code>## 
+## Call:
+## arima(x = ts(lu), order = c(0, 1, 1), seasonal = list(order = c(0, 1, 4), period = 13), 
+##     method = (&quot;ML&quot;))
+## 
+## Coefficients:
+##           ma1     sma1     sma2     sma3    sma4
+##       -0.8087  -0.8449  -0.0553  -0.2369  0.2667
+## s.e.   0.0634   0.3447   0.1598   0.1669  0.1404
+## 
+## sigma^2 estimated as 14.78:  log likelihood = -311.11,  aic = 634.21
 </code></pre></div>
 
 <p>A decrease in AIC by 1.74, decrease in log likelihood by 3.87 suggesting this model is a
 better fit to our data.</p>
 <p>We now consider <strong>ARIMA(0,1,2)(1,1,4)[13].</strong></p>
-<div class="highlight"><pre><span></span><code><span class="err">## </span>
-<span class="err">##  Ljung-Box test</span>
-<span class="err">## </span>
-<span class="err">## data:  Residuals from ARIMA(0,1,2)(0,1,4)[13]</span>
-<span class="err">## Q* = 5.676, df = 4, p-value = 0.2247</span>
-<span class="err">## </span>
-<span class="err">## Model df: 6.   Total lags used: 10</span>
+<div class="highlight"><pre><span></span><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(0,1,2)(0,1,4)[13]
+## Q* = 5.676, df = 4, p-value = 0.2247
+## 
+## Model df: 6.   Total lags used: 10
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code><span class="err">## </span>
-<span class="err">## Call:</span>
-<span class="err">## arima(x = lu, order = c(0, 1, 2), seasonal = list(order = c(0, 1, 4), period = 13), </span>
-<span class="err">##     method = (&quot;ML&quot;))</span>
-<span class="err">## </span>
-<span class="err">## Coefficients:</span>
-<span class="err">##           ma1      ma2     sma1     sma2     sma3    sma4</span>
-<span class="err">##       -0.7609  -0.0592  -0.8321  -0.0662  -0.2256  0.2670</span>
-<span class="err">## s.e.   0.1020   0.1022   0.2908   0.1589   0.1660  0.1458</span>
-<span class="err">## </span>
-<span class="err">## sigma^2 estimated as 14.85:  log likelihood = -310.94,  aic = 635.87</span>
+<div class="highlight"><pre><span></span><code>## 
+## Call:
+## arima(x = lu, order = c(0, 1, 2), seasonal = list(order = c(0, 1, 4), period = 13), 
+##     method = (&quot;ML&quot;))
+## 
+## Coefficients:
+##           ma1      ma2     sma1     sma2     sma3    sma4
+##       -0.7609  -0.0592  -0.8321  -0.0662  -0.2256  0.2670
+## s.e.   0.1020   0.1022   0.2908   0.1589   0.1660  0.1458
+## 
+## sigma^2 estimated as 14.85:  log likelihood = -310.94,  aic = 635.87
 </code></pre></div>
 
 <p>No improvement in the reduction of the log likelihood or AIC. </p>
