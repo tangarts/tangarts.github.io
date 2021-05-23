@@ -66,7 +66,7 @@ Markov chain for the sequence <span class="math">\((X^{(t)})_{t \geq 0}\)</span>
 <p>There are two popular Metropolis-Hastings variations, the Metropolis algorithm
 that uses a symmetric proposal distribution <span class="math">\(Q(X^{(t)} \mid X^{(t-1)}) = Q(X^{(t-1)} \mid X^{(t)})\)</span>. Common 
 distributions used are normal, <span class="math">\(\mathcal N(\mu, \sigma^2)\)</span> and uniform, <span class="math">\(U[a, b]\)</span>.
-The resulting acceptance ratio is simplfied to</p>
+The resulting acceptance ratio is simplified to</p>
 <div class="math">$$\alpha(X \mid X^{(t-1)}) = \min \left(1, \frac{\pi(X)}{\pi(X^{(t-1)})} \right)$$</div>
 <p><strong>Gibbs Sampling</strong></p>
 <p>Gibbs sampling uses full conditional distributions as the proposal distribution. For <span class="math">\(j = 1,2, \ldots, n\)</span> 

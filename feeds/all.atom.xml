@@ -269,6 +269,176 @@ replaced for non-linear decision boundary and the non-parametric version,
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
+&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Metropolis Hastings</title><link href="/metropolis-hastings.html" rel="alternate"></link><published>2021-04-27T00:00:00+01:00</published><updated>2021-04-27T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-27:/metropolis-hastings.html</id><summary type="html">&lt;p&gt;We continue the series of Monte Carlo methods by covering Markov chain based sampling algorithms.&lt;/p&gt;
+&lt;p&gt;Metropolis Hastings is a sampling algorithm that relies on the guarantees from invariant distributions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Metropolis Hastings&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Initialise &lt;span class="math"&gt;\(X^{(0)}\)&lt;/span&gt; and for &lt;span class="math"&gt;\(t \geq 1\)&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Draw &lt;span class="math"&gt;\(X \sim Q(\cdot \mid X^{(t-1)})\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Compute &lt;div class="math"&gt;$$\alpha(X …&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</summary><content type="html">&lt;p&gt;We continue the series of Monte Carlo methods by covering Markov chain based sampling algorithms.&lt;/p&gt;
+&lt;p&gt;Metropolis Hastings is a sampling algorithm that relies on the guarantees from invariant distributions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Metropolis Hastings&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Initialise &lt;span class="math"&gt;\(X^{(0)}\)&lt;/span&gt; and for &lt;span class="math"&gt;\(t \geq 1\)&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Draw &lt;span class="math"&gt;\(X \sim Q(\cdot \mid X^{(t-1)})\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Compute &lt;div class="math"&gt;$$\alpha(X \mid X^{(t-1)}) = \min \left(1, \frac{\pi(X)Q(X^{(t-1)} \mid X)}{\pi(X^{(t-1)})Q(X \mid X^{(t-1)})} \right)$$&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Set &lt;span class="math"&gt;\(X^{(t)} = X\)&lt;/span&gt; with probability &lt;span class="math"&gt;\(\alpha(X \mid X^{(t-1)})\)&lt;/span&gt; else &lt;span class="math"&gt;\(X^{(t)} = X^{(t-1)}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;The conditional probability of accepting any proposed state given the chain is in &lt;span class="math"&gt;\(i\)&lt;/span&gt; is
+&lt;/p&gt;
+&lt;div class="math"&gt;$$ a(i) = \sum_{j \in \mathbb S} \alpha(j \mid i)Q_{i, j} $$&lt;/div&gt;
+&lt;p&gt;From the algorithm we see the transition kernel &lt;span class="math"&gt;\(K_{i,j} = \alpha(j\mid i)Q_{i,i} + (1 - a(i))\delta_{ij}\)&lt;/span&gt; generates a 
+Markov chain for the sequence &lt;span class="math"&gt;\((X^{(t)})_{t \geq 0}\)&lt;/span&gt; using the distribution &lt;span class="math"&gt;\(\pi\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;An advantage of using MH algorithm is we only need to know a distribution that is proportional to &lt;span class="math"&gt;\(\pi\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;There are two popular Metropolis-Hastings variations, the Metropolis algorithm
+that uses a symmetric proposal distribution &lt;span class="math"&gt;\(Q(X^{(t)} \mid X^{(t-1)}) = Q(X^{(t-1)} \mid X^{(t)})\)&lt;/span&gt;. Common 
+distributions used are normal, &lt;span class="math"&gt;\(\mathcal N(\mu, \sigma^2)\)&lt;/span&gt; and uniform, &lt;span class="math"&gt;\(U[a, b]\)&lt;/span&gt;.
+The resulting acceptance ratio is simplified to&lt;/p&gt;
+&lt;div class="math"&gt;$$\alpha(X \mid X^{(t-1)}) = \min \left(1, \frac{\pi(X)}{\pi(X^{(t-1)})} \right)$$&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Gibbs Sampling&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Gibbs sampling uses full conditional distributions as the proposal distribution. For &lt;span class="math"&gt;\(j = 1,2, \ldots, n\)&lt;/span&gt; 
+the proposal &lt;/p&gt;
+&lt;div class="math"&gt;$$Q(X \mid X^{(t-1)}) = \pi(X_j \mid X_1^{(t-1)}, \ldots, X_1^{(t-1)}, X_1^{(t+1)}, \ldots, X_1^{(n)})$$&lt;/div&gt;
+&lt;p&gt;
+The acceptance probability &lt;span class="math"&gt;\(\alpha(X \mid X^{(t-1)})\)&lt;/span&gt; can be shown to be equal to 1.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Initialise &lt;span class="math"&gt;\(X^{(0)} = (X_1^{(0)}, X_2^{(0)})\)&lt;/span&gt; and for &lt;span class="math"&gt;\(t \geq 1\)&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Draw &lt;span class="math"&gt;\(X_1^{(t)} \sim \pi_{1|2}(\cdot \mid X_2^{(t-1)})\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Draw &lt;span class="math"&gt;\(X_2^{(t)} \sim \pi_{2|1}(\cdot \mid X_1^{(t)})\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;The transition kernel that guarantees an invariant distribution is&lt;/p&gt;
+&lt;div class="math"&gt;$$K(\mathbf x, \mathbf y) = \pi_{1|2}(y_1 \mid x_2)\pi_{2|1}(y_2 \mid y_1)$$&lt;/div&gt;
+&lt;p&gt;
+with &lt;span class="math"&gt;\(\mathbf x = (x_1, x_2) = (X_1^{(t-1)}, X_2^{(t-1)})\)&lt;/span&gt;
+and &lt;span class="math"&gt;\(\mathbf y = (y_1, y_2) = (X_1^{(t)}, X_2^{(t)})\)&lt;/span&gt;&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
 &lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Modelling TFL journeys</title><link href="/modelling-tfl-journeys.html" rel="alternate"></link><published>2021-04-26T00:00:00+01:00</published><updated>2021-04-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-26:/modelling-tfl-journeys.html</id><summary type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
 &lt;h3&gt;&lt;a href="https://data.london.gov.uk/dataset/public-transport-journeys-type-transport"&gt;Public Transport Journeys by Type of Transport&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The data set comes from the Transport for London website. It describes the number of journeys on the public transport network by TFL reporting period, by type of transport. Data is broken down by bus, underground, DLR, tram, Overground …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
