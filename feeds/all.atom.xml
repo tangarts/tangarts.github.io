@@ -1,5 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-05-19T00:00:00+01:00</updated><entry><title>Born to Run</title><link href="/born-to-run.html" rel="alternate"></link><published>2021-05-19T00:00:00+01:00</published><updated>2021-05-19T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-05-19:/born-to-run.html</id><summary type="html">&lt;h2&gt;Notes from Born to Run&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2021-08-05T00:00:00+01:00</updated><entry><title>Lotaria</title><link href="/lotaria.html" rel="alternate"></link><published>2021-06-27T06:51:00+01:00</published><updated>2021-06-27T06:51:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-06-27:/lotaria.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Adapted from If on a winter's night a traveller: Chapter 8&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I asked Lotaria if she has already read some books of mine that I lent her. She
+said no, because here she doesn't have a computer at her disposal. &lt;/p&gt;
+&lt;p&gt;She explained to me that a suitably programmed computer can …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Adapted from If on a winter's night a traveller: Chapter 8&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I asked Lotaria if she has already read some books of mine that I lent her. She
+said no, because here she doesn't have a computer at her disposal. &lt;/p&gt;
+&lt;p&gt;She explained to me that a suitably programmed computer can read a novel in a
+few minutes and record the list of all the words contained in the text, in
+order of frequency. 'That way I can have an already completed reading at hand,"
+Lotaria says, "with an incalculable saving of time. What is the reading of a
+text, in fact, except the recording of certain thematic recurrences, certain
+insistences of forms and meanings? An electronic reading supplies me with a
+list of the frequencies, which I have only to glance at to form an idea of the
+problems the book suggests to my critical study. Naturally, at the highest
+frequencies the list records countless articles, pronouns, particles, but I
+don't pay them any attention. I head straight for the words richest in meaning;
+they can give me a fairly precise notion of the book." &lt;/p&gt;
+&lt;p&gt;"In a novel of fifty to a hundred thousand words," she said to me, "I advise
+you to observe immediately the words that are repeated about twenty times. Look
+here. Words that appear nineteen times: &lt;/p&gt;
+&lt;p&gt;princesses, frog, miser, juniper, doctor, salad, gardener,
+watch, tail, singing, drank, journey, stretched, pulled,
+scarcely, legs, stones, bad, rolled, middle, crept, laughed,
+vain, glad, cock, broke, grieved, show, horses, tried,
+having, cart, waiting, words, cottage, kept, dress, alive,
+peas ... &lt;/p&gt;
+&lt;p&gt;"Words that appear eighteen times: &lt;/p&gt;
+&lt;p&gt;dancing, catherine, ashputtel, apples, clock, noise, thither,
+bottom, making, mouth, please, meantime, ought, farther, deep,
+girls, times, spot, strange, being, knife, lifted, carter,
+someone, showed, running, marry, falada, waited, learnt&lt;/p&gt;
+&lt;p&gt;"Don't you already have a clear idea what it's about?" Lotaria says.&lt;/p&gt;
+&lt;p&gt;"There's no question: it's a collection of fairy tales, princesses, cottages, 
+adventurous prose with a elements of darkness. The narration is entirely on the
+surface, I would say; but to make sure, it's always a good idea to take a look
+at the list of words used only once, though no less important for that. Take
+this sequence, for example: &lt;/p&gt;
+&lt;p&gt;readily, patience, straightening, leap, sixteenth, irons,
+drowned, secret, dozing, comfortably, crawling, tittered,
+adjourn, impertinent, worry, rises, handwriting, raw, pulling,
+prove&lt;/p&gt;
+&lt;p&gt;"Hmm, that seems consistent with what I suggested."&lt;/p&gt;
+&lt;p&gt;Lotaria shows me another series of lists. "This is an entirely different novel.
+It's immediately obvious. Look at the words that recur about fifty times: &lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;frequency&lt;/th&gt;
+&lt;th&gt;word&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;51&lt;/td&gt;
+&lt;td&gt;above, after&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;50&lt;/td&gt;
+&lt;td&gt;order, army&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;49&lt;/td&gt;
+&lt;td&gt;keep, lucca, then, very, hold&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;48&lt;/td&gt;
+&lt;td&gt;florence, most&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;47&lt;/td&gt;
+&lt;td&gt;alexander, although, found&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;46&lt;/td&gt;
+&lt;td&gt;pope, yet&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;your&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;44&lt;/td&gt;
+&lt;td&gt;concerning, war, france&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;43&lt;/td&gt;
+&lt;td&gt;before, country&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;42&lt;/td&gt;
+&lt;td&gt;power, whilst, friends, does&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;41&lt;/td&gt;
+&lt;td&gt;where, sent, long&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;40&lt;/td&gt;
+&lt;td&gt;affairs, seen, another, considered, enemy&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;39&lt;/td&gt;
+&lt;td&gt;wish, afterwards&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;"What do you think of that? An book of betrayal, power struggle, indecisiveness
+and uncertainty ... As a confirmation, we'll take a sample of words used
+a single time: &lt;/p&gt;
+&lt;p&gt;entreated, vainly, decree, reading, confirming, finest,
+imaginary, consisted, standstill, perceiving, seventh, beatrice,
+pressure, definiendis, colleoni, tales, essex, antico,
+valdichiana, invasion&lt;/p&gt;
+&lt;p&gt;"So we already have an idea of the atmosphere, the moods, the social background...
+. We can go on to a third book: &lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;frequency&lt;/th&gt;
+&lt;th&gt;word&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;27&lt;/td&gt;
+&lt;td&gt;master, added, jacques, word, five, empty, hear, stolen&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;26&lt;/td&gt;
+&lt;td&gt;please, ago, doors, being, wall, sharply, top, wife, bernard, arrest&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;25&lt;/td&gt;
+&lt;td&gt;pictures, work, does, jeanne, middle, already, paper, big, surprise, waiting, clock, behind, held, thief, seen, cigarette, lighted, keys&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;24&lt;/td&gt;
+&lt;td&gt;place, getting, ever, every, far, bag&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;23&lt;/td&gt;
+&lt;td&gt;end, chapter, full, lips, four, hour, stared, papa, noise, towards, lost, ten, though, bureau, van, believe&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;quick, marie, till, life, kept, next, our, stepped, brought, key, ladder&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;21&lt;/td&gt;
+&lt;td&gt;cars, many, gentle, cut, hardly, turning, relzieres, taking, doesn, sudden, exactly, wasn, hundred, beside, yourself, shut, poor, certainly, picked, sprang&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;clear, fell, called, having, people, ask, world, kind, changed, closed, station, photograph, else, least, laughed, leave, detectives&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;19&lt;/td&gt;
+&lt;td&gt;theft, windows, slipped, wedding, knew, rang, bell, bring, whatever, doing, frowning, suddenly, keep, laugh, train, saying, horse, france, fact, handed, given, interesting, piece, hope, eight, help, prison&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;18&lt;/td&gt;
+&lt;td&gt;true, honour, fine, sent, shoulders, absolutely, arm, frightened, charge, handkerchief&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;"I would say we're dealing with a lighter story of deception but this time
+a thief. Rhythmic twists and turns, gentlemen, a hidden romance. One last time,
+let's look at the list of words with a frequency of one. Look, for example:&lt;/p&gt;
+&lt;p&gt;covert, discussing, disturb, courtesy, duchesse, tragic, paltry,
+excluded, aquiline, unheard, reward, dealer, improve, differed,
+reassure, mason, poker, instantly, trap, plans&lt;/p&gt;
+&lt;p&gt;"You see? A guilt complex, pure and simple! A valuable indication: the critical
+inquiry can start with that, establish some working hypotheses.... What did I
+tell you? Isn't this a quick, effective system?" &lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Born to Run</title><link href="/born-to-run.html" rel="alternate"></link><published>2021-05-19T00:00:00+01:00</published><updated>2021-05-19T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-05-19:/born-to-run.html</id><summary type="html">&lt;h2&gt;Notes from Born to Run&lt;/h2&gt;
 &lt;p&gt;"The best runner leaves no tracks"-- wasn't some gossamer koan, but real,
 concrete, how-to, training advice.&lt;/p&gt;
 &lt;p&gt;There's something so universal about that sensation, the way running unites our
@@ -104,68 +277,7 @@ sight.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title
 &lt;p&gt;Suppose we have two classes of data &lt;span class="math"&gt;\(P_1\)&lt;/span&gt; and &lt;span class="math"&gt;\(P_2\)&lt;/span&gt; corresponding to genuine
 and counterfeit currency distributed &lt;span class="math"&gt;\(f_j(\mathbf x)\)&lt;/span&gt;, &lt;span class="math"&gt;\(j = \{1, 2\}\)&lt;/span&gt;. Letting
 &lt;span class="math"&gt;\(Y\)&lt;/span&gt; denote classes &lt;span class="math"&gt;\(Y = 1\)&lt;/span&gt; or &lt;span class="math"&gt;\(Y = 2\)&lt;/span&gt;. We also assume the prior probabilities
-of class assignment as &lt;span class="math"&gt;\(\mathbb P(Y = 1) = \pi_1 …&lt;/span&gt;&lt;/p&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-&lt;/script&gt;</summary><content type="html">&lt;h2&gt;Linear Discriminant Classifier&lt;/h2&gt;
+of class assignment as &lt;span class="math"&gt;\(\mathbb P(Y = 1) = \pi_1 …&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Linear Discriminant Classifier&lt;/h2&gt;
 &lt;p&gt;Suppose we have two classes of data &lt;span class="math"&gt;\(P_1\)&lt;/span&gt; and &lt;span class="math"&gt;\(P_2\)&lt;/span&gt; corresponding to genuine
 and counterfeit currency distributed &lt;span class="math"&gt;\(f_j(\mathbf x)\)&lt;/span&gt;, &lt;span class="math"&gt;\(j = \{1, 2\}\)&lt;/span&gt;. Letting
 &lt;span class="math"&gt;\(Y\)&lt;/span&gt; denote classes &lt;span class="math"&gt;\(Y = 1\)&lt;/span&gt; or &lt;span class="math"&gt;\(Y = 2\)&lt;/span&gt;. We also assume the prior probabilities
@@ -276,68 +388,7 @@ replaced for non-linear decision boundary and the non-parametric version,
 &lt;p&gt;Initialise &lt;span class="math"&gt;\(X^{(0)}\)&lt;/span&gt; and for &lt;span class="math"&gt;\(t \geq 1\)&lt;/span&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Draw &lt;span class="math"&gt;\(X \sim Q(\cdot \mid X^{(t-1)})\)&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;Compute &lt;div class="math"&gt;$$\alpha(X …&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-&lt;/script&gt;</summary><content type="html">&lt;p&gt;We continue the series of Monte Carlo methods by covering Markov chain based sampling algorithms.&lt;/p&gt;
+&lt;li&gt;Compute &lt;div class="math"&gt;$$\alpha(X …&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;We continue the series of Monte Carlo methods by covering Markov chain based sampling algorithms.&lt;/p&gt;
 &lt;p&gt;Metropolis Hastings is a sampling algorithm that relies on the guarantees from invariant distributions.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Metropolis Hastings&lt;/strong&gt;&lt;/p&gt;
 &lt;hr&gt;
@@ -656,68 +707,7 @@ All of which lie in the 80% forecast interval.&lt;/p&gt;
 &lt;p&gt;In this post we will cover Rejection and Importance sampling.&lt;/p&gt;
 &lt;p&gt;For a density function &lt;span class="math"&gt;\(\pi(x)\)&lt;/span&gt;, how can we sample from it?&lt;/p&gt;
 &lt;h2&gt;Rejection Sampling&lt;/h2&gt;
-&lt;p&gt;The idea is to sample from a distribution &lt;span class="math"&gt;\(q\)&lt;/span&gt; that contains &lt;span class="math"&gt;\(\pi …&lt;/span&gt;&lt;/p&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-&lt;/script&gt;</summary><content type="html">&lt;p&gt;We left the introduction to monte carlo simulations with its limitation of slow convergence.&lt;/p&gt;
+&lt;p&gt;The idea is to sample from a distribution &lt;span class="math"&gt;\(q\)&lt;/span&gt; that contains &lt;span class="math"&gt;\(\pi …&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;We left the introduction to monte carlo simulations with its limitation of slow convergence.&lt;/p&gt;
 &lt;p&gt;In this post we will cover Rejection and Importance sampling.&lt;/p&gt;
 &lt;p&gt;For a density function &lt;span class="math"&gt;\(\pi(x)\)&lt;/span&gt;, how can we sample from it?&lt;/p&gt;
 &lt;h2&gt;Rejection Sampling&lt;/h2&gt;
@@ -862,68 +852,7 @@ To do this we rely on the weak law of large numbers:&lt;/p&gt;
 &lt;dt&gt;&lt;strong&gt;The weak law of large numbers&lt;/strong&gt;&lt;/dt&gt;
 &lt;dd&gt;
 &lt;p&gt;A sequence of random variables &lt;span class="math"&gt;\(X_1, X_2, \cdots, X_n\)&lt;/span&gt; &lt;em&gt;converges in probability&lt;/em&gt; to a random
-variable &lt;span class="math"&gt;\(X\)&lt;/span&gt; if for …&lt;/p&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-&lt;/script&gt;</summary><content type="html">&lt;p&gt;Monte Carlo methods are a class of sampling algorithms to obtain numerical approximations.
+variable &lt;span class="math"&gt;\(X\)&lt;/span&gt; if for …&lt;/p&gt;&lt;/dd&gt;&lt;/dl&gt;</summary><content type="html">&lt;p&gt;Monte Carlo methods are a class of sampling algorithms to obtain numerical approximations.
 To do this we rely on the weak law of large numbers:&lt;/p&gt;
 &lt;dl&gt;
 &lt;dt&gt;&lt;strong&gt;The weak law of large numbers&lt;/strong&gt;&lt;/dt&gt;
@@ -1909,68 +1838,7 @@ parity to the simple one of learning just 2-bit parity.&lt;/p&gt;
 decomposition is &lt;span class="math"&gt;\(U\Sigma V^T\)&lt;/span&gt; where &lt;span class="math"&gt;\(U\)&lt;/span&gt; is a &lt;span class="math"&gt;\(n \times m\)&lt;/span&gt; matrix, &lt;span class="math"&gt;\(\Sigma\)&lt;/span&gt; and
 &lt;span class="math"&gt;\(V^T\)&lt;/span&gt; are &lt;span class="math"&gt;\(m \times m\)&lt;/span&gt; matrices.&lt;/p&gt;
 &lt;h4&gt;Properties of the matrices, &lt;span class="math"&gt;\(U\)&lt;/span&gt;, &lt;span class="math"&gt;\(V\)&lt;/span&gt; and &lt;span class="math"&gt;\(\Sigma\)&lt;/span&gt;&lt;/h4&gt;
-&lt;p&gt;Both &lt;span class="math"&gt;\(U\)&lt;/span&gt; and &lt;span class="math"&gt;\(V\)&lt;/span&gt; are orthogonal …&lt;/p&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-&lt;/script&gt;</summary><content type="html">&lt;p&gt;Take an &lt;span class="math"&gt;\(n \times m\)&lt;/span&gt;  matrix &lt;span class="math"&gt;\(X\)&lt;/span&gt;. The factorized form using singular value
+&lt;p&gt;Both &lt;span class="math"&gt;\(U\)&lt;/span&gt; and &lt;span class="math"&gt;\(V\)&lt;/span&gt; are orthogonal …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Take an &lt;span class="math"&gt;\(n \times m\)&lt;/span&gt;  matrix &lt;span class="math"&gt;\(X\)&lt;/span&gt;. The factorized form using singular value
 decomposition is &lt;span class="math"&gt;\(U\Sigma V^T\)&lt;/span&gt; where &lt;span class="math"&gt;\(U\)&lt;/span&gt; is a &lt;span class="math"&gt;\(n \times m\)&lt;/span&gt; matrix, &lt;span class="math"&gt;\(\Sigma\)&lt;/span&gt; and
 &lt;span class="math"&gt;\(V^T\)&lt;/span&gt; are &lt;span class="math"&gt;\(m \times m\)&lt;/span&gt; matrices.&lt;/p&gt;
 &lt;h4&gt;Properties of the matrices, &lt;span class="math"&gt;\(U\)&lt;/span&gt;, &lt;span class="math"&gt;\(V\)&lt;/span&gt; and &lt;span class="math"&gt;\(\Sigma\)&lt;/span&gt;&lt;/h4&gt;
@@ -2361,7 +2229,7 @@ economic science.&lt;/p&gt;
 &lt;dd&gt;the amount of goods and services that can be purchased with a unit of currency&lt;/dd&gt;
 &lt;dt&gt;Impetus&lt;/dt&gt;
 &lt;dd&gt;the force with which any body is driven or impelled; Momentum&lt;/dd&gt;
-&lt;/dl&gt;</content><category term="blog"></category></entry><entry><title>bookshelf</title><link href="/bookshelf.html" rel="alternate"></link><published>2020-06-19T00:00:00+01:00</published><updated>2021-05-19T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-19:/bookshelf.html</id><summary type="html">&lt;p&gt;An ongoing list of books I have read: in bold are the notable mentions.&lt;br&gt;
+&lt;/dl&gt;</content><category term="blog"></category></entry><entry><title>bookshelf</title><link href="/bookshelf.html" rel="alternate"></link><published>2020-06-19T00:00:00+01:00</published><updated>2021-08-05T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-19:/bookshelf.html</id><summary type="html">&lt;p&gt;An ongoing list of books I have read: in bold are the notable mentions.&lt;br&gt;
 This is to help remember the books, and to track progress.&lt;/p&gt;
 &lt;p&gt;The key idea is not to forget the ideas taken from what you have read,
 document, comment on the good, bad and interesting. Also it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;An ongoing list of books I have read: in bold are the notable mentions.&lt;br&gt;
@@ -2463,12 +2331,26 @@ conversation starter. &lt;/p&gt;
 &lt;li&gt;Keep the Aspidistra Flying, Orwell&lt;/li&gt;
 &lt;li&gt;The Paris Review Interviews vol. 2&lt;/li&gt;
 &lt;li&gt;Narcissus and Goldmund, Hesse&lt;/li&gt;
-&lt;li&gt;Ficciones, Borges&lt;/li&gt;
+&lt;li&gt;Collected Fictions, Borges&lt;/li&gt;
 &lt;li&gt;Art as Experience, Dewey&lt;/li&gt;
 &lt;li&gt;Born to Run, Christopher McDougall&lt;/li&gt;
+&lt;li&gt;If on a winter's night a traveler, Italo Calvino&lt;/li&gt;
+&lt;li&gt;Invisible Cities, Calvino&lt;/li&gt;
+&lt;li&gt;James Joyce Dubliners&lt;/li&gt;
+&lt;li&gt;Cloud Atlas, David Mitchell&lt;/li&gt;
+&lt;li&gt;Letters to a Young Poet, Rainer Maria Rilke&lt;/li&gt;
+&lt;li&gt;Apprenticeship Patterns, Dave Hoover&lt;/li&gt;
+&lt;li&gt;Principles (PDF), Ray Dalio&lt;/li&gt;
+&lt;li&gt;The War of Art, Stephen Pressfield&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Queued&lt;/h3&gt;
-&lt;p&gt;Designing Data Intensive Applications&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>sunset</title><link href="/sunset.html" rel="alternate"></link><published>2020-06-15T15:36:29+01:00</published><updated>2020-06-15T15:36:29+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-15:/sunset.html</id><summary type="html">&lt;p&gt;I've been thinking about sunsets recently and the lack of them &lt;a href=""&gt;at home.&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Designing Data Intensive Applications&lt;/li&gt;
+&lt;li&gt;Impro&lt;/li&gt;
+&lt;li&gt;The Charisma Myth&lt;/li&gt;
+&lt;li&gt;The Beak of the Finch, Story of Evolution in Our Time&lt;/li&gt;
+&lt;li&gt;Microserfs, Douglas Coupland&lt;/li&gt;
+&lt;/ul&gt;</content><category term="blog"></category></entry><entry><title>sunset</title><link href="/sunset.html" rel="alternate"></link><published>2020-06-15T15:36:29+01:00</published><updated>2020-06-15T15:36:29+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-15:/sunset.html</id><summary type="html">&lt;p&gt;I've been thinking about sunsets recently and the lack of them &lt;a href=""&gt;at home.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Why in the East, was I blessed to witness spectacular sunsets daily and now left with only memories of orange-hazed skies?&lt;/p&gt;
 &lt;h3&gt;Scattering&lt;/h3&gt;
 &lt;p&gt;When white light passes through our atmosphere, gases in our atmosphere absorb and scatter the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been thinking about sunsets recently and the lack of them &lt;a href=""&gt;at home.&lt;/a&gt;&lt;/p&gt;
