@@ -29,3 +29,20 @@ font-weight: bold;
 font-stretch: normal;
 src: url('../fonts/charter_bold_italic.woff2') format('woff2');
 }
+
+@font-face {
+font-family: 'Fira Mono';
+font-style: normal;
+font-weight: 400;
+font-stretch: normal;
+src: url('../fonts/FiraMono-Regular.woff2') format('woff2');
+}
+
+@font-face {
+font-family: 'Fira Mono';
+font-style: normal;
+font-weight: 600;
+font-stretch: normal;
+src: url('../fonts/FiraMono-Bold.woff2') format('woff2');
+}
+
