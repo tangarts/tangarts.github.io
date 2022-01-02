@@ -534,7 +534,7 @@ sight.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title
 &lt;p&gt;Suppose we have two classes of data &lt;span class="math"&gt;\(P_1\)&lt;/span&gt; and &lt;span class="math"&gt;\(P_2\)&lt;/span&gt; corresponding to genuine
 and counterfeit currency distributed &lt;span class="math"&gt;\(f_j(\mathbf x)\)&lt;/span&gt;, &lt;span class="math"&gt;\(j = \{1, 2\}\)&lt;/span&gt;. Letting
 &lt;span class="math"&gt;\(Y\)&lt;/span&gt; denote classes &lt;span class="math"&gt;\(Y = 1\)&lt;/span&gt; or &lt;span class="math"&gt;\(Y = 2\)&lt;/span&gt;. We also assume the prior probabilities
-of class assignment as &lt;span class="math"&gt;\(\mathbb P(Y = 1) = \pi_1 …&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Linear Discriminant Classifier&lt;/h2&gt;
+of class assignment as &lt;span class="math"&gt;\(\mathbb P …&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Linear Discriminant Classifier&lt;/h2&gt;
 &lt;p&gt;Suppose we have two classes of data &lt;span class="math"&gt;\(P_1\)&lt;/span&gt; and &lt;span class="math"&gt;\(P_2\)&lt;/span&gt; corresponding to genuine
 and counterfeit currency distributed &lt;span class="math"&gt;\(f_j(\mathbf x)\)&lt;/span&gt;, &lt;span class="math"&gt;\(j = \{1, 2\}\)&lt;/span&gt;. Letting
 &lt;span class="math"&gt;\(Y\)&lt;/span&gt; denote classes &lt;span class="math"&gt;\(Y = 1\)&lt;/span&gt; or &lt;span class="math"&gt;\(Y = 2\)&lt;/span&gt;. We also assume the prior probabilities
@@ -1109,7 +1109,7 @@ To do this we rely on the weak law of large numbers:&lt;/p&gt;
 &lt;dt&gt;&lt;strong&gt;The weak law of large numbers&lt;/strong&gt;&lt;/dt&gt;
 &lt;dd&gt;
 &lt;p&gt;A sequence of random variables &lt;span class="math"&gt;\(X_1, X_2, \cdots, X_n\)&lt;/span&gt; &lt;em&gt;converges in probability&lt;/em&gt; to a random
-variable &lt;span class="math"&gt;\(X\)&lt;/span&gt; if for …&lt;/p&gt;&lt;/dd&gt;&lt;/dl&gt;</summary><content type="html">&lt;p&gt;Monte Carlo methods are a class of sampling algorithms to obtain numerical approximations.
+variable …&lt;/p&gt;&lt;/dd&gt;&lt;/dl&gt;</summary><content type="html">&lt;p&gt;Monte Carlo methods are a class of sampling algorithms to obtain numerical approximations.
 To do this we rely on the weak law of large numbers:&lt;/p&gt;
 &lt;dl&gt;
 &lt;dt&gt;&lt;strong&gt;The weak law of large numbers&lt;/strong&gt;&lt;/dt&gt;
