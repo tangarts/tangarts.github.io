@@ -766,7 +766,7 @@ with our final forecasts.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## `geom_smooth()` using formula &amp;#39;y ~ x&amp;#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img alt="center" src="/figures/tfl/unnamed-chunk-3-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="center" src="/images/tfl/unnamed-chunk-3-1.png"&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;##                  Estimate   Std. Error  t value     Pr(&amp;gt;|t|)
 ## (Intercept)  4.983828e+03 4.579668e+02 10.88251 1.315793e-19
 ## period.start 6.840706e-03 6.413333e-04 10.66638 4.340164e-19
@@ -777,14 +777,14 @@ the non-zero linear model regression coefficient.&lt;/p&gt;
 &lt;p&gt;We also notice seasonal patterns which we will discuss later.&lt;/p&gt;
 &lt;h2&gt;Stationarity&lt;/h2&gt;
 &lt;p&gt;After first order differencing we plot the time series, its autocorrelation and partial auto correlation plots. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="center" src="/figures/tfl/unnamed-chunk-5-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="center" src="/images/tfl/unnamed-chunk-5-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;From the autocorrelation-lag plot we see high correlation at periodic intervals implying seasonality.&lt;/p&gt;
 &lt;h2&gt;Seasonality&lt;/h2&gt;
 &lt;p&gt;From the data we see months with two entries hence correlation every 13 lags. The data description also confirms this:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Period lengths are different in periods 1 and 13, and the data is not adjusted to account for that.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img alt="center" src="/figures/tfl/unnamed-chunk-6-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="center" src="/images/tfl/unnamed-chunk-6-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;After applying differencing every 13 lags we see a clearer representation of the ACF and
 PACF plots. We initially consider &lt;strong&gt;ARIMA(0,1,1)(0,1,1)[13]&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
@@ -887,7 +887,7 @@ better fit to our data.&lt;/p&gt;
 &lt;p&gt;The AIC is slightly higher compared to &lt;strong&gt;ARIMA(0,1,1)(0,1,4)[13]&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;We conclude that &lt;strong&gt;ARIMA(0,1,1)(0,1,4)[13]&lt;/strong&gt; is the best fitted model to the data.&lt;/p&gt;
 &lt;h2&gt;Forecasting&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="center" src="/figures/tfl/unnamed-chunk-11-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="center" src="/images/tfl/unnamed-chunk-11-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;Comparing with the test data we see all points lie close to the point forecast.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;From the analysis, we can see the yearly growth of the London Underground

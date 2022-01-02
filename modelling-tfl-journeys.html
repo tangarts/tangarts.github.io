@@ -62,7 +62,7 @@ with our final forecasts.</p>
 <div class="highlight"><pre><span></span><code>## `geom_smooth()` using formula &#39;y ~ x&#39;
 </code></pre></div>
 
-<p><img alt="center" src="/figures/tfl/unnamed-chunk-3-1.png"></p>
+<p><img alt="center" src="/images/tfl/unnamed-chunk-3-1.png"></p>
 <div class="highlight"><pre><span></span><code>##                  Estimate   Std. Error  t value     Pr(&gt;|t|)
 ## (Intercept)  4.983828e+03 4.579668e+02 10.88251 1.315793e-19
 ## period.start 6.840706e-03 6.413333e-04 10.66638 4.340164e-19
@@ -73,14 +73,14 @@ the non-zero linear model regression coefficient.</p>
 <p>We also notice seasonal patterns which we will discuss later.</p>
 <h2>Stationarity</h2>
 <p>After first order differencing we plot the time series, its autocorrelation and partial auto correlation plots. </p>
-<p><img alt="center" src="/figures/tfl/unnamed-chunk-5-1.png"></p>
+<p><img alt="center" src="/images/tfl/unnamed-chunk-5-1.png"></p>
 <p>From the autocorrelation-lag plot we see high correlation at periodic intervals implying seasonality.</p>
 <h2>Seasonality</h2>
 <p>From the data we see months with two entries hence correlation every 13 lags. The data description also confirms this:</p>
 <blockquote>
 <p>Period lengths are different in periods 1 and 13, and the data is not adjusted to account for that.</p>
 </blockquote>
-<p><img alt="center" src="/figures/tfl/unnamed-chunk-6-1.png"></p>
+<p><img alt="center" src="/images/tfl/unnamed-chunk-6-1.png"></p>
 <p>After applying differencing every 13 lags we see a clearer representation of the ACF and
 PACF plots. We initially consider <strong>ARIMA(0,1,1)(0,1,1)[13]</strong>.</p>
 <div class="highlight"><pre><span></span><code>## 
@@ -183,7 +183,7 @@ better fit to our data.</p>
 <p>The AIC is slightly higher compared to <strong>ARIMA(0,1,1)(0,1,4)[13]</strong>.</p>
 <p>We conclude that <strong>ARIMA(0,1,1)(0,1,4)[13]</strong> is the best fitted model to the data.</p>
 <h2>Forecasting</h2>
-<p><img alt="center" src="/figures/tfl/unnamed-chunk-11-1.png"></p>
+<p><img alt="center" src="/images/tfl/unnamed-chunk-11-1.png"></p>
 <p>Comparing with the test data we see all points lie close to the point forecast.</p>
 <h2>Conclusion</h2>
 <p>From the analysis, we can see the yearly growth of the London Underground
