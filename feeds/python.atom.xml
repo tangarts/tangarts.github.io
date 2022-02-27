@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - Python</title><link href="/" rel="alternate"></link><link href="/feeds/python.atom.xml" rel="self"></link><id>/</id><updated>2021-12-31T00:00:00+00:00</updated><entry><title>Python packaging</title><link href="/python-packaging.html" rel="alternate"></link><published>2021-12-09T00:00:00+00:00</published><updated>2021-12-31T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-09:/python-packaging.html</id><summary type="html">&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
+&lt;p&gt;I've collected useful utility functions to help me with this years advent of code. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2020 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
+&lt;p&gt;I've collected useful utility functions to help me with this years advent of code. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2021&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;day1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+        &lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+            &lt;span class="n"&gt;core&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+            &lt;span class="o"&gt;...&lt;/span&gt;
+    &lt;span class="n"&gt;LICENSE&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+    &lt;span class="n"&gt;README&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Before starting each puzzle I load up a new python file with the first line always starting with &lt;code&gt;from toolbox.core import ...&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Everything was great until I wanted to re-use my tool box for last years problems. I didn't want to duplicate my toolbox for every advent of code year I participate in. A logical place, I thought, would be to place the toolbox in the root of the project like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2021&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;day1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+    &lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;core&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+    &lt;span class="n"&gt;LICENSE&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+    &lt;span class="n"&gt;README&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This way I wouldn't have to duplicate my code and could expose the toolbox for each year to use. Not quite.&lt;/p&gt;
+&lt;p&gt;I first tried a relative import &lt;code&gt;from ..toolbox.core import parse_input&lt;/code&gt;. But that didn't work. &lt;/p&gt;
+&lt;p&gt;To answer the reason why, we need to understand what happens when you run a python script.&lt;/p&gt;
+&lt;h2&gt;What happens when you run a python script?&lt;/h2&gt;
+&lt;p&gt;The simplest solution was to create a local package using the &lt;code&gt;setuptools&lt;/code&gt; package that comes with a fresh installation of python 3.9.&lt;/p&gt;
+&lt;p&gt;If you want a minimal solution, look no further. Here it is:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;setup.py&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
+
+&lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;local_toolbox&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;toolbox&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,],&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And to install the package locally on the command line.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ pip install -e .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Enjoy. :).&lt;/p&gt;
+&lt;p&gt;For those who want to know a little more, let's continue. &lt;/p&gt;
+&lt;h2&gt;setup.cfg and setup.py&lt;/h2&gt;
+&lt;p&gt;There are two ways to specify setup config, dynamically as parameters of the &lt;code&gt;setuptools.setup()&lt;/code&gt; function and in a &lt;code&gt;setup.cfg&lt;/code&gt; config file.&lt;/p&gt;
+&lt;p&gt;The equivalent setup to the first example would split across the executable and config file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;setup.py&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
+
+&lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;setup.cfg&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[options]&lt;/span&gt;
+&lt;span class="na"&gt;packages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;toolbox&lt;/span&gt;
+
+&lt;span class="k"&gt;[metadata]&lt;/span&gt;
+&lt;span class="na"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;local_toolbox&lt;/span&gt;
+&lt;span class="na"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;0.1.0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see, the &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;version&lt;/code&gt; and &lt;code&gt;packages&lt;/code&gt; attributes are now configured as options and metadata. There is no definitive way in using &lt;code&gt;setuptools&lt;/code&gt;. I personally prefer to have all config in a config file. With additional optional fields such as a &lt;em&gt;long_description&lt;/em&gt;, it is easy to edit a config file than source code.&lt;/p&gt;
+&lt;h2&gt;Sharing is Caring.&lt;/h2&gt;
+&lt;p&gt;Finally, if you're excited to share your python project as a package, it is easy to register it using the Python Package Index (PyPI).&lt;/p&gt;
+&lt;p&gt;First, the name field must be unique if you wish to publish your package on the Python Package Index (PyPI). The packages field describes where you’ve put the Python source code within your project. &lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python Idioms</title><link href="/python-idioms.html" rel="alternate"></link><published>2020-03-22T00:00:00+00:00</published><updated>2020-03-22T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-03-22:/python-idioms.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;A collection of python idioms and design patterns&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;What idioms should I use to make my code easier to read?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Build strings as a list and use &lt;code&gt;''.join&lt;/code&gt; at the end.p&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;Join is a string method called on the separator, not the list. Calling it from
+the empty string …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;A collection of python idioms and design patterns&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;What idioms should I use to make my code easier to read?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Build strings as a list and use &lt;code&gt;''.join&lt;/code&gt; at the end.p&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;Join is a string method called on the separator, not the list. Calling it from
+the empty string concatenates the pieces with no separator, which is a Python
+quirk and rather surprising at first. This is important: &lt;strong&gt;string building with
++ is quadratic time instead of linear!&lt;/strong&gt; If you learn one idiom, learn this
+  one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Wrong:&lt;/strong&gt; &lt;code&gt;for s in strings: result += s&lt;/code&gt;&lt;br&gt;
+&lt;strong&gt;Right:&lt;/strong&gt; &lt;code&gt;result = ''.join(strings)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Use &lt;code&gt;in&lt;/code&gt; wherever possible.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Use &lt;code&gt;if not x&lt;/code&gt; instead of &lt;code&gt;if x == 0&lt;/code&gt;.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;To reverse-sort a list, use: &lt;code&gt;list.sort()&lt;/code&gt; or &lt;code&gt;list.reverse()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Catch errors rather than avoiding them to avoid cluttering your code with
+special cases.  This idiom is called EAFP ('easier to ask forgiveness than
+permission'), as opposed to LBYL ('look before you leap').
+This often makes the code more readable. For example:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Worse:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;#check whether int conversion will raise an error&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isdigit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;    &lt;span class="c1"&gt;#too many digits for int conversion&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Better:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ne"&gt;OverflowError&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;#int conversion failed&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;What techniques should I use to make my code run faster?&lt;/h3&gt;
+&lt;p&gt;Profile before optimizing for speed: optimize for readability first&lt;/p&gt;
+&lt;p&gt;Build strings as a list and use &lt;code&gt;''.join()&lt;/code&gt; at the end. &lt;strong&gt;(Super important)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Use &lt;code&gt;map&lt;/code&gt; and/or &lt;code&gt;filter&lt;/code&gt; to apply functions to lists.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;map&lt;/code&gt; applies a function to each item in a list (technically, sequence) and
+returns a list of the results.&lt;br&gt;
+&lt;code&gt;filter&lt;/code&gt; applies a function to each item in a sequence, and returns a list
+containing only those items for which the function evaluated True (using the
+&lt;strong&gt;nonzero&lt;/strong&gt; built-in method).&lt;br&gt;
+These functions can make code much shorter. 
+They also make it much faster, since the loop takes place entirely in the C API
+and never has to bind loop variables to Python objects.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Worse:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;strings&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;strings&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Better:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;strings&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;&lt;strong&gt;Use function factories to create utility functions.&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;multiply_by_field&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;fieldname&lt;/span&gt;, &lt;span class="nv"&gt;multiplier&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;Returns function that multiplies field &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;fieldname&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt; by multiplier.&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;multiplier&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;getattr&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt;, &lt;span class="nv"&gt;fieldname&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nv"&gt;multiplier&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;multiplier&lt;/span&gt;
+
+&lt;span class="nv"&gt;triple&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;multiply_by_field&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Count&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;, &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;quadruple&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;multiply_by_field&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Count&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;, &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;halve_sum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;multiply_by_field&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Sum&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;, &lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;python file names &lt;code&gt;calc_squares.py&lt;/code&gt; over &lt;code&gt;calc-squares.py&lt;/code&gt; as second cannot be
+imported though single name module names are best.&lt;/p&gt;
+&lt;h3&gt;packagin packages&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+  &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;        &lt;span class="o"&gt;--&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt; &lt;span class="n"&gt;functions&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;           &lt;span class="o"&gt;--&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt; &lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="n"&gt;subdir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+     &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;     &lt;span class="o"&gt;--&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt; &lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;package&lt;/span&gt;
+&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;package.other&lt;/span&gt;
+&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;package.subdir&lt;/span&gt;
+&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subdir&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;note:&lt;/em&gt; hierarchies of packages more than two deep are annoying to develop on&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot; &lt;/span&gt;
+&lt;span class="sd"&gt;Docstrings&lt;/span&gt;
+&lt;span class="sd"&gt;---------&lt;/span&gt;
+
+&lt;span class="sd"&gt;&amp;quot;Good&amp;quot; docstring coding is used to provide additional information about functionality &lt;/span&gt;
+&lt;span class="sd"&gt;beyond what can be discovered automatically by introspection&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;testing, testing, testing...&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;An Introduction to Testing Concepts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Unit tests are tests for fairly small and specific units of functionality.
+Functional tests test entire functional paths through your code. 
+Regression tests make sure that (within the resolution of your records) your program's output has not changed.&lt;/p&gt;
+&lt;p&gt;All three types of tests are necessary in different ways.&lt;/p&gt;
+&lt;p&gt;Regression tests tell you when unexpected changes in behavior occur, and can
+reassure you that your basic data processing is still working.  For scientists,
+this is particularly important if you are trying to link past research results
+to new research results: if you can no longer replicate your original results
+with your updated code, then you must regard your code with suspicion, unless
+the changes are intentional.&lt;/p&gt;
+&lt;p&gt;Both unit and functional tests tend to be expectation based.  you use the tests
+to lay out what behavior you expect from your code, and write your tests so
+that they assert that those expectations are met.&lt;/p&gt;
+&lt;p&gt;Unit tests tend to be much shorter and require less setup and teardown, while
+functional tests can be quite long.  functional tests tell you when your code
+is broken, while unit tests tell you where your code is broken.  because of the
+finer granularity of unit tests, a broken unit test can identify a particular
+piece of code as the source of an error, while functional tests merely tell you
+that a feature is broken.&lt;/p&gt;
+&lt;h3&gt;Adding tests to existing project&lt;/h3&gt;
+&lt;p&gt;First, start by writing a test for each bug as they are discovered.
+isolate the cause of the bug; write a test that demonstrates the bug; fix the
+bug; verify that the test passes.&lt;/p&gt;
+&lt;p&gt;Next, take out some time -- half a day or so -- and write fixtures and
+functional tests for some small chunk of code; if you can, pick a piece of code
+that you're planning to clean up or extend. Don't worry about being exhaustive,
+just write tests that target the main point of the code that you're working on.&lt;/p&gt;
+&lt;p&gt;Repeat this a few times. &lt;/p&gt;
+&lt;p&gt;Use code coverage analysis to analyze what code your tests cover, and what code
+isn't covered.  At this point you can take a targetted approach and spend some
+time writing tests aimed directly at uncovered areas of code.  There should now
+be tests that cover 30-50% of your code, at least (it's very easy to attain
+this level of code coverage!).&lt;/p&gt;
+&lt;p&gt;Once you've reached this point, you can either decide to focus on increasing
+your code coverage, or you can simply continue incrementally constraining your
+code by writing tests for bugs and new features.  Assuming you have a fairly
+normal code churn, you should get to the point of 70-80% coverage within a few
+months to a few years (depending on the size of the project!)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Cache decorator&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;simple_cache&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fn&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new_fn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;FOUND IN CACHE; RETURNING&amp;#39;&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# otherwise, call function &amp;amp; record value&lt;/span&gt;
+        &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;new_fn&lt;/span&gt;
+&lt;span class="nd"&gt;@simplecache&lt;/span&gt;
+&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This approach is effective because at each stage you get immediate feedback
+from your efforts, and it's easier to justify to managers than a whole-team
+effort to add testing. Plus, if you're unfamiliar with testing or with parts of
+the code base, it gives you time to adjust and adapt your approach to the needs
+of the particular project.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;see also: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=_O23jIXsshs"&gt;10 tips for pythonic code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/mikeckennedy/ten-tips-for-pythonic-code-jetbrains-webcast/blob/master/"&gt;ten-tips-for-pythonic-coten-tips-for-pythonic-code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Python"></category></entry></feed>

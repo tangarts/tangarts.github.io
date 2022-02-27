@@ -1,0 +1,233 @@
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <!-- KaTex -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css" crossorigin="anonymous">
+
+    <title> Consistency Levels in Cosmos DB </title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a id=logo href='/'> tangarts </a>
+            <div id="header_wrap" class="wrapper">
+                <nav id="navbar">
+                    <ul class="list-none">
+                        <li><a href="/about">about</a> &centerdot;</li>
+                        <li><a href="/archives.html">archive</a> &centerdot;</li>
+                        <li><a href="/now">now</a> &centerdot;</li>
+                        <li><a href="https://github.com/tangarts">projects</a></li>
+                    </ul>
+
+                </nav>
+            </div>
+
+            <hr>
+
+        </header>
+
+
+        <main class="wrapper">
+
+
+<h1> Consistency Levels in Cosmos DB </h1>
+<div class=date>
+  2021-12-01
+
+ | <span class="tags">
+    <a class="tag" href="/tag/azure.html">Azure</a> &centerdot;
+    <a class="tag" href="/tag/cosmosdb.html">CosmosDB</a> &centerdot;
+    <a class="tag" href="/tag/database.html">Database</a> &centerdot;
+  </span>
+</div>
+
+<article><p>TLDR; Cosmos DB offers five different levels of consistency guarantees so that the best performance of an application can be achieved without sacrificing data integrity. This post covers each consistency level </p>
+<h2>What is Consistency?</h2>
+<p>Within distributed systems, consistency assumes there is a single correct way to describe the order in which the events happen. Consistency can also be seen as recency guarantee; there appears to be a single copy of the data. As soon as one client successfully completes a write, all observers reading from the database must be able to see the value just written. </p>
+<p>On one hand, strong consistency guarantees every user will see the latest updated data, but may need to wait for all instances to be up to date. On the other hand, an eventual consistency guarantee means users will get a fast response but may see inconsistent data. </p>
+<p>With globally distributed applications, the characteristics of the chosen consistency level is emphasised. A greater distance for data to travel and a greater number of replicas to update increases the likelihood of performance issues under a strongly consistent model and inconsistent data under an eventually consistent model.</p>
+<p>Different consistency models offer different trade off between consistency, write latencies, throughput and availability. Generally, stronger consistency results in higher write latencies, higher throughput, and reduced availability. The purpose of different consistency levels is to give the client the best performance whilst achieving the minimum accepted level of consistency to an application.</p>
+<p>So what are the consistency level Cosmos offers? What are their guarantees, and when should I use each?</p>
+<p>As a nod to the white paper<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> that made consistency levels click for me, I'll use the example of a global sporting event watched by billions of people, the <a href="https://en.wikipedia.org/wiki/2018_FIFA_World_Cup_Final">2018 FIFA World Cup final</a>.</p>
+<p>The scores and time of updates are as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>France</th>
+<th>Croatia</th>
+<th>Database Operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00</td>
+<td>0</td>
+<td>0</td>
+<td>read("France"); read("Croatia")</td>
+</tr>
+<tr>
+<td>18</td>
+<td>1</td>
+<td>0</td>
+<td>write(team: "France", score: 1)</td>
+</tr>
+<tr>
+<td>29</td>
+<td>1</td>
+<td>1</td>
+<td>write(team: "Croatia", score: 1)</td>
+</tr>
+<tr>
+<td>38</td>
+<td>2</td>
+<td>1</td>
+<td>write(team: "France", score: 2)</td>
+</tr>
+<tr>
+<td>52</td>
+<td>3</td>
+<td>1</td>
+<td>write(team: "France", score: 3)</td>
+</tr>
+<tr>
+<td>59</td>
+<td>4</td>
+<td>1</td>
+<td>write(team: "France", score: 4)</td>
+</tr>
+<tr>
+<td>69</td>
+<td>4</td>
+<td>2</td>
+<td>write(team: "Croatia", score: 2)</td>
+</tr>
+<tr>
+<td>90</td>
+<td>4</td>
+<td>2</td>
+<td>read("France"); read("Croatia")</td>
+</tr>
+</tbody>
+</table>
+<p>In this scenario we have a primary database (located in West Europe region) providing writes to all replicas, and three follower replicas within the data centre. We also geo-replicate our data across each continent, each having four replicas in each data centre.</p>
+<p>We will consider who would most benefit from what consistency level. Cosmos DB allows clients to override the default consistency level for a specific read request, meaning we can relax read consistency per request for increased performance. </p>
+<h2>Guarantees</h2>
+<p>Cosmos DB offers five levels of consistency guarantees. In order of consistency, they are:</p>
+<ul>
+<li><a href="#strong-consistency">Strong</a><ul>
+<li>You will always see the latest version of the data. </li>
+<li>At any point in the game, you will see the latest score. </li>
+</ul>
+</li>
+<li><a href="#bounded-staleness-consistency">Bounded Staleness</a><ul>
+<li>Reads lag behind writes by at most <em>K</em> updates or time interval <em>T</em>. </li>
+<li>The score you see might be old by timespan <em>T</em>. </li>
+</ul>
+</li>
+<li><a href="#session-consistency">Session</a><ul>
+<li>Within a "session", reads are functionally strongly consistent. Outside the session, consistent prefix. </li>
+<li>Reads in the "<em>EU west</em> session" will receive the latest score. Everyone outside may see an old score.</li>
+</ul>
+</li>
+<li><a href="#consistent-prefix-consistency">Consistent Prefix</a><ul>
+<li>For all regions, writes are ordered. </li>
+<li>At any point in the game, you will never see a score that has never occurred.</li>
+</ul>
+</li>
+<li><a href="#eventual-consistency">Eventual</a><ul>
+<li>No guarantees, reads may be stale and inconsistent. Eventually, the data will be consistent until a new write.</li>
+<li>Any combination of scores may be seen, including scores that never occur.</li>
+</ul>
+</li>
+</ul>
+<h3>Strong consistency</h3>
+<p>Also known as linearizability, strong consistency guarantees all your users see the latest writes; every user at the 70 minute mark will see the score <code>{France: 4, Croatia: 2}</code>. As a consequence, there is increased latency. </p>
+<p>For a write to be committed to the system and acknowledged as successful, <em>all</em> replicas have to agree on the most recent value. This means high latency and reduced availability. If a region becomes unavailable, since the application cannot accept reads that are stale, the application will not be able to respond until the region has recovered and updated to the most recent write value. </p>
+<p>In practice anyone wanting updates from the World Cup final would be well served by a strong consistency guarantee. However, most people would be OK in seeing a score that is outdated by a few minutes. When would this not be acceptable? As scores are calculated by incrementing the previous score, it would be a disaster if the scorekeeper read the wrong score. In this case, the score keeper could not tolerate stale reads so strong consistency would be appropriate.  </p>
+<h3>Bounded Staleness consistency</h3>
+<p>This is the second strongest consistency guarantee Cosmos DB offers. As the name suggests, there is a window that you can tolerate stale data. Reads can be behind at most <em>K</em> updates to an item or behind by at most <em>T</em> time interval, whichever is reached first. For data that falls out of the specified window, the guarantees are identical to strong consistency.</p>
+<p>What is interesting about bounded staleness is that if you know the maximum allowable lag for your system then you can get the same guarantee of strong consistency without the penalty in latency. </p>
+<p>A football pundit only cares about the score during half time and at the end of the game. The pundit could use the length of the game to guarantee they read the most recent score by setting the window to 45 minutes. A read in the 46th minute would mean the most recent score is read and again in the 91st minute for post-game discussion.</p>
+<h3>Session consistency</h3>
+<p>This is the default configured consistency level. Within a single client session, operations are guaranteed to follow:</p>
+<ul>
+<li><strong>Monotonic Reads</strong>:<ul>
+<li>While the client can read arbitrarily stale data, it is guaranteed to read data that is increasingly up to date over time. </li>
+<li>(E.g., one it has read the score of <code>{France: 4, Croatia: 2}</code>, it won't then later see <code>{France: 0, Croatia: 0}</code> in the same session.)</li>
+</ul>
+</li>
+<li><strong>Monotonic writes</strong>:<ul>
+<li>Ensures that if the client performs writes <em>w</em> and then <em>v</em>, all processes within the session observe <em>w</em> before <em>v</em>.</li>
+</ul>
+</li>
+<li><strong>Read your writes</strong>:<ul>
+<li>All writes performed by the client are visible to the session's subsequent reads. In other words, strong consistency holds for the writer and clients sharing the same session id.</li>
+</ul>
+</li>
+<li><strong>Write follows reads</strong>:<ul>
+<li>Ensures that write updates are propagated after performing the previous read operation.</li>
+</ul>
+</li>
+<li><strong>Consistent prefix</strong>:<ul>
+<li>Covered in the next section</li>
+</ul>
+</li>
+</ul>
+<p>A session is defined through a unique session key that all writers include in their requests. Cosmos DB uses the session key to ensure read-my-writes (for the writer) and one of the above guarantees for readers using the session token. Within the same session, reads are consistent. Everyone outside of the session will fall back to the consistent prefix model.</p>
+<p>Session consistency provides good performance: write latencies, availability, and read throughput comparable to that of eventual consistency.</p>
+<p>Revisiting the score keeper we notice that they can achieve consistent reads without sacrificing performance by using session consistency. As the score keeper will be reading their own writes, session consistency guarantees they will see their most recent writes with the added benefit of not having to wait for all replicas to be up to date.</p>
+<h3>Consistent Prefix consistency</h3>
+<p>Also referred to as snapshot isolation; the reader sees a "snapshot of the data". Consistent prefix guarantees whilst they may not read the most current score, the score would reflect a previous score. And unlike bounded staleness, there is no guarantee on how long the delay is.</p>
+<p>With consistent prefix consistency, reads are some prefix of the updates. Possible scores for a consistent prefix read could be one of the following: </p>
+<ul>
+<li><code>{France: 1, Croatia: 0}</code></li>
+<li><code>{France: 2, Croatia: 1}</code></li>
+<li><code>{France: 4, Croatia: 1}</code></li>
+<li><code>{France: 4, Croatia: 2}</code></li>
+</ul>
+<p>Consistent prefix is great for those who wish to have write latencies, availability, and read throughput similar to eventual consistency whilst guaranteeing ordered writes. This means you'll never see a state which could have emerged if the order of writes was changed. As we will see below, a read value of <code>{France: 0, Croatia: 1}</code> could never happen under consistent prefix as France's first goal (write to the database) was before Croatia's.</p>
+<h3>Eventual consistency</h3>
+<p>Eventual consistency does not guarantee ordering for reads. Writes are also propagated in an arbitrary fashion. This means that you can see data that never occurs. For our football example, under eventual consistency a reader might see the score <code>{France: 0, Croatia: 1}</code>. In reality, this event never happened as France scored before Croatia. If no more writes occur, the replicas will eventually catch up and become consistent with the leader.</p>
+<p>A casual fan might opt for eventual consistency and read the final score hours or a day later. As there are no writes after the 90th minute, it is highly likely every replica would be updated with the final score when the fan decided to check the score. There is no need to choose a more consistent level than this.</p>
+<h3>Conclusion</h3>
+<p>Giving strong consistency gives up performance and availability. The question is then <em>what is the minimum level of consistency that is tolerable to the program that gives you the best performance?</em> Choosing the best consistency for your 
+application requires application semantics and usage scenarios to be understood.</p>
+<p>In reality, Cosmos DBs SLAs guarantee that read latency for all consistency levels is always guaranteed to be less than 10 milliseconds at the 99th percentile. In addition, Cosmos provides a <em>Probabilistic Bounded Staleness (PBS) metric</em> to quantify when eventual consistency is "good enough". </p>
+<!--
+
+There is no way I could not talk about eventual consistency without sharing this illustration:
+
+![Comic illustrating eventual consistency](/assets/images/blog/2021/12/eventual-consistency.jpg)
+
+-->
+
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://www.microsoft.com/research/publication/replicated-data-consistency-explained-through-baseball/">Replicated Data Consistency Explained Through Baseball (whitepaper) by Doug Terry</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article>
+
+
+
+        </main>
+
+        <footer>
+            <p>&centerdot; &centerdot; &centerdot;</p>
+        </footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - test</title><link href="/" rel="alternate"></link><link href="/feeds/test.atom.xml" rel="self"></link><id>/</id><updated>2020-08-26T00:00:00+01:00</updated><entry><title>Testing the Waters</title><link href="/testing-the-waters.html" rel="alternate"></link><published>2019-06-19T00:00:00+01:00</published><updated>2020-08-26T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2019-06-19:/testing-the-waters.html</id><summary type="html">&lt;h2&gt;Exploration in markdown&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - Test</title><link href="/" rel="alternate"></link><link href="/feeds/test.atom.xml" rel="self"></link><id>/</id><updated>2020-08-26T00:00:00+01:00</updated><entry><title>Testing the Waters</title><link href="/testing-the-waters.html" rel="alternate"></link><published>2019-06-19T00:00:00+01:00</published><updated>2020-08-26T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2019-06-19:/testing-the-waters.html</id><summary type="html">&lt;h2&gt;Exploration in markdown&lt;/h2&gt;
 &lt;p&gt;This article is a test post. I'm currently trying to configure writing blog
 posts in markdown to be rendered to html. &lt;/p&gt;
 &lt;p&gt;The blog will be an &lt;strong&gt;exploration&lt;/strong&gt; of the many novel or re-occurring thoughts
@@ -239,4 +239,4 @@ frequently browse. Some notable mentions:    &lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="test"></category></entry></feed>
+&lt;/script&gt;</content><category term="Test"></category></entry></feed>

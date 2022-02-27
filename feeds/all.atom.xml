@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2022-02-19T00:00:00+00:00</updated><entry><title>money</title><link href="/money.html" rel="alternate"></link><published>2021-12-29T18:52:00+00:00</published><updated>2021-12-29T18:52:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-29:/money.html</id><summary type="html">&lt;p&gt;"Back in my day Freddos were 10p a pop. Now look at the price, two and a half times more than what used to pay. And every January, we brace a little for the increase price of living: potatoes, peas, and toilet paper. Whilst our wages stay the same."&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2022-01-01T00:00:00+00:00</updated><entry><title>A Gentle Introduction to Inflation</title><link href="/a-gentle-introduction-to-inflation.html" rel="alternate"></link><published>2021-12-29T18:52:00+00:00</published><updated>2021-12-29T18:52:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-29:/a-gentle-introduction-to-inflation.html</id><summary type="html">&lt;p&gt;"Back in my day Freddos were 10p a pop. Now look at the price, two and a half times more than what used to pay. And every January, we brace a little for the increase price of living: potatoes, peas, and toilet paper. Whilst our wages stay the same."&lt;/p&gt;
 &lt;p&gt;Imagine …&lt;/p&gt;</summary><content type="html">&lt;p&gt;"Back in my day Freddos were 10p a pop. Now look at the price, two and a half times more than what used to pay. And every January, we brace a little for the increase price of living: potatoes, peas, and toilet paper. Whilst our wages stay the same."&lt;/p&gt;
 &lt;p&gt;Imagine, 20 years ago, a fiver would have got netted you 50 Freddos. That's enough Freddos to keep you busy for a while, whatever you're doing. Now, finding the same five pound note, going to the bank, exchanging it for a crisp, polymer note and heading to Sainsburys. That note isn't going far, only 20 Freddos. That's not fair.&lt;/p&gt;
 &lt;p&gt;Let's go back 20 years ago again. This time with the knowledge of increasing Freddo prices we have a goal to not get stung by the 250% price hike in 20 years. Playing it safe you look to the bank. Each year your bank gives you some money (interest) so that you can store your money with them. No risks involved, better than keeping it under the mattress right? &lt;/p&gt;
@@ -54,7 +54,83 @@
 &lt;p&gt;&lt;a href="https://www.bankofengland.co.uk/monetary-policy/inflation"&gt;Inflation and the 2% target&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</content><category term="blog"></category></entry><entry><title>Apprenticeship Patterns</title><link href="/apprenticeship-patterns.html" rel="alternate"></link><published>2021-07-29T00:00:00+01:00</published><updated>2021-07-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-07-29:/apprenticeship-patterns.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Notes from Apprenticeship Patterns&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;</content><category term="blog"></category></entry><entry><title>Python packaging</title><link href="/python-packaging.html" rel="alternate"></link><published>2021-12-09T00:00:00+00:00</published><updated>2021-12-31T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-09:/python-packaging.html</id><summary type="html">&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
+&lt;p&gt;I've collected useful utility functions to help me with this years advent of code. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2020 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
+&lt;p&gt;I've collected useful utility functions to help me with this years advent of code. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2021&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;day1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+        &lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+            &lt;span class="n"&gt;core&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+            &lt;span class="o"&gt;...&lt;/span&gt;
+    &lt;span class="n"&gt;LICENSE&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+    &lt;span class="n"&gt;README&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Before starting each puzzle I load up a new python file with the first line always starting with &lt;code&gt;from toolbox.core import ...&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Everything was great until I wanted to re-use my tool box for last years problems. I didn't want to duplicate my toolbox for every advent of code year I participate in. A logical place, I thought, would be to place the toolbox in the root of the project like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+    &lt;span class="mi"&gt;2021&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;day1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+    &lt;span class="n"&gt;toolbox&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+        &lt;span class="n"&gt;core&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+    &lt;span class="n"&gt;LICENSE&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+    &lt;span class="n"&gt;README&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This way I wouldn't have to duplicate my code and could expose the toolbox for each year to use. Not quite.&lt;/p&gt;
+&lt;p&gt;I first tried a relative import &lt;code&gt;from ..toolbox.core import parse_input&lt;/code&gt;. But that didn't work. &lt;/p&gt;
+&lt;p&gt;To answer the reason why, we need to understand what happens when you run a python script.&lt;/p&gt;
+&lt;h2&gt;What happens when you run a python script?&lt;/h2&gt;
+&lt;p&gt;The simplest solution was to create a local package using the &lt;code&gt;setuptools&lt;/code&gt; package that comes with a fresh installation of python 3.9.&lt;/p&gt;
+&lt;p&gt;If you want a minimal solution, look no further. Here it is:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;setup.py&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
+
+&lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;local_toolbox&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;toolbox&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,],&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And to install the package locally on the command line.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ pip install -e .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Enjoy. :).&lt;/p&gt;
+&lt;p&gt;For those who want to know a little more, let's continue. &lt;/p&gt;
+&lt;h2&gt;setup.cfg and setup.py&lt;/h2&gt;
+&lt;p&gt;There are two ways to specify setup config, dynamically as parameters of the &lt;code&gt;setuptools.setup()&lt;/code&gt; function and in a &lt;code&gt;setup.cfg&lt;/code&gt; config file.&lt;/p&gt;
+&lt;p&gt;The equivalent setup to the first example would split across the executable and config file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;setup.py&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
+
+&lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;setup.cfg&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[options]&lt;/span&gt;
+&lt;span class="na"&gt;packages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;toolbox&lt;/span&gt;
+
+&lt;span class="k"&gt;[metadata]&lt;/span&gt;
+&lt;span class="na"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;local_toolbox&lt;/span&gt;
+&lt;span class="na"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;0.1.0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see, the &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;version&lt;/code&gt; and &lt;code&gt;packages&lt;/code&gt; attributes are now configured as options and metadata. There is no definitive way in using &lt;code&gt;setuptools&lt;/code&gt;. I personally prefer to have all config in a config file. With additional optional fields such as a &lt;em&gt;long_description&lt;/em&gt;, it is easy to edit a config file than source code.&lt;/p&gt;
+&lt;h2&gt;Sharing is Caring.&lt;/h2&gt;
+&lt;p&gt;Finally, if you're excited to share your python project as a package, it is easy to register it using the Python Package Index (PyPI).&lt;/p&gt;
+&lt;p&gt;First, the name field must be unique if you wish to publish your package on the Python Package Index (PyPI). The packages field describes where you’ve put the Python source code within your project. &lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Apprenticeship Patterns</title><link href="/apprenticeship-patterns.html" rel="alternate"></link><published>2021-07-29T00:00:00+01:00</published><updated>2021-07-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-07-29:/apprenticeship-patterns.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Notes from Apprenticeship Patterns&lt;/strong&gt;&lt;/p&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;An apprenticeship is a season in your career when your focus is
 more on your own growth than almost anything else.&lt;/p&gt;
@@ -180,7 +256,7 @@ Chronological record of lessons learnt&lt;/p&gt;
 &lt;p&gt;For your career to prosper, you must learn to acquire and abandon familiar tools with ease.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Action&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;Write down a list of familiar tools. If the list has less than five items, look for tools that will fill gaps. Unfamiliar tools or new tools altogether.&lt;/p&gt;
-&lt;p&gt;For lists greater than five, are there more powerful tools available? Are there tools that may become obsolete?&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Lotaria</title><link href="/lotaria.html" rel="alternate"></link><published>2021-06-27T06:51:00+01:00</published><updated>2021-06-27T06:51:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-06-27:/lotaria.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Adapted from If on a winter's night a traveller: Chapter 8&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For lists greater than five, are there more powerful tools available? Are there tools that may become obsolete?&lt;/p&gt;</content><category term="Book Notes"></category></entry><entry><title>Lotaria</title><link href="/lotaria.html" rel="alternate"></link><published>2021-06-27T06:51:00+01:00</published><updated>2021-06-27T06:51:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-06-27:/lotaria.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Adapted from If on a winter's night a traveller: Chapter 8&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;I asked Lotaria if she has already read some books of mine that I lent her. She
 said no, because here she doesn't have a computer at her disposal. &lt;/p&gt;
 &lt;p&gt;She explained to me that a suitably programmed computer can …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Adapted from If on a winter's night a traveller: Chapter 8&lt;/strong&gt;&lt;/p&gt;
@@ -454,7 +530,7 @@ nineteen?"  ... It's sixty-four."&lt;/p&gt;
 &lt;p&gt;The reason I was feeling so much stronger today than I had on the long haul
 over from Batopilas, I realized, was because I was running like the Kalahari
 Bushmen. I wasn't trying to overtake the antelope; I was just keeping it in
-sight.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Discriminant Analysis</title><link href="/discriminant-analysis.html" rel="alternate"></link><published>2021-05-02T00:00:00+01:00</published><updated>2021-05-02T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-05-02:/discriminant-analysis.html</id><summary type="html">&lt;h2&gt;Linear Discriminant Classifier&lt;/h2&gt;
+sight.&lt;/p&gt;</content><category term="Book Notes"></category></entry><entry><title>Discriminant Analysis</title><link href="/discriminant-analysis.html" rel="alternate"></link><published>2021-05-02T00:00:00+01:00</published><updated>2021-05-02T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-05-02:/discriminant-analysis.html</id><summary type="html">&lt;h2&gt;Linear Discriminant Classifier&lt;/h2&gt;
 &lt;p&gt;Suppose we have two classes of data &lt;span class="math"&gt;\(P_1\)&lt;/span&gt; and &lt;span class="math"&gt;\(P_2\)&lt;/span&gt; corresponding to genuine
 and counterfeit currency distributed &lt;span class="math"&gt;\(f_j(\mathbf x)\)&lt;/span&gt;, &lt;span class="math"&gt;\(j = \{1, 2\}\)&lt;/span&gt;. Letting
 &lt;span class="math"&gt;\(Y\)&lt;/span&gt; denote classes &lt;span class="math"&gt;\(Y = 1\)&lt;/span&gt; or &lt;span class="math"&gt;\(Y = 2\)&lt;/span&gt;. We also assume the prior probabilities
@@ -1257,7 +1333,7 @@ assume the worst possible outcome and realizing that life is not forever so
 enjoy the present. Earlier this year I concluded that regrets are something
 I do not have, only lessons to be learnt from.&lt;/p&gt;
 &lt;p&gt;2020 wasn't &lt;em&gt;that&lt;/em&gt; bad, could've been worse.&lt;/p&gt;
-&lt;p&gt;Hello 2021. More on that later.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>XOR</title><link href="/xor.html" rel="alternate"></link><published>2020-08-08T00:00:00+01:00</published><updated>2020-12-26T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-08-08:/xor.html</id><summary type="html">&lt;h1&gt;XOR problem&lt;/h1&gt;
+&lt;p&gt;Hello 2021. More on that later.&lt;/p&gt;</content><category term="Review"></category></entry><entry><title>XOR</title><link href="/xor.html" rel="alternate"></link><published>2020-08-08T00:00:00+01:00</published><updated>2020-12-26T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-08-08:/xor.html</id><summary type="html">&lt;h1&gt;XOR problem&lt;/h1&gt;
 &lt;p&gt;In learning a new field I don't think an introduction using the most basic
 example doesn't help. Using the XOR problem to understand deep learning often
 obscures the grander picture. That being said, I'm not sure who this
@@ -1553,7 +1629,7 @@ transform our feature space for a linear model to learn.&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>password store</title><link href="/password-store.html" rel="alternate"></link><published>2020-08-07T00:00:00+01:00</published><updated>2020-09-02T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-08-07:/password-store.html</id><summary type="html">&lt;p&gt;After taking more than a few hours to reset my Pass for iOS repository on my
+&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Password Store</title><link href="/password-store.html" rel="alternate"></link><published>2020-08-07T00:00:00+01:00</published><updated>2020-09-02T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-08-07:/password-store.html</id><summary type="html">&lt;p&gt;After taking more than a few hours to reset my Pass for iOS repository on my
 phone, I thought it would be good to write a short guide to setting one up.&lt;/p&gt;
 &lt;p&gt;Check the &lt;a href="https://github.com/yishilin14/asc-key-to-qr-code-gif"&gt;official Pass for iOS
 Wiki&lt;/a&gt; to see alternative
@@ -1597,7 +1673,7 @@ generate QR images to import your PGP keys to the app.&lt;/p&gt;
 &lt;p&gt;Remember to exclude the &lt;code&gt;.git&lt;/code&gt; from the repo name&lt;/p&gt;
 &lt;p&gt;That should be all :)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;resetting ssh passphrase&lt;/strong&gt;
-&lt;code&gt;ssh-keygen -f ~/.ssh/pass_for_ios.key -p&lt;/code&gt;&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Learning the XOR function with an LSTM</title><link href="/xor-lstm.html" rel="alternate"></link><published>2020-08-04T00:00:00+01:00</published><updated>2020-08-04T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-08-04:/xor-lstm.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt; &lt;/p&gt;
+&lt;code&gt;ssh-keygen -f ~/.ssh/pass_for_ios.key -p&lt;/code&gt;&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>An OpenAI Challenge</title><link href="/xor-lstm.html" rel="alternate"></link><published>2020-08-04T00:00:00+01:00</published><updated>2020-08-04T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-08-04:/xor-lstm.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Problem Statement:&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;Train an LSTM to solve the XOR problem: that is, given a sequence of bits,
 determine its parity. The LSTM should consume the sequence, one bit at a time,
 and then output the correct answer at the sequence’s end. &lt;/p&gt;
@@ -2186,21 +2262,7 @@ vivere&lt;/em&gt; (know how to live) in all circumstances.&lt;/p&gt;
 &lt;p&gt;Dress at your best on your execution day. The dignified attitude will make both
 defeat and victory feel equally heroic. Try not to blame others of your fate,
 even if they deserve blame. Never exhibit any self-pity. Do not complain. The
-only article Lady Fortuna has no control over is your behaviour. Good Luck&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>links</title><link href="/links.html" rel="alternate"></link><published>2020-06-26T00:00:00+01:00</published><updated>2020-08-19T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-26:/links.html</id><content type="html">&lt;h2&gt;A bunch of links&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=nJPERZDfyWc"&gt;Everything is a remix&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.wired.com/story/six-weeks-100s-miles-hours-glorious-boredom-japan/"&gt;Walking&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=GTQnarzmTOc"&gt;Keynes vs Hayek&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.multivax.com/last_question.html"&gt;The Last Question&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="http://www.novelr.com/2008/08/16/vonnegut-how-to-write-with-style"&gt;Vonnegut, writing with style&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://writing.stackexchange.com/questions/761/the-rules-of-writing"&gt;Rules of Writing&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=q6xA-oh6xUM"&gt;The Anxious Scroll&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?time_continue=37&amp;amp;v=ji5_MqicxSo&amp;amp;feature=emb_logo"&gt;Randy Pausch's Last Lecture&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="http://jsomers.net/blog/speed-matters"&gt;Speed Matters&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.newyorker.com/magazine/1999/04/19/dont-eat-before-reading-this"&gt;Don't Eat Before Reading This&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.orwellfoundation.com/the-orwell-foundation/orwell/essays-and-other-works/shooting-an-elephant/"&gt;Shooting an Elephant&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://rs.io/software-writers-tools-improve-writing/"&gt;Software for Writers&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="blog"></category></entry><entry><title>Economics in One Lesson</title><link href="/economics-in-one.html" rel="alternate"></link><published>2020-06-25T00:00:00+01:00</published><updated>2020-06-25T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-25:/economics-in-one.html</id><summary type="html">&lt;h2&gt;Notes on Economics in One Lesson by Henry Hazlitt&lt;/h2&gt;
+only article Lady Fortuna has no control over is your behaviour. Good Luck&lt;/p&gt;</content><category term="Book Notes"></category></entry><entry><title>Economics in One Lesson</title><link href="/economics-in-one.html" rel="alternate"></link><published>2020-06-25T00:00:00+01:00</published><updated>2020-06-25T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-25:/economics-in-one.html</id><summary type="html">&lt;h2&gt;Notes on Economics in One Lesson by Henry Hazlitt&lt;/h2&gt;
 &lt;h3&gt;The Lesson&lt;/h3&gt;
 &lt;p&gt;Fallacies of economics, the self-interest of man ad the tendency to see only
 the immediate effects of a given policy (overlooking secondary consequences).&lt;/p&gt;
@@ -2410,131 +2472,7 @@ economic science.&lt;/p&gt;
 &lt;dd&gt;the amount of goods and services that can be purchased with a unit of currency&lt;/dd&gt;
 &lt;dt&gt;Impetus&lt;/dt&gt;
 &lt;dd&gt;the force with which any body is driven or impelled; Momentum&lt;/dd&gt;
-&lt;/dl&gt;</content><category term="blog"></category></entry><entry><title>bookshelf</title><link href="/bookshelf.html" rel="alternate"></link><published>2020-06-19T00:00:00+01:00</published><updated>2022-02-19T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-19:/bookshelf.html</id><summary type="html">&lt;p&gt;An ongoing list of books I have read: in bold are the notable mentions.&lt;br&gt;
-This is to help remember the books, and to track progress.&lt;/p&gt;
-&lt;p&gt;The key idea is not to forget the ideas taken from what you have read,
-document, comment on the good, bad and interesting. Also it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;An ongoing list of books I have read: in bold are the notable mentions.&lt;br&gt;
-This is to help remember the books, and to track progress.&lt;/p&gt;
-&lt;p&gt;The key idea is not to forget the ideas taken from what you have read,
-document, comment on the good, bad and interesting. Also it is a great
-conversation starter. &lt;/p&gt;
-&lt;p&gt;In chronological order?  &lt;/p&gt;
-&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;The Millennium Trilogy, Larsson  &lt;/li&gt;
-&lt;li&gt;His Dark Materials Trilogy, Pullman  &lt;/li&gt;
-&lt;li&gt;The Trial, Kafka   &lt;/li&gt;
-&lt;li&gt;The Metamorphoses, Kafka  &lt;/li&gt;
-&lt;li&gt;Kakfa on the Shore, Murakami   &lt;/li&gt;
-&lt;li&gt;The Wind-Up Bird Chronicle, Murakami   &lt;/li&gt;
-&lt;li&gt;Norwegian Wood, Murakami  &lt;/li&gt;
-&lt;li&gt;Sanshiro, Soseki  &lt;/li&gt;
-&lt;li&gt;Kokoro, Soseki  &lt;/li&gt;
-&lt;li&gt;A Thousand Splendid Suns, Hosseini  &lt;/li&gt;
-&lt;li&gt;Outliers, Gladwell  &lt;/li&gt;
-&lt;li&gt;Cats Cradle, Vonnegut  &lt;/li&gt;
-&lt;li&gt;The Catcher in The Rye, Salinger  &lt;/li&gt;
-&lt;li&gt;Catch 22, Heller  &lt;/li&gt;
-&lt;li&gt;Siddartha, Hesse  &lt;/li&gt;
-&lt;li&gt;On Solitude, Montaigne   &lt;/li&gt;
-&lt;li&gt;Zen and the Art of Motorcycle Maintenance, Pirsig  &lt;/li&gt;
-&lt;li&gt;Goodbye Things, Sasaki   &lt;/li&gt;
-&lt;li&gt;Letters from a Stoic, Seneca  &lt;/li&gt;
-&lt;li&gt;Meditations, Aurelius  &lt;/li&gt;
-&lt;li&gt;The Great Gatsby, F. Scott Fitzgerald  &lt;/li&gt;
-&lt;li&gt;How to Lie with Statistics, Huff  &lt;/li&gt;
-&lt;li&gt;Fermat's Last theorem, Singh  &lt;/li&gt;
-&lt;li&gt;The Code Book, Singh  &lt;/li&gt;
-&lt;li&gt;Zero: The Biography of a Dangerous Idea, Seife  &lt;/li&gt;
-&lt;li&gt;Maus, Spiegelman  &lt;/li&gt;
-&lt;li&gt;Watchmen, Moore  &lt;/li&gt;
-&lt;li&gt;V for Vendetta, Moore  &lt;/li&gt;
-&lt;li&gt;Logicomix: An Epic Search for Truth, Doxiadis  &lt;/li&gt;
-&lt;li&gt;Strange Case of Dr Jekyll and Mr Hyde, Stevenson  &lt;/li&gt;
-&lt;li&gt;Godel Escher Bach, Hofstadter  &lt;/li&gt;
-&lt;li&gt;How Not to Be Wrong, Ellenberg  &lt;/li&gt;
-&lt;li&gt;The Book of Tea, Okakura Kazuko  &lt;/li&gt;
-&lt;li&gt;Short Stories, Roald Dahl  &lt;/li&gt;
-&lt;li&gt;Sophie's World, Gaarder  &lt;/li&gt;
-&lt;li&gt;Thinking Fast and Slow, Kahneman  &lt;/li&gt;
-&lt;li&gt;David and Goliath,   &lt;/li&gt;
-&lt;li&gt;Either/Or, Kierkegaard  &lt;/li&gt;
-&lt;li&gt;Colorless Tsukuru Tazaki and His Years of Pilgrimage, Murakami  &lt;/li&gt;
-&lt;li&gt;Vagabonding, Rolf Potts  &lt;/li&gt;
-&lt;li&gt;Mans Search for Meaning, Frankl  &lt;/li&gt;
-&lt;li&gt;Lost Japan, Kerr  &lt;/li&gt;
-&lt;li&gt;Shogun, Clavell  &lt;/li&gt;
-&lt;li&gt;Fahrenheit 451, Bradbury  &lt;/li&gt;
-&lt;li&gt;1984, Orwell  &lt;/li&gt;
-&lt;li&gt;Politics and the English Language, Orwell  &lt;/li&gt;
-&lt;li&gt;Books vs Cigarettes, Orwell  &lt;/li&gt;
-&lt;li&gt;Brave New World, Huxley  &lt;/li&gt;
-&lt;li&gt;The Myth of Sisyphus, Camus  &lt;/li&gt;
-&lt;li&gt;The Stranger, Camus  &lt;/li&gt;
-&lt;li&gt;The Tao Te Ching, Lao Tzu  &lt;/li&gt;
-&lt;li&gt;The Tao of Pooh, Hoff  &lt;/li&gt;
-&lt;li&gt;A Man without a Country, Vonnegut  &lt;/li&gt;
-&lt;li&gt;Mother Night, Vonnegut  &lt;/li&gt;
-&lt;li&gt;Breakfast of Champions, Vonnegut  &lt;/li&gt;
-&lt;li&gt;Flowers For Algernon, Keyes  &lt;/li&gt;
-&lt;li&gt;The Unbearable Lightness of Being, Kundera  &lt;/li&gt;
-&lt;li&gt;Do Androids Dream of Electric Sheep, P.K. Dick  &lt;/li&gt;
-&lt;li&gt;Slaughterhouse-Five, Vonnegut  &lt;/li&gt;
-&lt;li&gt;Sirens of Titan, Vonnegut  &lt;/li&gt;
-&lt;li&gt;What We Talk About When We Talk About Love, Carver  &lt;/li&gt;
-&lt;li&gt;Will You Please Be Quiet, Please?, Carver  &lt;/li&gt;
-&lt;li&gt;The Pearl, Steinbeck  &lt;/li&gt;
-&lt;li&gt;Down and Out in Paris and London, Orwell  &lt;/li&gt;
-&lt;li&gt;Story of your Life, Chiang  &lt;/li&gt;
-&lt;li&gt;The Little Prince, Antoine de Saint-Exupéry  &lt;/li&gt;
-&lt;li&gt;Exhalation, Chiang  &lt;/li&gt;
-&lt;li&gt;What I Talk About When I Talk About Running, Murakami  &lt;/li&gt;
-&lt;li&gt;Antifragile, Taleb  &lt;/li&gt;
-&lt;li&gt;Masters of Doom, Kushner  &lt;/li&gt;
-&lt;li&gt;Fooled by Randomness, Taleb  &lt;/li&gt;
-&lt;li&gt;Metamorphoses, Ovid  &lt;/li&gt;
-&lt;li&gt;The Little Schemer,   &lt;/li&gt;
-&lt;li&gt;The Lessons of History, Will and Ariel Durant  &lt;/li&gt;
-&lt;li&gt;Economics in One Lesson, Hazlitt  &lt;/li&gt;
-&lt;li&gt;The Glass Bead Game, Hesse  &lt;/li&gt;
-&lt;li&gt;The Three Body Problem, Liu Cixin  &lt;/li&gt;
-&lt;li&gt;The Dark Forest, Liu Cixin  &lt;/li&gt;
-&lt;li&gt;The Master and Margarita, Bulgakov  &lt;/li&gt;
-&lt;li&gt;Popper, Magee  &lt;/li&gt;
-&lt;li&gt;Zorba the Greek, Kanzantzakis  &lt;/li&gt;
-&lt;li&gt;How Will You Measure Your Life, Christensen   &lt;/li&gt;
-&lt;li&gt;The Graveyard Book, Gaiman  &lt;/li&gt;
-&lt;li&gt;The Paris Review Interviews vol. 3&lt;/li&gt;
-&lt;li&gt;Essays and Aphorisms, Schopenhauer  &lt;/li&gt;
-&lt;li&gt;Foucault's Pendulum, Eco &lt;/li&gt;
-&lt;li&gt;Pale Fire, Nabokov&lt;/li&gt;
-&lt;li&gt;How to Win Friends, Carnegie &lt;/li&gt;
-&lt;li&gt;Keep the Aspidistra Flying, Orwell&lt;/li&gt;
-&lt;li&gt;The Paris Review Interviews vol. 2&lt;/li&gt;
-&lt;li&gt;Narcissus and Goldmund, Hesse&lt;/li&gt;
-&lt;li&gt;Collected Fictions, Borges&lt;/li&gt;
-&lt;li&gt;Art as Experience, Dewey&lt;/li&gt;
-&lt;li&gt;Born to Run, Christopher McDougall&lt;/li&gt;
-&lt;li&gt;If on a winter's night a traveler, Italo Calvino&lt;/li&gt;
-&lt;li&gt;Invisible Cities, Calvino&lt;/li&gt;
-&lt;li&gt;James Joyce Dubliners&lt;/li&gt;
-&lt;li&gt;Cloud Atlas, David Mitchell&lt;/li&gt;
-&lt;li&gt;Letters to a Young Poet, Rainer Maria Rilke&lt;/li&gt;
-&lt;li&gt;Apprenticeship Patterns, Dave Hoover&lt;/li&gt;
-&lt;li&gt;Principles (PDF), Ray Dalio&lt;/li&gt;
-&lt;li&gt;The War of Art, Stephen Pressfield&lt;/li&gt;
-&lt;li&gt;The Charisma Myth&lt;/li&gt;
-&lt;li&gt;Head First Design Patterns&lt;/li&gt;
-&lt;li&gt;The Phoenix Project&lt;/li&gt;
-&lt;li&gt;The Pragmatic Programmer&lt;/li&gt;
-&lt;li&gt;The Enchiridion&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Queued&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Designing Data Intensive Applications&lt;/li&gt;
-&lt;li&gt;Impro&lt;/li&gt;
-&lt;li&gt;The Beak of the Finch, Story of Evolution in Our Time&lt;/li&gt;
-&lt;/ul&gt;</content><category term="blog"></category></entry><entry><title>sunset</title><link href="/sunset.html" rel="alternate"></link><published>2020-06-15T15:36:29+01:00</published><updated>2020-06-15T15:36:29+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-15:/sunset.html</id><summary type="html">&lt;p&gt;I've been thinking about sunsets recently and the lack of them &lt;a href=""&gt;at home.&lt;/a&gt;&lt;/p&gt;
+&lt;/dl&gt;</content><category term="blog"></category></entry><entry><title>sunset</title><link href="/sunset.html" rel="alternate"></link><published>2020-06-15T15:36:29+01:00</published><updated>2020-06-15T15:36:29+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-15:/sunset.html</id><summary type="html">&lt;p&gt;I've been thinking about sunsets recently and the lack of them &lt;a href=""&gt;at home.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Why in the East, was I blessed to witness spectacular sunsets daily and now left with only memories of orange-hazed skies?&lt;/p&gt;
 &lt;h3&gt;Scattering&lt;/h3&gt;
 &lt;p&gt;When white light passes through our atmosphere, gases in our atmosphere absorb and scatter the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been thinking about sunsets recently and the lack of them &lt;a href=""&gt;at home.&lt;/a&gt;&lt;/p&gt;
@@ -2638,7 +2576,7 @@ is simply this: a writer has to take all the risks of putting down what he
 sees. No one can tell him about that. No one can control that reality. It
 reminds me of something Pablo Picasso was supposed to have said to Gertrude
 Stein while he was painting her portrait. Gertrude said, "I don't look like
-that." And Picasso replied, "You will." And he was right.  &lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Dear me</title><link href="/dear-me.html" rel="alternate"></link><published>2020-06-05T00:00:00+01:00</published><updated>2020-06-05T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-05:/dear-me.html</id><summary type="html">&lt;p&gt;Keep up the good school work. It's vital that you build a strong foundation for
+that." And Picasso replied, "You will." And he was right.  &lt;/p&gt;</content><category term="Book Notes"></category></entry><entry><title>Dear me</title><link href="/dear-me.html" rel="alternate"></link><published>2020-06-05T00:00:00+01:00</published><updated>2020-06-05T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-05:/dear-me.html</id><summary type="html">&lt;p&gt;Keep up the good school work. It's vital that you build a strong foundation for
 the sciences, a desire to never stop learning. Mathematics &amp;mdash; It'll open
 doors and give you options just like you originally planned. But never forget
 about others; people are important, each interaction moulds us. &lt;/p&gt;
@@ -2678,7 +2616,7 @@ one can learn from their supposed mistake, then I would like to think regret
 doesn't fit. There's still time, only now you know what it feels to lose.  In
 all seriousness. I hope whatever you're doing, wherever you are, that you have
 stuck to our values.&lt;/p&gt;
-&lt;p&gt;Your nails better be pristine :)&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>revolution of our time</title><link href="/revolution-of-our-time.html" rel="alternate"></link><published>2020-06-03T00:00:00+01:00</published><updated>2020-06-03T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-03:/revolution-of-our-time.html</id><summary type="html">&lt;p&gt;"But half of the T-shirts I own are black &amp;hellip;" &lt;/p&gt;
+&lt;p&gt;Your nails better be pristine :)&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Revolution of our Time</title><link href="/revolution-of-our-time.html" rel="alternate"></link><published>2020-06-03T00:00:00+01:00</published><updated>2020-06-03T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-03:/revolution-of-our-time.html</id><summary type="html">&lt;p&gt;"But half of the T-shirts I own are black &amp;hellip;" &lt;/p&gt;
 &lt;p&gt;I didn't give much thought to the political situation before flying out.
 Flights were booked and in my mind, Hong Kong was home for the next 10 months.
 Protests simmering over summer weren't going away. One side, had to give. &lt;/p&gt;
@@ -2976,7 +2914,7 @@ attributes.&lt;/p&gt;
 opinion, for our horizontal friend and advisor, only he who has courage is free
 with his opinion. &lt;/p&gt;
 &lt;p&gt;The best way of checking if you are alive is by checking if you live
-variations. Remember that food would not have a taste if it weren't for hunger.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>python-idioms</title><link href="/python-idioms.html" rel="alternate"></link><published>2020-03-22T00:00:00+00:00</published><updated>2020-03-22T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-03-22:/python-idioms.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;A collection of python idioms and design patterns&lt;/strong&gt;&lt;/p&gt;
+variations. Remember that food would not have a taste if it weren't for hunger.&lt;/p&gt;</content><category term="Book Notes"></category></entry><entry><title>Python Idioms</title><link href="/python-idioms.html" rel="alternate"></link><published>2020-03-22T00:00:00+00:00</published><updated>2020-03-22T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-03-22:/python-idioms.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;A collection of python idioms and design patterns&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;What idioms should I use to make my code easier to read?&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Build strings as a list and use &lt;code&gt;''.join&lt;/code&gt; at the end.p&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;Join is a string method called on the separator, not the list. Calling it from
@@ -3147,7 +3085,7 @@ of the particular project.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=_O23jIXsshs"&gt;10 tips for pythonic code&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/mikeckennedy/ten-tips-for-pythonic-code-jetbrains-webcast/blob/master/"&gt;ten-tips-for-pythonic-coten-tips-for-pythonic-code&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="blog"></category></entry><entry><title>grok the term</title><link href="/grok-the-term.html" rel="alternate"></link><published>2020-01-29T00:00:00+00:00</published><updated>2020-12-26T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-29:/grok-the-term.html</id><summary type="html">&lt;p&gt;A few minutes into a conversation about &lt;a href=""&gt;why I use Linux&lt;/a&gt;, I am hit with the question. &lt;em&gt;So what is&lt;/em&gt; a terminal?&lt;/p&gt;
+&lt;/ul&gt;</content><category term="Python"></category></entry><entry><title>grok the term</title><link href="/grok-the-term.html" rel="alternate"></link><published>2020-01-29T00:00:00+00:00</published><updated>2020-12-26T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-29:/grok-the-term.html</id><summary type="html">&lt;p&gt;A few minutes into a conversation about &lt;a href=""&gt;why I use Linux&lt;/a&gt;, I am hit with the question. &lt;em&gt;So what is&lt;/em&gt; a terminal?&lt;/p&gt;
 &lt;p&gt;looking at a segment of &lt;code&gt;pstree&lt;/code&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt; ├─st───zsh───tmux: client
  └─st───zsh───pstree
@@ -3273,7 +3211,7 @@ The evening air comes cold,&lt;br&gt;
 The sunset scatters gold.&lt;br&gt;
 Small grasses toss and bend,&lt;br&gt;
 Small pathways idly tend&lt;br&gt;
-Towards no fearful end.  &lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Learning to Learn</title><link href="/learning-to-learn.html" rel="alternate"></link><published>2019-07-20T00:00:00+01:00</published><updated>2022-01-01T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2019-07-20:/learning-to-learn.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Notes from the Coursera Course: Learning How to Learn&lt;/strong&gt;&lt;/p&gt;
+Towards no fearful end.  &lt;/p&gt;</content><category term="blog"></category><category term="Poem"></category></entry><entry><title>Learning to Learn</title><link href="/learning-to-learn.html" rel="alternate"></link><published>2019-07-20T00:00:00+01:00</published><updated>2022-01-01T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2019-07-20:/learning-to-learn.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Notes from the Coursera Course: Learning How to Learn&lt;/strong&gt;&lt;/p&gt;
 &lt;h2&gt;1. What is Learning&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;FOCUSED&lt;/strong&gt; and &lt;strong&gt;DIFFUSE&lt;/strong&gt; mode.&lt;/p&gt;
 &lt;p&gt;When learning, its best to make use of both modes, switching between focused and diffuse mode thinking.&lt;/p&gt;
@@ -3603,4 +3541,4 @@ frequently browse. Some notable mentions:    &lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="test"></category></entry></feed>
+&lt;/script&gt;</content><category term="Test"></category></entry></feed>
