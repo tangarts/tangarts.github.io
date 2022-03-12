@@ -49,7 +49,7 @@
   </span>
 </div>
 
-<article><p>TLDR; Cosmos DB offers five different levels of consistency guarantees so that the best performance of an application can be achieved without sacrificing data integrity. This post covers each consistency level </p>
+<article><p>TLDR; Cosmos DB offers five different levels of consistency guarantees so that the best performance of an application can be achieved without sacrificing data integrity.</p>
 <h2>What is Consistency?</h2>
 <p>Within distributed systems, consistency assumes there is a single correct way to describe the order in which the events happen. Consistency can also be seen as recency guarantee; there appears to be a single copy of the data. As soon as one client successfully completes a write, all observers reading from the database must be able to see the value just written. </p>
 <p>On one hand, strong consistency guarantees every user will see the latest updated data, but may need to wait for all instances to be up to date. On the other hand, an eventual consistency guarantee means users will get a fast response but may see inconsistent data. </p>

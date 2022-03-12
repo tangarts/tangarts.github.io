@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - .NET</title><link href="/" rel="alternate"></link><link href="/feeds/net.atom.xml" rel="self"></link><id>/</id><updated>2022-02-02T00:00:00+00:00</updated><entry><title>Application Startup in ASP.NET Core</title><link href="/application-startup.html" rel="alternate"></link><published>2022-02-02T00:00:00+00:00</published><updated>2022-02-02T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2022-02-02:/application-startup.html</id><summary type="html">&lt;p&gt;In this post, we investigate what the application startup code does in a new ASP.NET Core web project.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;TLDR; In an ASP.NET web application, the Program.cs file contains code that configures, runs and manages the lifetime of your app. In this post we explore what happens when you run a new ASP.NET Core web application.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;When working on an existing ASP.NET application it might be daunting to know where to begin with understanding the codebase. With a new ASP.NET Core 3.1 or .NET 5.0 web application you're met with two files with boilerplate code the &lt;code&gt;Startup.cs&lt;/code&gt; and &lt;code&gt;Program.cs&lt;/code&gt;. What do they do?&lt;/p&gt;
+&lt;h2&gt;The entry point&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Program&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;Main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;CreateHostBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;Build&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;Run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;IHostBuilder&lt;/span&gt; &lt;span class="nf"&gt;CreateHostBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class="n"&gt;Host&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CreateDefaultBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ConfigureWebHostDefaults&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;webBuilder&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;webBuilder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseStartup&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Startup&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;();&lt;/span&gt;
+            &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In .NET applications, it is convention to have a &lt;code&gt;Program.cs&lt;/code&gt; file with a public static method called &lt;code&gt;Main&lt;/code&gt; inside the &lt;code&gt;Program&lt;/code&gt; class&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;. Similar to command-line applications, the &lt;code&gt;Program.Main&lt;/code&gt; method is the entry point of our application, where the execution chain begins when the application starts running.&lt;/p&gt;
+&lt;p&gt;When you run the application using &lt;code&gt;dotnet run&lt;/code&gt; on the command line, the command looks in the current folder or project file, builds the project, launches a process and looks for the entry point to execute your code. &lt;/p&gt;
+&lt;p&gt;When the &lt;code&gt;Main&lt;/code&gt; method is executed, the program creates a host builder, builds the host and then runs the application. The host is responsible for the application's startup and lifetime management. &lt;/p&gt;
+&lt;p&gt;The host is also responsible for configuring the necessary pieces your web application needs to communicate with incoming HTTP requests and to respond in the appropriate way. This includes: an HTTP server implementation, middleware components, logging, dependency injection (DI) services and configuration. The configuration and instantiation consists of the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;creating a builder&lt;/li&gt;
+&lt;li&gt;configuring services&lt;/li&gt;
+&lt;li&gt;creating the application host&lt;/li&gt;
+&lt;li&gt;running the application&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The next few sections expand on the above steps.&lt;/p&gt;
+&lt;h3&gt;Creating a builder&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;HostBuilder&lt;/code&gt; knows how to create your application and also configures the necessary default pieces your web application needs to determine how to operate. If we look at the definition of &lt;code&gt;CreateDefaultBuilder&lt;/code&gt; method we see that it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;sets the base root of the project to the current directory. This is how the application is able to locate the folder containing static files, Razor pages, and configuration files such as  &lt;code&gt;appsettings.json&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;loads configuration. The different configuration sources include &lt;code&gt;appsettings.json&lt;/code&gt;, environment variables, and command-line arguments. &lt;/li&gt;
+&lt;li&gt;adds logging logging providers such as console and debug. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The next method to be called is the &lt;code&gt;ConfigureWebHostDefaults&lt;/code&gt; which unsurprisingly, configures web specific defaults. This includes setting the HTTP server as Kestrel server and adds the host filtering middleware, which in combination with the &lt;code&gt;AllowedHosts&lt;/code&gt; key in &lt;code&gt;appsettings.json&lt;/code&gt;, specifies the allowable host names. &lt;/p&gt;
+&lt;h3&gt;Configuring services&lt;/h3&gt;
+&lt;p&gt;The call to &lt;code&gt;UseStartup&lt;/code&gt; looks for the &lt;code&gt;ConfigureServices&lt;/code&gt; and &lt;code&gt;Configure&lt;/code&gt; methods in the &lt;code&gt;Startup&lt;/code&gt; class. The &lt;code&gt;ConfigureServices&lt;/code&gt; method allows us to register services with the dependency injection container. This gives us the ability to put our custom services into the ASP.NET Core, which can be injected into the application where needed. An example would be registering a database, whether that is an in-memory or a SQL database. &lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;Configure&lt;/code&gt; method allows us to customise the HTTP request pipeline or middleware pipeline. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Startup&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="n"&gt;IConfiguration&lt;/span&gt; &lt;span class="n"&gt;Configuration&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;get&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;Startup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IConfiguration&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Configuration&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// This method gets called by the runtime. Use this method to add services to the container.&lt;/span&gt;
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;ConfigureServices&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IServiceCollection&lt;/span&gt; &lt;span class="n"&gt;services&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddControllersWithViews&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.&lt;/span&gt;
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;Configure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IApplicationBuilder&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IWebHostEnvironment&lt;/span&gt; &lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="p"&gt;...&lt;/span&gt;
+        &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseRouting&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseEndpoints&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;endpoints&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;endpoints&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapControllerRoute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="n"&gt;pattern&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;{controller=Home}/{action=Index}/{id?}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Creating the application&lt;/h3&gt;
+&lt;p&gt;We call &lt;code&gt;.Build()&lt;/code&gt; on the &lt;code&gt;HostBuilder&lt;/code&gt; which initialises the host. This then:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;starts the web host instance so it can listen, receive and process HTTP messages.&lt;/li&gt;
+&lt;li&gt;loads configuration from &lt;code&gt;appsettings.json&lt;/code&gt;, environment variables and other configuration sources.&lt;/li&gt;
+&lt;li&gt;sends logging output to the console. This what we see in the console as we interact with the web application.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Run&lt;/h3&gt;
+&lt;p&gt;We then &lt;code&gt;Run&lt;/code&gt; the application. The &lt;code&gt;Run&lt;/code&gt; method starts the application and blocks the calling thread until the host is shut down. &lt;/p&gt;
+&lt;h2&gt;.NET 6.0&lt;/h2&gt;
+&lt;p&gt;With .NET 6.0 we're given a &lt;code&gt;Startup.cs&lt;/code&gt; file with the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;WebApplicationBuilder&lt;/span&gt;&lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;builder&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;WebApplication&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CreateBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Add services to the container.&lt;/span&gt;
+&lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddRazorPages&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddControllersWithViews&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="n"&gt;WebApplication&lt;/span&gt;&lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Build&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Configure the HTTP request pipeline.&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(!&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsDevelopment&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseExceptionHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/Error&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseHttpsRedirection&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseStaticFiles&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseAuthorization&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapGet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/hi&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapDefaultControllerRoute&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapRazorPages&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There is a significant visual difference between the new boilerplate we are now given and the first example. However, the execution of steps remain the same:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;we create a builder which registers default services &lt;/li&gt;
+&lt;li&gt;we register our services&lt;/li&gt;
+&lt;li&gt;we build the web application&lt;/li&gt;
+&lt;li&gt;we run the web application&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;.NET 6 simplifies the boiler plate code and introduces types &lt;code&gt;WebApplicationBuilder&lt;/code&gt; and &lt;code&gt;WebApplication&lt;/code&gt; that replaces the &lt;code&gt;HostBuilder&lt;/code&gt; and &lt;code&gt;Host&lt;/code&gt; respectively.&lt;/p&gt;
+&lt;h3&gt;.NET &lt;code&gt;WebApplication&lt;/code&gt; Host&lt;/h3&gt;
+&lt;p&gt;This is the new and default way of creating a web application. There are a few major differences in how the &lt;code&gt;WebApplication&lt;/code&gt; host is configured but the underlying steps to configure and manage the application is similar to the &lt;code&gt;Host&lt;/code&gt; we saw in the previous section. &lt;/p&gt;
+&lt;p&gt;First of all, the &lt;code&gt;Startup&lt;/code&gt; class has been removed. Instead of registering services with &lt;code&gt;ConfigureServices&lt;/code&gt;, they are registered directly on the &lt;code&gt;Services&lt;/code&gt; property. The same applies when configuring the HTTP pipeline. Instead of registering middleware with &lt;code&gt;Configure&lt;/code&gt; we call the &lt;code&gt;UseXyz&lt;/code&gt; methods directly on the app of type &lt;code&gt;WebApplication&lt;/code&gt; (which implements &lt;code&gt;IApplicationBuilder&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;For new applications, this is the preferred way of getting started. However, this doesn't mean you should migrate every ASP.NET application to using the new template. The previous instantiation using the &lt;code&gt;HostBuilder&lt;/code&gt; and &lt;code&gt;Startup&lt;/code&gt; class still works in .NET 6. &lt;/p&gt;
+&lt;p&gt;With the simplified .NET 6.0 achieving the same result as the first example, is it necessary to know about &lt;code&gt;HostBuilder&lt;/code&gt; and the separation of concerns with the &lt;code&gt;Program.cs&lt;/code&gt; and &lt;code&gt;Startup.cs&lt;/code&gt;? Well, yes. The next section covers why we still have the &lt;code&gt;HostBuilder&lt;/code&gt; and briefly comments on the original way of creating a default web host (that was introduced in ASP.NET Core 2.1).&lt;/p&gt;
+&lt;h2&gt;ASP.NET Core: &lt;code&gt;Host&lt;/code&gt; and &lt;code&gt;WebHost&lt;/code&gt;&lt;/h2&gt;
+&lt;h3&gt;ASP.NET Core &lt;code&gt;WebHost&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Before ASP.NET Core 3.x, this was the default way of configuring and instantiating your web application. The decision to move away from using the &lt;code&gt;WebHost&lt;/code&gt; and &lt;code&gt;WebHostBuilder&lt;/code&gt; was to decouple the web specific configuration (server and middleware) from application specific configuration (logging, configuration and dependency injection services). &lt;/p&gt;
+&lt;p&gt;Creating a &lt;code&gt;WebHostBuilder&lt;/code&gt; involves:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Configuring DI services, logging, configuration, default filtering middleware and the HTTP server&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;UseStartup&amp;lt;Startup&amp;gt;()&lt;/code&gt; to specify the startup class to configure our dependency injection services and HTTP request pipeline.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;IWebHostBuilder&lt;/span&gt; &lt;span class="nf"&gt;CreateWebHostBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class="n"&gt;WebHost&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CreateDefaultBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+           &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseStartup&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Startup&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For a web application using the generic &lt;code&gt;HostBuilder&lt;/code&gt;, &lt;code&gt;WebHost.CreateDefaultBuilder&lt;/code&gt; is split across two methods &lt;code&gt;Host.CreateDefaultBuilder&lt;/code&gt; and &lt;code&gt;ConfigureWebHostDefaults&lt;/code&gt; as we saw in the first code snippet. The &lt;code&gt;WebHost&lt;/code&gt; is no longer recommended for creating new web applications. However, it is still used for backwards compatibility with ASP.NET Core 2.x. &lt;/p&gt;
+&lt;h3&gt;.NET Generic &lt;code&gt;Host&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;This is the default way of creating a web host in ASP.NET Core 3.x and .NET 5.0. The generic host separates the registering of configuration, dependency injection services and logging from the web specific resources such as the middleware components and the HTTP server implementation. This allows non-HTTP based applications to be able to use dependency injection services, logging and configuration. &lt;/p&gt;
+&lt;p&gt;The interfaces &lt;code&gt;IHost&lt;/code&gt; and &lt;code&gt;IHostBuilder&lt;/code&gt; are found in &lt;code&gt;Microsoft.Extensions.Hosting&lt;/code&gt;, emphasising that we can now have hosted services that are not dependent on &lt;code&gt;AspNetCore&lt;/code&gt; namespace. &lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;In this post we looked at understanding what the boilerplate code does in a new ASP.NET Core application. We first looked at the ASP.NET Core 3.x and 5.0 example and then covered the new ASP.NET 6.0 web application template. We saw that despite the visual difference between template code, both do similar jobs and achieve the same outcome. We ended by talking about the differences between startup code across the different ASP.NET Core version, from 2.1 to 6.0.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;With .NET 6 this is no longer mandatory. Some of the new changes also include not requiring the &lt;code&gt;namespace&lt;/code&gt; keyword and the removal of commonly used &lt;code&gt;using&lt;/code&gt; statements.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term=".NET"></category><category term="dotnet"></category><category term="csharp"></category></entry></feed>

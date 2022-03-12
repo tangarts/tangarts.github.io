@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - Python</title><link href="/" rel="alternate"></link><link href="/feeds/python.atom.xml" rel="self"></link><id>/</id><updated>2021-12-31T00:00:00+00:00</updated><entry><title>Python packaging</title><link href="/python-packaging.html" rel="alternate"></link><published>2021-12-09T00:00:00+00:00</published><updated>2021-12-31T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-09:/python-packaging.html</id><summary type="html">&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
-&lt;p&gt;I've collected useful utility functions to help me with this years advent of code. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-    &lt;span class="mi"&gt;2020 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
-&lt;p&gt;I've collected useful utility functions to help me with this years advent of code. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - Python</title><link href="/" rel="alternate"></link><link href="/feeds/python.atom.xml" rel="self"></link><id>/</id><updated>2021-12-31T00:00:00+00:00</updated><entry><title>Python packaging</title><link href="/python-packaging.html" rel="alternate"></link><published>2021-12-09T00:00:00+00:00</published><updated>2021-12-31T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-09:/python-packaging.html</id><summary type="html">&lt;h1&gt;Python packaging&lt;/h1&gt;
+&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
+&lt;p&gt;I've collected a few useful utility functions to help me with &lt;a href="https://adventofcode.com/2021"&gt;advent of code 2021&lt;/a&gt;. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;Python packaging&lt;/h1&gt;
+&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
+&lt;p&gt;I've collected a few useful utility functions to help me with &lt;a href="https://adventofcode.com/2021"&gt;advent of code 2021&lt;/a&gt;. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
     &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
     &lt;span class="mi"&gt;2021&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
@@ -17,8 +18,8 @@
     &lt;span class="n"&gt;README&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Before starting each puzzle I load up a new python file with the first line always starting with &lt;code&gt;from toolbox.core import ...&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Everything was great until I wanted to re-use my tool box for last years problems. I didn't want to duplicate my toolbox for every advent of code year I participate in. A logical place, I thought, would be to place the toolbox in the root of the project like so:&lt;/p&gt;
+&lt;p&gt;For each puzzle I create a new python file with the first line always starting with &lt;code&gt;from toolbox.core import ...&lt;/code&gt; to handle parsing data.&lt;/p&gt;
+&lt;p&gt;Everything works smoothly until I wanted to re-use my toolbox modules for 2020 problems. I don't want to duplicate my toolbox for every advent of code year I participate in. A logical place I thought, would be to place the toolbox package in the root of the project like so:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
     &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
     &lt;span class="mi"&gt;2021&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
@@ -32,13 +33,12 @@
     &lt;span class="n"&gt;README&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;This way I wouldn't have to duplicate my code and could expose the toolbox for each year to use. Not quite.&lt;/p&gt;
-&lt;p&gt;I first tried a relative import &lt;code&gt;from ..toolbox.core import parse_input&lt;/code&gt;. But that didn't work. &lt;/p&gt;
-&lt;p&gt;To answer the reason why, we need to understand what happens when you run a python script.&lt;/p&gt;
-&lt;h2&gt;What happens when you run a python script?&lt;/h2&gt;
-&lt;p&gt;The simplest solution was to create a local package using the &lt;code&gt;setuptools&lt;/code&gt; package that comes with a fresh installation of python 3.9.&lt;/p&gt;
-&lt;p&gt;If you want a minimal solution, look no further. Here it is:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;setup.py&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This way I won't have to duplicate my code and could expose the toolbox for each year to use. Not quite.&lt;/p&gt;
+&lt;p&gt;The problem is that when running the python file inside the &lt;code&gt;2021/&lt;/code&gt; directory, the python interpreter is unable to locate the &lt;code&gt;toolbox/&lt;/code&gt;. The list of system paths tells python where to look for python code that it can import such as the inbuilt &lt;code&gt;collections&lt;/code&gt;, &lt;code&gt;functools&lt;/code&gt; and &lt;code&gt;math&lt;/code&gt; packages, and pip-installed modules such as &lt;code&gt;pytest&lt;/code&gt;, &lt;code&gt;numpy&lt;/code&gt; and &lt;code&gt;pandas&lt;/code&gt;. We could, for each runnable script, add the location of the toolbox to the system path (&lt;code&gt;sys.path&lt;/code&gt;). However, this is cumbersome; there is a much better way.&lt;/p&gt;
+&lt;h2&gt;Local modules&lt;/h2&gt;
+&lt;p&gt;A simple fix is to create a local package using the &lt;code&gt;setuptools&lt;/code&gt; package. &lt;code&gt;setuptools&lt;/code&gt; can be installed using &lt;code&gt;pip install setuptools&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you want a minimal solution look no further, Here it is.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;setup.py&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
 
 &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
@@ -52,18 +52,20 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ pip install -e .
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Enjoy. :).&lt;/p&gt;
+&lt;p&gt;From &lt;code&gt;pip install --help&lt;/code&gt; we see that the &lt;code&gt;-e&lt;/code&gt; flag or &lt;code&gt;--editable&lt;/code&gt; is to "install a project in editable mode (i.e. setuptools "develop mode") from a local project path ...".&lt;/p&gt;
+&lt;p&gt;Enjoy :).&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;For those who want to know a little more, let's continue. &lt;/p&gt;
-&lt;h2&gt;setup.cfg and setup.py&lt;/h2&gt;
+&lt;h2&gt;&lt;code&gt;setup.cfg&lt;/code&gt; and &lt;code&gt;setup.py&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;There are two ways to specify setup config, dynamically as parameters of the &lt;code&gt;setuptools.setup()&lt;/code&gt; function and in a &lt;code&gt;setup.cfg&lt;/code&gt; config file.&lt;/p&gt;
-&lt;p&gt;The equivalent setup to the first example would split across the executable and config file.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;setup.py&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The equivalent setup to the first example would be split across the executable and config file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;setup.py&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
 
 &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;setup.cfg&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;setup.cfg&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[options]&lt;/span&gt;
 &lt;span class="na"&gt;packages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;toolbox&lt;/span&gt;
 
@@ -72,10 +74,11 @@
 &lt;span class="na"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;0.1.0&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;As you can see, the &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;version&lt;/code&gt; and &lt;code&gt;packages&lt;/code&gt; attributes are now configured as options and metadata. There is no definitive way in using &lt;code&gt;setuptools&lt;/code&gt;. I personally prefer to have all config in a config file. With additional optional fields such as a &lt;em&gt;long_description&lt;/em&gt;, it is easy to edit a config file than source code.&lt;/p&gt;
-&lt;h2&gt;Sharing is Caring.&lt;/h2&gt;
-&lt;p&gt;Finally, if you're excited to share your python project as a package, it is easy to register it using the Python Package Index (PyPI).&lt;/p&gt;
-&lt;p&gt;First, the name field must be unique if you wish to publish your package on the Python Package Index (PyPI). The packages field describes where you’ve put the Python source code within your project. &lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python Idioms</title><link href="/python-idioms.html" rel="alternate"></link><published>2020-03-22T00:00:00+00:00</published><updated>2020-03-22T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-03-22:/python-idioms.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;A collection of python idioms and design patterns&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, the &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;version&lt;/code&gt; and &lt;code&gt;packages&lt;/code&gt; attributes are now configured as options and metadata. There is no definitive way in using &lt;code&gt;setuptools&lt;/code&gt;. I personally prefer to have all config in a config file. With additional optional fields such as a &lt;em&gt;long_description&lt;/em&gt;, it is easy to edit a config file than source code. Even if it is python. &lt;/p&gt;
+&lt;h2&gt;Sharing is Caring&lt;/h2&gt;
+&lt;p&gt;Finally, if you're excited to share your python project as a package, it is easy to register it using the Python Package Index (PyPI). I recommend looking at the &lt;a href="https://setuptools.pypa.io/en/latest/userguide/quickstart.html"&gt;setuptools&lt;/a&gt; documentation and &lt;a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/"&gt;Packaging Python Authority (PyPA)&lt;/a&gt; to learn more about the standard way of building and distributing python projects. &lt;/p&gt;
+&lt;h2&gt;In Conclusion&lt;/h2&gt;
+&lt;p&gt;Reusing python code across local projects can be done in as little as a two liner python script and pip install command. Whilst there are different options in packaging a project to share on the Python Package Index, &lt;code&gt;setuptools&lt;/code&gt; makes it easy to build a package and registering is also fairly simple.&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python Idioms</title><link href="/python-idioms.html" rel="alternate"></link><published>2020-03-22T00:00:00+00:00</published><updated>2020-03-22T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-03-22:/python-idioms.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;A collection of python idioms and design patterns&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;What idioms should I use to make my code easier to read?&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Build strings as a list and use &lt;code&gt;''.join&lt;/code&gt; at the end.p&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;Join is a string method called on the separator, not the list. Calling it from

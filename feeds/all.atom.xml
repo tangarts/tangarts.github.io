@@ -1,5 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2022-01-01T00:00:00+00:00</updated><entry><title>A Gentle Introduction to Inflation</title><link href="/a-gentle-introduction-to-inflation.html" rel="alternate"></link><published>2021-12-29T18:52:00+00:00</published><updated>2021-12-29T18:52:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-29:/a-gentle-introduction-to-inflation.html</id><summary type="html">&lt;p&gt;"Back in my day Freddos were 10p a pop. Now look at the price, two and a half times more than what used to pay. And every January, we brace a little for the increase price of living: potatoes, peas, and toilet paper. Whilst our wages stay the same."&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2022-02-02T00:00:00+00:00</updated><entry><title>Application Startup in ASP.NET Core</title><link href="/application-startup.html" rel="alternate"></link><published>2022-02-02T00:00:00+00:00</published><updated>2022-02-02T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2022-02-02:/application-startup.html</id><summary type="html">&lt;p&gt;In this post, we investigate what the application startup code does in a new ASP.NET Core web project.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;TLDR; In an ASP.NET web application, the Program.cs file contains code that configures, runs and manages the lifetime of your app. In this post we explore what happens when you run a new ASP.NET Core web application.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;When working on an existing ASP.NET application it might be daunting to know where to begin with understanding the codebase. With a new ASP.NET Core 3.1 or .NET 5.0 web application you're met with two files with boilerplate code the &lt;code&gt;Startup.cs&lt;/code&gt; and &lt;code&gt;Program.cs&lt;/code&gt;. What do they do?&lt;/p&gt;
+&lt;h2&gt;The entry point&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Program&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;Main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;CreateHostBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;Build&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;Run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;IHostBuilder&lt;/span&gt; &lt;span class="nf"&gt;CreateHostBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class="n"&gt;Host&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CreateDefaultBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ConfigureWebHostDefaults&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;webBuilder&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;webBuilder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseStartup&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Startup&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;();&lt;/span&gt;
+            &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In .NET applications, it is convention to have a &lt;code&gt;Program.cs&lt;/code&gt; file with a public static method called &lt;code&gt;Main&lt;/code&gt; inside the &lt;code&gt;Program&lt;/code&gt; class&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;. Similar to command-line applications, the &lt;code&gt;Program.Main&lt;/code&gt; method is the entry point of our application, where the execution chain begins when the application starts running.&lt;/p&gt;
+&lt;p&gt;When you run the application using &lt;code&gt;dotnet run&lt;/code&gt; on the command line, the command looks in the current folder or project file, builds the project, launches a process and looks for the entry point to execute your code. &lt;/p&gt;
+&lt;p&gt;When the &lt;code&gt;Main&lt;/code&gt; method is executed, the program creates a host builder, builds the host and then runs the application. The host is responsible for the application's startup and lifetime management. &lt;/p&gt;
+&lt;p&gt;The host is also responsible for configuring the necessary pieces your web application needs to communicate with incoming HTTP requests and to respond in the appropriate way. This includes: an HTTP server implementation, middleware components, logging, dependency injection (DI) services and configuration. The configuration and instantiation consists of the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;creating a builder&lt;/li&gt;
+&lt;li&gt;configuring services&lt;/li&gt;
+&lt;li&gt;creating the application host&lt;/li&gt;
+&lt;li&gt;running the application&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The next few sections expand on the above steps.&lt;/p&gt;
+&lt;h3&gt;Creating a builder&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;HostBuilder&lt;/code&gt; knows how to create your application and also configures the necessary default pieces your web application needs to determine how to operate. If we look at the definition of &lt;code&gt;CreateDefaultBuilder&lt;/code&gt; method we see that it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;sets the base root of the project to the current directory. This is how the application is able to locate the folder containing static files, Razor pages, and configuration files such as  &lt;code&gt;appsettings.json&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;loads configuration. The different configuration sources include &lt;code&gt;appsettings.json&lt;/code&gt;, environment variables, and command-line arguments. &lt;/li&gt;
+&lt;li&gt;adds logging logging providers such as console and debug. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The next method to be called is the &lt;code&gt;ConfigureWebHostDefaults&lt;/code&gt; which unsurprisingly, configures web specific defaults. This includes setting the HTTP server as Kestrel server and adds the host filtering middleware, which in combination with the &lt;code&gt;AllowedHosts&lt;/code&gt; key in &lt;code&gt;appsettings.json&lt;/code&gt;, specifies the allowable host names. &lt;/p&gt;
+&lt;h3&gt;Configuring services&lt;/h3&gt;
+&lt;p&gt;The call to &lt;code&gt;UseStartup&lt;/code&gt; looks for the &lt;code&gt;ConfigureServices&lt;/code&gt; and &lt;code&gt;Configure&lt;/code&gt; methods in the &lt;code&gt;Startup&lt;/code&gt; class. The &lt;code&gt;ConfigureServices&lt;/code&gt; method allows us to register services with the dependency injection container. This gives us the ability to put our custom services into the ASP.NET Core, which can be injected into the application where needed. An example would be registering a database, whether that is an in-memory or a SQL database. &lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;Configure&lt;/code&gt; method allows us to customise the HTTP request pipeline or middleware pipeline. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Startup&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="n"&gt;IConfiguration&lt;/span&gt; &lt;span class="n"&gt;Configuration&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;get&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;Startup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IConfiguration&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Configuration&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// This method gets called by the runtime. Use this method to add services to the container.&lt;/span&gt;
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;ConfigureServices&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IServiceCollection&lt;/span&gt; &lt;span class="n"&gt;services&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddControllersWithViews&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.&lt;/span&gt;
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;Configure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IApplicationBuilder&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IWebHostEnvironment&lt;/span&gt; &lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="p"&gt;...&lt;/span&gt;
+        &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseRouting&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseEndpoints&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;endpoints&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;endpoints&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapControllerRoute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="n"&gt;pattern&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;{controller=Home}/{action=Index}/{id?}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Creating the application&lt;/h3&gt;
+&lt;p&gt;We call &lt;code&gt;.Build()&lt;/code&gt; on the &lt;code&gt;HostBuilder&lt;/code&gt; which initialises the host. This then:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;starts the web host instance so it can listen, receive and process HTTP messages.&lt;/li&gt;
+&lt;li&gt;loads configuration from &lt;code&gt;appsettings.json&lt;/code&gt;, environment variables and other configuration sources.&lt;/li&gt;
+&lt;li&gt;sends logging output to the console. This what we see in the console as we interact with the web application.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Run&lt;/h3&gt;
+&lt;p&gt;We then &lt;code&gt;Run&lt;/code&gt; the application. The &lt;code&gt;Run&lt;/code&gt; method starts the application and blocks the calling thread until the host is shut down. &lt;/p&gt;
+&lt;h2&gt;.NET 6.0&lt;/h2&gt;
+&lt;p&gt;With .NET 6.0 we're given a &lt;code&gt;Startup.cs&lt;/code&gt; file with the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;WebApplicationBuilder&lt;/span&gt;&lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;builder&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;WebApplication&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CreateBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Add services to the container.&lt;/span&gt;
+&lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddRazorPages&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddControllersWithViews&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="n"&gt;WebApplication&lt;/span&gt;&lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Build&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Configure the HTTP request pipeline.&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(!&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsDevelopment&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseExceptionHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/Error&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseHttpsRedirection&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseStaticFiles&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseAuthorization&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapGet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/hi&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapDefaultControllerRoute&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MapRazorPages&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Run&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There is a significant visual difference between the new boilerplate we are now given and the first example. However, the execution of steps remain the same:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;we create a builder which registers default services &lt;/li&gt;
+&lt;li&gt;we register our services&lt;/li&gt;
+&lt;li&gt;we build the web application&lt;/li&gt;
+&lt;li&gt;we run the web application&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;.NET 6 simplifies the boiler plate code and introduces types &lt;code&gt;WebApplicationBuilder&lt;/code&gt; and &lt;code&gt;WebApplication&lt;/code&gt; that replaces the &lt;code&gt;HostBuilder&lt;/code&gt; and &lt;code&gt;Host&lt;/code&gt; respectively.&lt;/p&gt;
+&lt;h3&gt;.NET &lt;code&gt;WebApplication&lt;/code&gt; Host&lt;/h3&gt;
+&lt;p&gt;This is the new and default way of creating a web application. There are a few major differences in how the &lt;code&gt;WebApplication&lt;/code&gt; host is configured but the underlying steps to configure and manage the application is similar to the &lt;code&gt;Host&lt;/code&gt; we saw in the previous section. &lt;/p&gt;
+&lt;p&gt;First of all, the &lt;code&gt;Startup&lt;/code&gt; class has been removed. Instead of registering services with &lt;code&gt;ConfigureServices&lt;/code&gt;, they are registered directly on the &lt;code&gt;Services&lt;/code&gt; property. The same applies when configuring the HTTP pipeline. Instead of registering middleware with &lt;code&gt;Configure&lt;/code&gt; we call the &lt;code&gt;UseXyz&lt;/code&gt; methods directly on the app of type &lt;code&gt;WebApplication&lt;/code&gt; (which implements &lt;code&gt;IApplicationBuilder&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;For new applications, this is the preferred way of getting started. However, this doesn't mean you should migrate every ASP.NET application to using the new template. The previous instantiation using the &lt;code&gt;HostBuilder&lt;/code&gt; and &lt;code&gt;Startup&lt;/code&gt; class still works in .NET 6. &lt;/p&gt;
+&lt;p&gt;With the simplified .NET 6.0 achieving the same result as the first example, is it necessary to know about &lt;code&gt;HostBuilder&lt;/code&gt; and the separation of concerns with the &lt;code&gt;Program.cs&lt;/code&gt; and &lt;code&gt;Startup.cs&lt;/code&gt;? Well, yes. The next section covers why we still have the &lt;code&gt;HostBuilder&lt;/code&gt; and briefly comments on the original way of creating a default web host (that was introduced in ASP.NET Core 2.1).&lt;/p&gt;
+&lt;h2&gt;ASP.NET Core: &lt;code&gt;Host&lt;/code&gt; and &lt;code&gt;WebHost&lt;/code&gt;&lt;/h2&gt;
+&lt;h3&gt;ASP.NET Core &lt;code&gt;WebHost&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Before ASP.NET Core 3.x, this was the default way of configuring and instantiating your web application. The decision to move away from using the &lt;code&gt;WebHost&lt;/code&gt; and &lt;code&gt;WebHostBuilder&lt;/code&gt; was to decouple the web specific configuration (server and middleware) from application specific configuration (logging, configuration and dependency injection services). &lt;/p&gt;
+&lt;p&gt;Creating a &lt;code&gt;WebHostBuilder&lt;/code&gt; involves:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Configuring DI services, logging, configuration, default filtering middleware and the HTTP server&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;UseStartup&amp;lt;Startup&amp;gt;()&lt;/code&gt; to specify the startup class to configure our dependency injection services and HTTP request pipeline.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="n"&gt;IWebHostBuilder&lt;/span&gt; &lt;span class="nf"&gt;CreateWebHostBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class="n"&gt;WebHost&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CreateDefaultBuilder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+           &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UseStartup&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Startup&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For a web application using the generic &lt;code&gt;HostBuilder&lt;/code&gt;, &lt;code&gt;WebHost.CreateDefaultBuilder&lt;/code&gt; is split across two methods &lt;code&gt;Host.CreateDefaultBuilder&lt;/code&gt; and &lt;code&gt;ConfigureWebHostDefaults&lt;/code&gt; as we saw in the first code snippet. The &lt;code&gt;WebHost&lt;/code&gt; is no longer recommended for creating new web applications. However, it is still used for backwards compatibility with ASP.NET Core 2.x. &lt;/p&gt;
+&lt;h3&gt;.NET Generic &lt;code&gt;Host&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;This is the default way of creating a web host in ASP.NET Core 3.x and .NET 5.0. The generic host separates the registering of configuration, dependency injection services and logging from the web specific resources such as the middleware components and the HTTP server implementation. This allows non-HTTP based applications to be able to use dependency injection services, logging and configuration. &lt;/p&gt;
+&lt;p&gt;The interfaces &lt;code&gt;IHost&lt;/code&gt; and &lt;code&gt;IHostBuilder&lt;/code&gt; are found in &lt;code&gt;Microsoft.Extensions.Hosting&lt;/code&gt;, emphasising that we can now have hosted services that are not dependent on &lt;code&gt;AspNetCore&lt;/code&gt; namespace. &lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;In this post we looked at understanding what the boilerplate code does in a new ASP.NET Core application. We first looked at the ASP.NET Core 3.x and 5.0 example and then covered the new ASP.NET 6.0 web application template. We saw that despite the visual difference between template code, both do similar jobs and achieve the same outcome. We ended by talking about the differences between startup code across the different ASP.NET Core version, from 2.1 to 6.0.&lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;With .NET 6 this is no longer mandatory. Some of the new changes also include not requiring the &lt;code&gt;namespace&lt;/code&gt; keyword and the removal of commonly used &lt;code&gt;using&lt;/code&gt; statements.&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term=".NET"></category><category term="dotnet"></category><category term="csharp"></category></entry><entry><title>Consistency Levels and Quorums</title><link href="/consistency-levels-and-quorums.html" rel="alternate"></link><published>2022-01-18T00:00:00+00:00</published><updated>2022-01-18T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2022-01-18:/consistency-levels-and-quorums.html</id><summary type="html">&lt;p&gt;This post dives into the internals of how Cosmos guarantees consistency&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;What is the underlying mechanism for data replication in Cosmos DB?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In a &lt;a href="./consistency-levels-in-cosmos-db"&gt;previous post&lt;/a&gt;, I covered the five different consistency levels Cosmos offers. We saw that choosing a consistency level requires evaluating a trade off in data consistency, availability and performance. In this post, I explore how Cosmos DB enforces consistency.&lt;/p&gt;
+&lt;p&gt;From the Microsoft documentation page on &lt;a href="https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels"&gt;Consistency levels in Azure Cosmos DB&lt;/a&gt; we have:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For strong and bounded staleness, &lt;em&gt;reads are done against two replicas in a four replica set (minority quorum)&lt;/em&gt; to provide consistency guarantees. Session, consistent prefix and eventual do &lt;em&gt;single replica reads&lt;/em&gt;. The result is that, for the same number of request units, read throughput for strong and bounded staleness is half of the other consistency levels.&lt;/p&gt;
+&lt;p&gt;For a given type of write operation, such as insert, replace, upsert, and delete, the write throughput for request units is identical for all consistency levels. For &lt;em&gt;strong consistency, changes need to be committed in every region (global majority)&lt;/em&gt; while for all other consistency levels, local majority (three replicas in a four replica set) is being used.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We also get the following table:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Consistency Level&lt;/th&gt;
+&lt;th&gt;Quorum Reads&lt;/th&gt;
+&lt;th&gt;Quorum Writes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Strong&lt;/td&gt;
+&lt;td&gt;Local Minority&lt;/td&gt;
+&lt;td&gt;Global Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Bounded Staleness&lt;/td&gt;
+&lt;td&gt;Local Minority&lt;/td&gt;
+&lt;td&gt;Local Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Session&lt;/td&gt;
+&lt;td&gt;Single Replica (using session token)&lt;/td&gt;
+&lt;td&gt;Local Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Consistent Prefix&lt;/td&gt;
+&lt;td&gt;Single Replica&lt;/td&gt;
+&lt;td&gt;Local Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Eventual&lt;/td&gt;
+&lt;td&gt;Single Replica&lt;/td&gt;
+&lt;td&gt;Local Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;What does this all mean? What are quorums, replica sets, global majority, local majority, and local minority. In this post we will figure it out together.&lt;/p&gt;
+&lt;h2&gt;Quorums and consensus&lt;/h2&gt;
+&lt;dl&gt;
+&lt;dt&gt;&lt;strong&gt;Quorum&lt;/strong&gt;&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;The smallest number of people needed to be present at a meeting before it can officially begin and before official decisions can be taken. &lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;A more technical definition of a quorum is as follows:&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;A quorum is the minimum number of votes that a distributed transaction has to obtain in order to be allowed to perform an operation in a distributed system. A quorum-based technique is implemented to enforce consistent operation in a distributed system. &lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;So a quorum is a collection of replicas communicating in such a way to ensure data consistency. Cosmos DB groups four replicas (one leader, three followers) within a physical partition to form a &lt;em&gt;replica set&lt;/em&gt;. The leader is responsible for propagating writes within the replica set. And within the replica set we can group replicas together to for a &lt;em&gt;quorum&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A partition set consisting of one leader and three followers" src="/images/partition-set.svg"&gt;&lt;/p&gt;
+&lt;p&gt;How then are quorums involved in ensuring a write or read is successful?&lt;/p&gt;
+&lt;h3&gt;Quorum Writes and Reads&lt;/h3&gt;
+&lt;p&gt;Under strong consistency, a write is deemed successful if every replica can agree on the most recent write. This comes at the price of decreased performance as every replica must have the latest value written to it for the system to agree on the current state.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="figure showing two partition sets under strong consistency" src="/images/global-m-partition-set.png"&gt;&lt;/p&gt;
+&lt;p&gt;For consistency levels other than strong, a local majority is used. This means when writing to a replica set (four instances of the data), only three of the four replicas have to be up to date at any given time for a write to be acknowledged. This keeps latency lower as if one replica was unavailable the write could still be acknowledged by the database.&lt;/p&gt;
+&lt;p&gt;For quorum reads, the convention is similar. Strong and bounded staleness, reads are done against a local majority; &lt;em&gt;two replicas in a four replica set&lt;/em&gt;, this means two replicas have to agree on seeing the same value for a read to be acknowledged. In the diagram below the bounded staleness partition-set reads from a quorum in which two partitions have the been updated to the latest value. &lt;/p&gt;
+&lt;p&gt;We can imagine the leader and two followers enclosed in the dotted line as writing a value and then a reader milliseconds later querying the same value from the replica set as the dashed box. As both boxes overlap we are guaranteed to see the latest written value.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="figure showing a partition sets under bounded staleness" src="/images/bs-partition-set.png"&gt;&lt;/p&gt;
+&lt;p&gt;Session, consistent prefix and eventual reads are done through single replicas. As shown in the diagram below, comes at a cost of reading stale data.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="figure showing a partition sets under session, consistent prefix or eventual" src="/images/single-partition-set.png"&gt;&lt;/p&gt;
+&lt;p&gt;The quorum reads and quorum writes are the same for session, consistent prefix and eventual. This explains why write latencies, availability and read throughput for session and consistent prefix are comparable to eventual consistency.&lt;/p&gt;
+&lt;h3&gt;Quorum consensus&lt;/h3&gt;
+&lt;p&gt;In general, with &lt;span class="math"&gt;\(n\)&lt;/span&gt; replicas in a replica set, every write must be confirmed by &lt;span class="math"&gt;\(w\)&lt;/span&gt; nodes to be considered a successful write. We must query at least &lt;span class="math"&gt;\(r\)&lt;/span&gt; nodes for each read. As long as &lt;span class="math"&gt;\(w + r &amp;gt; n\)&lt;/span&gt; we expect to get an up-to-date value when reading; at least one of the &lt;span class="math"&gt;\(r\)&lt;/span&gt; nodes we are reading from must be up-to-date.&lt;/p&gt;
+&lt;p&gt;Reads and writes obeying &lt;span class="math"&gt;\(r\)&lt;/span&gt; and &lt;span class="math"&gt;\(w\)&lt;/span&gt; values are called quorum reads and writes. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;At least one node needs to overlap:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(w \geq (n - r) + 1\)&lt;/span&gt; and &lt;span class="math"&gt;\(r \geq (n - w) + 1\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;thus &lt;span class="math"&gt;\(w &amp;gt; n - r\)&lt;/span&gt; and &lt;span class="math"&gt;\(r &amp;gt; n - w\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;thus &lt;span class="math"&gt;\(w + r &amp;gt; n\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Probabilistic Bounded Staleness&lt;/h2&gt;
+&lt;p&gt;You may have noticed that under bounded staleness, the quorum consensus set up ensure we always see the latest value. However, bounded staleness can allow stale reads. This occurs when we replicate our data across multiple replica sets. Here we are not guaranteed strong consistency as one quorum may not have received the latest write.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="figure showing two partition sets under bounded staleness" src="/images/global-m-partition-set.png"&gt;&lt;/p&gt;
+&lt;p&gt;Instead, we can use a metric called &lt;a href="http://pbs.cs.berkeley.edu/"&gt;probabilistic bounded staleness&lt;/a&gt; to determine the probability of getting strongly consistent reads for a combination of write and read regions.&lt;/p&gt;
+&lt;h2&gt;In Conclusion&lt;/h2&gt;
+&lt;p&gt;Quorums are one mechanism which explains why different consistency levels have differing performance characteristics. In this post we defined what quorums are and how Cosmos DB uses them to enforce consistency constraints. &lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;&lt;a href="https://dictionary.cambridge.org/dictionary/english/quorum"&gt;Meaning of &lt;strong&gt;quorum&lt;/strong&gt; in English&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Quorum_%28distributed_computing%29"&gt;Quorum (distributed computing)&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Azure, Big Data"></category><category term="Azure"></category><category term="CosmosDB"></category></entry><entry><title>A Gentle Introduction to Inflation</title><link href="/a-gentle-introduction-to-inflation.html" rel="alternate"></link><published>2021-12-29T18:52:00+00:00</published><updated>2021-12-29T18:52:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-29:/a-gentle-introduction-to-inflation.html</id><summary type="html">&lt;p&gt;"Back in my day Freddos were 10p a pop. Now look at the price, two and a half times more than what used to pay. And every January, we brace a little for the increase price of living: potatoes, peas, and toilet paper. Whilst our wages stay the same."&lt;/p&gt;
 &lt;p&gt;Imagine …&lt;/p&gt;</summary><content type="html">&lt;p&gt;"Back in my day Freddos were 10p a pop. Now look at the price, two and a half times more than what used to pay. And every January, we brace a little for the increase price of living: potatoes, peas, and toilet paper. Whilst our wages stay the same."&lt;/p&gt;
 &lt;p&gt;Imagine, 20 years ago, a fiver would have got netted you 50 Freddos. That's enough Freddos to keep you busy for a while, whatever you're doing. Now, finding the same five pound note, going to the bank, exchanging it for a crisp, polymer note and heading to Sainsburys. That note isn't going far, only 20 Freddos. That's not fair.&lt;/p&gt;
 &lt;p&gt;Let's go back 20 years ago again. This time with the knowledge of increasing Freddo prices we have a goal to not get stung by the 250% price hike in 20 years. Playing it safe you look to the bank. Each year your bank gives you some money (interest) so that you can store your money with them. No risks involved, better than keeping it under the mattress right? &lt;/p&gt;
@@ -54,11 +357,12 @@
 &lt;p&gt;&lt;a href="https://www.bankofengland.co.uk/monetary-policy/inflation"&gt;Inflation and the 2% target&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</content><category term="blog"></category></entry><entry><title>Python packaging</title><link href="/python-packaging.html" rel="alternate"></link><published>2021-12-09T00:00:00+00:00</published><updated>2021-12-31T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-09:/python-packaging.html</id><summary type="html">&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
-&lt;p&gt;I've collected useful utility functions to help me with this years advent of code. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-    &lt;span class="mi"&gt;2020 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
-&lt;p&gt;I've collected useful utility functions to help me with this years advent of code. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
+&lt;/div&gt;</content><category term="Finance"></category></entry><entry><title>Python packaging</title><link href="/python-packaging.html" rel="alternate"></link><published>2021-12-09T00:00:00+00:00</published><updated>2021-12-31T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-09:/python-packaging.html</id><summary type="html">&lt;h1&gt;Python packaging&lt;/h1&gt;
+&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
+&lt;p&gt;I've collected a few useful utility functions to help me with &lt;a href="https://adventofcode.com/2021"&gt;advent of code 2021&lt;/a&gt;. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;Python packaging&lt;/h1&gt;
+&lt;h2&gt;How can I reuse local python code in different projects?&lt;/h2&gt;
+&lt;p&gt;I've collected a few useful utility functions to help me with &lt;a href="https://adventofcode.com/2021"&gt;advent of code 2021&lt;/a&gt;. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
     &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
     &lt;span class="mi"&gt;2021&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
@@ -72,8 +376,8 @@
     &lt;span class="n"&gt;README&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Before starting each puzzle I load up a new python file with the first line always starting with &lt;code&gt;from toolbox.core import ...&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Everything was great until I wanted to re-use my tool box for last years problems. I didn't want to duplicate my toolbox for every advent of code year I participate in. A logical place, I thought, would be to place the toolbox in the root of the project like so:&lt;/p&gt;
+&lt;p&gt;For each puzzle I create a new python file with the first line always starting with &lt;code&gt;from toolbox.core import ...&lt;/code&gt; to handle parsing data.&lt;/p&gt;
+&lt;p&gt;Everything works smoothly until I wanted to re-use my toolbox modules for 2020 problems. I don't want to duplicate my toolbox for every advent of code year I participate in. A logical place I thought, would be to place the toolbox package in the root of the project like so:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;advent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
     &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
     &lt;span class="mi"&gt;2021&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
@@ -87,13 +391,12 @@
     &lt;span class="n"&gt;README&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;This way I wouldn't have to duplicate my code and could expose the toolbox for each year to use. Not quite.&lt;/p&gt;
-&lt;p&gt;I first tried a relative import &lt;code&gt;from ..toolbox.core import parse_input&lt;/code&gt;. But that didn't work. &lt;/p&gt;
-&lt;p&gt;To answer the reason why, we need to understand what happens when you run a python script.&lt;/p&gt;
-&lt;h2&gt;What happens when you run a python script?&lt;/h2&gt;
-&lt;p&gt;The simplest solution was to create a local package using the &lt;code&gt;setuptools&lt;/code&gt; package that comes with a fresh installation of python 3.9.&lt;/p&gt;
-&lt;p&gt;If you want a minimal solution, look no further. Here it is:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;setup.py&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This way I won't have to duplicate my code and could expose the toolbox for each year to use. Not quite.&lt;/p&gt;
+&lt;p&gt;The problem is that when running the python file inside the &lt;code&gt;2021/&lt;/code&gt; directory, the python interpreter is unable to locate the &lt;code&gt;toolbox/&lt;/code&gt;. The list of system paths tells python where to look for python code that it can import such as the inbuilt &lt;code&gt;collections&lt;/code&gt;, &lt;code&gt;functools&lt;/code&gt; and &lt;code&gt;math&lt;/code&gt; packages, and pip-installed modules such as &lt;code&gt;pytest&lt;/code&gt;, &lt;code&gt;numpy&lt;/code&gt; and &lt;code&gt;pandas&lt;/code&gt;. We could, for each runnable script, add the location of the toolbox to the system path (&lt;code&gt;sys.path&lt;/code&gt;). However, this is cumbersome; there is a much better way.&lt;/p&gt;
+&lt;h2&gt;Local modules&lt;/h2&gt;
+&lt;p&gt;A simple fix is to create a local package using the &lt;code&gt;setuptools&lt;/code&gt; package. &lt;code&gt;setuptools&lt;/code&gt; can be installed using &lt;code&gt;pip install setuptools&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you want a minimal solution look no further, Here it is.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;setup.py&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
 
 &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
@@ -107,18 +410,20 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ pip install -e .
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Enjoy. :).&lt;/p&gt;
+&lt;p&gt;From &lt;code&gt;pip install --help&lt;/code&gt; we see that the &lt;code&gt;-e&lt;/code&gt; flag or &lt;code&gt;--editable&lt;/code&gt; is to "install a project in editable mode (i.e. setuptools "develop mode") from a local project path ...".&lt;/p&gt;
+&lt;p&gt;Enjoy :).&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;For those who want to know a little more, let's continue. &lt;/p&gt;
-&lt;h2&gt;setup.cfg and setup.py&lt;/h2&gt;
+&lt;h2&gt;&lt;code&gt;setup.cfg&lt;/code&gt; and &lt;code&gt;setup.py&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;There are two ways to specify setup config, dynamically as parameters of the &lt;code&gt;setuptools.setup()&lt;/code&gt; function and in a &lt;code&gt;setup.cfg&lt;/code&gt; config file.&lt;/p&gt;
-&lt;p&gt;The equivalent setup to the first example would split across the executable and config file.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;setup.py&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The equivalent setup to the first example would be split across the executable and config file.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;setup.py&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;
 
 &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;setup.cfg&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;setup.cfg&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[options]&lt;/span&gt;
 &lt;span class="na"&gt;packages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;toolbox&lt;/span&gt;
 
@@ -127,10 +432,206 @@
 &lt;span class="na"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;0.1.0&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;As you can see, the &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;version&lt;/code&gt; and &lt;code&gt;packages&lt;/code&gt; attributes are now configured as options and metadata. There is no definitive way in using &lt;code&gt;setuptools&lt;/code&gt;. I personally prefer to have all config in a config file. With additional optional fields such as a &lt;em&gt;long_description&lt;/em&gt;, it is easy to edit a config file than source code.&lt;/p&gt;
-&lt;h2&gt;Sharing is Caring.&lt;/h2&gt;
-&lt;p&gt;Finally, if you're excited to share your python project as a package, it is easy to register it using the Python Package Index (PyPI).&lt;/p&gt;
-&lt;p&gt;First, the name field must be unique if you wish to publish your package on the Python Package Index (PyPI). The packages field describes where you’ve put the Python source code within your project. &lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Apprenticeship Patterns</title><link href="/apprenticeship-patterns.html" rel="alternate"></link><published>2021-07-29T00:00:00+01:00</published><updated>2021-07-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-07-29:/apprenticeship-patterns.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Notes from Apprenticeship Patterns&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, the &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;version&lt;/code&gt; and &lt;code&gt;packages&lt;/code&gt; attributes are now configured as options and metadata. There is no definitive way in using &lt;code&gt;setuptools&lt;/code&gt;. I personally prefer to have all config in a config file. With additional optional fields such as a &lt;em&gt;long_description&lt;/em&gt;, it is easy to edit a config file than source code. Even if it is python. &lt;/p&gt;
+&lt;h2&gt;Sharing is Caring&lt;/h2&gt;
+&lt;p&gt;Finally, if you're excited to share your python project as a package, it is easy to register it using the Python Package Index (PyPI). I recommend looking at the &lt;a href="https://setuptools.pypa.io/en/latest/userguide/quickstart.html"&gt;setuptools&lt;/a&gt; documentation and &lt;a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/"&gt;Packaging Python Authority (PyPA)&lt;/a&gt; to learn more about the standard way of building and distributing python projects. &lt;/p&gt;
+&lt;h2&gt;In Conclusion&lt;/h2&gt;
+&lt;p&gt;Reusing python code across local projects can be done in as little as a two liner python script and pip install command. Whilst there are different options in packaging a project to share on the Python Package Index, &lt;code&gt;setuptools&lt;/code&gt; makes it easy to build a package and registering is also fairly simple.&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Consistency Levels in Cosmos DB</title><link href="/consistency-levels-in-cosmos-db.html" rel="alternate"></link><published>2021-12-01T11:11:11+00:00</published><updated>2021-12-01T11:11:11+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-12-01:/consistency-levels-in-cosmos-db.html</id><summary type="html">&lt;p&gt;TLDR; Cosmos DB offers five different levels of consistency guarantees so that the best performance of an application can be achieved without sacrificing data integrity.&lt;/p&gt;
+&lt;h2&gt;What is Consistency?&lt;/h2&gt;
+&lt;p&gt;Within distributed systems, consistency assumes there is a single correct way to describe the order in which the events happen. Consistency can …&lt;/p&gt;</summary><content type="html">&lt;p&gt;TLDR; Cosmos DB offers five different levels of consistency guarantees so that the best performance of an application can be achieved without sacrificing data integrity.&lt;/p&gt;
+&lt;h2&gt;What is Consistency?&lt;/h2&gt;
+&lt;p&gt;Within distributed systems, consistency assumes there is a single correct way to describe the order in which the events happen. Consistency can also be seen as recency guarantee; there appears to be a single copy of the data. As soon as one client successfully completes a write, all observers reading from the database must be able to see the value just written. &lt;/p&gt;
+&lt;p&gt;On one hand, strong consistency guarantees every user will see the latest updated data, but may need to wait for all instances to be up to date. On the other hand, an eventual consistency guarantee means users will get a fast response but may see inconsistent data. &lt;/p&gt;
+&lt;p&gt;With globally distributed applications, the characteristics of the chosen consistency level is emphasised. A greater distance for data to travel and a greater number of replicas to update increases the likelihood of performance issues under a strongly consistent model and inconsistent data under an eventually consistent model.&lt;/p&gt;
+&lt;p&gt;Different consistency models offer different trade off between consistency, write latencies, throughput and availability. Generally, stronger consistency results in higher write latencies, higher throughput, and reduced availability. The purpose of different consistency levels is to give the client the best performance whilst achieving the minimum accepted level of consistency to an application.&lt;/p&gt;
+&lt;p&gt;So what are the consistency level Cosmos offers? What are their guarantees, and when should I use each?&lt;/p&gt;
+&lt;p&gt;As a nod to the white paper&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt; that made consistency levels click for me, I'll use the example of a global sporting event watched by billions of people, the &lt;a href="https://en.wikipedia.org/wiki/2018_FIFA_World_Cup_Final"&gt;2018 FIFA World Cup final&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The scores and time of updates are as follows:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Time&lt;/th&gt;
+&lt;th&gt;France&lt;/th&gt;
+&lt;th&gt;Croatia&lt;/th&gt;
+&lt;th&gt;Database Operation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;00&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;read("France"); read("Croatia")&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;18&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;write(team: "France", score: 1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;29&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;write(team: "Croatia", score: 1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;38&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;write(team: "France", score: 2)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;52&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;write(team: "France", score: 3)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;59&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;write(team: "France", score: 4)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;69&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;write(team: "Croatia", score: 2)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;90&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;read("France"); read("Croatia")&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;In this scenario we have a primary database (located in West Europe region) providing writes to all replicas, and three follower replicas within the data centre. We also geo-replicate our data across each continent, each having four replicas in each data centre.&lt;/p&gt;
+&lt;p&gt;We will consider who would most benefit from what consistency level. Cosmos DB allows clients to override the default consistency level for a specific read request, meaning we can relax read consistency per request for increased performance. &lt;/p&gt;
+&lt;h2&gt;Guarantees&lt;/h2&gt;
+&lt;p&gt;Cosmos DB offers five levels of consistency guarantees. In order of consistency, they are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#strong-consistency"&gt;Strong&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;You will always see the latest version of the data. &lt;/li&gt;
+&lt;li&gt;At any point in the game, you will see the latest score. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#bounded-staleness-consistency"&gt;Bounded Staleness&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;Reads lag behind writes by at most &lt;em&gt;K&lt;/em&gt; updates or time interval &lt;em&gt;T&lt;/em&gt;. &lt;/li&gt;
+&lt;li&gt;The score you see might be old by timespan &lt;em&gt;T&lt;/em&gt;. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#session-consistency"&gt;Session&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;Within a "session", reads are functionally strongly consistent. Outside the session, consistent prefix. &lt;/li&gt;
+&lt;li&gt;Reads in the "&lt;em&gt;EU west&lt;/em&gt; session" will receive the latest score. Everyone outside may see an old score.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#consistent-prefix-consistency"&gt;Consistent Prefix&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;For all regions, writes are ordered. &lt;/li&gt;
+&lt;li&gt;At any point in the game, you will never see a score that has never occurred.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#eventual-consistency"&gt;Eventual&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;No guarantees, reads may be stale and inconsistent. Eventually, the data will be consistent until a new write.&lt;/li&gt;
+&lt;li&gt;Any combination of scores may be seen, including scores that never occur.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Strong consistency&lt;/h3&gt;
+&lt;p&gt;Also known as linearizability, strong consistency guarantees all your users see the latest writes; every user at the 70 minute mark will see the score &lt;code&gt;{France: 4, Croatia: 2}&lt;/code&gt;. As a consequence, there is increased latency. &lt;/p&gt;
+&lt;p&gt;For a write to be committed to the system and acknowledged as successful, &lt;em&gt;all&lt;/em&gt; replicas have to agree on the most recent value. This means high latency and reduced availability. If a region becomes unavailable, since the application cannot accept reads that are stale, the application will not be able to respond until the region has recovered and updated to the most recent write value. &lt;/p&gt;
+&lt;p&gt;In practice anyone wanting updates from the World Cup final would be well served by a strong consistency guarantee. However, most people would be OK in seeing a score that is outdated by a few minutes. When would this not be acceptable? As scores are calculated by incrementing the previous score, it would be a disaster if the scorekeeper read the wrong score. In this case, the score keeper could not tolerate stale reads so strong consistency would be appropriate.  &lt;/p&gt;
+&lt;h3&gt;Bounded Staleness consistency&lt;/h3&gt;
+&lt;p&gt;This is the second strongest consistency guarantee Cosmos DB offers. As the name suggests, there is a window that you can tolerate stale data. Reads can be behind at most &lt;em&gt;K&lt;/em&gt; updates to an item or behind by at most &lt;em&gt;T&lt;/em&gt; time interval, whichever is reached first. For data that falls out of the specified window, the guarantees are identical to strong consistency.&lt;/p&gt;
+&lt;p&gt;What is interesting about bounded staleness is that if you know the maximum allowable lag for your system then you can get the same guarantee of strong consistency without the penalty in latency. &lt;/p&gt;
+&lt;p&gt;A football pundit only cares about the score during half time and at the end of the game. The pundit could use the length of the game to guarantee they read the most recent score by setting the window to 45 minutes. A read in the 46th minute would mean the most recent score is read and again in the 91st minute for post-game discussion.&lt;/p&gt;
+&lt;h3&gt;Session consistency&lt;/h3&gt;
+&lt;p&gt;This is the default configured consistency level. Within a single client session, operations are guaranteed to follow:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Monotonic Reads&lt;/strong&gt;:&lt;ul&gt;
+&lt;li&gt;While the client can read arbitrarily stale data, it is guaranteed to read data that is increasingly up to date over time. &lt;/li&gt;
+&lt;li&gt;(E.g., one it has read the score of &lt;code&gt;{France: 4, Croatia: 2}&lt;/code&gt;, it won't then later see &lt;code&gt;{France: 0, Croatia: 0}&lt;/code&gt; in the same session.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Monotonic writes&lt;/strong&gt;:&lt;ul&gt;
+&lt;li&gt;Ensures that if the client performs writes &lt;em&gt;w&lt;/em&gt; and then &lt;em&gt;v&lt;/em&gt;, all processes within the session observe &lt;em&gt;w&lt;/em&gt; before &lt;em&gt;v&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Read your writes&lt;/strong&gt;:&lt;ul&gt;
+&lt;li&gt;All writes performed by the client are visible to the session's subsequent reads. In other words, strong consistency holds for the writer and clients sharing the same session id.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Write follows reads&lt;/strong&gt;:&lt;ul&gt;
+&lt;li&gt;Ensures that write updates are propagated after performing the previous read operation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Consistent prefix&lt;/strong&gt;:&lt;ul&gt;
+&lt;li&gt;Covered in the next section&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A session is defined through a unique session key that all writers include in their requests. Cosmos DB uses the session key to ensure read-my-writes (for the writer) and one of the above guarantees for readers using the session token. Within the same session, reads are consistent. Everyone outside of the session will fall back to the consistent prefix model.&lt;/p&gt;
+&lt;p&gt;Session consistency provides good performance: write latencies, availability, and read throughput comparable to that of eventual consistency.&lt;/p&gt;
+&lt;p&gt;Revisiting the score keeper we notice that they can achieve consistent reads without sacrificing performance by using session consistency. As the score keeper will be reading their own writes, session consistency guarantees they will see their most recent writes with the added benefit of not having to wait for all replicas to be up to date.&lt;/p&gt;
+&lt;h3&gt;Consistent Prefix consistency&lt;/h3&gt;
+&lt;p&gt;Also referred to as snapshot isolation; the reader sees a "snapshot of the data". Consistent prefix guarantees whilst they may not read the most current score, the score would reflect a previous score. And unlike bounded staleness, there is no guarantee on how long the delay is.&lt;/p&gt;
+&lt;p&gt;With consistent prefix consistency, reads are some prefix of the updates. Possible scores for a consistent prefix read could be one of the following: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;{France: 1, Croatia: 0}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{France: 2, Croatia: 1}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{France: 4, Croatia: 1}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{France: 4, Croatia: 2}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Consistent prefix is great for those who wish to have write latencies, availability, and read throughput similar to eventual consistency whilst guaranteeing ordered writes. This means you'll never see a state which could have emerged if the order of writes was changed. As we will see below, a read value of &lt;code&gt;{France: 0, Croatia: 1}&lt;/code&gt; could never happen under consistent prefix as France's first goal (write to the database) was before Croatia's.&lt;/p&gt;
+&lt;h3&gt;Eventual consistency&lt;/h3&gt;
+&lt;p&gt;Eventual consistency does not guarantee ordering for reads. Writes are also propagated in an arbitrary fashion. This means that you can see data that never occurs. For our football example, under eventual consistency a reader might see the score &lt;code&gt;{France: 0, Croatia: 1}&lt;/code&gt;. In reality, this event never happened as France scored before Croatia. If no more writes occur, the replicas will eventually catch up and become consistent with the leader.&lt;/p&gt;
+&lt;p&gt;A casual fan might opt for eventual consistency and read the final score hours or a day later. As there are no writes after the 90th minute, it is highly likely every replica would be updated with the final score when the fan decided to check the score. There is no need to choose a more consistent level than this.&lt;/p&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;Giving strong consistency gives up performance and availability. The question is then &lt;em&gt;what is the minimum level of consistency that is tolerable to the program that gives you the best performance?&lt;/em&gt; Choosing the best consistency for your 
+application requires application semantics and usage scenarios to be understood.&lt;/p&gt;
+&lt;p&gt;In reality, Cosmos DBs SLAs guarantee that read latency for all consistency levels is always guaranteed to be less than 10 milliseconds at the 99th percentile. In addition, Cosmos provides a &lt;em&gt;Probabilistic Bounded Staleness (PBS) metric&lt;/em&gt; to quantify when eventual consistency is "good enough". &lt;/p&gt;
+&lt;!--
+
+There is no way I could not talk about eventual consistency without sharing this illustration:
+
+![Comic illustrating eventual consistency](/assets/images/blog/2021/12/eventual-consistency.jpg)
+
+--&gt;
+
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;&lt;a href="https://www.microsoft.com/research/publication/replicated-data-consistency-explained-through-baseball/"&gt;Replicated Data Consistency Explained Through Baseball (whitepaper) by Doug Terry&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="Azure"></category><category term="Azure"></category><category term="CosmosDB"></category><category term="Database"></category></entry><entry><title>What cloud service is right for me?</title><link href="/what-cloud-service-is-right-for-me.html" rel="alternate"></link><published>2021-09-12T00:00:00+01:00</published><updated>2021-09-12T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-09-12:/what-cloud-service-is-right-for-me.html</id><summary type="html">&lt;!-- In this post I will introduce the different categories of cloud services. --&gt;
+
+&lt;p&gt;Cloud services can be categorised into three service models. Infrastructure-as-a-service (IaaS), Platform-as-a-Service (PaaS) and Software-as-a-Service (SaaS).
+Each service has the advantage of no up-front cost for buying and maintaining hardware. &lt;/p&gt;
+&lt;p&gt;An on-premises service maintains the entire technology stack.&lt;/p&gt;
+&lt;h3&gt;Infrastructure as a Service&lt;/h3&gt;
+&lt;p&gt;IaaS manages the most expensive part, the virtual …&lt;/p&gt;</summary><content type="html">&lt;!-- In this post I will introduce the different categories of cloud services. --&gt;
+
+&lt;p&gt;Cloud services can be categorised into three service models. Infrastructure-as-a-service (IaaS), Platform-as-a-Service (PaaS) and Software-as-a-Service (SaaS).
+Each service has the advantage of no up-front cost for buying and maintaining hardware. &lt;/p&gt;
+&lt;p&gt;An on-premises service maintains the entire technology stack.&lt;/p&gt;
+&lt;h3&gt;Infrastructure as a Service&lt;/h3&gt;
+&lt;p&gt;IaaS manages the most expensive part, the virtual machines, storage and networking. You pay a third party cloud provider to rent infrastructure. This is the most flexible out of the three models, allowing you control over the size of hardware and how much you want to use. Azure Virtual Machines, Azure Storage and Azure Virtual Networks are three examples of infrastructure Azure has to offer.&lt;/p&gt;
+&lt;h3&gt;Platform as a Service&lt;/h3&gt;
+&lt;p&gt;For PaaS, server configuration is handled for you. It is usually quicker to set up than IaaS. Azure App Services enables mobile and web apps to be deployed without having to worry about server configuration. This allows developers to focus more of their energy on business logic. &lt;/p&gt;
+&lt;h3&gt;Software as a Service&lt;/h3&gt;
+&lt;p&gt;SaaS solutions are the most user friendly. Office 365, Dropbox and many common apps such as Slack and Shopify. These are usually available via monthly or annual subscriptions. SaaS allows organizations to have the same application quickly and easily. &lt;/p&gt;
+&lt;h3&gt;Functions as a Service&lt;/h3&gt;
+&lt;p&gt;Another cloud service model that doesn't fall into the above three is serveless computing. Serverless computing is a misnomer— it still uses servers to operate; the name comes from the infrastructure being invisible to the developer. The cloud service provider provisions, scales and manages the infrastructure required to execute code. Serverless applications are event-driven, resources are used when a trigger occurs.&lt;/p&gt;
+&lt;p&gt;Serverless solutions provided by Azure can be custom code scripts via Azure Functions or a workflow based no-code tool using Azure Logic Apps.&lt;/p&gt;
+&lt;p&gt;Serverless is similar to PaaS as the infrastructure is abstracted away from the developer. However, there are notable differences between the two such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Serverless application code executes only when triggered by an event&lt;/li&gt;
+&lt;li&gt;Serverless apps scales automatically whereas a PaaS scaling parameters have to be configures&lt;/li&gt;
+&lt;li&gt;PaaS solutions have more control over development environment— it is easier to test and debug the application.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Cloud"></category><category term="Cloud"></category><category term="Azure"></category></entry><entry><title>Apprenticeship Patterns</title><link href="/apprenticeship-patterns.html" rel="alternate"></link><published>2021-07-29T00:00:00+01:00</published><updated>2021-07-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-07-29:/apprenticeship-patterns.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;Notes from Apprenticeship Patterns&lt;/strong&gt;&lt;/p&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;An apprenticeship is a season in your career when your focus is
 more on your own growth than almost anything else.&lt;/p&gt;
@@ -747,7 +1248,7 @@ and &lt;span class="math"&gt;\(\mathbf y = (y_1, y_2) = (X_1^{(t)}, X_2^{(t)})\)
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Modelling TFL journeys</title><link href="/modelling-tfl-journeys.html" rel="alternate"></link><published>2021-04-26T00:00:00+01:00</published><updated>2021-04-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-26:/modelling-tfl-journeys.html</id><summary type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
+&lt;/script&gt;</content><category term="Statistics"></category><category term="Statistics"></category></entry><entry><title>Modelling TFL journeys</title><link href="/modelling-tfl-journeys.html" rel="alternate"></link><published>2021-04-26T00:00:00+01:00</published><updated>2021-04-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-26:/modelling-tfl-journeys.html</id><summary type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
 &lt;h3&gt;&lt;a href="https://data.london.gov.uk/dataset/public-transport-journeys-type-transport"&gt;Public Transport Journeys by Type of Transport&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The data set comes from the Transport for London website. It describes the number of journeys on the public transport network by TFL reporting period, by type of transport. Data is broken down by bus, underground, DLR, tram, Overground …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
 &lt;h3&gt;&lt;a href="https://data.london.gov.uk/dataset/public-transport-journeys-type-transport"&gt;Public Transport Journeys by Type of Transport&lt;/a&gt;&lt;/h3&gt;
@@ -960,7 +1461,7 @@ All of which lie in the 80% forecast interval.&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Sampling: Rejection and Importance</title><link href="/sampling-rejection-and-importance.html" rel="alternate"></link><published>2021-04-25T00:00:00+01:00</published><updated>2021-04-26T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-25:/sampling-rejection-and-importance.html</id><summary type="html">&lt;p&gt;We left the introduction to monte carlo simulations with its limitation of slow convergence.&lt;/p&gt;
+&lt;/script&gt;</content><category term="Statistics"></category><category term="Statistics"></category><category term="Data"></category></entry><entry><title>Sampling: Rejection and Importance</title><link href="/sampling-rejection-and-importance.html" rel="alternate"></link><published>2021-04-25T00:00:00+01:00</published><updated>2021-04-26T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-25:/sampling-rejection-and-importance.html</id><summary type="html">&lt;p&gt;We left the introduction to monte carlo simulations with its limitation of slow convergence.&lt;/p&gt;
 &lt;p&gt;In this post we will cover Rejection and Importance sampling.&lt;/p&gt;
 &lt;p&gt;For a density function &lt;span class="math"&gt;\(\pi(x)\)&lt;/span&gt;, how can we sample from it?&lt;/p&gt;
 &lt;h2&gt;Rejection Sampling&lt;/h2&gt;
@@ -1103,7 +1604,7 @@ the unbiased estimator of &lt;span class="math"&gt;\(\mathbb E_\pi[\varphi(X)]\)
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Monte Carlo</title><link href="/monte-carlo.html" rel="alternate"></link><published>2021-04-24T00:00:00+01:00</published><updated>2021-04-24T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-24:/monte-carlo.html</id><summary type="html">&lt;p&gt;Monte Carlo methods are a class of sampling algorithms to obtain numerical approximations.
+&lt;/script&gt;</content><category term="Statistics"></category><category term="Statistics"></category></entry><entry><title>Monte Carlo</title><link href="/monte-carlo.html" rel="alternate"></link><published>2021-04-24T00:00:00+01:00</published><updated>2021-04-24T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-24:/monte-carlo.html</id><summary type="html">&lt;p&gt;Monte Carlo methods are a class of sampling algorithms to obtain numerical approximations.
 To do this we rely on the weak law of large numbers:&lt;/p&gt;
 &lt;dl&gt;
 &lt;dt&gt;&lt;strong&gt;The weak law of large numbers&lt;/strong&gt;&lt;/dt&gt;
@@ -1227,7 +1728,7 @@ Finally, we see the error term shrinks by a factor of $\sqrt{n}$.
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Web, faster</title><link href="/web-faster.html" rel="alternate"></link><published>2021-03-23T00:00:00+00:00</published><updated>2021-03-28T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-03-23:/web-faster.html</id><summary type="html">&lt;p&gt;On inspecting &lt;a href="sunset"&gt;sunset&lt;/a&gt; I noticed I had to wait as each image loaded, top to bottom.
+&lt;/script&gt;</content><category term="Statistics"></category><category term="Statistics"></category></entry><entry><title>Web, faster</title><link href="/web-faster.html" rel="alternate"></link><published>2021-03-23T00:00:00+00:00</published><updated>2021-03-28T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-03-23:/web-faster.html</id><summary type="html">&lt;p&gt;On inspecting &lt;a href="sunset"&gt;sunset&lt;/a&gt; I noticed I had to wait as each image loaded, top to bottom.
 There must be something I can do about it.&lt;/p&gt;
 &lt;h2&gt;The Test&lt;/h2&gt;
 &lt;p&gt;All tests conducted used &lt;a href="https://www.webpagetest.org/"&gt;WebPageTest&lt;/a&gt; with the default settings.&lt;/p&gt;
@@ -1629,7 +2130,7 @@ transform our feature space for a linear model to learn.&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Password Store</title><link href="/password-store.html" rel="alternate"></link><published>2020-08-07T00:00:00+01:00</published><updated>2020-09-02T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-08-07:/password-store.html</id><summary type="html">&lt;p&gt;After taking more than a few hours to reset my Pass for iOS repository on my
+&lt;/script&gt;</content><category term="Machine Learning"></category><category term="Machine Learning"></category></entry><entry><title>Password Store</title><link href="/password-store.html" rel="alternate"></link><published>2020-08-07T00:00:00+01:00</published><updated>2020-09-02T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-08-07:/password-store.html</id><summary type="html">&lt;p&gt;After taking more than a few hours to reset my Pass for iOS repository on my
 phone, I thought it would be good to write a short guide to setting one up.&lt;/p&gt;
 &lt;p&gt;Check the &lt;a href="https://github.com/yishilin14/asc-key-to-qr-code-gif"&gt;official Pass for iOS
 Wiki&lt;/a&gt; to see alternative
@@ -2091,7 +2592,7 @@ parity to the simple one of learning just 2-bit parity.&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>SVD</title><link href="/svd.html" rel="alternate"></link><published>2020-07-25T00:00:00+01:00</published><updated>2021-04-24T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-07-25:/svd.html</id><summary type="html">&lt;p&gt;Take an &lt;span class="math"&gt;\(n \times m\)&lt;/span&gt;  matrix &lt;span class="math"&gt;\(X\)&lt;/span&gt;. The factorized form using singular value
+&lt;/script&gt;</content><category term="Machine Learning"></category><category term="Statistics"></category><category term="AI"></category><category term="Machine Learning"></category></entry><entry><title>SVD</title><link href="/svd.html" rel="alternate"></link><published>2020-07-25T00:00:00+01:00</published><updated>2021-04-24T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-07-25:/svd.html</id><summary type="html">&lt;p&gt;Take an &lt;span class="math"&gt;\(n \times m\)&lt;/span&gt;  matrix &lt;span class="math"&gt;\(X\)&lt;/span&gt;. The factorized form using singular value
 decomposition is &lt;span class="math"&gt;\(U\Sigma V^T\)&lt;/span&gt; where &lt;span class="math"&gt;\(U\)&lt;/span&gt; is a &lt;span class="math"&gt;\(n \times m\)&lt;/span&gt; matrix, &lt;span class="math"&gt;\(\Sigma\)&lt;/span&gt; and
 &lt;span class="math"&gt;\(V^T\)&lt;/span&gt; are &lt;span class="math"&gt;\(m \times m\)&lt;/span&gt; matrices.&lt;/p&gt;
 &lt;h4&gt;Properties of the matrices, &lt;span class="math"&gt;\(U\)&lt;/span&gt;, &lt;span class="math"&gt;\(V\)&lt;/span&gt; and &lt;span class="math"&gt;\(\Sigma\)&lt;/span&gt;&lt;/h4&gt;
@@ -2187,7 +2688,7 @@ decomposition is &lt;span class="math"&gt;\(U\Sigma V^T\)&lt;/span&gt; where &lt
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="blog"></category></entry><entry><title>Fooled by Randomness</title><link href="/fooled-by-randomness.html" rel="alternate"></link><published>2020-06-29T17:36:36+01:00</published><updated>2020-06-29T17:36:36+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-29:/fooled-by-randomness.html</id><summary type="html">&lt;p&gt;&amp;hellip; that which came with the help of luck could be taken away by luck
+&lt;/script&gt;</content><category term="Machine Learning"></category><category term="Statistics"></category><category term="Machine Learning"></category></entry><entry><title>Fooled by Randomness</title><link href="/fooled-by-randomness.html" rel="alternate"></link><published>2020-06-29T17:36:36+01:00</published><updated>2020-06-29T17:36:36+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-06-29:/fooled-by-randomness.html</id><summary type="html">&lt;p&gt;&amp;hellip; that which came with the help of luck could be taken away by luck
 &amp;hellip; things that come with little help from luck are more resistant to
 randomness.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Skewness&lt;/em&gt; issue; it doesn't matter how frequently something succeeds if
@@ -3152,7 +3653,7 @@ content. I hope to:&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;It will be an interesting to see where the year of creativity will take me. &lt;/p&gt;
 &lt;p&gt;What goals will I have achieved and how will I define creating in 12 months.  &lt;/p&gt;
-&lt;p&gt;To a year of creating!&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Designs That Don't Suck</title><link href="/designs-that-dont-suck.html" rel="alternate"></link><published>2020-01-28T00:00:00+00:00</published><updated>2020-01-28T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-28:/designs-that-dont-suck.html</id><summary type="html">&lt;p&gt;&lt;a href="https://www.curiositry.com/designs-that-don-t-suck/"&gt;some useful advice&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To a year of creating!&lt;/p&gt;</content><category term="Review"></category></entry><entry><title>Designs That Don't Suck</title><link href="/designs-that-dont-suck.html" rel="alternate"></link><published>2020-01-28T00:00:00+00:00</published><updated>2020-01-28T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-28:/designs-that-dont-suck.html</id><summary type="html">&lt;p&gt;&lt;a href="https://www.curiositry.com/designs-that-don-t-suck/"&gt;some useful advice&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;Ample leading&lt;/h2&gt;
 &lt;p&gt;Set our leading (line-height) to 120-145% of your base font size. Give your words room to breathe.&lt;/p&gt;
 &lt;h2&gt;Alignment&lt;/h2&gt;
@@ -3174,7 +3675,7 @@ content. I hope to:&lt;/p&gt;
 &lt;h2&gt;White Space&lt;/h2&gt;
 &lt;p&gt;&lt;br&gt;
 &lt;br&gt;
-&lt;br&gt;&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>An English Wood</title><link href="/an-english-wood.html" rel="alternate"></link><published>2020-01-27T10:25:00+00:00</published><updated>2020-01-27T10:25:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-27:/an-english-wood.html</id><summary type="html">&lt;h5&gt;by Robert Greaves&lt;/h5&gt;
+&lt;br&gt;&lt;/p&gt;</content><category term="blog"></category><category term="design"></category></entry><entry><title>An English Wood</title><link href="/an-english-wood.html" rel="alternate"></link><published>2020-01-27T10:25:00+00:00</published><updated>2020-01-27T10:25:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2020-01-27:/an-english-wood.html</id><summary type="html">&lt;h5&gt;by Robert Greaves&lt;/h5&gt;
 &lt;p&gt;This valley wood is pledged&lt;br&gt;
 To the set shape of things,&lt;br&gt;
 And reasonably hedged:&lt;br&gt;

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - Azure, Big Data</title><link href="/" rel="alternate"></link><link href="/feeds/azure-big-data.atom.xml" rel="self"></link><id>/</id><updated>2022-01-18T00:00:00+00:00</updated><entry><title>Consistency Levels and Quorums</title><link href="/consistency-levels-and-quorums.html" rel="alternate"></link><published>2022-01-18T00:00:00+00:00</published><updated>2022-01-18T00:00:00+00:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2022-01-18:/consistency-levels-and-quorums.html</id><summary type="html">&lt;p&gt;This post dives into the internals of how Cosmos guarantees consistency&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;What is the underlying mechanism for data replication in Cosmos DB?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In a &lt;a href="./consistency-levels-in-cosmos-db"&gt;previous post&lt;/a&gt;, I covered the five different consistency levels Cosmos offers. We saw that choosing a consistency level requires evaluating a trade off in data consistency, availability and performance. In this post, I explore how Cosmos DB enforces consistency.&lt;/p&gt;
+&lt;p&gt;From the Microsoft documentation page on &lt;a href="https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels"&gt;Consistency levels in Azure Cosmos DB&lt;/a&gt; we have:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For strong and bounded staleness, &lt;em&gt;reads are done against two replicas in a four replica set (minority quorum)&lt;/em&gt; to provide consistency guarantees. Session, consistent prefix and eventual do &lt;em&gt;single replica reads&lt;/em&gt;. The result is that, for the same number of request units, read throughput for strong and bounded staleness is half of the other consistency levels.&lt;/p&gt;
+&lt;p&gt;For a given type of write operation, such as insert, replace, upsert, and delete, the write throughput for request units is identical for all consistency levels. For &lt;em&gt;strong consistency, changes need to be committed in every region (global majority)&lt;/em&gt; while for all other consistency levels, local majority (three replicas in a four replica set) is being used.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We also get the following table:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Consistency Level&lt;/th&gt;
+&lt;th&gt;Quorum Reads&lt;/th&gt;
+&lt;th&gt;Quorum Writes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Strong&lt;/td&gt;
+&lt;td&gt;Local Minority&lt;/td&gt;
+&lt;td&gt;Global Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Bounded Staleness&lt;/td&gt;
+&lt;td&gt;Local Minority&lt;/td&gt;
+&lt;td&gt;Local Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Session&lt;/td&gt;
+&lt;td&gt;Single Replica (using session token)&lt;/td&gt;
+&lt;td&gt;Local Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Consistent Prefix&lt;/td&gt;
+&lt;td&gt;Single Replica&lt;/td&gt;
+&lt;td&gt;Local Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Eventual&lt;/td&gt;
+&lt;td&gt;Single Replica&lt;/td&gt;
+&lt;td&gt;Local Majority&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;What does this all mean? What are quorums, replica sets, global majority, local majority, and local minority. In this post we will figure it out together.&lt;/p&gt;
+&lt;h2&gt;Quorums and consensus&lt;/h2&gt;
+&lt;dl&gt;
+&lt;dt&gt;&lt;strong&gt;Quorum&lt;/strong&gt;&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;The smallest number of people needed to be present at a meeting before it can officially begin and before official decisions can be taken. &lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;A more technical definition of a quorum is as follows:&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;A quorum is the minimum number of votes that a distributed transaction has to obtain in order to be allowed to perform an operation in a distributed system. A quorum-based technique is implemented to enforce consistent operation in a distributed system. &lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;So a quorum is a collection of replicas communicating in such a way to ensure data consistency. Cosmos DB groups four replicas (one leader, three followers) within a physical partition to form a &lt;em&gt;replica set&lt;/em&gt;. The leader is responsible for propagating writes within the replica set. And within the replica set we can group replicas together to for a &lt;em&gt;quorum&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A partition set consisting of one leader and three followers" src="/images/partition-set.svg"&gt;&lt;/p&gt;
+&lt;p&gt;How then are quorums involved in ensuring a write or read is successful?&lt;/p&gt;
+&lt;h3&gt;Quorum Writes and Reads&lt;/h3&gt;
+&lt;p&gt;Under strong consistency, a write is deemed successful if every replica can agree on the most recent write. This comes at the price of decreased performance as every replica must have the latest value written to it for the system to agree on the current state.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="figure showing two partition sets under strong consistency" src="/images/global-m-partition-set.png"&gt;&lt;/p&gt;
+&lt;p&gt;For consistency levels other than strong, a local majority is used. This means when writing to a replica set (four instances of the data), only three of the four replicas have to be up to date at any given time for a write to be acknowledged. This keeps latency lower as if one replica was unavailable the write could still be acknowledged by the database.&lt;/p&gt;
+&lt;p&gt;For quorum reads, the convention is similar. Strong and bounded staleness, reads are done against a local majority; &lt;em&gt;two replicas in a four replica set&lt;/em&gt;, this means two replicas have to agree on seeing the same value for a read to be acknowledged. In the diagram below the bounded staleness partition-set reads from a quorum in which two partitions have the been updated to the latest value. &lt;/p&gt;
+&lt;p&gt;We can imagine the leader and two followers enclosed in the dotted line as writing a value and then a reader milliseconds later querying the same value from the replica set as the dashed box. As both boxes overlap we are guaranteed to see the latest written value.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="figure showing a partition sets under bounded staleness" src="/images/bs-partition-set.png"&gt;&lt;/p&gt;
+&lt;p&gt;Session, consistent prefix and eventual reads are done through single replicas. As shown in the diagram below, comes at a cost of reading stale data.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="figure showing a partition sets under session, consistent prefix or eventual" src="/images/single-partition-set.png"&gt;&lt;/p&gt;
+&lt;p&gt;The quorum reads and quorum writes are the same for session, consistent prefix and eventual. This explains why write latencies, availability and read throughput for session and consistent prefix are comparable to eventual consistency.&lt;/p&gt;
+&lt;h3&gt;Quorum consensus&lt;/h3&gt;
+&lt;p&gt;In general, with &lt;span class="math"&gt;\(n\)&lt;/span&gt; replicas in a replica set, every write must be confirmed by &lt;span class="math"&gt;\(w\)&lt;/span&gt; nodes to be considered a successful write. We must query at least &lt;span class="math"&gt;\(r\)&lt;/span&gt; nodes for each read. As long as &lt;span class="math"&gt;\(w + r &amp;gt; n\)&lt;/span&gt; we expect to get an up-to-date value when reading; at least one of the &lt;span class="math"&gt;\(r\)&lt;/span&gt; nodes we are reading from must be up-to-date.&lt;/p&gt;
+&lt;p&gt;Reads and writes obeying &lt;span class="math"&gt;\(r\)&lt;/span&gt; and &lt;span class="math"&gt;\(w\)&lt;/span&gt; values are called quorum reads and writes. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;At least one node needs to overlap:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(w \geq (n - r) + 1\)&lt;/span&gt; and &lt;span class="math"&gt;\(r \geq (n - w) + 1\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;thus &lt;span class="math"&gt;\(w &amp;gt; n - r\)&lt;/span&gt; and &lt;span class="math"&gt;\(r &amp;gt; n - w\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;thus &lt;span class="math"&gt;\(w + r &amp;gt; n\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Probabilistic Bounded Staleness&lt;/h2&gt;
+&lt;p&gt;You may have noticed that under bounded staleness, the quorum consensus set up ensure we always see the latest value. However, bounded staleness can allow stale reads. This occurs when we replicate our data across multiple replica sets. Here we are not guaranteed strong consistency as one quorum may not have received the latest write.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="figure showing two partition sets under bounded staleness" src="/images/global-m-partition-set.png"&gt;&lt;/p&gt;
+&lt;p&gt;Instead, we can use a metric called &lt;a href="http://pbs.cs.berkeley.edu/"&gt;probabilistic bounded staleness&lt;/a&gt; to determine the probability of getting strongly consistent reads for a combination of write and read regions.&lt;/p&gt;
+&lt;h2&gt;In Conclusion&lt;/h2&gt;
+&lt;p&gt;Quorums are one mechanism which explains why different consistency levels have differing performance characteristics. In this post we defined what quorums are and how Cosmos DB uses them to enforce consistency constraints. &lt;/p&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;&lt;a href="https://dictionary.cambridge.org/dictionary/english/quorum"&gt;Meaning of &lt;strong&gt;quorum&lt;/strong&gt; in English&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Quorum_%28distributed_computing%29"&gt;Quorum (distributed computing)&lt;/a&gt;&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Azure, Big Data"></category><category term="Azure"></category><category term="CosmosDB"></category></entry></feed>

@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - Statistics</title><link href="/" rel="alternate"></link><link href="/feeds/statistics.atom.xml" rel="self"></link><id>/</id><updated>2021-04-29T00:00:00+01:00</updated><entry><title>Metropolis Hastings</title><link href="/metropolis-hastings.html" rel="alternate"></link><published>2021-04-27T00:00:00+01:00</published><updated>2021-04-27T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-27:/metropolis-hastings.html</id><summary type="html">&lt;p&gt;We continue the series of Monte Carlo methods by covering Markov chain based sampling algorithms.&lt;/p&gt;
+&lt;p&gt;Metropolis Hastings is a sampling algorithm that relies on the guarantees from invariant distributions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Metropolis Hastings&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Initialise &lt;span class="math"&gt;\(X^{(0)}\)&lt;/span&gt; and for &lt;span class="math"&gt;\(t \geq 1\)&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Draw &lt;span class="math"&gt;\(X \sim Q(\cdot \mid X^{(t-1)})\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Compute &lt;div class="math"&gt;$$\alpha(X …&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;We continue the series of Monte Carlo methods by covering Markov chain based sampling algorithms.&lt;/p&gt;
+&lt;p&gt;Metropolis Hastings is a sampling algorithm that relies on the guarantees from invariant distributions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Metropolis Hastings&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Initialise &lt;span class="math"&gt;\(X^{(0)}\)&lt;/span&gt; and for &lt;span class="math"&gt;\(t \geq 1\)&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Draw &lt;span class="math"&gt;\(X \sim Q(\cdot \mid X^{(t-1)})\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Compute &lt;div class="math"&gt;$$\alpha(X \mid X^{(t-1)}) = \min \left(1, \frac{\pi(X)Q(X^{(t-1)} \mid X)}{\pi(X^{(t-1)})Q(X \mid X^{(t-1)})} \right)$$&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Set &lt;span class="math"&gt;\(X^{(t)} = X\)&lt;/span&gt; with probability &lt;span class="math"&gt;\(\alpha(X \mid X^{(t-1)})\)&lt;/span&gt; else &lt;span class="math"&gt;\(X^{(t)} = X^{(t-1)}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;The conditional probability of accepting any proposed state given the chain is in &lt;span class="math"&gt;\(i\)&lt;/span&gt; is
+&lt;/p&gt;
+&lt;div class="math"&gt;$$ a(i) = \sum_{j \in \mathbb S} \alpha(j \mid i)Q_{i, j} $$&lt;/div&gt;
+&lt;p&gt;From the algorithm we see the transition kernel &lt;span class="math"&gt;\(K_{i,j} = \alpha(j\mid i)Q_{i,i} + (1 - a(i))\delta_{ij}\)&lt;/span&gt; generates a 
+Markov chain for the sequence &lt;span class="math"&gt;\((X^{(t)})_{t \geq 0}\)&lt;/span&gt; using the distribution &lt;span class="math"&gt;\(\pi\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;An advantage of using MH algorithm is we only need to know a distribution that is proportional to &lt;span class="math"&gt;\(\pi\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;There are two popular Metropolis-Hastings variations, the Metropolis algorithm
+that uses a symmetric proposal distribution &lt;span class="math"&gt;\(Q(X^{(t)} \mid X^{(t-1)}) = Q(X^{(t-1)} \mid X^{(t)})\)&lt;/span&gt;. Common 
+distributions used are normal, &lt;span class="math"&gt;\(\mathcal N(\mu, \sigma^2)\)&lt;/span&gt; and uniform, &lt;span class="math"&gt;\(U[a, b]\)&lt;/span&gt;.
+The resulting acceptance ratio is simplified to&lt;/p&gt;
+&lt;div class="math"&gt;$$\alpha(X \mid X^{(t-1)}) = \min \left(1, \frac{\pi(X)}{\pi(X^{(t-1)})} \right)$$&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Gibbs Sampling&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Gibbs sampling uses full conditional distributions as the proposal distribution. For &lt;span class="math"&gt;\(j = 1,2, \ldots, n\)&lt;/span&gt; 
+the proposal &lt;/p&gt;
+&lt;div class="math"&gt;$$Q(X \mid X^{(t-1)}) = \pi(X_j \mid X_1^{(t-1)}, \ldots, X_1^{(t-1)}, X_1^{(t+1)}, \ldots, X_1^{(n)})$$&lt;/div&gt;
+&lt;p&gt;
+The acceptance probability &lt;span class="math"&gt;\(\alpha(X \mid X^{(t-1)})\)&lt;/span&gt; can be shown to be equal to 1.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Initialise &lt;span class="math"&gt;\(X^{(0)} = (X_1^{(0)}, X_2^{(0)})\)&lt;/span&gt; and for &lt;span class="math"&gt;\(t \geq 1\)&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Draw &lt;span class="math"&gt;\(X_1^{(t)} \sim \pi_{1|2}(\cdot \mid X_2^{(t-1)})\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Draw &lt;span class="math"&gt;\(X_2^{(t)} \sim \pi_{2|1}(\cdot \mid X_1^{(t)})\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;The transition kernel that guarantees an invariant distribution is&lt;/p&gt;
+&lt;div class="math"&gt;$$K(\mathbf x, \mathbf y) = \pi_{1|2}(y_1 \mid x_2)\pi_{2|1}(y_2 \mid y_1)$$&lt;/div&gt;
+&lt;p&gt;
+with &lt;span class="math"&gt;\(\mathbf x = (x_1, x_2) = (X_1^{(t-1)}, X_2^{(t-1)})\)&lt;/span&gt;
+and &lt;span class="math"&gt;\(\mathbf y = (y_1, y_2) = (X_1^{(t)}, X_2^{(t)})\)&lt;/span&gt;&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Statistics"></category><category term="Statistics"></category></entry><entry><title>Modelling TFL journeys</title><link href="/modelling-tfl-journeys.html" rel="alternate"></link><published>2021-04-26T00:00:00+01:00</published><updated>2021-04-29T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-26:/modelling-tfl-journeys.html</id><summary type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
+&lt;h3&gt;&lt;a href="https://data.london.gov.uk/dataset/public-transport-journeys-type-transport"&gt;Public Transport Journeys by Type of Transport&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The data set comes from the Transport for London website. It describes the number of journeys on the public transport network by TFL reporting period, by type of transport. Data is broken down by bus, underground, DLR, tram, Overground …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Data Description and Background&lt;/h2&gt;
+&lt;h3&gt;&lt;a href="https://data.london.gov.uk/dataset/public-transport-journeys-type-transport"&gt;Public Transport Journeys by Type of Transport&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The data set comes from the Transport for London website. It describes the number of journeys on the public transport network by TFL reporting period, by type of transport. Data is broken down by bus, underground, DLR, tram, Overground and cable car.&lt;/p&gt;
+&lt;p&gt;Some information about the dataset from the data description:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Period lengths are different in periods 1 and 13, and the data is not adjusted to account for that.
+   Docklands Light Railway journeys are based on automatic passenger counts at stations.
+   Overground and Tram journeys are based on automatic on-carriage passenger counts.
+   Reliable Overground journey numbers have only been available since October 2010.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In this project we will be forecasting the number of journeys on the London Underground network.&lt;/p&gt;
+&lt;p&gt;We first create a test set the last 5 journey counts on the London Underground network to compare 
+with our final forecasts.&lt;/p&gt;
+&lt;h2&gt;Visualise the time series plot&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## `geom_smooth()` using formula &amp;#39;y ~ x&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img alt="center" src="/images/tfl/unnamed-chunk-3-1.png"&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;##                  Estimate   Std. Error  t value     Pr(&amp;gt;|t|)
+## (Intercept)  4.983828e+03 4.579668e+02 10.88251 1.315793e-19
+## period.start 6.840706e-03 6.413333e-04 10.66638 4.340164e-19
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;From the initial plot, we can see the time series is non-stationary. We also confirm this from
+the non-zero linear model regression coefficient.&lt;/p&gt;
+&lt;p&gt;We also notice seasonal patterns which we will discuss later.&lt;/p&gt;
+&lt;h2&gt;Stationarity&lt;/h2&gt;
+&lt;p&gt;After first order differencing we plot the time series, its autocorrelation and partial auto correlation plots. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="center" src="/images/tfl/unnamed-chunk-5-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;From the autocorrelation-lag plot we see high correlation at periodic intervals implying seasonality.&lt;/p&gt;
+&lt;h2&gt;Seasonality&lt;/h2&gt;
+&lt;p&gt;From the data we see months with two entries hence correlation every 13 lags. The data description also confirms this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Period lengths are different in periods 1 and 13, and the data is not adjusted to account for that.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img alt="center" src="/images/tfl/unnamed-chunk-6-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;After applying differencing every 13 lags we see a clearer representation of the ACF and
+PACF plots. We initially consider &lt;strong&gt;ARIMA(0,1,1)(0,1,1)[13]&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(0,1,1)(0,1,1)[13]
+## Q* = 5.4208, df = 8, p-value = 0.7118
+## 
+## Model df: 2.   Total lags used: 10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
+## Call:
+## arima(x = lu, order = c(0, 1, 1), seasonal = list(order = c(0, 1, 1), period = 13), 
+##     method = (&amp;quot;ML&amp;quot;))
+## 
+## Coefficients:
+##           ma1     sma1
+##       -0.8258  -0.9033
+## s.e.   0.0575   0.2643
+## 
+## sigma^2 estimated as 16.43:  log likelihood = -314.98,  aic = 635.95
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The model summary seems promising, we now check if the model is adequate using Ljung-Box tests for 
+&lt;span class="math"&gt;\(K = 6\)&lt;/span&gt;, 12 and 24&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
+##  Box-Ljung test
+## 
+## data:  model1$residuals
+## X-squared = 1.9491, df = 6, p-value = 0.9243
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
+##  Box-Ljung test
+## 
+## data:  model1$residuals
+## X-squared = 14.991, df = 12, p-value = 0.242
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
+##  Box-Ljung test
+## 
+## data:  model1$residuals
+## X-squared = 28.14, df = 24, p-value = 0.2542
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;From the Ljung-Box tests, we can conclude the model is adequate up to lag 24.&lt;/p&gt;
+&lt;h2&gt;Overdifferencing&lt;/h2&gt;
+&lt;p&gt;We now try to overfit the model. We start by increasing the degree of the seasonal moving average part to 4. 
+Assuming quarterly seasonal variation.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(0,1,1)(0,1,4)[13]
+## Q* = 5.4319, df = 5, p-value = 0.3655
+## 
+## Model df: 5.   Total lags used: 10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
+## Call:
+## arima(x = ts(lu), order = c(0, 1, 1), seasonal = list(order = c(0, 1, 4), period = 13), 
+##     method = (&amp;quot;ML&amp;quot;))
+## 
+## Coefficients:
+##           ma1     sma1     sma2     sma3    sma4
+##       -0.8087  -0.8449  -0.0553  -0.2369  0.2667
+## s.e.   0.0634   0.3447   0.1598   0.1669  0.1404
+## 
+## sigma^2 estimated as 14.78:  log likelihood = -311.11,  aic = 634.21
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A decrease in AIC by 1.74, decrease in log likelihood by 3.87 suggesting this model is a
+better fit to our data.&lt;/p&gt;
+&lt;p&gt;We now consider &lt;strong&gt;ARIMA(0,1,2)(1,1,4)[13].&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(0,1,2)(0,1,4)[13]
+## Q* = 5.676, df = 4, p-value = 0.2247
+## 
+## Model df: 6.   Total lags used: 10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 
+## Call:
+## arima(x = lu, order = c(0, 1, 2), seasonal = list(order = c(0, 1, 4), period = 13), 
+##     method = (&amp;quot;ML&amp;quot;))
+## 
+## Coefficients:
+##           ma1      ma2     sma1     sma2     sma3    sma4
+##       -0.7609  -0.0592  -0.8321  -0.0662  -0.2256  0.2670
+## s.e.   0.1020   0.1022   0.2908   0.1589   0.1660  0.1458
+## 
+## sigma^2 estimated as 14.85:  log likelihood = -310.94,  aic = 635.87
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;No improvement in the reduction of the log likelihood or AIC. &lt;/p&gt;
+&lt;p&gt;The AIC is slightly higher compared to &lt;strong&gt;ARIMA(0,1,1)(0,1,4)[13]&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;We conclude that &lt;strong&gt;ARIMA(0,1,1)(0,1,4)[13]&lt;/strong&gt; is the best fitted model to the data.&lt;/p&gt;
+&lt;h2&gt;Forecasting&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="center" src="/images/tfl/unnamed-chunk-11-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;Comparing with the test data we see all points lie close to the point forecast.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;From the analysis, we can see the yearly growth of the London Underground
+network usage.&lt;/p&gt;
+&lt;p&gt;We note there is seasonal effects of the number of journeys on the London
+Underground network each year.&lt;/p&gt;
+&lt;p&gt;We first fit the data to an &lt;strong&gt;ARIMA(0,1,1)(0,1,1)[13]&lt;/strong&gt; and after
+overdifferencing concluded that a &lt;strong&gt;ARIMA(0,1,1)(0,1,4)[13]&lt;/strong&gt; was more
+suitable.&lt;/p&gt;
+&lt;p&gt;We then forecasted the next 5 months resulting in accurate forecasts. 
+All of which lie in the 80% forecast interval.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Statistics"></category><category term="Statistics"></category><category term="Data"></category></entry><entry><title>Sampling: Rejection and Importance</title><link href="/sampling-rejection-and-importance.html" rel="alternate"></link><published>2021-04-25T00:00:00+01:00</published><updated>2021-04-26T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-25:/sampling-rejection-and-importance.html</id><summary type="html">&lt;p&gt;We left the introduction to monte carlo simulations with its limitation of slow convergence.&lt;/p&gt;
+&lt;p&gt;In this post we will cover Rejection and Importance sampling.&lt;/p&gt;
+&lt;p&gt;For a density function &lt;span class="math"&gt;\(\pi(x)\)&lt;/span&gt;, how can we sample from it?&lt;/p&gt;
+&lt;h2&gt;Rejection Sampling&lt;/h2&gt;
+&lt;p&gt;The idea is to sample from a distribution &lt;span class="math"&gt;\(q\)&lt;/span&gt; that contains &lt;span class="math"&gt;\(\pi …&lt;/span&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;We left the introduction to monte carlo simulations with its limitation of slow convergence.&lt;/p&gt;
+&lt;p&gt;In this post we will cover Rejection and Importance sampling.&lt;/p&gt;
+&lt;p&gt;For a density function &lt;span class="math"&gt;\(\pi(x)\)&lt;/span&gt;, how can we sample from it?&lt;/p&gt;
+&lt;h2&gt;Rejection Sampling&lt;/h2&gt;
+&lt;p&gt;The idea is to sample from a distribution &lt;span class="math"&gt;\(q\)&lt;/span&gt; that contains &lt;span class="math"&gt;\(\pi\)&lt;/span&gt; for all &lt;span class="math"&gt;\(x\)&lt;/span&gt;, that is 
+&lt;span class="math"&gt;\(\pi \leq M \cdot q\)&lt;/span&gt; for all &lt;span class="math"&gt;\(x\)&lt;/span&gt; and a constant &lt;span class="math"&gt;\(M\)&lt;/span&gt;.
+The algorithm is a two step process:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Rejection Sampling&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;Sample &lt;span class="math"&gt;\(X \sim q\)&lt;/span&gt; and sample &lt;span class="math"&gt;\(U \sim U[0, 1]\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;If &lt;span class="math"&gt;\(\mathbb P(U &amp;lt; \frac{\pi(X)}{Mq(X)})\)&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;accept &lt;span class="math"&gt;\(X\)&lt;/span&gt; as a sample from &lt;span class="math"&gt;\(\pi\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;otherwise reject &lt;span class="math"&gt;\(X\)&lt;/span&gt; and repeat the sampling step.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;To show this works we prove:
+For any &lt;span class="math"&gt;\(a, b \in \mathbb R\)&lt;/span&gt;, &lt;span class="math"&gt;\(a \leq b\)&lt;/span&gt;.
+&lt;/p&gt;
+&lt;div class="math"&gt;$$
+    \mathbb P(X \in [a, b] \mid X \text{ accepted}) = \int_a^b \pi(x) dx
+$$&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Proof&lt;/em&gt;:
+&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{aligned}
+\mathbb P(X \in [a, b] \cap \text{ accepted}) &amp;amp;= \int_a^b \mathbb P(X \text{ accepted} \mid X = x)q(x) dx \\
+&amp;amp;= \int_a^b \frac{\pi(X)}{Mq(X)}q(x) dx \\
+&amp;amp;= \frac{1}{M} \int_a^b \pi(x) dx  \\
+\Rightarrow \mathbb P( X \text{ accepted}) &amp;amp;= \frac{1}{M} 
+\end{aligned}
+$$&lt;/div&gt;
+&lt;p&gt;
+Using Bayes' theorem
+&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{aligned}
+    \mathbb P(X \in [a, b] \mid X \text{ accepted}) &amp;amp;= \frac{\mathbb P(X \in [a, b] \cap \text{ accepted})}{\mathbb P(X \text{ accepted})} \\
+    &amp;amp;= \frac{\frac{1}{M} \int_a^b \pi(x) dx}{\frac{1}{M}} \\
+    &amp;amp;= \int_a^b \pi(x) dx  
+\end{aligned}
+$$&lt;/div&gt;
+&lt;p&gt;An important consequence of this is the probability until an acceptance &lt;span class="math"&gt;\(\mathbb P(X \text{ accepted}) = \frac{1}{M}\)&lt;/span&gt; is distributed
+geometrically &lt;span class="math"&gt;\(Y \sim \text{Geometric}(\frac{1}{M})\)&lt;/span&gt;. The mean time until an acceptance is then &lt;span class="math"&gt;\(\mathbb E[Y] = M\)&lt;/span&gt;.&lt;/p&gt;
+&lt;h2&gt;Importance sampling&lt;/h2&gt;
+&lt;p&gt;We want to evaluate integrals in the form: &lt;span class="math"&gt;\(\int \varphi(x)\pi(x) dx\)&lt;/span&gt; where
+&lt;span class="math"&gt;\(\pi\)&lt;/span&gt; is a probability distribution and &lt;span class="math"&gt;\(\varphi(x)\)&lt;/span&gt; is a function. Sometimes
+&lt;span class="math"&gt;\(\pi\)&lt;/span&gt; is tricky to evaluate, maybe the integral is intractable. Importance
+sampling introduces a proposal distribution &lt;span class="math"&gt;\(q\)&lt;/span&gt; such that&lt;/p&gt;
+&lt;div class="math"&gt;$$ \{x : \pi(x) &amp;gt; 0\} \subseteq \{x : q(x) &amp;gt; 0\} $$&lt;/div&gt;
+&lt;p&gt;or alternatively, there exists a constant &lt;span class="math"&gt;\(M\)&lt;/span&gt; such that &lt;span class="math"&gt;\(\pi(x) \leq M \cdot
+q(x)\)&lt;/span&gt; for all &lt;span class="math"&gt;\(x\)&lt;/span&gt; which allows us to express our integral as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{aligned}
+\mathbb E_{\pi}[\varphi(X)] &amp;amp;= \int \varphi(x)\pi(x) dx \\
+&amp;amp;= \int \varphi(x)\frac{\pi(x)}{q(x)}q(x) dx \\
+&amp;amp;= \int \varphi(x)w(x)q(x) dx \\
+&amp;amp;= \mathbb E_{q}[\varphi(X)w(X)]. \end{aligned}$$&lt;/div&gt;
+&lt;p&gt;Using the equivalence above, letting &lt;span class="math"&gt;\(X_i \overset{i.i.d}\sim q\)&lt;/span&gt; and appealing
+to the weak law of large numbers we see &lt;/p&gt;
+&lt;div class="math"&gt;$$
+    \frac{1}{n} \sum_{i=1}^n \varphi(X_i)w(X_i) \overset{\text{p}}\rightarrow \mathbb E_{\pi}[\varphi(X)]
+$$&lt;/div&gt;
+&lt;p&gt;The algorithm is as follows:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Importance Sampling&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Choose &lt;span class="math"&gt;\(q\)&lt;/span&gt; such that &lt;span class="math"&gt;\(\{x : \pi(x) &amp;gt; 0\} \subseteq \{x : q(x) &amp;gt; 0\}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;For &lt;span class="math"&gt;\(i = 1, 2, \cdots, n\)&lt;/span&gt;:&lt;ul&gt;
+&lt;li&gt;Draw &lt;span class="math"&gt;\(X_i \sim q\)&lt;/span&gt; &lt;/li&gt;
+&lt;li&gt;Calculate importance weights &lt;span class="math"&gt;\(w(X_i) = \frac{\pi(X_i)}{q(X_i)}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Calculate &lt;span class="math"&gt;\(\bar{\varphi}_n = \frac{1}{n}\sum_{i=1}^n \varphi(X_i)w(X_i)\)&lt;/span&gt;, 
+the unbiased estimator of &lt;span class="math"&gt;\(\mathbb E_\pi[\varphi(X)]\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Statistics"></category><category term="Statistics"></category></entry><entry><title>Monte Carlo</title><link href="/monte-carlo.html" rel="alternate"></link><published>2021-04-24T00:00:00+01:00</published><updated>2021-04-24T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-04-24:/monte-carlo.html</id><summary type="html">&lt;p&gt;Monte Carlo methods are a class of sampling algorithms to obtain numerical approximations.
+To do this we rely on the weak law of large numbers:&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;&lt;strong&gt;The weak law of large numbers&lt;/strong&gt;&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;A sequence of random variables &lt;span class="math"&gt;\(X_1, X_2, \cdots, X_n\)&lt;/span&gt; &lt;em&gt;converges in probability&lt;/em&gt; to a random
+variable …&lt;/p&gt;&lt;/dd&gt;&lt;/dl&gt;</summary><content type="html">&lt;p&gt;Monte Carlo methods are a class of sampling algorithms to obtain numerical approximations.
+To do this we rely on the weak law of large numbers:&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;&lt;strong&gt;The weak law of large numbers&lt;/strong&gt;&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;A sequence of random variables &lt;span class="math"&gt;\(X_1, X_2, \cdots, X_n\)&lt;/span&gt; &lt;em&gt;converges in probability&lt;/em&gt; to a random
+variable &lt;span class="math"&gt;\(X\)&lt;/span&gt; if for all &lt;span class="math"&gt;\(\delta &amp;gt; 0\)&lt;/span&gt;
+&lt;div class="math"&gt;$$
+    \lim_{n\rightarrow \infty} \mathbb P(|X_n - X | \geq \delta) = 0.
+$$&lt;/div&gt;
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;This is also written as &lt;span class="math"&gt;\(X_n \overset{\text{p}}\rightarrow X\)&lt;/span&gt;&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;A consequence of this taking using the empirical mean &lt;span class="math"&gt;\(\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i\)&lt;/span&gt;&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;If the sequence &lt;span class="math"&gt;\(X_1, X_2, \cdots\)&lt;/span&gt; are independent and identically distributed (i.i.d) with &lt;span class="math"&gt;\(\mathbb E(X_1) = \mu\)&lt;/span&gt; and
+finite variance &lt;span class="math"&gt;\(\sigma^2 &amp;lt; \infty\)&lt;/span&gt;,  we have &lt;span class="math"&gt;\(\overline{X}_n \overset{\text{p}}\rightarrow \mu\)&lt;/span&gt;&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;For an illustrated example we'll use an abstract example of estimating the probability that &lt;span class="math"&gt;\(X \in A\)&lt;/span&gt; for a set &lt;span class="math"&gt;\(A \subset \mathbb R\)&lt;/span&gt;. We also assume &lt;span class="math"&gt;\(X\)&lt;/span&gt; has probability density function &lt;span class="math"&gt;\(\pi\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Defining the estimator of a sample landing in &lt;span class="math"&gt;\(A\)&lt;/span&gt; as &lt;span class="math"&gt;\(\hat{p} := \boldsymbol{1}_{X_n \in A}\)&lt;/span&gt; we notice that &lt;span class="math"&gt;\(\mathbb P(X \in A) = \mathbb E[\boldsymbol{1}_{X_n \in A}]\)&lt;/span&gt; thus we approximate &lt;span class="math"&gt;\(\mathbb P(X \in A)\)&lt;/span&gt; with the empirical mean &lt;span class="math"&gt;\(\frac{1}{n} \sum_{i=1}^n \boldsymbol{1}_{X_i \in A}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where
+&lt;/p&gt;
+&lt;div class="math"&gt;$$\boldsymbol{1}_{X_i \in A} = \left\{
+\begin{array}{ll}
+1 &amp;amp;  X_i \in A \\
+0 &amp;amp; \text{otherwise}
+\end{array} 
+\right.$$&lt;/div&gt;
+&lt;p&gt;The estimator &lt;span class="math"&gt;\(\hat{p}\)&lt;/span&gt; describes the proportion of samples landing in &lt;span class="math"&gt;\(A\)&lt;/span&gt;. If we define &lt;span class="math"&gt;\(Z_n\)&lt;/span&gt; as the &lt;em&gt;number&lt;/em&gt; of samples landing in &lt;span class="math"&gt;\(A\)&lt;/span&gt; the we have the relationship &lt;span class="math"&gt;\(\hat{p} = \dfrac{Z_n}{n}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;It follows that the number of samples that land in &lt;span class="math"&gt;\(A\)&lt;/span&gt; follows a Binomial distribution &lt;span class="math"&gt;\(Z_n \sim \text{Bin}(n, p)\)&lt;/span&gt;. This arises from considering the sum of &lt;span class="math"&gt;\(n\)&lt;/span&gt; independent Bernoulli trials.&lt;/p&gt;
+&lt;!--
+#### The limitations of Monte Carlo simulations
+
+As we know the distribution of $\hat{p}$ we can calculate the variance of the estimator:
+$$
+    \text{Var}(\hat{p}) = \frac{1}{n^2}\text{Var}(Z_n) = \frac{np(1 - p)}{n^2} = \frac{p(1 - p)}{n}.
+$$
+The empirical mean $\mathbb E[\hat{p}] = \frac{1}{n}\mathbb E[Z_n] = p$ thus using the weak law of large numbers, $\hat{p} \overset{\text{p}}\rightarrow p$.
+
+How do we quantify how close $\hat{p}$ is to $p$? First we introduce the Central Limit theorem:
+
+: For $X_1, X_2, \cdots, X_n$, $n$ i.i.d samples with mean $\mu$ and finite variance $\sigma^2$ with $\overline{X}_n$ defining the empirical mean,
+$$Z = lim_{n \rightarrow \infty} \sqrt{n}\left( \frac{\overline{X}_n - \mu}{\sigma}\right) \sim \mathcal N(0, 1)$$
+
+The consequence of the theorem tells us 
+for large $n$ $\overline{Z}_n \sim \mu + \frac{\sigma}{\sqrt{n}}Z$
+Which for our parameters of interest:
+$$p + \frac{\sqrt{p(1-p)}}{\sqrt{n}}Z$$
+
+$p$ the quantity of interest and $\frac{\sqrt{p(1-p)}}{\sqrt{n}}Z$ the error term. As $Z \in (0, 1)$ we take the error term to be $\frac{\sqrt{p(1-p)}}{\sqrt{n}}$
+
+Finally, we see the error term shrinks by a factor of $\sqrt{n}$. 
+--&gt;
+
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Statistics"></category><category term="Statistics"></category></entry></feed>

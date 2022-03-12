@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <!-- KaTex -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css" crossorigin="anonymous">
+
+    <title> What Microsoft does well </title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a id=logo href='/'> tangarts </a>
+            <div id="header_wrap" class="wrapper">
+                <nav id="navbar">
+                    <ul class="list-none">
+                        <li><a href="/about">about</a> &centerdot;</li>
+                        <li><a href="/archives.html">archive</a> &centerdot;</li>
+                        <li><a href="/now">now</a> &centerdot;</li>
+                        <li><a href="https://github.com/tangarts">projects</a></li>
+                    </ul>
+
+                </nav>
+            </div>
+
+            <hr>
+
+        </header>
+
+
+        <main class="wrapper">
+
+
+<h1> What Microsoft does well </h1>
+<div class=date>
+  2022-02-04
+
+</div>
+
+<article><p>The three hardest problems in software engineering is off by one errors and naming.</p>
+<p>As someone who has used Microsoft tooling for less than 6 months, I have been pleasantly surprised at how good Microsoft's naming conventions are. </p>
+<p>This is a collection of examples I came up with:</p>
+<h2>The C# Language</h2>
+<p>The convention for C# classes and methods are to be descriptive (this should be true for all languages). It took me a while to get used to what I confused descriptive naming for verbosity. This may be as a result of working on better written software project.</p>
+<p>Exploring the Azure .NET SDK code base (specifically the <code>keyvaultexamples</code>) was made easier due to naming conventions. Within the code, complexity of the domain was pushed to lower level components meaning I could follow the non-domain specific logic. </p>
+<h2>Azure</h2>
+<p>Azure offers a lot of services. Starting out, I was overwhelmed with what each service did and wondered if I would ever remember which service did what. After spending some time with the Microsoft Learn resources and Pluralsight courses, I felt as if given a new resource, I could infer what it's purpose is. Compared to AWS, Azure services are well named and easier to remember. </p>
+<p>For example, which is easier to remember AWS S3 (Amazon Simple Storage Service) or Azure Storage. For compute, AWS EC2 (Amazon Elastic Compute Cloud) or Azure Compute. For hosting apps, AWS Elastic Beanstalk or Azure App Service. For DNS, AWS Route 53 or Azure DNS. </p>
+<p>If I worked with AWS, maybe I would have become as familiar with the resource names just as quick. From an outsiders perspective or new-comer, the overhead of trying to remember clever names doesn't substitute for clarity. </p>
+<p>The following table highlights a few more examples:</p>
+<h2>PowerShell</h2>
+<p>Despite not having the GNU Core utilities such as <code>less</code> and <code>grep</code> on a fresh install there are some usable alternatives. For <code>grep</code>, there is <code>Select-String</code>. Listing files with <code>ls</code> is still possible, though the optional flags are different. To show hidden files you have to use the <code>-Hidden</code> flag. Turns out <code>ls</code> is an alias for <code>Get-ChildItem</code> along with the command prompts <code>dir</code>. </p></article>
+
+
+
+        </main>
+
+        <footer>
+            <p>&centerdot; &centerdot; &centerdot;</p>
+        </footer>
+
+    </div>
+</body>
+
+</html>

@@ -48,8 +48,9 @@
   </span>
 </div>
 
-<article><h2>How can I reuse local python code in different projects?</h2>
-<p>I've collected useful utility functions to help me with this years advent of code. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this</p>
+<article><h1>Python packaging</h1>
+<h2>How can I reuse local python code in different projects?</h2>
+<p>I've collected a few useful utility functions to help me with <a href="https://adventofcode.com/2021">advent of code 2021</a>. So far it has been great, the folder lives in the same directory as my yearly advent of code folder like this</p>
 <div class="highlight"><pre><span></span><code><span class="n">advent</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">code</span><span class="o">/</span>
     <span class="mi">2020</span><span class="o">/</span>
     <span class="mi">2021</span><span class="o">/</span>
@@ -63,8 +64,8 @@
     <span class="n">README</span><span class="o">.</span><span class="n">md</span>
 </code></pre></div>
 
-<p>Before starting each puzzle I load up a new python file with the first line always starting with <code>from toolbox.core import ...</code>.</p>
-<p>Everything was great until I wanted to re-use my tool box for last years problems. I didn't want to duplicate my toolbox for every advent of code year I participate in. A logical place, I thought, would be to place the toolbox in the root of the project like so:</p>
+<p>For each puzzle I create a new python file with the first line always starting with <code>from toolbox.core import ...</code> to handle parsing data.</p>
+<p>Everything works smoothly until I wanted to re-use my toolbox modules for 2020 problems. I don't want to duplicate my toolbox for every advent of code year I participate in. A logical place I thought, would be to place the toolbox package in the root of the project like so:</p>
 <div class="highlight"><pre><span></span><code><span class="n">advent</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">code</span><span class="o">/</span>
     <span class="mi">2020</span><span class="o">/</span>
     <span class="mi">2021</span><span class="o">/</span>
@@ -78,13 +79,12 @@
     <span class="n">README</span><span class="o">.</span><span class="n">md</span>
 </code></pre></div>
 
-<p>This way I wouldn't have to duplicate my code and could expose the toolbox for each year to use. Not quite.</p>
-<p>I first tried a relative import <code>from ..toolbox.core import parse_input</code>. But that didn't work. </p>
-<p>To answer the reason why, we need to understand what happens when you run a python script.</p>
-<h2>What happens when you run a python script?</h2>
-<p>The simplest solution was to create a local package using the <code>setuptools</code> package that comes with a fresh installation of python 3.9.</p>
-<p>If you want a minimal solution, look no further. Here it is:</p>
-<p><strong>setup.py</strong></p>
+<p>This way I won't have to duplicate my code and could expose the toolbox for each year to use. Not quite.</p>
+<p>The problem is that when running the python file inside the <code>2021/</code> directory, the python interpreter is unable to locate the <code>toolbox/</code>. The list of system paths tells python where to look for python code that it can import such as the inbuilt <code>collections</code>, <code>functools</code> and <code>math</code> packages, and pip-installed modules such as <code>pytest</code>, <code>numpy</code> and <code>pandas</code>. We could, for each runnable script, add the location of the toolbox to the system path (<code>sys.path</code>). However, this is cumbersome; there is a much better way.</p>
+<h2>Local modules</h2>
+<p>A simple fix is to create a local package using the <code>setuptools</code> package. <code>setuptools</code> can be installed using <code>pip install setuptools</code>.</p>
+<p>If you want a minimal solution look no further, Here it is.</p>
+<p><strong><code>setup.py</code></strong></p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
 
 <span class="n">setup</span><span class="p">(</span>
@@ -98,18 +98,20 @@
 <div class="highlight"><pre><span></span><code>$ pip install -e .
 </code></pre></div>
 
-<p>Enjoy. :).</p>
+<p>From <code>pip install --help</code> we see that the <code>-e</code> flag or <code>--editable</code> is to "install a project in editable mode (i.e. setuptools "develop mode") from a local project path ...".</p>
+<p>Enjoy :).</p>
+<hr>
 <p>For those who want to know a little more, let's continue. </p>
-<h2>setup.cfg and setup.py</h2>
+<h2><code>setup.cfg</code> and <code>setup.py</code></h2>
 <p>There are two ways to specify setup config, dynamically as parameters of the <code>setuptools.setup()</code> function and in a <code>setup.cfg</code> config file.</p>
-<p>The equivalent setup to the first example would split across the executable and config file.</p>
-<p><strong>setup.py</strong></p>
+<p>The equivalent setup to the first example would be split across the executable and config file.</p>
+<p><strong><code>setup.py</code></strong></p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
 
 <span class="n">setup</span><span class="p">()</span>
 </code></pre></div>
 
-<p><strong>setup.cfg</strong></p>
+<p><strong><code>setup.cfg</code></strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">[options]</span>
 <span class="na">packages</span> <span class="o">=</span> <span class="s">toolbox</span>
 
@@ -118,10 +120,11 @@
 <span class="na">version</span> <span class="o">=</span> <span class="s">0.1.0</span>
 </code></pre></div>
 
-<p>As you can see, the <code>name</code>, <code>version</code> and <code>packages</code> attributes are now configured as options and metadata. There is no definitive way in using <code>setuptools</code>. I personally prefer to have all config in a config file. With additional optional fields such as a <em>long_description</em>, it is easy to edit a config file than source code.</p>
-<h2>Sharing is Caring.</h2>
-<p>Finally, if you're excited to share your python project as a package, it is easy to register it using the Python Package Index (PyPI).</p>
-<p>First, the name field must be unique if you wish to publish your package on the Python Package Index (PyPI). The packages field describes where you’ve put the Python source code within your project. </p></article>
+<p>As you can see, the <code>name</code>, <code>version</code> and <code>packages</code> attributes are now configured as options and metadata. There is no definitive way in using <code>setuptools</code>. I personally prefer to have all config in a config file. With additional optional fields such as a <em>long_description</em>, it is easy to edit a config file than source code. Even if it is python. </p>
+<h2>Sharing is Caring</h2>
+<p>Finally, if you're excited to share your python project as a package, it is easy to register it using the Python Package Index (PyPI). I recommend looking at the <a href="https://setuptools.pypa.io/en/latest/userguide/quickstart.html">setuptools</a> documentation and <a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/">Packaging Python Authority (PyPA)</a> to learn more about the standard way of building and distributing python projects. </p>
+<h2>In Conclusion</h2>
+<p>Reusing python code across local projects can be done in as little as a two liner python script and pip install command. Whilst there are different options in packaging a project to share on the Python Package Index, <code>setuptools</code> makes it easy to build a package and registering is also fairly simple.</p></article>
 
 
 

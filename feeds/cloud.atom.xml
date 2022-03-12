@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tangarts - Cloud</title><link href="/" rel="alternate"></link><link href="/feeds/cloud.atom.xml" rel="self"></link><id>/</id><updated>2021-09-12T00:00:00+01:00</updated><entry><title>What cloud service is right for me?</title><link href="/what-cloud-service-is-right-for-me.html" rel="alternate"></link><published>2021-09-12T00:00:00+01:00</published><updated>2021-09-12T00:00:00+01:00</updated><author><name>Nehemiah Tang-Campbell</name></author><id>tag:None,2021-09-12:/what-cloud-service-is-right-for-me.html</id><summary type="html">&lt;!-- In this post I will introduce the different categories of cloud services. --&gt;
+
+&lt;p&gt;Cloud services can be categorised into three service models. Infrastructure-as-a-service (IaaS), Platform-as-a-Service (PaaS) and Software-as-a-Service (SaaS).
+Each service has the advantage of no up-front cost for buying and maintaining hardware. &lt;/p&gt;
+&lt;p&gt;An on-premises service maintains the entire technology stack.&lt;/p&gt;
+&lt;h3&gt;Infrastructure as a Service&lt;/h3&gt;
+&lt;p&gt;IaaS manages the most expensive part, the virtual …&lt;/p&gt;</summary><content type="html">&lt;!-- In this post I will introduce the different categories of cloud services. --&gt;
+
+&lt;p&gt;Cloud services can be categorised into three service models. Infrastructure-as-a-service (IaaS), Platform-as-a-Service (PaaS) and Software-as-a-Service (SaaS).
+Each service has the advantage of no up-front cost for buying and maintaining hardware. &lt;/p&gt;
+&lt;p&gt;An on-premises service maintains the entire technology stack.&lt;/p&gt;
+&lt;h3&gt;Infrastructure as a Service&lt;/h3&gt;
+&lt;p&gt;IaaS manages the most expensive part, the virtual machines, storage and networking. You pay a third party cloud provider to rent infrastructure. This is the most flexible out of the three models, allowing you control over the size of hardware and how much you want to use. Azure Virtual Machines, Azure Storage and Azure Virtual Networks are three examples of infrastructure Azure has to offer.&lt;/p&gt;
+&lt;h3&gt;Platform as a Service&lt;/h3&gt;
+&lt;p&gt;For PaaS, server configuration is handled for you. It is usually quicker to set up than IaaS. Azure App Services enables mobile and web apps to be deployed without having to worry about server configuration. This allows developers to focus more of their energy on business logic. &lt;/p&gt;
+&lt;h3&gt;Software as a Service&lt;/h3&gt;
+&lt;p&gt;SaaS solutions are the most user friendly. Office 365, Dropbox and many common apps such as Slack and Shopify. These are usually available via monthly or annual subscriptions. SaaS allows organizations to have the same application quickly and easily. &lt;/p&gt;
+&lt;h3&gt;Functions as a Service&lt;/h3&gt;
+&lt;p&gt;Another cloud service model that doesn't fall into the above three is serveless computing. Serverless computing is a misnomer— it still uses servers to operate; the name comes from the infrastructure being invisible to the developer. The cloud service provider provisions, scales and manages the infrastructure required to execute code. Serverless applications are event-driven, resources are used when a trigger occurs.&lt;/p&gt;
+&lt;p&gt;Serverless solutions provided by Azure can be custom code scripts via Azure Functions or a workflow based no-code tool using Azure Logic Apps.&lt;/p&gt;
+&lt;p&gt;Serverless is similar to PaaS as the infrastructure is abstracted away from the developer. However, there are notable differences between the two such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Serverless application code executes only when triggered by an event&lt;/li&gt;
+&lt;li&gt;Serverless apps scales automatically whereas a PaaS scaling parameters have to be configures&lt;/li&gt;
+&lt;li&gt;PaaS solutions have more control over development environment— it is easier to test and debug the application.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Cloud"></category><category term="Cloud"></category><category term="Azure"></category></entry></feed>

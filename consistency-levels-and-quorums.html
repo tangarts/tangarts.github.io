@@ -49,7 +49,7 @@
 </div>
 
 <article><p><strong>What is the underlying mechanism for data replication in Cosmos DB?</strong></p>
-<p>Last time, I covered the five different consistency levels Cosmos offers. We saw that choosing a consistency level requires evaluating a trade off in data consistency, availability and performance. In this post, I explore how Cosmos DB enforces consistency.</p>
+<p>In a <a href="./consistency-levels-in-cosmos-db">previous post</a>, I covered the five different consistency levels Cosmos offers. We saw that choosing a consistency level requires evaluating a trade off in data consistency, availability and performance. In this post, I explore how Cosmos DB enforces consistency.</p>
 <p>From the Microsoft documentation page on <a href="https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels">Consistency levels in Azure Cosmos DB</a> we have:</p>
 <blockquote>
 <p>For strong and bounded staleness, <em>reads are done against two replicas in a four replica set (minority quorum)</em> to provide consistency guarantees. Session, consistent prefix and eventual do <em>single replica reads</em>. The result is that, for the same number of request units, read throughput for strong and bounded staleness is half of the other consistency levels.</p>
@@ -120,14 +120,16 @@
 <h3>Quorum consensus</h3>
 <p>In general, with <span class="math">\(n\)</span> replicas in a replica set, every write must be confirmed by <span class="math">\(w\)</span> nodes to be considered a successful write. We must query at least <span class="math">\(r\)</span> nodes for each read. As long as <span class="math">\(w + r &gt; n\)</span> we expect to get an up-to-date value when reading; at least one of the <span class="math">\(r\)</span> nodes we are reading from must be up-to-date.</p>
 <p>Reads and writes obeying <span class="math">\(r\)</span> and <span class="math">\(w\)</span> values are called quorum reads and writes. </p>
-<p><strong>At least one node needs to overlap:</strong>
-- <span class="math">\(w \geq (n - r) + 1\)</span> and <span class="math">\(r \geq (n - w) + 1\)</span>
-- thus <span class="math">\(w &gt; n - r\)</span> and <span class="math">\(r &gt; n - w\)</span>
-- thus <span class="math">\(w + r &gt; n\)</span></p>
+<p><strong>At least one node needs to overlap:</strong></p>
+<ul>
+<li><span class="math">\(w \geq (n - r) + 1\)</span> and <span class="math">\(r \geq (n - w) + 1\)</span></li>
+<li>thus <span class="math">\(w &gt; n - r\)</span> and <span class="math">\(r &gt; n - w\)</span></li>
+<li>thus <span class="math">\(w + r &gt; n\)</span></li>
+</ul>
 <h2>Probabilistic Bounded Staleness</h2>
-<p>Some of you may have noticed that under bounded staleness, the quorum consensus set up ensure we always see the latest value, however bounded staleness can allow stale reads. This occurs when we replicate our data into multiple replica sets. Here, we are not guaranteed strong consistency as one quorum may not have received the latest write.</p>
+<p>You may have noticed that under bounded staleness, the quorum consensus set up ensure we always see the latest value. However, bounded staleness can allow stale reads. This occurs when we replicate our data across multiple replica sets. Here we are not guaranteed strong consistency as one quorum may not have received the latest write.</p>
 <p><img alt="figure showing two partition sets under bounded staleness" src="/images/global-m-partition-set.png"></p>
-<p>Instead, Cosmos DB uses a metric to determine the probability of getting strongly consistent reads for a combination of write and read regions.</p>
+<p>Instead, we can use a metric called <a href="http://pbs.cs.berkeley.edu/">probabilistic bounded staleness</a> to determine the probability of getting strongly consistent reads for a combination of write and read regions.</p>
 <h2>In Conclusion</h2>
 <p>Quorums are one mechanism which explains why different consistency levels have differing performance characteristics. In this post we defined what quorums are and how Cosmos DB uses them to enforce consistency constraints. </p>
 <div class="footnote">
